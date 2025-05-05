@@ -1,6 +1,7 @@
 import ContactInformation from "@/components/ContactInformation";
 import Education from "@/components/Education";
 import Socials from "@/components/Socials";
+import WorkExperience from "@/components/WorkExperience";
 
 import data from "@/UserData";  // Importing data from UserData.js
 
@@ -13,7 +14,7 @@ export default function Home() {
       <section>
         <div className="w-full max-w-xl flex flex-row gap-5">
           <ContactInformation data={data}/>
-          
+
           {/* We want to pass classes into the component to allow for multiple template layouts */}
           <Socials data={data} classes="justify-end"/>
         </div>
@@ -25,6 +26,7 @@ export default function Home() {
       </section>
 
       <Education data={data}/>
+      <WorkExperience data={data}/>
     </main>
   );
 }
