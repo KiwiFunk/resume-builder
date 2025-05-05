@@ -1,4 +1,5 @@
 import ContactInformation from "@/components/ContactInformation";
+import Education from "@/components/Education";
 import Socials from "@/components/Socials";
 
 import data from "@/UserData";  // Importing data from UserData.js
@@ -10,6 +11,7 @@ export default function Home() {
       <p className="text-lg text-gray-600 mt-2">Create and customize your resume effortlessly.</p>
       <ContactInformation data={data}/>
       <Socials data={data}/>
+      <Education data={data}/>
     </main>
   );
 }
