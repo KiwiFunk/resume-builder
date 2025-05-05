@@ -13,11 +13,9 @@ export default function Socials({ data, classes }) {
       {/* Map the social media objects (object, index value) */}
       {data.socials.map((social, index) => (
         <div key={index} className={`flex items-center mt-4 ${classes}`}>
-          <a href={social.url} target="_blank" rel="noopener noreferrer">
-            <p className="mb-4 text-gray-700">
-              <img src={`/icons/${social.platform.toLowerCase()}.svg`} alt={social.platform} className="w-6 h-6 mr-2"/>
-              {formatURL(social.url)}
-            </p>
+          <a href={social.url} target="_blank" rel="noopener noreferrer" className="flex items-center gap-2">
+            <img src={`/icons/${social.platform.toLowerCase()}.svg`} alt={social.platform} className="w-6 h-6" />
+            <span className="text-gray-700">{formatURL(social.url)}</span>
           </a>
         </div>
       ))}
