@@ -6,6 +6,25 @@ let data = {
     summary: `A highly motivated and results-oriented professional with a strong background in software development and project management. 
     Proven ability to lead teams and deliver projects on time and within budget. 
     Excellent communication and interpersonal skills.`,
+    // Store social media links in an array of objects
+    socials: [
+        {
+            platform: "Website",
+            url: "#"
+        },  
+        {
+            platform: "LinkedIn",
+            url: "#"
+        },
+        {
+            platform: "GitHub",
+            url: "#"
+        },
+        {
+            platform: "ArtStation",
+            url: "#"
+        },
+    ],
     skills: [
         "JavaScript",
         "React",
