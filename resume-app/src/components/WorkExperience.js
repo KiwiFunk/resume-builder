@@ -1,16 +1,12 @@
 export default function WorkExperience({ data }) {
 
     function formatJobDescription(string) {
-        /*
-        This function takes a string and splits it into sentences based on punctuation marks (., !, ?).
-        Use a regular expression (/ ... /) to match sentences and return an array of sentences.
-        ^ inside the [] matches anything that is not .!?, and then the second [] matches the punctuation mark.
-        The g (global) flag makes sure that all matches are found, not just the first one.
-        If null, return an empty array.
-        */
-        const sentences = string.match(/[^.!?]+[.!?]/g) || [];
-        // Use map to return a new array with each sentence prefixed by a hyphen and trimmed of whitespace
-        return sentences.map((sentence) => `- ${sentence.trim()}`);
+       //Use regular expression to split the string into sentences based on punctuation marks followed by whitespace
+        const sentences = string.split(/[.!?] +/);
+        // Use map to return a new array with each sentence prefixed by a hyphen and trimmed of whitespace, re-apply the period.
+        return sentences.map((sentence, index) => 
+            index === sentences.length - 1 ? `- ${sentence.trim()}` : `- ${sentence.trim()}.`
+        );
     }
 
     return (

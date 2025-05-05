@@ -44,8 +44,8 @@ let data = {
             location: "Irvine, CA",
             startDate: "2020-01-01",
             endDate: "2022-12-31",
-            description: `Developed and maintained web applications using React and Node.js. 
-            Collaborated with cross-functional teams to define, design, and ship new features. 
+            description: `Developed and maintained web applications using React and Node.js! 
+            Collaborated with cross-functional teams to define, design, and ship new features? 
             Participated in code reviews and contributed to team knowledge sharing.`
         },
         {
