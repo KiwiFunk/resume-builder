@@ -1,8 +1,14 @@
 export default function WorkExperience({ data }) {
 
     function formatJobDescription(string) {
-        // Split the string into an array of sentences
-        const sentences = string.split(". ");
+        /*
+        This function takes a string and splits it into sentences based on punctuation marks (., !, ?).
+        Use a regular expression (/ ... /) to match sentences and return an array of sentences.
+        ^ inside the [] matches anything that is not .!?, and then the second [] matches the punctuation mark.
+        The g (global) flag makes sure that all matches are found, not just the first one.
+        If null, return an empty array.
+        */
+        const sentences = string.match(/[^.!?]+[.!?]/g) || [];
         // Use map to return a new array with each sentence prefixed by a hyphen and trimmed of whitespace
         return sentences.map((sentence) => `- ${sentence.trim()}`);
     }
@@ -31,7 +37,6 @@ export default function WorkExperience({ data }) {
                         })}
                     </p>
 
-                    {/* Create helper function to format the job description and turn into hyphenated points */}
                     {formatJobDescription(job.description).map((point) => (
                         <p className="text-gray-700 text-sm">{point}</p>
                     ))}
