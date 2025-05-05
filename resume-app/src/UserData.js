@@ -10,19 +10,19 @@ let data = {
     socials: [
         {
             platform: "Website",
-            url: "#"
+            url: "https://www.google.com/"
         },  
         {
             platform: "LinkedIn",
-            url: "#"
+            url: "https://www.linkedin.com/"
         },
         {
             platform: "GitHub",
-            url: "#"
+            url: "https://github.com/"
         },
         {
             platform: "ArtStation",
-            url: "#"
+            url: "https://www.artstation.com/"
         },
     ],
     skills: [
