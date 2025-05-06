@@ -1,6 +1,6 @@
 export default function Education({ data }) {
     return (
-        <div className="mt-6 p-6 bg-white rounded shadow-lg w-full max-w-xl">
+        <div className="mt-6 p-6 bg-white rounded shadow-lg w-full max-w-4xl">
             <h2 className="text-2xl font-bold text-gray-800">Education</h2>
             {data.education.map((edu, index) => (
                 <div key={index} className="mt-4">

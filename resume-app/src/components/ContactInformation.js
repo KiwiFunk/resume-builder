@@ -3,7 +3,7 @@
 export default function ContactInformation({ data, className }) {
 
   return (
-    <div className={`mt-6 p-6 bg-white rounded shadow-lg w-full max-w-xl ${className}`}>
+    <div className={`mt-6 p-6 bg-white rounded shadow-lg ${className}`}>
       <p className="mt-1 text-gray-700 text-4xl font-bold">{data.name}</p>
       <div className="leading-[1]">
         <p className="mt-4 text-gray-700">{data.email || "email@service.com"}</p>

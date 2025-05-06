@@ -12,13 +12,13 @@ export default function Home() {
       <p className="text-lg text-gray-600 mt-2">Create and customize your resume effortlessly.</p>
 
       <section>
-        <div className="w-full flex flex-row gap-5 ">
-          <ContactInformation className="basis-2/3 flex-shrink-0" data={data} />
-          <Socials className="basis-1/3 flex-shrink-0" data={data} />
+        <div className="w-full flex flex-row gap-4 max-w-4xl">
+          <ContactInformation className="flex-grow" data={data} />
+          <Socials className="flex-shrink" data={data} />
         </div>
 
         {/* Resume Summary Paragraph */}
-        <div className="mt-6 p-6 bg-white rounded shadow-lg w-full max-w-xl">
+        <div className="mt-6 p-6 bg-white rounded shadow-lg w-full max-w-4xl">
           <p className="text-gray-700">{data.summary}</p>
         </div>
       </section>
