@@ -1,5 +1,6 @@
 let data = {
     name: "John Doe",
+    title: "Software Engineer",
     email: "johndoe@example.com",
     phone: "+1 234 567 8900",
     location: "Irvine, CA",
