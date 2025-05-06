@@ -90,6 +90,22 @@ let data = {
             startDate: "2018-09-01",
             endDate: "2020-06-30"
         }
+    ],
+    training: [
+        {
+            title: "Full Stack Web Development Bootcamp",
+            institution: "Coding Academy",
+            startDate: "2020-01-01",
+            endDate: "2020-06-30",
+            description: `Completed a comprehensive bootcamp covering full stack web development, including HTML, CSS, JavaScript, React, Node.js, and MongoDB.`
+        },
+        {
+            title: "Agile Project Management Certification",
+            institution: "Project Management Institute",
+            startDate: "2019-01-01",
+            endDate: "2019-03-31",
+            description: `Achieved certification in Agile Project Management methodologies and practices.`
+        }
     ]
 }
 

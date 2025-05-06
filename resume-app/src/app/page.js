@@ -3,6 +3,7 @@ import Education from "@/components/Education";
 import Socials from "@/components/Socials";
 import WorkExperience from "@/components/WorkExperience";
 import Skills from "@/components/Skills";
+import CoursesAndTraining from "@/components/CoursesAndTraining";
 
 import data from "@/UserData";  // Importing data from UserData.js
 
@@ -27,6 +28,9 @@ export default function Home() {
       <Skills data={data} />
 
       <Education data={data}/>
+      <CoursesAndTraining data={data}/>
+
+      {/* Add a new section for Projects */}
       <WorkExperience data={data}/>
     </main>
   );
