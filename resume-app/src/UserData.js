@@ -106,7 +106,25 @@ let data = {
             endDate: "2019-03-31",
             description: `Achieved certification in Agile Project Management methodologies and practices.`
         }
+    ],
+    projects: [
+        {
+            title: "Personal Portfolio Website",
+            description: `Developed a personal portfolio website to showcase my projects and skills using React and CSS.`,
+            url: "https://github.com/"
+        },
+        {
+            title: "E-commerce Application",
+            description: `Built a full-stack e-commerce application using MERN stack (MongoDB, Express.js, React, Node.js).`,
+            url: "https://github.com/"
+        },
+        {
+            title: "Task Management App",
+            description: `Created a task management application using Django and React to help users manage their tasks efficiently.`,
+            url: "https://github.com/"
+        }
     ]
+
 }
 
 export default data;
