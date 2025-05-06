@@ -9,7 +9,7 @@ export default function Socials({ data, className }) {
   }
 
   return (
-    <div className={`mt-6 p-6 bg-white rounded shadow-lg ${className}`}>
+    <div className={`mt-4 p-6 bg-white rounded shadow-lg ${className}`}>
       {/* Map the social media objects */}
       {data.socials.map((social, index) =>
         // Check if the social media platform is in use

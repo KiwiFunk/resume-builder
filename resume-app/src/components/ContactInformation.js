@@ -1,6 +1,6 @@
 export default function ContactInformation({ data, className }) {
   return (
-    <div className={`mt-6 p-6 bg-white rounded shadow-lg ${className}`}>
+    <div className={`mt-4 p-6 bg-white rounded shadow-lg ${className}`}>
       {/* Name */}
       <h1 className="text-4xl font-extrabold text-gray-900">{data.name}</h1>
       {/* Title */}
