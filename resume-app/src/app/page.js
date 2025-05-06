@@ -2,6 +2,7 @@ import ContactInformation from "@/components/ContactInformation";
 import Education from "@/components/Education";
 import Socials from "@/components/Socials";
 import WorkExperience from "@/components/WorkExperience";
+import Skills from "@/components/Skills";
 
 import data from "@/UserData";  // Importing data from UserData.js
 
@@ -22,6 +23,8 @@ export default function Home() {
           <p className="text-gray-700">{data.summary}</p>
         </div>
       </section>
+
+      <Skills data={data} />
 
       <Education data={data}/>
       <WorkExperience data={data}/>
