@@ -33,6 +33,12 @@ let data = {
             url: "https://www.twitter.com/",
             inUse: false,
         },
+        {
+            platform: "StackOverflow",
+            url: "https://stackoverflow.com/",
+            inUse: true,
+        },
+
     ],
     skills: [
         "JavaScript",

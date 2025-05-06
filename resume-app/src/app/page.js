@@ -12,11 +12,9 @@ export default function Home() {
       <p className="text-lg text-gray-600 mt-2">Create and customize your resume effortlessly.</p>
 
       <section>
-        <div className="w-full max-w-xl flex flex-row gap-5">
-          <ContactInformation data={data}/>
-
-          {/* We want to pass classes into the component to allow for multiple template layouts */}
-          <Socials data={data} classes="justify-end"/>
+        <div className="w-full flex flex-row gap-5 ">
+          <ContactInformation className="basis-2/3 flex-shrink-0" data={data} />
+          <Socials className="basis-1/3 flex-shrink-0" data={data} />
         </div>
 
         {/* Resume Summary Paragraph */}
