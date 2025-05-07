@@ -18,7 +18,7 @@ export default function WorkExperience({ data }) {
                     <div key={index} className="mt-4 flex flex-row">
 
                         <div className="flex-grow">
-                            <p className="text-gray-700 text-lg font-bold">{job.title}</p>
+                            <h3 className="text-gray-700 text-lg font-bold">{job.title}</h3>
                             <p className="text-gray-700">{job.company}</p>
                             <p className="text-gray-700 text-sm">{job.location}</p>
 
