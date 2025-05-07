@@ -15,8 +15,8 @@ export default function WorkExperience({ data }) {
                             <p className="text-gray-700">{job.company}</p>
                             <p className="text-gray-700 text-sm">{job.location}</p>
 
-                            {formatTextToPoints(job.description).map((point) => (
-                                <p className="text-gray-700 text-sm">{point}</p>
+                            {formatTextToPoints(job.description).map((point, index) => (
+                                <p key={index} className="text-gray-700 text-sm">{point}</p>
                             ))}
                         </div>
 
