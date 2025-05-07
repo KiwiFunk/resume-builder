@@ -1,14 +1,29 @@
-import data from "@/UserData";  // Importing data from UserData.js
-import DisplayResume from "./ResumeDisplay";
+"use client";   // Enables React hooks in Next.js 13+
+
+import { useRouter } from "next/navigation"; // Import useRouter for navigation
+import data from "@/UserData"; // Import your user data
 
 export default function Home() {
+  const router = useRouter(); // Initialize the router
+
   return (
     <main className="flex flex-col items-center justify-center min-h-screen p-6">
       <h1 className="text-4xl font-bold">Resume Builder</h1>
       <p className="text-lg text-gray-600 mt-2">Create and customize your resume effortlessly.</p>
 
-      <DisplayResume data={data} />
-      
+      <button
+        className="mt-4 px-4 py-2 bg-blue-500 text-white rounded shadow hover:bg-blue-600"
+        onClick={() => router.push("/resume-display")} // Navigate to the new page
+      >
+        Display Resume
+      </button>
+
+      <button
+        className="mt-4 px-4 py-2 bg-green-500 text-white rounded shadow hover:bg-green-600"
+        onClick={() => alert("Edit functionality coming soon!")}
+      >
+        Edit Details
+      </button>
     </main>
   );
 }

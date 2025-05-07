@@ -1,5 +1,3 @@
-"use client";   // Enables React hooks in Next.js 13+
-
 export default function Socials({ data, className }) {
 
   function formatURL(url) {
