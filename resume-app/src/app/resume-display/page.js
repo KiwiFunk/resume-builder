@@ -8,7 +8,9 @@ export default function ResumeDisplayPage() {
     return (
         <main className="flex flex-col items-center justify-center min-h-screen p-6">
             {/* Page navigation and tools such as save to PDF */}
-            <i class="bi bi-chevron-left"></i>
+            <div className="w-full max-w-4xl">
+                <button className="self-start"><i class="bi bi-chevron-left"></i></button>
+            </div>
 
             {/* Eventually, add a widget to handle selecting a resume template before displaying */}
 
