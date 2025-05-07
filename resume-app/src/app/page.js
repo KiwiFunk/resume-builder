@@ -13,14 +13,14 @@ export default function Home() {
 
       <button
         className="mt-4 px-4 py-2 bg-blue-500 text-white rounded shadow hover:bg-blue-600 cursor-pointer"
-        onClick={() => router.push("/resume-display")} // Navigate to the new page
+        onClick={() => router.push("/resume-display")} // Navigate to resume display page
       >
         Display Resume
       </button>
 
       <button
         className="mt-4 px-4 py-2 bg-green-500 text-white rounded shadow hover:bg-green-600 cursor-pointer"
-        onClick={() => alert("Edit functionality coming soon!")}
+        onClick={() => router.push("/edit-details")} // Navigate to the edit details page
       >
         Edit Details
       </button>
