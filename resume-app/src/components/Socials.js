@@ -16,11 +16,14 @@ export default function Socials({ data, className }) {
         social.inUse ? (
           <div key={index} className="flex items-center mt-4">
             <a href={social.url} target="_blank" rel="noopener noreferrer" className="flex items-center gap-2">
-              <img
-                src={`/icons/${social.platform.toLowerCase()}.svg`}
-                alt={social.platform}
-                className="w-6 h-6"
-              />
+
+              {/* Tailwind Mask */}
+              <div
+                className="w-6 h-6 bg-blue-500"
+                style={{ maskImage: `url('/icons/${social.platform.toLowerCase()}.svg')`, WebkitMaskImage: `url('/icons/${social.platform.toLowerCase()}.svg')` }}
+                aria-label={social.platform}
+              ></div>
+              
               <span className="text-gray-700 text-sm">{formatURL(social.url)}</span>
             </a>
           </div>

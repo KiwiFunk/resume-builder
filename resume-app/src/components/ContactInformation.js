@@ -4,7 +4,7 @@ export default function ContactInformation({ data, className }) {
       {/* Name */}
       <h1 className="text-4xl font-extrabold text-gray-900">{data.name}</h1>
       {/* Title */}
-      <h2 className="text-xl font-medium text-gray-600 mt-2">{data.title}</h2>
+      <h2 className="text-xl font-medium text-(--accent) mt-2">{data.title}</h2>
       {/* Contact Information */}
       <div className="mt-4 space-y-2">
         <p className="text-gray-700">{data.email || "email@service.com"}</p>
