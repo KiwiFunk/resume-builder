@@ -42,16 +42,45 @@ let data = {
 
     ],
     skills: [
-        "JavaScript",
-        "React",
-        "Node.js",
-        "Python",
-        "Django",
-        "HTML",
-        "CSS",
-        "SQL",
-        "Git",
-        "Agile Methodologies"
+        {
+            groupName: "Programming Languages",
+            items: [
+                "JavaScript",
+                "Python",
+                "Java",
+                "C++",
+                "Ruby"
+            ]
+        },
+        {
+            groupName: "Frameworks",
+            items: [
+                "React",
+                "Node.js",
+                "Django",
+                "Flask",
+                "Spring"
+            ]
+        },
+        {
+            groupName: "Databases",
+            items: [
+                "MySQL",
+                "PostgreSQL",
+                "MongoDB",
+                "SQLite"
+            ]
+        },
+        {
+            groupName: "Tools & Technologies",
+            items: [
+                "Git",
+                "Docker",
+                "Kubernetes",
+                "AWS",
+                "Azure"
+            ]
+        }
     ],
     experience: [
         {
