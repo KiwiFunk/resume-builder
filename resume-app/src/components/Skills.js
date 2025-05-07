@@ -12,7 +12,7 @@ export default function Skills({ data }) {
             <h3 className="text-lg text-gray-800 mb-2">{group.groupName}</h3>
 
             {/* Iterate through skills in that group */}
-            <div className="flex flex-wrap gap-2">
+            <div className="flex flex-wrap gap-1.5">
               {group.items.map((skill, skillIndex) => (
                 <span
                   key={skillIndex}
