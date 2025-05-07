@@ -10,12 +10,21 @@ export default function ResumeDisplayPage() {
     return (
         <main className="flex flex-col items-center justify-center min-h-screen p-6">
             {/* Page navigation and tools such as save to PDF */}
-            <div className="w-full max-w-4xl">
-                <button 
-                    className="self-start cursor-pointer hover:scale-120 transition-transform duration-200 ease-in-out"
-                    onClick={() => router.push("/")} // Navigate back to the home pagemm
-                ><i className="bi bi-chevron-left"></i></button>
-            </div>
+            <div className="w-full max-w-4xl flex justify-between items-center">
+                <button
+                    className="cursor-pointer hover:scale-120 transition-transform duration-200 ease-in-out"
+                    onClick={() => router.push("/")}
+                >
+                    <i className="bi bi-chevron-left"></i>
+                </button>
+
+                <button
+                    className="cursor-pointer hover:scale-120 transition-transform duration-200 ease-in-out"
+                    onClick={() => alert("PDF functionality coming soon!")}
+                >
+                    <i className="bi bi-file-earmark-pdf-fill"></i>
+                </button>
+                </div>
 
             {/* Eventually, add a widget to handle selecting a resume template before displaying */}
 
