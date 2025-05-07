@@ -1,13 +1,6 @@
-export default function WorkExperience({ data }) {
+import { formatTextToPoints } from "../utils/formatText";
 
-    function formatJobDescription(string) {
-       //Use regular expression to split the string into sentences based on punctuation marks followed by whitespace
-        const sentences = string.split(/[.!?] +/);
-        // Use map to return a new array with each sentence prefixed by a hyphen and trimmed of whitespace, re-apply the period.
-        return sentences.map((sentence, index) => 
-            index === sentences.length - 1 ? `- ${sentence.trim()}` : `- ${sentence.trim()}.`
-        );
-    }
+export default function WorkExperience({ data }) {
 
     return (
         <div className="mt-4 p-6 bg-white rounded shadow-lg w-full max-w-4xl">
@@ -22,7 +15,7 @@ export default function WorkExperience({ data }) {
                             <p className="text-gray-700">{job.company}</p>
                             <p className="text-gray-700 text-sm">{job.location}</p>
 
-                            {formatJobDescription(job.description).map((point) => (
+                            {formatTextToPoints(job.description).map((point) => (
                             <p className="text-gray-700 text-sm">{point}</p>
                             ))}
                         </div>
