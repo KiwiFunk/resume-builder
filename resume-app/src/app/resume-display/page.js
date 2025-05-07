@@ -12,17 +12,17 @@ export default function ResumeDisplayPage() {
             {/* Page navigation and tools such as save to PDF */}
             <div className="w-full max-w-4xl flex justify-between items-center">
                 <button
-                    className="cursor-pointer hover:scale-120 transition-transform duration-200 ease-in-out"
+                    className="cursor-pointer hover:scale-110 transition-transform duration-200 ease-in-out"
                     onClick={() => router.push("/")}
                 >
-                    <i className="bi bi-chevron-left"></i>
+                    <i className="bi bi-chevron-left text-xl"></i>
                 </button>
 
                 <button
-                    className="cursor-pointer hover:scale-120 transition-transform duration-200 ease-in-out"
+                    className="cursor-pointer hover:scale-110 transition-transform duration-200 ease-in-out"
                     onClick={() => alert("PDF functionality coming soon!")}
                 >
-                    <i className="bi bi-file-earmark-pdf-fill"></i>
+                    <i className="bi bi-file-earmark-pdf-fill text-xl"></i>
                 </button>
                 </div>
 
