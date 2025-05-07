@@ -12,7 +12,7 @@ export default function ResumeDisplayPage() {
             {/* Page navigation and tools such as save to PDF */}
             <div className="w-full max-w-4xl">
                 <button 
-                    className="self-start cursor-pointer"
+                    className="self-start cursor-pointer hover:scale-120 transition-transform duration-200 ease-in-out"
                     onClick={() => router.push("/")} // Navigate back to the home pagemm
                 ><i className="bi bi-chevron-left"></i></button>
             </div>
