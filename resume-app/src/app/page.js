@@ -5,6 +5,7 @@ import WorkExperience from "@/components/WorkExperience";
 import Skills from "@/components/Skills";
 import CoursesAndTraining from "@/components/CoursesAndTraining";
 import Projects from "@/components/Projects";
+import Hobbies from "@/components/Hobbies";
 
 import data from "@/UserData";  // Importing data from UserData.js
 
@@ -33,6 +34,12 @@ export default function Home() {
       <Projects data={data}/>
       
       <WorkExperience data={data}/>
+      <Hobbies data={data}/>
+
+      {/* Footer */}
+      <footer className="mt-4 p-6 bg-white rounded shadow-lg w-full max-w-4xl">
+        <p className="text-gray-700">© 2025 Resume Builder. All rights reserved.</p>
+      </footer>
     </main>
   );
 }
