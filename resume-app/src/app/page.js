@@ -12,14 +12,14 @@ export default function Home() {
       <p className="text-lg text-gray-600 mt-2">Create and customize your resume effortlessly.</p>
 
       <button
-        className="mt-4 px-4 py-2 bg-blue-500 text-white rounded shadow hover:bg-blue-600"
+        className="mt-4 px-4 py-2 bg-blue-500 text-white rounded shadow hover:bg-blue-600 cursor-pointer"
         onClick={() => router.push("/resume-display")} // Navigate to the new page
       >
         Display Resume
       </button>
 
       <button
-        className="mt-4 px-4 py-2 bg-green-500 text-white rounded shadow hover:bg-green-600"
+        className="mt-4 px-4 py-2 bg-green-500 text-white rounded shadow hover:bg-green-600 cursor-pointer"
         onClick={() => alert("Edit functionality coming soon!")}
       >
         Edit Details
