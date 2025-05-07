@@ -136,7 +136,7 @@ let data = {
             skills: ["Django", "React"]
         }
     ],
-    hobbies: `In my free time, I enjoy hiking, photography, and playing video games. I love to practice coding challenges and contribute to open-source projects.
+    hobbies: `In my free time, I enjoy hiking, photography, and playing video games. I love to practice coding challenges and contribute to open-source projects. 
     I am working on a personal project to develop a mobile application that helps users track their fitness goals.`,
 
 }
