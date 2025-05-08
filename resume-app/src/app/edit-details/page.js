@@ -159,15 +159,27 @@ export default function EditDetailsPage() {
                             <div className="flex flex-wrap gap-2 mt-3">
                                 {/* Skill Tags */}
                                 {["Placeholder", "Placeholder", "Placeholder"].map((skill, index) => (
-                                <span key={index} className="px-3 py-2 rounded-lg bg-gray-200 text-gray-700 text-sm font-medium shadow-sm hover:bg-gray-300 transition duration-200">
-                                    {skill}
-                                </span>
+                                    <div
+                                        key={index}
+                                        className="px-3 py-2 rounded-lg bg-gray-200 text-gray-700 text-sm font-medium shadow-sm transition duration-200 [&:has(button:hover)]:bg-red-500"
+                                    >
+                                        <span className="[&:has(button:hover)]:text-white">{skill}
+                                            <button 
+                                                className="ml-2"
+                                                onClick={() => alert("Delete skill functionality coming soon!")}
+                                            >
+                                                <i className="bi bi-x text-red-500 cursor-pointer transition duration-200 hover:text-white"></i>
+                                            </button>
+                                        </span>
+                                    </div>
                                 ))}
-                                
+
                                 {/* Add Skill Button */}
                                 <button className="px-3 py-2 rounded-lg bg-gray-300 text-gray-600 text-sm font-medium shadow-sm hover:bg-gray-400 transition duration-200">
-                                <i className="bi bi-plus"></i>
+                                    <i className="bi bi-plus"></i>
                                 </button>
+
+                                {/* Implement react-dnd to allow drag and drop of skills between groups */}
                             </div>
                         </div>
                                                             
