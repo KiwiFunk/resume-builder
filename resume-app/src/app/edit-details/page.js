@@ -138,53 +138,54 @@ export default function EditDetailsPage() {
                 <div className="mt-4 p-6 bg-white rounded shadow-lg w-full max-w-4xl">
                     <h2 className="text-2xl font-bold text-gray-800 mb-2.5">Edit Skills</h2>
                     <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+
                         {/* Map through current skills data */}
-
-                        <div id="skill-group" className="mb-4 w-full bg-white p-5 rounded-lg shadow-md border border-gray-300">
+                        {data.skills.map((group, index) => (
+                            <div id="skill-group" key={index} className="mb-4 w-full bg-white p-5 rounded-lg shadow-md border border-gray-300">
                             
-                            <div className="flex items-center gap-2 mb-4">
-                                <input
-                                    type="text"
-                                    defaultValue="Skill Group Name"
-                                    className={inputClasses}
-                                />
-                                <button 
-                                    className="p-3 border border-gray-300 rounded text-red-500 hover:text-red-600 cursor-pointer hover:animate-wiggle hover:scale-110 transition-transform duration-100 ease-in-out"
-                                    onClick={() => alert("Delete skill group functionality coming soon!")}
-                                >
-                                    <i className="bi bi-trash"></i>
-                                </button>
-                            </div>
-                            
-                            <div className="flex flex-wrap gap-2 mt-3">
-                                {/* Skill Tags */}
-                                {["Placeholder", "Placeholder", "Placeholder"].map((skill, index) => (
-                                    <div
-                                        key={index}
-                                        className="px-3 py-2 rounded-lg bg-gray-200 text-gray-700 text-sm font-medium shadow-sm transition duration-300 [&:has(button:hover)]:bg-red-500"
+                                <div className="flex items-center gap-2 mb-4">
+                                    <input
+                                        type="text"
+                                        defaultValue={group.groupName}
+                                        className={inputClasses}
+                                    />
+                                    <button 
+                                        className="p-3 border border-gray-300 rounded text-red-500 hover:text-red-600 cursor-pointer hover:animate-wiggle hover:scale-110 transition-transform duration-100 ease-in-out"
+                                        onClick={() => alert("Delete skill group functionality coming soon!")}
                                     >
-                                        <span className="transition duration-300 [&:has(button:hover)]:text-white">{skill}
-                                            <button 
-                                                className="ml-2"
-                                                onClick={() => alert("Delete skill functionality coming soon!")}
-                                            >
-                                                <i className="bi bi-x text-red-500 cursor-pointer transition duration-300 hover:text-white"></i>
-                                            </button>
-                                        </span>
-                                    </div>
-                                ))}
+                                        <i className="bi bi-trash"></i>
+                                    </button>
+                                </div>
+                                
+                                <div className="flex flex-wrap gap-2 mt-3">
+                                    {/* Skill Tags */}
+                                    {group.items.map((skill, index) => (
+                                        <div
+                                            key={index}
+                                            className="px-3 py-2 rounded-lg bg-gray-200 text-gray-700 text-sm font-medium shadow-sm transition duration-300 [&:has(button:hover)]:bg-red-500"
+                                        >
+                                            <span className="transition duration-300 [&:has(button:hover)]:text-white">{skill}
+                                                <button 
+                                                    className="ml-2"
+                                                    onClick={() => alert("Delete skill functionality coming soon!")}
+                                                >
+                                                    <i className="bi bi-x text-red-500 cursor-pointer transition duration-300 hover:text-white"></i>
+                                                </button>
+                                            </span>
+                                        </div>
+                                    ))}
 
-                                {/* Add Skill Button */}
-                                <button className="px-3 py-2 rounded-lg bg-gray-300 text-gray-600 text-sm font-medium shadow-sm hover:bg-gray-400 transition duration-200">
-                                    <i className="bi bi-plus"></i>
-                                </button>
+                                    {/* Add Skill Button */}
+                                    <button className="px-3 py-2 rounded-lg bg-gray-300 text-gray-600 text-sm font-medium shadow-sm hover:bg-gray-400 transition duration-200">
+                                        <i className="bi bi-plus"></i>
+                                    </button>
 
-                                {/* Implement react-dnd to allow drag and drop of skills between groups */}
-                            </div>
-                        </div>
-                                                            
-
-                        {/* Create skill group button under the last skill group */}
+                                    {/* Implement react-dnd to allow drag and drop of skills between groups */}
+                                </div>
+                            </div>   
+                        ))}
+                                                        
+                        {/* Create skill group button under the last skill group, MAKE RESPONSIVE 1/2 COLUMNS */}
                             {/* Add new skill button in each group */}
                         
                         {/* Implement react-dnd to allow drag and drop of skills between groups */}
