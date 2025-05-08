@@ -67,41 +67,55 @@ export default function EditDetailsPage() {
 
                 <div className="mt-4 p-6 bg-white rounded shadow-lg w-full max-w-4xl">
                     <h2 className="text-2xl font-bold text-gray-800 mb-2.5">Edit Socials</h2>
+                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                         {/* Map through the current social media data */}
-                        <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                            {data.socials.map((social, index) => (
-                                <div key={index} className="flex items-center gap-2">
-                                    {/* Social Media Icon */}
-                                    <div
-                                        className="w-6 h-5 bg-(--accent)"
-                                        style={{ maskImage: `url('/icons/${social.platform.toLowerCase()}.svg')`, WebkitMaskImage: `url('/icons/${social.platform.toLowerCase()}.svg')` }}
-                                        aria-label={social.platform}
-                                    ></div>
+                        {data.socials.map((social, index) => (
+                            <div key={index} className="flex items-center gap-2">
+                                {/* Social Media Icon */}
+                                <div
+                                    className="w-6 h-5 bg-(--accent)"
+                                    style={{ maskImage: `url('/icons/${social.platform.toLowerCase()}.svg')`, WebkitMaskImage: `url('/icons/${social.platform.toLowerCase()}.svg')` }}
+                                    aria-label={social.platform}
+                                ></div>
 
-                                    {/* Social Media URL Input */}
-                                    <input
-                                        type="text"
-                                        defaultValue={social.url}
-                                        className={inputClasses}
-                                        onChange={(e) => handleSocialChange(index, e.target.value)}
-                                    />
+                                {/* Social Media URL Input */}
+                                <input
+                                    type="text"
+                                    defaultValue={social.url}
+                                    className={inputClasses}
+                                    onChange={(e) => handleSocialChange(index, e.target.value)}
+                                />
 
-                                    {/* Delete Button */}
-                                    <button
-                                        type="button"
-                                        className="text-red-500 hover:text-red-600 cursor-pointer hover:animate-wiggle hover:scale-110 transition-transform duration-100 ease-in-out"
-                                        onClick={() => handleDeleteSocial(index)}
-                                    >
-                                        <i className="bi bi-trash"></i>
-                                    </button>
-                                </div>
-                            ))}
-                        </div>
+                                {/* Delete Button */}
+                                <button
+                                    type="button"
+                                    className="text-red-500 hover:text-red-600 cursor-pointer hover:animate-wiggle hover:scale-110 transition-transform duration-100 ease-in-out"
+                                    onClick={() => handleDeleteSocial(index)}
+                                >
+                                    <i className="bi bi-trash"></i>
+                                </button>
+                            </div>
+                        ))}
 
-                        {/* Input field with social icon to the left, dynamically set by parsing the name from the url */}
+                         {/* Input field with social icon to the left, dynamically set by parsing the name from the url */}
 
                         {/* Create new social media button under the last social media link */}
 
+                    </div>
+                </div>
+
+                {/* Skills Section */}
+                <div className="mt-4 p-6 bg-white rounded shadow-lg w-full max-w-4xl">
+                    <h2 className="text-2xl font-bold text-gray-800 mb-2.5">Edit Skills</h2>
+                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                        {/* Map through current skills data */}
+
+                        {/* Create skill group button under the last skill group */}
+                            {/* Add new skill button in each group */}
+                        
+                        {/* Implement react-dnd to allow drag and drop of skills between groups */}
+                        
+                    </div>
                 </div>
                     
 
