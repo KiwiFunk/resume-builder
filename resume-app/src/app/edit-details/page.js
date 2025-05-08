@@ -61,11 +61,25 @@ export default function EditDetailsPage() {
                         <label htmlFor="summary" className="block text-gray-700">Summary:</label>
                         <textarea id="summary" defaultValue={data.summary} className={inputClasses} rows="6"></textarea>
                     </div>
-
-                    {/* Social Media Links */}
-
-                    {/* Add more fields as needed */}
                 </div>
+                    
+                {/* Social Media Links */}
+
+                <div className="mt-4 p-6 bg-white rounded shadow-lg w-full max-w-4xl">
+                    <h2 className="text-2xl font-bold text-gray-800">Edit Socials</h2>
+                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                        {/* Map through the current social media data */}
+
+                        {/* Input field with social icon to the left, dynamically set by parsing the name from the url */}
+
+                        {/* Create new social media button under the last social media link */}
+
+                    </div>
+                    
+                </div>
+
+                {/* Add more fields as needed */}
+                
 
                 {/* Submit button */}
                 <button
