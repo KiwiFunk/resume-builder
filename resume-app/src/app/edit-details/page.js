@@ -140,6 +140,18 @@ export default function EditDetailsPage() {
                     <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                         {/* Map through current skills data */}
 
+                        <div id="skill-group" className="mb-2 w-full bg-gray-100 p-4 rounded shadow-sm">
+                            <h3 className="text-lg text-gray-800 bg-gray-200 w-full mb-2">Skill Group Name</h3>
+                            <div className="flex flex-wrap gap-1.5">
+                                {/* Map through skills in that group */}
+                                <span className="px-3 py-2 rounded-full bg-(--accent) text-white text-sm font-semibold shadow-sm">Placeholder</span>
+                                <span className="px-3 py-2 rounded-full bg-(--accent) text-white text-sm font-semibold shadow-sm">Placeholder</span>
+                                <span className="px-3 py-2 rounded-full bg-(--accent) text-white text-sm font-semibold shadow-sm">Placeholder</span>
+                                <span className="px-3 py-2 rounded-full bg-(--accent) text-white text-sm font-semibold shadow-sm"><i className="bi bi-plus"></i></span>
+                            </div>
+                        </div>
+                                
+
                         {/* Create skill group button under the last skill group */}
                             {/* Add new skill button in each group */}
                         
