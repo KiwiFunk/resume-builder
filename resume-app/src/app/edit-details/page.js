@@ -29,18 +29,14 @@ export default function EditDetailsPage() {
 
             {/* Form populated with data from UserData.js */}
             <form className="w-full max-w-4xl">
-                <div className="mt-4 p-6 bg-white rounded shadow-lg w-full max-w-4xl">
-                    <h2 className="text-2xl font-bold text-gray-800">Edit Details</h2>
 
-                    {/* Contact Information */}
+                {/* Persistant user info */}
+                <div className="mt-4 p-6 bg-white rounded shadow-lg w-full max-w-4xl">
+                    <h2 className="text-2xl font-bold text-gray-800">Your Info</h2>
                     <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                         <div className="mt-4">
                             <label htmlFor="name" className="block text-gray-700">Name:</label>
                             <input type="text" id="name" defaultValue={data.name} className={inputClasses} />
-                        </div>
-                        <div className="mt-4">
-                            <label htmlFor="title" className="block text-gray-700">Title:</label>
-                            <input type="text" id="title" defaultValue={data.title} className={inputClasses} />
                         </div>
                         <div className="mt-4">
                             <label htmlFor="email" className="block text-gray-700">Email:</label>
@@ -55,12 +51,25 @@ export default function EditDetailsPage() {
                             <input type="text" id="location" defaultValue={data.location} className={inputClasses} />
                         </div>
                     </div>
+                </div>
 
-                    {/* Resume Summary */}
+
+                {/* Resume selector, with the option to create a new resume */}
+
+                {/* Resume Details */}
+                <div className="mt-4 p-6 bg-white rounded shadow-lg w-full max-w-4xl">
+                    <h2 className="text-2xl font-bold text-gray-800">Edit Details</h2>
+
+                    <div className="mt-4">
+                        <label htmlFor="title" className="block text-gray-700">Title:</label>
+                        <input type="text" id="title" defaultValue={data.title} className={inputClasses} />
+                    </div>
+                   
                     <div className="mt-4">
                         <label htmlFor="summary" className="block text-gray-700">Summary:</label>
                         <textarea id="summary" defaultValue={data.summary} className={inputClasses} rows="6"></textarea>
                     </div>
+
                 </div>
                     
                 {/* Social Media Links */}
