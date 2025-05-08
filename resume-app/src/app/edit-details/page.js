@@ -140,17 +140,26 @@ export default function EditDetailsPage() {
                     <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                         {/* Map through current skills data */}
 
-                        <div id="skill-group" className="mb-2 w-full bg-gray-100 p-4 rounded shadow-sm">
-                            <h3 className="text-lg text-gray-800 bg-gray-200 w-full mb-2">Skill Group Name</h3>
-                            <div className="flex flex-wrap gap-1.5">
-                                {/* Map through skills in that group */}
-                                <span className="px-3 py-2 rounded-full bg-(--accent) text-white text-sm font-semibold shadow-sm">Placeholder</span>
-                                <span className="px-3 py-2 rounded-full bg-(--accent) text-white text-sm font-semibold shadow-sm">Placeholder</span>
-                                <span className="px-3 py-2 rounded-full bg-(--accent) text-white text-sm font-semibold shadow-sm">Placeholder</span>
-                                <span className="px-3 py-2 rounded-full bg-(--accent) text-white text-sm font-semibold shadow-sm"><i className="bi bi-plus"></i></span>
+                        <div id="skill-group" className="mb-4 w-full bg-white p-5 rounded-lg shadow-md border border-gray-300">
+                            <h3 className="text-lg font-medium text-gray-800 bg-gray-100 w-full py-2 px-4 rounded-md">
+                                Skill Group Name
+                            </h3>
+                            
+                            <div className="flex flex-wrap gap-2 mt-3">
+                                {/* Skill Tags */}
+                                {["Placeholder", "Placeholder", "Placeholder"].map((skill, index) => (
+                                <span key={index} className="px-3 py-2 rounded-lg bg-gray-200 text-gray-700 text-sm font-medium shadow-sm hover:bg-gray-300 transition duration-200">
+                                    {skill}
+                                </span>
+                                ))}
+                                
+                                {/* Add Skill Button */}
+                                <button className="px-3 py-2 rounded-lg bg-gray-300 text-gray-600 text-sm font-medium shadow-sm hover:bg-gray-400 transition duration-200">
+                                <i className="bi bi-plus"></i>
+                                </button>
                             </div>
                         </div>
-                                
+                                                            
 
                         {/* Create skill group button under the last skill group */}
                             {/* Add new skill button in each group */}
