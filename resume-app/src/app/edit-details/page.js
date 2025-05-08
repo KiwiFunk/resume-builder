@@ -3,6 +3,8 @@
 import { useRouter } from "next/navigation"; // Import useRouter for routing
 import data from "@/UserData"; // Import the user data
 
+const inputClasses = "w-full p-3 border border-gray-300 rounded text-gray-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500";
+
 export default function EditDetailsPage() {
     const router = useRouter(); // Initialize the router
     
@@ -23,9 +25,54 @@ export default function EditDetailsPage() {
                 >
                     <i className="bi bi-floppy-fill text-xl"></i>
                 </button>
+            </div>
+
+            {/* Form populated with data from UserData.js */}
+            <form className="w-full max-w-4xl">
+                <div className="mt-4 p-6 bg-white rounded shadow-lg w-full max-w-4xl">
+                    <h2 className="text-2xl font-bold text-gray-800">Edit Details</h2>
+
+                    {/* Contact Information */}
+                    <div className="mt-4">
+                        <label htmlFor="name" className="block text-gray-700">Name:</label>
+                        <input type="text" id="name" defaultValue={data.name} className={inputClasses} />
+                    </div>
+                    <div className="mt-4">
+                        <label htmlFor="title" className="block text-gray-700">Title:</label>
+                        <input type="text" id="title" defaultValue={data.title} className={inputClasses} />
+                    </div>
+                    <div className="mt-4">
+                        <label htmlFor="email" className="block text-gray-700">Email:</label>
+                        <input type="email" id="email" defaultValue={data.email} className={inputClasses} />
+                    </div>
+                    <div className="mt-4">
+                        <label htmlFor="phone" className="block text-gray-700">Phone:</label>
+                        <input type="text" id="phone" defaultValue={data.phone} className={inputClasses} />
+                    </div>
+                    <div className="mt-4">
+                        <label htmlFor="location" className="block text-gray-700">Location:</label>
+                        <input type="text" id="location" defaultValue={data.location} className={inputClasses} />
+                    </div>
+
+                    {/* Resume Summary */}
+                    <div className="mt-4">
+                        <label htmlFor="summary" className="block text-gray-700">Summary:</label>
+                        <textarea id="summary" defaultValue={data.summary} className={inputClasses} rows="6"></textarea>
+                    </div>
+                    
+                    {/* Social Media Links */}
+
+                    {/* Add more fields as needed */}
                 </div>
 
-            {/* Display form populated by UserData JSON to allow updating fields. */}
+                {/* Submit button */}
+                <button
+                    type="submit"
+                    className="mt-4 px-4 py-2 bg-blue-500 text-white rounded shadow hover:bg-blue-600 cursor-pointer"
+                >
+                    Save Changes
+                </button>
+            </form>
 
         </main>
     );
