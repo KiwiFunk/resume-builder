@@ -89,7 +89,7 @@ export default function EditDetailsPage() {
                                     {/* Delete Button */}
                                     <button
                                         type="button"
-                                        className="text-red-500 hover:text-red-900 cursor-pointer"
+                                        className="text-red-500 hover:text-red-600 cursor-pointer hover:animate-wiggle hover:scale-110 transition-transform duration-100 ease-in-out"
                                         onClick={() => handleDeleteSocial(index)}
                                     >
                                         <i className="bi bi-trash"></i>
