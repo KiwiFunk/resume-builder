@@ -141,9 +141,20 @@ export default function EditDetailsPage() {
                         {/* Map through current skills data */}
 
                         <div id="skill-group" className="mb-4 w-full bg-white p-5 rounded-lg shadow-md border border-gray-300">
-                            <h3 className="text-lg font-medium text-gray-800 bg-gray-100 w-full py-2 px-4 rounded-md">
-                                Skill Group Name
-                            </h3>
+                            
+                            <div className="flex items-center gap-2 mb-4">
+                                <input
+                                    type="text"
+                                    defaultValue="Skill Group Name"
+                                    className={inputClasses}
+                                />
+                                <button 
+                                    className="p-3 border border-gray-300 rounded text-red-500 hover:text-red-600 cursor-pointer hover:animate-wiggle hover:scale-110 transition-transform duration-100 ease-in-out"
+                                    onClick={() => alert("Delete skill group functionality coming soon!")}
+                                >
+                                    <i className="bi bi-trash"></i>
+                                </button>
+                            </div>
                             
                             <div className="flex flex-wrap gap-2 mt-3">
                                 {/* Skill Tags */}
