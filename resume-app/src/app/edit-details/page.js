@@ -161,14 +161,14 @@ export default function EditDetailsPage() {
                                 {["Placeholder", "Placeholder", "Placeholder"].map((skill, index) => (
                                     <div
                                         key={index}
-                                        className="px-3 py-2 rounded-lg bg-gray-200 text-gray-700 text-sm font-medium shadow-sm transition duration-200 [&:has(button:hover)]:bg-red-500"
+                                        className="px-3 py-2 rounded-lg bg-gray-200 text-gray-700 text-sm font-medium shadow-sm transition duration-300 [&:has(button:hover)]:bg-red-500"
                                     >
-                                        <span className="[&:has(button:hover)]:text-white">{skill}
+                                        <span className="transition duration-300 [&:has(button:hover)]:text-white">{skill}
                                             <button 
                                                 className="ml-2"
                                                 onClick={() => alert("Delete skill functionality coming soon!")}
                                             >
-                                                <i className="bi bi-x text-red-500 cursor-pointer transition duration-200 hover:text-white"></i>
+                                                <i className="bi bi-x text-red-500 cursor-pointer transition duration-300 hover:text-white"></i>
                                             </button>
                                         </span>
                                     </div>
