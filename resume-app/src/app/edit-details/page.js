@@ -73,7 +73,7 @@ export default function EditDetailsPage() {
                                 <div key={index} className="flex items-center gap-2">
                                     {/* Social Media Icon */}
                                     <div
-                                        className="w-6 h-5 bg-blue-500"
+                                        className="w-6 h-5 bg-(--accent)"
                                         style={{ maskImage: `url('/icons/${social.platform.toLowerCase()}.svg')`, WebkitMaskImage: `url('/icons/${social.platform.toLowerCase()}.svg')` }}
                                         aria-label={social.platform}
                                     ></div>
