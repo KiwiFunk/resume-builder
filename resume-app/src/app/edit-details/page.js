@@ -195,7 +195,7 @@ export default function EditDetailsPage() {
                     {data.education.map((edu, index) => (
                     <div id="education-entry" key={index} className="mb-4 w-full bg-white p-5 rounded-lg shadow-md border border-gray-300">
 
-                        <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                        <div className="grid grid-cols-1 mb-6 sm:grid-cols-2 sm:gap-4">
                             <div>
                                 <label htmlFor="edutitle" className="block text-gray-700">Title:</label>
                                 <input type="text" id="edutitle" defaultValue={edu.degree} className={inputClasses} />'
@@ -206,21 +206,28 @@ export default function EditDetailsPage() {
                             </div>
                         </div>
 
-                        <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
-                            <div>
+                        <div className="flex flex-col sm:flex-row sm:gap-4">
+                            <div className="flex-1">
                                 <label htmlFor="edulocation" className="block text-gray-700">Location:</label>
                                 <input type="text" id="edulocation" defaultValue={edu.location} className={inputClasses} />'
                             </div>
-                            <div>
+                            <div className="flex-1 mb-4">
                                 <label htmlFor="edustart" className="block text-gray-700">Start Date:</label>
                                 <input type="date" id="edustart" defaultValue={edu.startDate} className={inputClasses} />
                             </div>
-                            <div>
+                            <div className="flex-1">
                                 <label htmlFor="eduend" className="block text-gray-700">End Date:</label>
                                 <input type="date" id="eduend" defaultValue={edu.endDate} className={inputClasses} />
                             </div>
+
+                            {/* Delete button */}
+                            <button 
+                                className="h-full p-3 mt-6 border border-gray-300 rounded text-red-500 hover:text-red-600 cursor-pointer sm:hover:animate-wiggle sm:hover:scale-110 transition-transform duration-100 ease-in-out flex-0"
+                                onClick={() => alert("Delete skill group functionality coming soon!")}
+                            >
+                                <i className="bi bi-trash"></i>
+                            </button>
                         </div>
-                        
                     </div>
                     ))}
                         
