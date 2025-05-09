@@ -231,66 +231,113 @@ export default function EditDetailsPage() {
                                     </button>
                                 </div>
                             </div>
-                            ))
-                        }
+                        ))
+                    }
 
-                        {/* Add new education button under the last education entry */}
+                    {/* Add new education button under the last education entry */}
                 </CollapsibleContainer>
-                
+
                 <CollapsibleContainer title="Your Courses & Training">
-                        {/* Map through current courses data */}
-                        {data.training
-                            .sort((a, b) => new Date(b.startDate) - new Date(a.startDate)) // Sort by startDate (Descending)
-                            .map((course, index) => (
-                                <div id="training-entry" key={index} className="mb-4 w-full bg-white p-5 rounded-lg shadow-md border border-gray-300">
+                    {/* Map through current courses data */}
+                    {data.training
+                        .sort((a, b) => new Date(b.startDate) - new Date(a.startDate)) // Sort by startDate (Descending)
+                        .map((course, index) => (
+                            <div id="training-entry" key={index} className="mb-4 w-full bg-white p-5 rounded-lg shadow-md border border-gray-300">
 
-                                    <div className="grid grid-cols-1 sm:mb-0 sm:grid-cols-2 sm:gap-4">
-                                        <div>
-                                            <label htmlFor="course-title" className="block text-gray-700">Title:</label>
-                                            <input type="text" id="course-title" defaultValue={course.title} className={inputClasses} />'
-                                        </div>
-                                        <div>
-                                            <label htmlFor="course-institute" className="block text-gray-700">Institution:</label>
-                                            <input type="text" id="course-institute" defaultValue={course.institution} className={inputClasses} />
-                                        </div>
+                                <div className="grid grid-cols-1 sm:mb-0 sm:grid-cols-2 sm:gap-4">
+                                    <div>
+                                        <label htmlFor="course-title" className="block text-gray-700">Title:</label>
+                                        <input type="text" id="course-title" defaultValue={course.title} className={inputClasses} />'
                                     </div>
-
-                                    <div className="mt-6 sm:mt-0 flex flex-col sm:flex-row gap-6 sm:gap-4">
-                                    
-                                        <div className="flex-1">
-                                            <label htmlFor="course-start" className="block text-gray-700">Start Date:</label>
-                                            <input type="date" id="course-start" defaultValue={course.startDate} className={inputClasses} />
-                                        </div>
-                                        <div className="flex-1">
-                                            <label htmlFor="course-end" className="block text-gray-700">End Date:</label>
-                                            <input type="date" id="course-end" defaultValue={course.endDate} className={inputClasses} />
-                                        </div>
-
-                                        {/* Delete button */}
-                                        <button 
-                                            className="h-full p-3 mt-6 border border-gray-300 rounded text-red-500 hover:text-red-600 cursor-pointer sm:hover:animate-wiggle sm:hover:scale-110 transition-transform duration-100 ease-in-out flex-0"
-                                            onClick={() => alert("Delete skill group functionality coming soon!")}
-                                        >
-                                            <i className="bi bi-trash"></i>
-                                        </button>
-                                    </div>
-
-                                    <label htmlFor="course-description" className="block text-gray-700 mt-4">Description:</label>
-                                    <textarea id="course-description" defaultValue={course.description} className={inputClasses} rows="3"></textarea>
-
+                                    <div>
+                                        <label htmlFor="course-institute" className="block text-gray-700">Institution:</label>
+                                        <input type="text" id="course-institute" defaultValue={course.institution} className={inputClasses} />
+                                    </div>                                    
                                 </div>
-                            ))
-                        }
-                        {/* Add new course button under the last course entry */}
+
+                                <div className="mt-6 sm:mt-0 flex flex-col sm:flex-row gap-6 sm:gap-4">
+                                    
+                                    <div className="flex-1">
+                                        <label htmlFor="course-start" className="block text-gray-700">Start Date:</label>
+                                        <input type="date" id="course-start" defaultValue={course.startDate} className={inputClasses} />
+                                    </div>
+                                    <div className="flex-1">
+                                        <label htmlFor="course-end" className="block text-gray-700">End Date:</label>
+                                        <input type="date" id="course-end" defaultValue={course.endDate} className={inputClasses} />
+                                    </div>
+
+                                    {/* Delete button */}
+                                    <button                                             
+                                        className="h-full p-3 mt-6 border border-gray-300 rounded text-red-500 hover:text-red-600 cursor-pointer sm:hover:animate-wiggle sm:hover:scale-110 transition-transform duration-100 ease-in-out flex-0"
+                                        onClick={() => alert("Delete skill group functionality coming soon!")}
+                                    >
+                                        <i className="bi bi-trash"></i>
+                                    </button>
+                                </div>
+
+                                <label htmlFor="course-description" className="block text-gray-700 mt-6">Description:</label>
+                                <textarea id="course-description" defaultValue={course.description} className={inputClasses} rows="3"></textarea>
+
+                            </div>
+                        ))
+                    }
+                    {/* Add new course button under the last course entry */}
                         
                 </CollapsibleContainer>
 
                 <CollapsibleContainer title="Employment History">
-                        {/* Map through current employment data */}
-                        {/* Job Title, Company Name, Location, Start/End date selection, TextArea for description of job */}
+                    {/* Map through current employment data */}
+                    {data.experience
+                        .sort((a, b) => new Date(b.startDate) - new Date(a.startDate)) // Sort by startDate (Descending)
+                        .map((job, index) => (
+                            <div id="job-entry" key={index} className="mb-4 w-full bg-white p-5 rounded-lg shadow-md border border-gray-300">
+
+                                <div className="grid grid-cols-1 sm:mb-0 sm:grid-cols-2 sm:gap-4">
+                                    <div>
+                                        <label htmlFor="job-title" className="block text-gray-700">Title:</label>
+                                        <input type="text" id="job-title" defaultValue={job.title} className={inputClasses} />'
+                                    </div>
+                                    <div>
+                                        <label htmlFor="company" className="block text-gray-700">Company:</label>
+                                        <input type="text" id="company" defaultValue={job.company} className={inputClasses} />
+                                    </div>                                    
+                                </div>
+
+                                <div className="mt-6 sm:mt-0 flex flex-col sm:flex-row gap-6 sm:gap-4">
+                                    
+                                    <div className="flex-1">
+                                        <label htmlFor="job-location" className="block text-gray-700">Location:</label>
+                                        <input type="text" id="job-location" defaultValue={job.location} className={inputClasses} />
+                                    </div>
+                                    <div className="flex-1">
+                                        <label htmlFor="job-start" className="block text-gray-700">Start Date:</label>
+                                        <input type="date" id="job-start" defaultValue={job.startDate} className={inputClasses} />
+                                    </div>
+                                    <div className="flex-1">
+                                        <label htmlFor="job-end" className="block text-gray-700">End Date:</label>
+                                        <input type="date" id="job-end" defaultValue={job.endDate} className={inputClasses} />
+                                    </div>
+
+                                    {/* Delete button */}
+                                    <button                                             
+                                        className="h-full p-3 mt-6 border border-gray-300 rounded text-red-500 hover:text-red-600 cursor-pointer sm:hover:animate-wiggle sm:hover:scale-110 transition-transform duration-100 ease-in-out flex-0"
+                                        onClick={() => alert("Delete skill group functionality coming soon!")}
+                                    >
+                                        <i className="bi bi-trash"></i>
+                                    </button>
+                                </div>
+
+                                <label htmlFor="course-description" className="block text-gray-700 mt-6">Description:</label>
+                                <textarea id="course-description" defaultValue={job.description} className={inputClasses} rows="4"></textarea>
+                                <p className="text-gray-400 text-sm">Sentences will be automatically formatted as bullet points.</p>
+
+                            </div>
+                        ))
+                    }
+
                         {/* Add new job button under the last job entry */}
-                        {/* Always sort with descending hierarchy, no need for dnd */}
                 </CollapsibleContainer>
+
                 <CollapsibleContainer title="Projects & Portfolio">
                     {/* Map through current projects data */}
                         {/* Project Name, URL for repo/hosting, skills used entry, TextArea for description of project */}
