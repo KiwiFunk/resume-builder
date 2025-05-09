@@ -21,7 +21,11 @@ export default function CollapsibleContainer({ title, children }) {
                     </div>
 
                     {/* Collapsable content */}
-                    <div className={`mt-2.5 transition-all duration-300 ${isOpen ? "max-h-screen" : "max-h-0 overflow-hidden"}`}>
+                    <div
+                        className={`mt-2.5 transition-all duration-300 ease-in-out ${
+                        isOpen ? "max-h-screen opacity-100 pointer-events-auto" : "max-h-0 opacity-0 pointer-events-none"
+                        } overflow-hidden`}
+                    >
                         {children}
                         <p>TEST CONTENT</p>
                         <p>TEST CONTENT</p>
