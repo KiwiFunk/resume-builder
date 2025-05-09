@@ -197,6 +197,10 @@ export default function EditDetailsPage() {
                 {/* Add more fields as needed */}
 
                 <CollapsibleContainer title="Add More Details">
+                    <p>TEST CONTENT</p>
+                    <p>TEST CONTENT</p>
+                    <p>TEST CONTENT</p>
+                    <p>TEST CONTENT</p>
                 </CollapsibleContainer>
                 
 

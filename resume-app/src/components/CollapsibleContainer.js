@@ -31,20 +31,16 @@ export default function CollapsibleContainer({ title, children }) {
                         <h2 className="text-2xl font-bold text-gray-800">{title}</h2>
                         {/* Arrow icon */}
                         <i 
-                            className="bi bi-caret-down-fill text-gray-300"
+                            className={`bi ${isOpen ? "bi-caret-down-fill" : "bi-caret-right-fill"} text-gray-300 hover:cursor-pointer hover:scale-105 hover:text-gray-600`}
                             onClick={toggleCollapse}  // Toggle the collapsible content
                         ></i>
                     </div>
 
                     {/* Collapsable content */}
                     <div
-                        className={`mt-2.5 transition-all duration-100 ease-in-out ${isOpen ? "max-h-screen opacity-100" : "max-h-0 opacity-0 overflow-hidden"}`}
+                        className={`transition-all duration-100 ease-in-out ${isOpen ? "max-h-screen opacity-100 mt-2.5" : "max-h-0 opacity-0 overflow-hidden"}`}
                     >
                         {children}
-                        <p>TEST CONTENT</p>
-                        <p>TEST CONTENT</p>
-                        <p>TEST CONTENT</p>
-                        <p>TEST CONTENT</p>
                     </div>
                     
         </div>
