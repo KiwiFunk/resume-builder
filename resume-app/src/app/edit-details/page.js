@@ -208,7 +208,7 @@ export default function EditDetailsPage() {
                                     </div>
                                 </div>
 
-                                <div className="mt-4 flex flex-col sm:flex-row gap-4 sm:gap-4">
+                                <div className="mt-6 sm:mt-0 flex flex-col sm:flex-row gap-6 sm:gap-4">
                                     <div className="flex-1">
                                         <label htmlFor="edulocation" className="block text-gray-700">Location:</label>
                                         <input type="text" id="edulocation" defaultValue={edu.location} className={inputClasses} />
