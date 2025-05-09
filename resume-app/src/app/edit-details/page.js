@@ -344,15 +344,24 @@ export default function EditDetailsPage() {
                         .map((project, index) => (
                             <div id="project-entry" key={index} className="mb-4 w-full bg-white p-5 rounded-lg shadow-md border border-gray-300">
                                 
-                                <div className="grid grid-cols-1 sm:mb-0 sm:grid-cols-2 sm:gap-4">
-                                    <div>
+                                <div className="mt-6 sm:mt-0 flex flex-col sm:flex-row gap-6 sm:gap-4">
+                                    <div className="flex-1">
                                         <label htmlFor="project-title" className="block text-gray-700">Title:</label>
                                         <input type="text" id="project-title" defaultValue={project.title} className={inputClasses} />'
                                     </div>
-                                    <div>
+                                    <div className="flex-1">
                                         <label htmlFor="project-url" className="block text-gray-700">URL:</label>
                                         <input type="text" id="project-url" defaultValue={project.url} className={inputClasses} />
-                                    </div>                                    
+                                    </div> 
+
+                                    {/* Delete button */}
+                                    <button                                             
+                                        className="h-full p-3 mt-6 border border-gray-300 rounded text-red-500 hover:text-red-600 cursor-pointer sm:hover:animate-wiggle sm:hover:scale-110 transition-transform duration-100 ease-in-out flex-0"
+                                        onClick={() => alert("Delete skill group functionality coming soon!")}
+                                    >
+                                        <i className="bi bi-trash"></i>
+                                    </button>
+
                                 </div>  
 
                                 <label htmlFor="project-skills" className="block text-gray-700">Technologies used:</label>
