@@ -190,7 +190,17 @@ export default function EditDetailsPage() {
 
                 </CollapsibleContainer>
 
-                {/* Add more fields as needed */}
+                <CollapsibleContainer title="Your Education"> 
+                </CollapsibleContainer>
+                <CollapsibleContainer title="Your Courses & Training">
+                </CollapsibleContainer>
+                <CollapsibleContainer title="Employment History">
+                </CollapsibleContainer>
+                <CollapsibleContainer title="Projects & Portfolio">
+                </CollapsibleContainer>
+                <CollapsibleContainer title="Hobbies & Interests">
+                </CollapsibleContainer>
+
 
                 {/* Submit button */}
                 <button
