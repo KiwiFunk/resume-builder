@@ -39,7 +39,7 @@ export default function EditDetailsPage() {
                             <label htmlFor="name" className="block text-gray-700">Name:</label>
                             <input type="text" id="name" defaultValue={data.name} className={inputClasses} />
                         </div>
-                        <div>
+                        <div className="sm:mt-4">
                             <label htmlFor="email" className="block text-gray-700">Email:</label>
                             <input type="email" id="email" defaultValue={data.email} className={inputClasses} />
                         </div>
