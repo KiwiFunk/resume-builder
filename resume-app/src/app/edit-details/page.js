@@ -2,6 +2,7 @@
 
 import { useRouter } from "next/navigation"; // Import useRouter for routing
 import data from "@/UserData"; // Import the user data
+import CollapsibleContainer from "@/components/CollapsibleContainer";
 
 const inputClasses = "w-full p-3 border border-gray-300 rounded text-gray-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500";
 
@@ -194,6 +195,9 @@ export default function EditDetailsPage() {
                     
 
                 {/* Add more fields as needed */}
+
+                <CollapsibleContainer title="Add More Details">
+                </CollapsibleContainer>
                 
 
                 {/* Submit button */}
