@@ -209,13 +209,15 @@ export default function EditDetailsPage() {
                         {/* Always sort with descending hierarchy, no need for dnd */}
                 </CollapsibleContainer>
                 <CollapsibleContainer title="Projects & Portfolio">
-                        {/* Map through current projects data */}
+                    {/* Map through current projects data */}
                         {/* Project Name, URL for repo/hosting, skills used entry, TextArea for description of project */}
                         {/* Add new project button under the last project entry */}
                         {/* Always sort with descending hierarchy, no need for dnd */}
                 </CollapsibleContainer>
                 <CollapsibleContainer title="Hobbies & Interests">
-                        {/* Simple TextArea for hobbies and interests, each new sentence will be formatted to new bullet point */}
+                    <label htmlFor="summary" className="hidden text-gray-700">Summary:</label>
+                    <textarea id="summary" defaultValue={data.hobbies} className={inputClasses} rows="6"></textarea>
+                    <p className="text-gray-400 text-sm">Sentences will be automatically formatted as bullet points.</p>
                 </CollapsibleContainer>
 
 
