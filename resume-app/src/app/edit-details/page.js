@@ -191,14 +191,31 @@ export default function EditDetailsPage() {
                 </CollapsibleContainer>
 
                 <CollapsibleContainer title="Your Education"> 
+                        {/* Map through the current education data */}
+                        {/* Degree Name, Institution, Location Start/End date selection */}
+                        {/* Add new education button under the last education entry */}
+                        {/* Always sort with descending hierarchy, no need for dnd */}
                 </CollapsibleContainer>
                 <CollapsibleContainer title="Your Courses & Training">
+                        {/* Map through current courses data */}
+                        {/* Course Name, Institution, Start/End date selection, TextArea for description of training or cert */}
+                        {/* Add new course button under the last course entry */}
+                        {/* Always sort with descending hierarchy, no need for dnd */}
                 </CollapsibleContainer>
                 <CollapsibleContainer title="Employment History">
+                        {/* Map through current employment data */}
+                        {/* Job Title, Company Name, Location, Start/End date selection, TextArea for description of job */}
+                        {/* Add new job button under the last job entry */}
+                        {/* Always sort with descending hierarchy, no need for dnd */}
                 </CollapsibleContainer>
                 <CollapsibleContainer title="Projects & Portfolio">
+                        {/* Map through current projects data */}
+                        {/* Project Name, URL for repo/hosting, skills used entry, TextArea for description of project */}
+                        {/* Add new project button under the last project entry */}
+                        {/* Always sort with descending hierarchy, no need for dnd */}
                 </CollapsibleContainer>
                 <CollapsibleContainer title="Hobbies & Interests">
+                        {/* Simple TextArea for hobbies and interests, each new sentence will be formatted to new bullet point */}
                 </CollapsibleContainer>
 
 
