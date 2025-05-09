@@ -340,9 +340,57 @@ export default function EditDetailsPage() {
 
                 <CollapsibleContainer title="Projects & Portfolio">
                     {/* Map through current projects data */}
-                        {/* Project Name, URL for repo/hosting, skills used entry, TextArea for description of project */}
+                    {data.projects
+                        .map((project, index) => (
+                            <div id="project-entry" key={index} className="mb-4 w-full bg-white p-5 rounded-lg shadow-md border border-gray-300">
+                                
+                                <div className="grid grid-cols-1 sm:mb-0 sm:grid-cols-2 sm:gap-4">
+                                    <div>
+                                        <label htmlFor="project-title" className="block text-gray-700">Title:</label>
+                                        <input type="text" id="project-title" defaultValue={project.title} className={inputClasses} />'
+                                    </div>
+                                    <div>
+                                        <label htmlFor="project-url" className="block text-gray-700">URL:</label>
+                                        <input type="text" id="project-url" defaultValue={project.url} className={inputClasses} />
+                                    </div>                                    
+                                </div>  
+
+                                <label htmlFor="project-skills" className="block text-gray-700">Technologies used:</label>
+                                <div className="flex flex-wrap gap-2 mt-3">
+                                    {/* Skill Tags */}
+                                    
+                                    {project.skills.map((skill, index) => (
+                                        <div
+                                            key={index}
+                                            className="px-3 py-2 rounded-lg bg-gray-200 text-gray-700 text-sm font-medium shadow-sm transition duration-300 [&:has(button:hover)]:bg-red-500"
+                                        >
+                                            <span className="transition duration-300 [&:has(button:hover)]:text-white">{skill}
+                                                <button 
+                                                    className="ml-2"
+                                                    onClick={() => alert("Delete skill functionality coming soon!")}
+                                                >
+                                                    <i className="bi bi-x text-red-500 cursor-pointer transition duration-300 hover:text-white"></i>
+                                                </button>
+                                            </span>
+                                        </div>
+                                    ))}
+
+                                    {/* Add Skill Button */}
+                                    <button className="px-3 py-2 rounded-lg bg-gray-300 text-gray-600 text-sm font-medium shadow-sm hover:bg-gray-400 transition duration-200">
+                                        <i className="bi bi-plus"></i>
+                                    </button>
+
+                                    {/* Implement react-dnd to allow drag and drop of skills between groups */}
+                                </div>
+
+                                <label htmlFor="project-description" className="block text-gray-700 mt-6">Description:</label>
+                                <textarea id="project-description" defaultValue={project.description} className={inputClasses} rows="3"></textarea>
+                        
+                            </div>
+                    ))}
+
                         {/* Add new project button under the last project entry */}
-                        {/* Always sort with descending hierarchy, no need for dnd */}
+                  
                 </CollapsibleContainer>
                 <CollapsibleContainer title="Hobbies & Interests">
                     <label htmlFor="summary" className="hidden text-gray-700">Summary:</label>
