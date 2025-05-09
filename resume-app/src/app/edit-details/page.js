@@ -79,9 +79,8 @@ export default function EditDetailsPage() {
                 </div>
 
                 {/* Resume Details */}
-                <div className="mt-4 p-6 bg-white rounded shadow-lg w-full max-w-4xl">
-                    <h2 className="text-2xl font-bold text-gray-800">Edit Details</h2>
-
+    
+                <CollapsibleContainer title="Edit Resume Details">
                     <div className="mt-4">
                         <label htmlFor="title" className="block text-gray-700">Title:</label>
                         <input type="text" id="title" defaultValue={data.title} className={inputClasses} />
@@ -91,13 +90,11 @@ export default function EditDetailsPage() {
                         <label htmlFor="summary" className="block text-gray-700">Summary:</label>
                         <textarea id="summary" defaultValue={data.summary} className={inputClasses} rows="6"></textarea>
                     </div>
-
-                </div>
+                </CollapsibleContainer>
+                
                     
                 {/* Social Media Links */}
-
-                <div className="mt-4 p-6 bg-white rounded shadow-lg w-full max-w-4xl">
-                    <h2 className="text-2xl font-bold text-gray-800 mb-2.5">Edit Socials</h2>
+                <CollapsibleContainer title="Edit Socials">
                     <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                         {/* Map through the current social media data */}
                         {data.socials.map((social, index) => (
@@ -132,11 +129,10 @@ export default function EditDetailsPage() {
                         {/* Create new social media button under the last social media link */}
 
                     </div>
-                </div>
+                </CollapsibleContainer>
 
                 {/* Skills Section */}
-                <div className="mt-4 p-6 bg-white rounded shadow-lg w-full max-w-4xl">
-                    <h2 className="text-2xl font-bold text-gray-800 mb-2.5">Edit Skills</h2>
+                <CollapsibleContainer title="Edit Skills">
                     <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
 
                         {/* Map through current skills data */}
@@ -191,18 +187,10 @@ export default function EditDetailsPage() {
                         {/* Implement react-dnd to allow drag and drop of skills between groups */}
                         
                     </div>
-                </div>
-                    
+
+                </CollapsibleContainer>
 
                 {/* Add more fields as needed */}
-
-                <CollapsibleContainer title="Add More Details">
-                    <p>TEST CONTENT</p>
-                    <p>TEST CONTENT</p>
-                    <p>TEST CONTENT</p>
-                    <p>TEST CONTENT</p>
-                </CollapsibleContainer>
-                
 
                 {/* Submit button */}
                 <button

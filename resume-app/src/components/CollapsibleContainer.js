@@ -4,7 +4,7 @@ import React, { useState, useRef } from "react";
 export default function CollapsibleContainer({ title, children }) {
 
     // State to manage the visibility of the collapsible content
-    const [isOpen, setIsOpen] = useState(true);
+    const [isOpen, setIsOpen] = useState(false);
 
     // Reference to this container
     const containerRef = useRef(null);
@@ -16,7 +16,7 @@ export default function CollapsibleContainer({ title, children }) {
             // Scroll into view when expanding (Needs a timeout to work with opacity transition for some reason)
             setTimeout(() => {
                 containerRef.current.scrollIntoView({ behavior: "smooth", block: "start" });
-            }, 20);
+            }, 50);
         }
         return !prev;
         });
@@ -31,14 +31,16 @@ export default function CollapsibleContainer({ title, children }) {
                         <h2 className="text-2xl font-bold text-gray-800">{title}</h2>
                         {/* Arrow icon */}
                         <i 
-                            className={`bi ${isOpen ? "bi-caret-down-fill" : "bi-caret-right-fill"} text-gray-300 hover:cursor-pointer hover:scale-105 hover:text-gray-600`}
+                            className={`bi ${isOpen ? "bi-caret-down-fill" : "bi-caret-right-fill"}
+                            text-gray-300 hover:cursor-pointer hover:scale-105 hover:text-gray-600`}
                             onClick={toggleCollapse}  // Toggle the collapsible content
                         ></i>
                     </div>
 
                     {/* Collapsable content */}
                     <div
-                        className={`transition-all duration-100 ease-in-out ${isOpen ? "max-h-screen opacity-100 mt-2.5" : "max-h-0 opacity-0 overflow-hidden"}`}
+                        className={`transition-all duration-100 ease-in-out 
+                        ${isOpen ? "max-h-screen opacity-100 mt-2.5" : "max-h-0 opacity-0 overflow-hidden"}`}
                     >
                         {children}
                     </div>
