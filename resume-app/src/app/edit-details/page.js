@@ -39,15 +39,15 @@ export default function EditDetailsPage() {
                             <label htmlFor="name" className="block text-gray-700">Name:</label>
                             <input type="text" id="name" defaultValue={data.name} className={inputClasses} />
                         </div>
-                        <div className="mt-4">
+                        <div>
                             <label htmlFor="email" className="block text-gray-700">Email:</label>
                             <input type="email" id="email" defaultValue={data.email} className={inputClasses} />
                         </div>
-                        <div className="mt-4">
+                        <div>
                             <label htmlFor="phone" className="block text-gray-700">Phone:</label>
                             <input type="text" id="phone" defaultValue={data.phone} className={inputClasses} />
                         </div>
-                        <div className="mt-4">
+                        <div>
                             <label htmlFor="location" className="block text-gray-700">Location:</label>
                             <input type="text" id="location" defaultValue={data.location} className={inputClasses} />
                         </div>
@@ -197,7 +197,7 @@ export default function EditDetailsPage() {
                         .map((edu, index) => (
                             <div id="education-entry" key={index} className="mb-4 w-full bg-white p-5 rounded-lg shadow-md border border-gray-300">
 
-                                <div className="grid grid-cols-1 mb-6 sm:mb-0 sm:grid-cols-2 sm:gap-4">
+                                <div className="grid grid-cols-1 sm:mb-0 sm:grid-cols-2 sm:gap-4">
                                     <div>
                                         <label htmlFor="edutitle" className="block text-gray-700">Title:</label>
                                         <input type="text" id="edutitle" defaultValue={edu.degree} className={inputClasses} />'
@@ -208,12 +208,12 @@ export default function EditDetailsPage() {
                                     </div>
                                 </div>
 
-                                <div className="flex flex-col sm:flex-row sm:gap-4">
+                                <div className="mt-4 flex flex-col sm:flex-row gap-4 sm:gap-4">
                                     <div className="flex-1">
                                         <label htmlFor="edulocation" className="block text-gray-700">Location:</label>
-                                        <input type="text" id="edulocation" defaultValue={edu.location} className={inputClasses} />'
+                                        <input type="text" id="edulocation" defaultValue={edu.location} className={inputClasses} />
                                     </div>
-                                    <div className="flex-1 mb-4">
+                                    <div className="flex-1">
                                         <label htmlFor="edustart" className="block text-gray-700">Start Date:</label>
                                         <input type="date" id="edustart" defaultValue={edu.startDate} className={inputClasses} />
                                     </div>
@@ -233,6 +233,7 @@ export default function EditDetailsPage() {
                             </div>
                             ))
                         }
+
                         {/* Add new education button under the last education entry */}
                 </CollapsibleContainer>
                 <CollapsibleContainer title="Your Courses & Training">
