@@ -14,23 +14,28 @@ export default function TaggingHandler({ tagCollection }) {
     const handleDoubleClick = (index) => {
         setEditingIndex(index);                 // Set the index of the tag being edited
         setTagName(tagCollection[index]);       // Set input field to the current tag value
-    }
+    };
 
     // Function to handle tag renaming
     const handleTagRename = (event) => {
         setTagName(event.target.value);         // Update tag name state
         {/* Logic to update the stored data in the database */}
-    }
+    };
 
     // Edit mode exit events
     const handleFocusLoss = () => {
         setEditingIndex(null);                  // Exit editing mode when focus is lost
-    }
+    };
 
     const handleKeyDown = (event) => {
         if (event.key === "Enter") {
             setEditingIndex(null);              // Exit editing mode on Enter key
         }
+    };
+
+    const createTag = () => {
+        // Logic to create a new tag and add it to the tagCollection
+        alert("Create tag functionality coming soon!");
     };
 
     return (
@@ -81,7 +86,7 @@ export default function TaggingHandler({ tagCollection }) {
             <button 
                 type="button"
                 className="px-3 py-2 rounded-lg bg-gray-300 text-gray-600 text-sm font-medium shadow-sm hover:bg-gray-400 transition duration-200 hover:cursor-pointer"
-                onClick={() => alert("Add tag functionality coming soon!")}
+                onClick={createTag}
             >
                 <i className="bi bi-plus"></i>
             </button>
