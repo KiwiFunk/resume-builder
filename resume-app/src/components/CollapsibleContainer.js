@@ -4,7 +4,7 @@ import React, { useState, useRef } from "react";
 export default function CollapsibleContainer({ title, children }) {
 
     // State to manage the visibility of the collapsible content
-    const [isOpen, setIsOpen] = useState(true);
+    const [isOpen, setIsOpen] = useState(false);
 
     // Reference to this container
     const containerRef = useRef(null);

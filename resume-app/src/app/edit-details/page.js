@@ -3,6 +3,7 @@
 import { useRouter } from "next/navigation"; // Import useRouter for routing
 import data from "@/UserData"; // Import the user data
 import CollapsibleContainer from "@/components/CollapsibleContainer";
+import TaggingHandler from "@/components/TaggingHandler";
 
 const inputClasses = "w-full p-3 border border-gray-300 rounded text-gray-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500";
 
@@ -152,32 +153,9 @@ export default function EditDetailsPage() {
                                         <i className="bi bi-trash"></i>
                                     </button>
                                 </div>
-                                
-                                <div className="flex flex-wrap gap-2 mt-3">
-                                    {/* Skill Tags */}
-                                    {group.items.map((skill, index) => (
-                                        <div
-                                            key={index}
-                                            className="px-3 py-2 rounded-lg bg-gray-200 text-gray-700 text-sm font-medium shadow-sm transition duration-300 [&:has(button:hover)]:bg-red-500"
-                                        >
-                                            <span className="transition duration-300 [&:has(button:hover)]:text-white">{skill}
-                                                <button 
-                                                    className="ml-2"
-                                                    onClick={() => alert("Delete skill functionality coming soon!")}
-                                                >
-                                                    <i className="bi bi-x text-red-500 cursor-pointer transition duration-300 hover:text-white"></i>
-                                                </button>
-                                            </span>
-                                        </div>
-                                    ))}
 
-                                    {/* Add Skill Button */}
-                                    <button className="px-3 py-2 rounded-lg bg-gray-300 text-gray-600 text-sm font-medium shadow-sm hover:bg-gray-400 transition duration-200">
-                                        <i className="bi bi-plus"></i>
-                                    </button>
-
-                                    {/* Implement react-dnd to allow drag and drop of skills between groups */}
-                                </div>
+                                <TaggingHandler tagCollection={group.items} />
+                               
                             </div>   
                         ))}
                                                         
@@ -365,33 +343,8 @@ export default function EditDetailsPage() {
                                 </div>  
 
                                 <label htmlFor="project-skills" className="block text-gray-700">Technologies used:</label>
-                                <div className="flex flex-wrap gap-2 mt-3">
-                                    {/* Skill Tags */}
-                                    
-                                    {project.skills.map((skill, index) => (
-                                        <div
-                                            key={index}
-                                            className="px-3 py-2 rounded-lg bg-gray-200 text-gray-700 text-sm font-medium shadow-sm transition duration-300 [&:has(button:hover)]:bg-red-500"
-                                        >
-                                            <span className="transition duration-300 [&:has(button:hover)]:text-white">{skill}
-                                                <button 
-                                                    className="ml-2"
-                                                    onClick={() => alert("Delete skill functionality coming soon!")}
-                                                >
-                                                    <i className="bi bi-x text-red-500 cursor-pointer transition duration-300 hover:text-white"></i>
-                                                </button>
-                                            </span>
-                                        </div>
-                                    ))}
-
-                                    {/* Add Skill Button */}
-                                    <button className="px-3 py-2 rounded-lg bg-gray-300 text-gray-600 text-sm font-medium shadow-sm hover:bg-gray-400 transition duration-200">
-                                        <i className="bi bi-plus"></i>
-                                    </button>
-
-                                    {/* Implement react-dnd to allow drag and drop of skills between groups */}
-                                </div>
-
+                                <TaggingHandler tagCollection={project.skills} />
+                                
                                 <label htmlFor="project-description" className="block text-gray-700 mt-6">Description:</label>
                                 <textarea id="project-description" defaultValue={project.description} className={inputClasses} rows="3"></textarea>
                         
