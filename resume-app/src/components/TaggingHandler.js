@@ -7,6 +7,8 @@ export default function TaggingHandler({ tagCollection }) {
 
     // State to handle tag name input
     const [tagName, setTagName] = useState("");
+    // State to store index of the tag being edited
+    const [editingIndex, setEditingIndex] = useState(null);
 
     // Function to handle tag renaming
     const handleTagRename = (event) => {
