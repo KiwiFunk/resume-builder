@@ -10,6 +10,7 @@ export default function TaggingHandler({ tagCollection }) {
                 >
                     <span className="transition duration-300 [&:has(button:hover)]:text-white">{tag}
                         <button
+                            type="button"
                             className="ml-2"
                             onClick={() => alert("Delete tag functionality coming soon!")}
                         >
@@ -21,6 +22,7 @@ export default function TaggingHandler({ tagCollection }) {
 
             {/* Add tag Button */}
             <button 
+                type="button"
                 className="px-3 py-2 rounded-lg bg-gray-300 text-gray-600 text-sm font-medium shadow-sm hover:bg-gray-400 transition duration-200"
                 onClick={() => alert("Add tag functionality coming soon!")}
             >
