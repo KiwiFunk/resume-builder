@@ -37,6 +37,11 @@ export default function TaggingHandler({ tagCollection }) {
         tagCollection.push("New Tag");                  // Add new tag to the collection
         handleDoubleClick(tagCollection.length - 1);    // Enter edit mode for the new tag
     };
+    
+    const handleTagDelete = (index) => {
+        tagCollection.splice(index, 1);                // Remove tag from the collection
+        setEditingIndex(null);                         // Exit editing mode if the deleted tag was being edited
+    }
 
     return (
         <div className="flex flex-wrap gap-2 mt-3">
@@ -74,7 +79,7 @@ export default function TaggingHandler({ tagCollection }) {
                         <button
                             type="button"
                             className="ml-2"
-                            onClick={() => alert("Delete tag functionality coming soon!")}
+                            onClick={() => handleTagDelete(index)}
                         >
                             <i className="bi bi-x text-red-500 cursor-pointer transition duration-300 hover:text-white"></i>
                         </button>
