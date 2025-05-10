@@ -10,6 +10,11 @@ export default function TaggingHandler({ tagCollection }) {
     // State to store index of the tag being edited
     const [editingIndex, setEditingIndex] = useState(null);
 
+    // Handle double click event
+    const handleDoubleClick = (index) => {
+        setEditingIndex(index); // Set the index of the tag being edited
+    }
+
     // Function to handle tag renaming
     const handleTagRename = (event) => {
         event.stopPropagation(); // Prevent the click event from bubbling up to the parent element
@@ -26,9 +31,14 @@ export default function TaggingHandler({ tagCollection }) {
                 >
                     <span className="transition duration-300 [&:has(button:hover)]:text-white">
                         {/* Tag name */}
-                        <span onClick={handleTagRename}> 
-                        {tag}
-                        </span>
+                        {editingIndex === index ? (
+                            <span>Editing Tag</span>    
+                        ) : (
+                            <span onDoubleClick={() => handleDoubleClick(index)}> 
+                                {tag}
+                            </span>
+                        )}
+                        
                         
                         {/* Delete tag button */}
                         <button
