@@ -5,6 +5,9 @@ import { useState } from "react";
 
 export default function TaggingHandler({ tagCollection }) {
 
+    // State to manage the tag collection (React will not re-render if we directly modify the array as it was passed as a prop)
+    const [tags, setTags] = useState(tagCollection); // Initialize state with the passed tag collection
+
     // State to handle tag name input
     const [tagName, setTagName] = useState("");
     // State to store index of the tag being edited
@@ -13,7 +16,7 @@ export default function TaggingHandler({ tagCollection }) {
     // Handle double click event
     const handleDoubleClick = (index) => {
         setEditingIndex(index);                 // Set the index of the tag being edited
-        setTagName(tagCollection[index]);       // Set input field to the current tag value
+        setTagName(tags[index]);       // Set input field to the current tag value
     };
 
     // Function to handle tag renaming
@@ -34,19 +37,20 @@ export default function TaggingHandler({ tagCollection }) {
     };
 
     const createTag = () => {
-        tagCollection.push("New Tag");                  // Add new tag to the collection
-        handleDoubleClick(tagCollection.length - 1);    // Enter edit mode for the new tag
+        tags.push("New Tag");                  // Add new tag to the collection
+        handleDoubleClick(tags.length - 1);    // Enter edit mode for the new tag
     };
     
     const handleTagDelete = (index) => {
-        tagCollection.splice(index, 1);                // Remove tag from the collection
-        setEditingIndex(null);                         // Exit editing mode if the deleted tag was being edited
+        const updatedTags = tags.filter((_, i) => i !== index); // Create new array excluding 'index'
+        setTags(updatedTags);                                   // Update the state with the new array
+        setEditingIndex(null);                                  // Exit editing mode if the deleted tag was being edited
     }
 
     return (
         <div className="flex flex-wrap gap-2 mt-3">
             
-            {tagCollection.map((tag, index) => (
+            {tags.map((tag, index) => (
                 <div
                     key={index}
                     className={`select-none px-3 py-2 rounded-lg bg-gray-200 text-gray-700 text-sm font-medium shadow-sm ${editingIndex !== index ? "hover:bg-gray-300" : ""} transition duration-300 [&:has(button:hover)]:bg-red-500 ${
