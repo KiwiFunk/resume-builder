@@ -1,6 +1,9 @@
 "use client"; // Enables React hooks in Next.js 13+
 
 import { useRouter } from "next/navigation"; // Import useRouter for routing
+import { useState, useEffect } from "react";
+import { getLocalData, setLocalData } from "@/utils/localData";
+
 import data from "@/UserData"; // Import the user data
 import CollapsibleContainer from "@/components/CollapsibleContainer";
 import TaggingHandler from "@/components/TaggingHandler";
@@ -9,6 +12,7 @@ const inputClasses = "w-full p-3 border border-gray-300 rounded text-gray-700 fo
 
 export default function EditDetailsPage() {
     const router = useRouter(); // Initialize the router
+    const [data, setData] = useState(() => getLocalData("userData")); // Fetch user data from local storage
     
     return (
         <main className="flex flex-col items-center justify-center min-h-screen p-6">
