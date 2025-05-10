@@ -12,14 +12,27 @@ export default function TaggingHandler({ tagCollection }) {
 
     // Handle double click event
     const handleDoubleClick = (index) => {
-        setEditingIndex(index); // Set the index of the tag being edited
+        setEditingIndex(index);                 // Set the index of the tag being edited
+        setTagName(tagCollection[index]);       // Set input field to the current tag value
     }
 
     // Function to handle tag renaming
     const handleTagRename = (event) => {
-        event.stopPropagation(); // Prevent the click event from bubbling up to the parent element
-        console.log("Tag name clicked:", event.target.innerText);
+        setTagName(event.target.value);         // Update tag name state
     }
+
+    // Edit mode exit events
+    const handleFocusLoss = () => {
+        setEditingIndex(null);                  // Exit editing mode when focus is lost
+    }
+
+    const handleKeyDown = (event) => {
+        if (event.key === "Enter") {
+            setEditingIndex(null);              // Exit editing mode on Enter key
+        }
+    };
+
+    
 
     return (
         <div className="flex flex-wrap gap-2 mt-3">
@@ -32,7 +45,15 @@ export default function TaggingHandler({ tagCollection }) {
                     <span className="transition duration-300 [&:has(button:hover)]:text-white">
                         {/* Tag name */}
                         {editingIndex === index ? (
-                            <span>Editing Tag</span>    
+                            <input
+                                type="text"
+                                value={tagName}
+                                onChange={handleTagRename}
+                                autoFocus
+                                // Exit events
+                                onBlur={handleFocusLoss} 
+                                onKeyDown={handleKeyDown} 
+                            />
                         ) : (
                             <span onDoubleClick={() => handleDoubleClick(index)}> 
                                 {tag}
