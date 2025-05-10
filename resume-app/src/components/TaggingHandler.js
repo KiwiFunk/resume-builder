@@ -69,7 +69,7 @@ export default function TaggingHandler({ tagCollection }) {
             {tags.map((tag, index) => (
                 <div
                     key={index}
-                    className={`select-none px-3 py-2 rounded-lg bg-gray-200 text-gray-700 text-sm font-medium shadow-sm ${editingIndex !== index ? "hover:bg-gray-300" : ""} transition duration-300 [&:has(button:hover)]:bg-red-500 ${
+                    className={`select-none px-3 py-2 rounded-lg bg-gray-200 text-gray-700 text-sm font-medium shadow-sm ${editingIndex !== index ? "hover:bg-gray-300" : ""} transition duration-300 [&:has(button:hover)]:bg-red-500 [&:has(button:hover)]:scale-105 ${
                         editingIndex === index 
                         ? "border border-blue-500 text-gray-800 bg-white" // Edit mode styles
                         : ""
@@ -82,7 +82,7 @@ export default function TaggingHandler({ tagCollection }) {
                             <input
                                 type="text"
                                 value={tagName}
-                                className="rounded border border-gray-300 text-sm px-1 border-none outline-none"
+                                className="rounded border border-gray-300 text-sm border-none outline-none"
                                 onChange={handleTagRename}
                                 autoFocus
                                 // Set input width based on text content
@@ -110,7 +110,7 @@ export default function TaggingHandler({ tagCollection }) {
             {/* Add tag Button */}
             <button 
                 type="button"
-                className="px-3 py-2 rounded-lg bg-gray-300 text-gray-600 text-sm font-medium shadow-sm hover:bg-gray-400 transition duration-200 hover:cursor-pointer"
+                className="px-3 py-2 rounded-lg bg-gray-300 text-gray-600 text-sm font-medium shadow-sm hover:bg-gray-400 hover:text-white transition duration-200 hover:cursor-pointer"
                 onClick={createTag}
             >
                 <i className="bi bi-plus"></i>
