@@ -26,8 +26,10 @@ export default function TaggingHandler({ tagCollection }) {
 
     const applyRenamedTag = () => {
         if (editingIndex !== null) {
-            const updatedTags = [...tags];       
-            updatedTags[editingIndex] = tagName.trim();
+            const updatedTags = [...tags];
+            //Clean up tag name
+            updatedTags[editingIndex] = tagName.trim() === "" ? "Untitled" : tagName.trim();
+
             setTags(updatedTags);            
         }
     };
