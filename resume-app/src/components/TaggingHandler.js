@@ -39,7 +39,11 @@ export default function TaggingHandler({ tagCollection }) {
             {tagCollection.map((tag, index) => (
                 <div
                     key={index}
-                    className="select-none px-3 py-2 rounded-lg bg-gray-200 text-gray-700 text-sm font-medium shadow-sm hover:bg-gray-300 transition duration-300 [&:has(button:hover)]:bg-red-500"
+                    className={`select-none px-3 py-2 rounded-lg bg-gray-200 text-gray-700 text-sm font-medium shadow-sm ${editingIndex !== index ? "hover:bg-gray-300" : ""} transition duration-300 [&:has(button:hover)]:bg-red-500 ${
+                        editingIndex === index 
+                        ? "border border-blue-500 text-gray-800 bg-white" // Edit mode styles
+                        : ""
+                    }`}
                 >
                     <span className="transition duration-300 [&:has(button:hover)]:text-white">
 
@@ -48,11 +52,11 @@ export default function TaggingHandler({ tagCollection }) {
                             <input
                                 type="text"
                                 value={tagName}
-                                className="rounded border border-gray-300 text-sm px-1"
+                                className="rounded border border-gray-300 text-sm px-1 border-none outline-none"
                                 onChange={handleTagRename}
                                 autoFocus
                                 // Set input width based on text content
-                                style={{ width: `${tagName.length + 3}ch` }}
+                                style={{ width: `${tagName.length + 2}ch` }}
                                 // Exit events
                                 onBlur={handleFocusLoss} 
                                 onKeyDown={handleKeyDown} 
