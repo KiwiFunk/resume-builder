@@ -4,7 +4,7 @@ import { useRouter } from "next/navigation"; // Import useRouter for routing
 import { useState, useEffect } from "react";
 import { getLocalData, setLocalData } from "@/utils/localData";
 
-import data from "@/UserData"; // Import the user data
+import debugData from "@/UserData"; // Import the user data
 import CollapsibleContainer from "@/components/CollapsibleContainer";
 import TaggingHandler from "@/components/TaggingHandler";
 
@@ -12,7 +12,26 @@ const inputClasses = "w-full p-3 border border-gray-300 rounded text-gray-700 fo
 
 export default function EditDetailsPage() {
     const router = useRouter(); // Initialize the router
-    const [data, setData] = useState(() => getLocalData("userData")); // Fetch user data from local storage
+    const [data, setData] = useState(() =>
+        getLocalData("userData", {
+          name: "",
+          email: "",
+          phone: "",
+          location: "",
+          socials: [], // Default to an empty array
+          skills: [],
+          education: [],
+          training: [],
+          experience: [],
+          projects: [],
+          hobbies: "",
+        })
+      );
+
+    const handleSave = () => {
+        setLocalData("userData", data);     // Save the updated data to local storage
+        alert("Data saved successfully!");  // Alert the user
+    }
     
     return (
         <main className="flex flex-col items-center justify-center min-h-screen p-6">
@@ -27,7 +46,7 @@ export default function EditDetailsPage() {
 
                 <button
                     className="cursor-pointer hover:scale-110 transition-transform duration-200 ease-in-out"
-                    onClick={() => alert("Saving functionality coming soon!")}
+                    onClick={handleSave}
                 >
                     <i className="bi bi-floppy-fill text-xl"></i>
                 </button>
