@@ -19,6 +19,7 @@ export default function TaggingHandler({ tagCollection }) {
     // Function to handle tag renaming
     const handleTagRename = (event) => {
         setTagName(event.target.value);         // Update tag name state
+        {/* Logic to update the stored data in the database */}
     }
 
     // Edit mode exit events
@@ -32,34 +33,33 @@ export default function TaggingHandler({ tagCollection }) {
         }
     };
 
-    
-
     return (
         <div className="flex flex-wrap gap-2 mt-3">
             
             {tagCollection.map((tag, index) => (
                 <div
                     key={index}
-                    className="px-3 py-2 rounded-lg bg-gray-200 text-gray-700 text-sm font-medium shadow-sm hover:bg-gray-300 transition duration-300 [&:has(button:hover)]:bg-red-500"
+                    className="select-none px-3 py-2 rounded-lg bg-gray-200 text-gray-700 text-sm font-medium shadow-sm hover:bg-gray-300 transition duration-300 [&:has(button:hover)]:bg-red-500"
                 >
                     <span className="transition duration-300 [&:has(button:hover)]:text-white">
+
                         {/* Tag name */}
                         {editingIndex === index ? (
                             <input
                                 type="text"
                                 value={tagName}
+                                className="rounded border border-gray-300 text-sm px-1"
                                 onChange={handleTagRename}
                                 autoFocus
+                                // Set input width based on text content
+                                style={{ width: `${tagName.length + 3}ch` }}
                                 // Exit events
                                 onBlur={handleFocusLoss} 
                                 onKeyDown={handleKeyDown} 
                             />
                         ) : (
-                            <span onDoubleClick={() => handleDoubleClick(index)}> 
-                                {tag}
-                            </span>
+                            <span onDoubleClick={() => handleDoubleClick(index)}>{tag}</span>
                         )}
-                        
                         
                         {/* Delete tag button */}
                         <button
