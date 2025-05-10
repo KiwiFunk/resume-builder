@@ -34,8 +34,8 @@ export default function TaggingHandler({ tagCollection }) {
     };
 
     const createTag = () => {
-        // Logic to create a new tag and add it to the tagCollection
-        alert("Create tag functionality coming soon!");
+        tagCollection.push("New Tag");                  // Add new tag to the collection
+        handleDoubleClick(tagCollection.length - 1);    // Enter edit mode for the new tag
     };
 
     return (
