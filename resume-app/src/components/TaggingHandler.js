@@ -19,19 +19,28 @@ export default function TaggingHandler({ tagCollection }) {
         setTagName(tags[index]);       // Set input field to the current tag value
     };
 
-    // Function to handle tag renaming
+    // Functions to handle tag renaming
     const handleTagRename = (event) => {
         setTagName(event.target.value);         // Update tag name state
-        {/* Logic to update the stored data in the database */}
+    };
+
+    const applyRenamedTag = () => {
+        if (editingIndex !== null) {
+            const updatedTags = [...tags];       
+            updatedTags[editingIndex] = tagName.trim();
+            setTags(updatedTags);            
+        }
     };
 
     // Edit mode exit events
     const handleFocusLoss = () => {
+        applyRenamedTag();                      // Apply the new tag name on focus loss
         setEditingIndex(null);                  // Exit editing mode when focus is lost
     };
 
     const handleKeyDown = (event) => {
         if (event.key === "Enter") {
+            applyRenamedTag();                  // Apply the new tag name on Enter key
             setEditingIndex(null);              // Exit editing mode on Enter key
         }
     };
@@ -46,6 +55,11 @@ export default function TaggingHandler({ tagCollection }) {
         setTags(updatedTags);                                   // Update the state with the new array
         setEditingIndex(null);                                  // Exit editing mode if the deleted tag was being edited
     }
+
+    {/* Create function to update original array with the tag state when save is clicked */}
+    const updateTagCollection = () => {
+        tagCollection = tags; // Update the original array with the new state
+    };
 
     return (
         <div className="flex flex-wrap gap-2 mt-3">
