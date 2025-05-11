@@ -182,7 +182,7 @@ export default function EditDetailsPage() {
                                     type="text"
                                     defaultValue={social.url}
                                     className={inputClasses}
-                                    onChange={(e) => handleSocialChange(index, e.target.value)}
+                                    onChange={(e) => setData({ ...data, name: e.target.value })}
                                 />
 
                                 {/* Delete Button */}
@@ -213,7 +213,8 @@ export default function EditDetailsPage() {
                                 <div className="flex items-center gap-2 mb-4">
                                     <input
                                         type="text"
-                                        defaultValue={group.groupName}
+                                        value={group.groupName}
+                                        onChange={(e) => setData({ ...data, name: e.target.value })}
                                         className={inputClasses}
                                     />
                                     <button 
@@ -248,26 +249,55 @@ export default function EditDetailsPage() {
                                 <div className="grid grid-cols-1 sm:mb-0 sm:grid-cols-2 sm:gap-4">
                                     <div>
                                         <label htmlFor="edutitle" className="block text-gray-700">Title:</label>
-                                        <input type="text" id="edutitle" defaultValue={edu.degree} className={inputClasses} />'
+                                        <input 
+                                            type="text" 
+                                            id="edutitle" 
+                                            value={edu.degree}
+                                            onChange={(e) => setData({ ...data, name: e.target.value })} 
+                                            className={inputClasses} 
+                                        />
                                     </div>
                                     <div>
                                         <label htmlFor="eduinstitute" className="block text-gray-700">Institution:</label>
-                                        <input type="text" id="eduinstitute" defaultValue={edu.institution} className={inputClasses} />
+                                        <input 
+                                            type="text" 
+                                            id="eduinstitute" 
+                                            value={edu.institution}
+                                            onChange={(e) => setData({ ...data, name: e.target.value })} 
+                                            className={inputClasses} />
                                     </div>
                                 </div>
 
                                 <div className="mt-6 sm:mt-0 flex flex-col sm:flex-row gap-6 sm:gap-4">
                                     <div className="flex-1">
                                         <label htmlFor="edulocation" className="block text-gray-700">Location:</label>
-                                        <input type="text" id="edulocation" defaultValue={edu.location} className={inputClasses} />
+                                        <input 
+                                            type="text" 
+                                            id="edulocation" 
+                                            value={edu.location} 
+                                            onChange={(e) => setData({ ...data, name: e.target.value })}
+                                            className={inputClasses} 
+                                        />
                                     </div>
                                     <div className="flex-1">
                                         <label htmlFor="edustart" className="block text-gray-700">Start Date:</label>
-                                        <input type="date" id="edustart" defaultValue={edu.startDate} className={inputClasses} />
+                                        <input 
+                                            type="date" 
+                                            id="edustart" 
+                                            value={edu.startDate}
+                                            onChange={(e) => setData({ ...data, name: e.target.value })} 
+                                            className={inputClasses} 
+                                        />
                                     </div>
                                     <div className="flex-1">
                                         <label htmlFor="eduend" className="block text-gray-700">End Date:</label>
-                                        <input type="date" id="eduend" defaultValue={edu.endDate} className={inputClasses} />
+                                        <input 
+                                            type="date" 
+                                            id="eduend" 
+                                            value={edu.endDate} 
+                                            onChange={(e) => setData({ ...data, name: e.target.value })}
+                                            className={inputClasses}
+                                        />
                                     </div>
 
                                     {/* Delete button */}
@@ -295,11 +325,23 @@ export default function EditDetailsPage() {
                                 <div className="grid grid-cols-1 sm:mb-0 sm:grid-cols-2 sm:gap-4">
                                     <div>
                                         <label htmlFor="course-title" className="block text-gray-700">Title:</label>
-                                        <input type="text" id="course-title" defaultValue={course.title} className={inputClasses} />'
+                                        <input 
+                                            type="text" 
+                                            id="course-title" 
+                                            value={course.title} 
+                                            onChange={(e) => setData({ ...data, name: e.target.value })}
+                                            className={inputClasses} 
+                                        />
                                     </div>
                                     <div>
                                         <label htmlFor="course-institute" className="block text-gray-700">Institution:</label>
-                                        <input type="text" id="course-institute" defaultValue={course.institution} className={inputClasses} />
+                                        <input 
+                                            type="text" 
+                                            id="course-institute" 
+                                            value={course.institution} 
+                                            onChange={(e) => setData({ ...data, name: e.target.value })}
+                                            className={inputClasses} 
+                                        />
                                     </div>                                    
                                 </div>
 
@@ -307,11 +349,23 @@ export default function EditDetailsPage() {
                                     
                                     <div className="flex-1">
                                         <label htmlFor="course-start" className="block text-gray-700">Start Date:</label>
-                                        <input type="date" id="course-start" defaultValue={course.startDate} className={inputClasses} />
+                                        <input 
+                                            type="date" 
+                                            id="course-start" 
+                                            value={course.startDate} 
+                                            onChange={(e) => setData({ ...data, name: e.target.value })}
+                                            className={inputClasses}
+                                        />
                                     </div>
                                     <div className="flex-1">
                                         <label htmlFor="course-end" className="block text-gray-700">End Date:</label>
-                                        <input type="date" id="course-end" defaultValue={course.endDate} className={inputClasses} />
+                                        <input 
+                                            type="date" 
+                                            id="course-end" 
+                                            value={course.endDate}
+                                            onChange={(e) => setData({ ...data, name: e.target.value })} 
+                                            className={inputClasses} 
+                                        />
                                     </div>
 
                                     {/* Delete button */}
@@ -343,11 +397,23 @@ export default function EditDetailsPage() {
                                 <div className="grid grid-cols-1 sm:mb-0 sm:grid-cols-2 sm:gap-4">
                                     <div>
                                         <label htmlFor="job-title" className="block text-gray-700">Title:</label>
-                                        <input type="text" id="job-title" defaultValue={job.title} className={inputClasses} />'
+                                        <input 
+                                            type="text" 
+                                            id="job-title" 
+                                            value={job.title}
+                                            onChange={(e) => setData({ ...data, name: e.target.value })} 
+                                            className={inputClasses} 
+                                        />
                                     </div>
                                     <div>
                                         <label htmlFor="company" className="block text-gray-700">Company:</label>
-                                        <input type="text" id="company" defaultValue={job.company} className={inputClasses} />
+                                        <input 
+                                            type="text" 
+                                            id="company" 
+                                            value={job.company}
+                                            onChange={(e) => setData({ ...data, name: e.target.value })}
+                                            className={inputClasses} 
+                                        />
                                     </div>                                    
                                 </div>
 
@@ -355,15 +421,33 @@ export default function EditDetailsPage() {
                                     
                                     <div className="flex-1">
                                         <label htmlFor="job-location" className="block text-gray-700">Location:</label>
-                                        <input type="text" id="job-location" defaultValue={job.location} className={inputClasses} />
+                                        <input 
+                                            type="text" 
+                                            id="job-location" 
+                                            value={job.location}
+                                            onChange={(e) => setData({ ...data, name: e.target.value })} 
+                                            className={inputClasses} 
+                                        />
                                     </div>
                                     <div className="flex-1">
                                         <label htmlFor="job-start" className="block text-gray-700">Start Date:</label>
-                                        <input type="date" id="job-start" defaultValue={job.startDate} className={inputClasses} />
+                                        <input 
+                                            type="date" 
+                                            id="job-start" 
+                                            value={job.startDate}
+                                            onChange={(e) => setData({ ...data, name: e.target.value })} 
+                                            className={inputClasses} 
+                                        />
                                     </div>
                                     <div className="flex-1">
                                         <label htmlFor="job-end" className="block text-gray-700">End Date:</label>
-                                        <input type="date" id="job-end" defaultValue={job.endDate} className={inputClasses} />
+                                        <input 
+                                            type="date" 
+                                            id="job-end" 
+                                            value={job.endDate}
+                                            onChange={(e) => setData({ ...data, name: e.target.value })} 
+                                            className={inputClasses} 
+                                        />
                                     </div>
 
                                     {/* Delete button */}
@@ -376,7 +460,13 @@ export default function EditDetailsPage() {
                                 </div>
 
                                 <label htmlFor="course-description" className="block text-gray-700 mt-6">Description:</label>
-                                <textarea id="course-description" defaultValue={job.description} className={inputClasses} rows="4"></textarea>
+                                <textarea 
+                                    id="course-description" 
+                                    value={job.description}
+                                    onChange={(e) => setData({ ...data, name: e.target.value })} 
+                                    className={inputClasses} 
+                                    rows="4"
+                                ></textarea>
                                 <p className="text-gray-400 text-sm">Sentences will be automatically formatted as bullet points.</p>
 
                             </div>
@@ -395,11 +485,23 @@ export default function EditDetailsPage() {
                                 <div className="mt-6 sm:mt-0 flex flex-col sm:flex-row gap-6 sm:gap-4">
                                     <div className="flex-1">
                                         <label htmlFor="project-title" className="block text-gray-700">Title:</label>
-                                        <input type="text" id="project-title" defaultValue={project.title} className={inputClasses} />'
+                                        <input 
+                                            type="text" 
+                                            id="project-title" 
+                                            value={project.title} 
+                                            onChange={(e) => setData({ ...data, name: e.target.value })}
+                                            className={inputClasses} 
+                                        />
                                     </div>
                                     <div className="flex-1">
                                         <label htmlFor="project-url" className="block text-gray-700">URL:</label>
-                                        <input type="text" id="project-url" defaultValue={project.url} className={inputClasses} />
+                                        <input 
+                                            type="text" 
+                                            id="project-url" 
+                                            value={project.url} 
+                                            onChange={(e) => setData({ ...data, name: e.target.value })}
+                                            className={inputClasses} 
+                                        />
                                     </div> 
 
                                     {/* Delete button */}
@@ -416,7 +518,13 @@ export default function EditDetailsPage() {
                                 <TaggingHandler tagCollection={project.skills} />
                                 
                                 <label htmlFor="project-description" className="block text-gray-700 mt-6">Description:</label>
-                                <textarea id="project-description" defaultValue={project.description} className={inputClasses} rows="3"></textarea>
+                                <textarea 
+                                    id="project-description" 
+                                    value={project.description}
+                                    onChange={(e) => setData({ ...data, name: e.target.value })} 
+                                    className={inputClasses} 
+                                    rows="3"
+                                ></textarea>
                         
                             </div>
                     ))}
@@ -426,7 +534,13 @@ export default function EditDetailsPage() {
                 </CollapsibleContainer>
                 <CollapsibleContainer title="Hobbies & Interests">
                     <label htmlFor="summary" className="hidden text-gray-700">Summary:</label>
-                    <textarea id="summary" defaultValue={data.hobbies} className={inputClasses} rows="6"></textarea>
+                    <textarea 
+                        id="summary" 
+                        value={data.hobbies}
+                        onChange={(e) => setData({ ...data, name: e.target.value })} 
+                        className={inputClasses} 
+                        rows="6"
+                    ></textarea>
                     <p className="text-gray-400 text-sm">Sentences will be automatically formatted as bullet points.</p>
                 </CollapsibleContainer>
 
