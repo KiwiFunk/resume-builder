@@ -1,11 +1,22 @@
 "use client"; // Enables React hooks in Next.js 13+
 
 import { useRouter } from "next/navigation";    // Import useRouter for navigation
-import DisplayResume from "./ResumeDisplay"; // Import the DisplayResume component from the same folder
-import data from "@/UserData"; // Import your user data
+import DisplayResume from "./ResumeDisplay";    // Import the DisplayResume component from the same folder
+import { useState, useEffect } from "react";
+import { getLocalData } from "@/utils/localData";   // Import the getLocalData function to fetch data from local storage
 
 export default function ResumeDisplayPage() {
-    const router = useRouter(); // Initialize the router
+    const router = useRouter();                     // Initialize the router
+    const [data, setData] = useState(null);         // Initialize state to hold user data
+
+    useEffect(() => {
+        const userData = getLocalData("userData");  // Fetch user data from local storage once component mounts
+        setData(userData);                          // Set the fetched data to state
+    }, []); 
+
+    if (!data) {
+        return <div>Loading...</div>;               // Show loading state until data is fetched
+    }
 
     return (
         <main className="flex flex-col items-center justify-center min-h-screen p-6">
