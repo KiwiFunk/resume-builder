@@ -1,7 +1,8 @@
 "use client";   // Enables React hooks in Next.js 13+
 
 import { useRouter } from "next/navigation"; // Import useRouter for navigation
-import data from "@/UserData"; // Import your user data
+import { removeLocalData, setLocalData } from "@/utils/localData";
+import data from "@/UserData"; // Import demo/debug user data
 
 export default function Home() {
   const router = useRouter(); // Initialize the router
@@ -25,7 +26,28 @@ export default function Home() {
         Edit Details
       </button>
 
-      {/* Add button to delete localStorage data, add button to load in UserData as demo */}
+      <button
+        className="mt-4 px-4 py-2 bg-red-500 text-white rounded shadow hover:bg-red-600 cursor-pointer"
+        onClick={() => {
+          removeLocalData("userData")
+          alert("User data deleted!"); // Alert user
+        }} 
+      >
+        DELETE USER DATA (DEBUG)
+      </button>
+
+      <button
+        className="mt-4 px-4 py-2 bg-red-500 text-white rounded shadow hover:bg-red-600 cursor-pointer"
+        onClick={() => {
+          setLocalData("userData", data); // Set default user data
+          alert("Demo data loaded!"); // Alert user
+        }}
+      >
+        LOAD DEMO DATA (DEBUG)
+      </button>
+
+      
+      
     </main>
   );
 }
