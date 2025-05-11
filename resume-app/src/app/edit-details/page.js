@@ -4,33 +4,40 @@ import { useRouter } from "next/navigation"; // Import useRouter for routing
 import { useState, useEffect } from "react";
 import { getLocalData, setLocalData } from "@/utils/localData";
 
-import debugData from "@/UserData"; // Import the user data
 import CollapsibleContainer from "@/components/CollapsibleContainer";
 import TaggingHandler from "@/components/TaggingHandler";
 
 const inputClasses = "w-full p-3 border border-gray-300 rounded text-gray-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500";
 
 export default function EditDetailsPage() {
-    const router = useRouter(); // Initialize the router
-    const [data, setData] = useState(() =>
-        getLocalData("userData", {
-          name: "",
-          email: "",
-          phone: "",
-          location: "",
-          socials: [], // Default to an empty array
-          skills: [],
-          education: [],
-          training: [],
-          experience: [],
-          projects: [],
-          hobbies: "",
-        })
-      );
+    const router = useRouter();                     // Initialize the router
+    const [data, setData] = useState(null);         // Init as null to avoid hydration issues
+
+    useEffect(() => {
+        // Fetch data from localStorage AFTER the component mounts.
+        const storedData = getLocalData("userData", {
+            name: "",
+            email: "",
+            phone: "",
+            location: "",
+            socials: [],                            
+            skills: [],
+            education: [],
+            training: [],
+            experience: [],
+            projects: [],
+            hobbies: "",
+        });
+        setData(storedData);                        // Set the loaded data to state
+    }, []);                                         // Use empty dependency array to only run once.
 
     const handleSave = () => {
-        setLocalData("userData", data);     // Save the updated data to local storage
-        alert("Data saved successfully!");  // Alert the user
+        setLocalData("userData", data);             // Save the updated data to local storage
+        alert("Data saved successfully!");          // Alert the user
+    }
+
+    if (!data) {
+        return <div>Loading...</div>;               // Show loading state until data is fetched
     }
     
     return (

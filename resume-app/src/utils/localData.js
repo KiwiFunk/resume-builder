@@ -1,3 +1,5 @@
+"use client";           // Make sure that this can only be used in client-side code since localStorage is not available on the server
+
 /**
 * @description Utility functions to manage local storage data.
 * @param {string} key - The key under which the data is stored in local storage.
@@ -14,6 +16,7 @@ export function getLocalData(key, defaultValue = {}) {
 
 // Save data to local storage
 export function setLocalData(key, data) {
+    console.log(`Saving data to local storage: ${key}`, data);          // For debugging purposes
     localStorage.setItem(key, JSON.stringify(data));
 }
 

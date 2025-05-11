@@ -1,3 +1,5 @@
+"use client";
+
 import ContactInformation from "@/components/ContactInformation";
 import Education from "@/components/Education";
 import Socials from "@/components/Socials";
