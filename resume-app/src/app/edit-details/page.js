@@ -669,7 +669,7 @@ export default function EditDetailsPage() {
                                 <label htmlFor="project-description" className="block text-gray-700 mt-6">Description:</label>
                                 <textarea 
                                     id="project-description" 
-                                    default={project.description}
+                                    defaultValue={project.description}
                                     onBlur={(e) => {
                                                 setData({
                                                     ...data,
