@@ -15,7 +15,7 @@ export default function EditDetailsPage() {
     const router = useRouter();                     // Initialize the router
     const [data, setData] = useState(null);         // Init as null to avoid hydration issues
 
-    var useDebugData = true;                        // Set to true to use debug data
+    var useDebugData = false;                       // Set to true to load debug data
 
     useEffect(() => {
         // Fetch data from localStorage AFTER the component mounts.
