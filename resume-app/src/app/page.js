@@ -24,6 +24,8 @@ export default function Home() {
       >
         Edit Details
       </button>
+
+      {/* Add button to delete localStorage data, add button to load in UserData as demo */}
     </main>
   );
 }
