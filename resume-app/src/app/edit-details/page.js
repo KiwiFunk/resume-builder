@@ -7,11 +7,15 @@ import { getLocalData, setLocalData } from "@/utils/localData";
 import CollapsibleContainer from "@/components/CollapsibleContainer";
 import TaggingHandler from "@/components/TaggingHandler";
 
+import debugData from "@/UserData";         // Import placeholder data for debugging
+
 const inputClasses = "w-full p-3 border border-gray-300 rounded text-gray-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500";
 
 export default function EditDetailsPage() {
     const router = useRouter();                     // Initialize the router
     const [data, setData] = useState(null);         // Init as null to avoid hydration issues
+
+    var useDebugData = true;                        // Set to true to use debug data
 
     useEffect(() => {
         // Fetch data from localStorage AFTER the component mounts.
@@ -29,6 +33,10 @@ export default function EditDetailsPage() {
             hobbies: "",
         });
         setData(storedData);                        // Set the loaded data to state
+
+        if (useDebugData) {
+            setData(debugData);                     // Set the debug data to state on component mount
+        }
     }, []);                                         // Use empty dependency array to only run once.
 
     const handleSave = () => {
@@ -39,7 +47,7 @@ export default function EditDetailsPage() {
     if (!data) {
         return <div>Loading...</div>;               // Show loading state until data is fetched
     }
-    
+
     return (
         <main className="flex flex-col items-center justify-center min-h-screen p-6">
             {/* Page navigation and function buttons */}
@@ -68,19 +76,40 @@ export default function EditDetailsPage() {
                     <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                         <div className="mt-4">
                             <label htmlFor="name" className="block text-gray-700">Name:</label>
-                            <input type="text" id="name" defaultValue={data.name} className={inputClasses} />
+                            <input 
+                                type="text" 
+                                id="name" 
+                                value={data.name} 
+                                onChange={(e) => setData({ ...data, name: e.target.value })} // Update state on change
+                                className={inputClasses} 
+                            />
                         </div>
                         <div className="sm:mt-4">
                             <label htmlFor="email" className="block text-gray-700">Email:</label>
-                            <input type="email" id="email" defaultValue={data.email} className={inputClasses} />
+                            <input 
+                                type="email" 
+                                id="email" 
+                                value={data.email} 
+                                onChange={(e) => setData({ ...data, name: e.target.value })}
+                                className={inputClasses} />
                         </div>
                         <div>
                             <label htmlFor="phone" className="block text-gray-700">Phone:</label>
-                            <input type="text" id="phone" defaultValue={data.phone} className={inputClasses} />
+                            <input 
+                                type="text" 
+                                id="phone" 
+                                value={data.phone} 
+                                onChange={(e) => setData({ ...data, name: e.target.value })}
+                                className={inputClasses} />
                         </div>
                         <div>
                             <label htmlFor="location" className="block text-gray-700">Location:</label>
-                            <input type="text" id="location" defaultValue={data.location} className={inputClasses} />
+                            <input 
+                                type="text" 
+                                id="location" 
+                                value={data.location}
+                                onChange={(e) => setData({ ...data, name: e.target.value })} 
+                                className={inputClasses} />
                         </div>
                     </div>
                 </div>
@@ -114,12 +143,23 @@ export default function EditDetailsPage() {
                 <CollapsibleContainer title="Edit Resume Details">
                     <div className="mt-4">
                         <label htmlFor="title" className="block text-gray-700">Title:</label>
-                        <input type="text" id="title" defaultValue={data.title} className={inputClasses} />
+                        <input 
+                            type="text" 
+                            id="title" 
+                            value={data.title}
+                            onChange={(e) => setData({ ...data, name: e.target.value })} 
+                            className={inputClasses} />
                     </div>
                    
                     <div className="mt-4">
                         <label htmlFor="summary" className="block text-gray-700">Summary:</label>
-                        <textarea id="summary" defaultValue={data.summary} className={inputClasses} rows="6"></textarea>
+                        <textarea 
+                            id="summary" 
+                            value={data.summary} 
+                            onChange={(e) => setData({ ...data, name: e.target.value })}
+                            className={inputClasses} 
+                            rows="6"
+                        ></textarea>
                     </div>
                 </CollapsibleContainer>
                 
