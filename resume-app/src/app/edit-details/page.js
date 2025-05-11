@@ -90,7 +90,7 @@ export default function EditDetailsPage() {
                                 type="email" 
                                 id="email" 
                                 value={data.email} 
-                                onChange={(e) => setData({ ...data, name: e.target.value })}
+                                onChange={(e) => setData({ ...data, email: e.target.value })}
                                 className={inputClasses} />
                         </div>
                         <div>
@@ -99,7 +99,7 @@ export default function EditDetailsPage() {
                                 type="text" 
                                 id="phone" 
                                 value={data.phone} 
-                                onChange={(e) => setData({ ...data, name: e.target.value })}
+                                onChange={(e) => setData({ ...data, phone: e.target.value })}
                                 className={inputClasses} />
                         </div>
                         <div>
@@ -108,7 +108,7 @@ export default function EditDetailsPage() {
                                 type="text" 
                                 id="location" 
                                 value={data.location}
-                                onChange={(e) => setData({ ...data, name: e.target.value })} 
+                                onChange={(e) => setData({ ...data, location: e.target.value })} 
                                 className={inputClasses} />
                         </div>
                     </div>
@@ -147,7 +147,7 @@ export default function EditDetailsPage() {
                             type="text" 
                             id="title" 
                             value={data.title}
-                            onChange={(e) => setData({ ...data, name: e.target.value })} 
+                            onChange={(e) => setData({ ...data, title: e.target.value })} 
                             className={inputClasses} />
                     </div>
                    
@@ -156,7 +156,7 @@ export default function EditDetailsPage() {
                         <textarea 
                             id="summary" 
                             value={data.summary} 
-                            onChange={(e) => setData({ ...data, name: e.target.value })}
+                            onChange={(e) => setData({ ...data, summary: e.target.value })}
                             className={inputClasses} 
                             rows="6"
                         ></textarea>
@@ -178,11 +178,19 @@ export default function EditDetailsPage() {
                                 ></div>
 
                                 {/* Social Media URL Input */}
+                                {/* Using defaultValue and onBlur to avoid excessive re-renders. Only update state when focus is lost */}
                                 <input
                                     type="text"
                                     defaultValue={social.url}
                                     className={inputClasses}
-                                    onChange={(e) => setData({ ...data, name: e.target.value })}
+                                    onBlur={(e) => {
+                                        setData({
+                                            ...data, 
+                                            socials: data.socials.map((social, i) => 
+                                                i === index ? { ...social, url: e.target.value } : social
+                                            )
+                                        });
+                                    }}
                                 />
 
                                 {/* Delete Button */}
@@ -213,8 +221,17 @@ export default function EditDetailsPage() {
                                 <div className="flex items-center gap-2 mb-4">
                                     <input
                                         type="text"
-                                        value={group.groupName}
-                                        onChange={(e) => setData({ ...data, name: e.target.value })}
+                                        defaultValue={group.groupName}
+                                        onBlur={(e) => {
+                                            setData({
+                                                ...data,
+                                                // When updating states, React needs a new object, instead of mutating the existing one
+                                                skills: data.skills.map((group, i) => 
+                                                    // If i == index, spread the group and update the groupName, else return the group unchanged
+                                                    i === index ? { ...group, groupName: e.target.value } : group
+                                                )
+                                            });
+                                        }}
                                         className={inputClasses}
                                     />
                                     <button 
@@ -252,8 +269,15 @@ export default function EditDetailsPage() {
                                         <input 
                                             type="text" 
                                             id="edutitle" 
-                                            value={edu.degree}
-                                            onChange={(e) => setData({ ...data, name: e.target.value })} 
+                                            defaultValue={edu.degree}
+                                            onBlur={(e) => {
+                                                setData({
+                                                    ...data,
+                                                    education: data.education.map((edu, i) => 
+                                                        i === index ? { ...edu, degree: e.target.value } : edu
+                                                    )
+                                                });
+                                            }}
                                             className={inputClasses} 
                                         />
                                     </div>
@@ -262,8 +286,15 @@ export default function EditDetailsPage() {
                                         <input 
                                             type="text" 
                                             id="eduinstitute" 
-                                            value={edu.institution}
-                                            onChange={(e) => setData({ ...data, name: e.target.value })} 
+                                            defaultValue={edu.institution}
+                                            onBlur={(e) => {
+                                                setData({
+                                                    ...data,
+                                                    education: data.education.map((edu, i) =>
+                                                        i === index ? { ...edu, institution: e.target.value } : edu
+                                                    )
+                                                });
+                                            }}
                                             className={inputClasses} />
                                     </div>
                                 </div>
@@ -274,8 +305,15 @@ export default function EditDetailsPage() {
                                         <input 
                                             type="text" 
                                             id="edulocation" 
-                                            value={edu.location} 
-                                            onChange={(e) => setData({ ...data, name: e.target.value })}
+                                            defaultValue={edu.location} 
+                                            onBlur={(e) => {
+                                                setData({
+                                                    ...data,
+                                                    education: data.education.map((edu, i) =>
+                                                        i === index ? { ...edu, location: e.target.value } : edu
+                                                    )
+                                                });
+                                            }}
                                             className={inputClasses} 
                                         />
                                     </div>
@@ -284,8 +322,15 @@ export default function EditDetailsPage() {
                                         <input 
                                             type="date" 
                                             id="edustart" 
-                                            value={edu.startDate}
-                                            onChange={(e) => setData({ ...data, name: e.target.value })} 
+                                            defaultValue={edu.startDate}
+                                            onBlur={(e) => {
+                                                setData({
+                                                    ...data,
+                                                    education: data.education.map((edu, i) =>
+                                                        i === index ? { ...edu, startDate: e.target.value } : edu
+                                                    )
+                                                });
+                                            }}
                                             className={inputClasses} 
                                         />
                                     </div>
@@ -294,8 +339,15 @@ export default function EditDetailsPage() {
                                         <input 
                                             type="date" 
                                             id="eduend" 
-                                            value={edu.endDate} 
-                                            onChange={(e) => setData({ ...data, name: e.target.value })}
+                                            defaultValue={edu.endDate} 
+                                            onBlur={(e) => {
+                                                setData({
+                                                    ...data,
+                                                    education: data.education.map((edu, i) =>
+                                                        i === index ? { ...edu, endDate: e.target.value } : edu
+                                                    )
+                                                });
+                                            }}
                                             className={inputClasses}
                                         />
                                     </div>
@@ -328,8 +380,15 @@ export default function EditDetailsPage() {
                                         <input 
                                             type="text" 
                                             id="course-title" 
-                                            value={course.title} 
-                                            onChange={(e) => setData({ ...data, name: e.target.value })}
+                                            defaultValue={course.title} 
+                                            onBlur={(e) => {
+                                                setData({
+                                                    ...data,
+                                                    training: data.training.map((course, i) =>
+                                                        i === index ? { ...course, title: e.target.value } : course
+                                                    )
+                                                });
+                                            }}
                                             className={inputClasses} 
                                         />
                                     </div>
@@ -338,8 +397,15 @@ export default function EditDetailsPage() {
                                         <input 
                                             type="text" 
                                             id="course-institute" 
-                                            value={course.institution} 
-                                            onChange={(e) => setData({ ...data, name: e.target.value })}
+                                            defaultValue={course.institution} 
+                                            onBlur={(e) => {
+                                                setData({
+                                                    ...data,
+                                                    training: data.training.map((course, i) =>
+                                                        i === index ? { ...course, institution: e.target.value } : course
+                                                    )
+                                                });
+                                            }}
                                             className={inputClasses} 
                                         />
                                     </div>                                    
@@ -352,8 +418,15 @@ export default function EditDetailsPage() {
                                         <input 
                                             type="date" 
                                             id="course-start" 
-                                            value={course.startDate} 
-                                            onChange={(e) => setData({ ...data, name: e.target.value })}
+                                            defaultValue={course.startDate} 
+                                            onBlur={(e) => {
+                                                setData({
+                                                    ...data,
+                                                    training: data.training.map((course, i) =>
+                                                        i === index ? { ...course, startDate: e.target.value } : course
+                                                    )
+                                                });
+                                            }}
                                             className={inputClasses}
                                         />
                                     </div>
@@ -362,8 +435,15 @@ export default function EditDetailsPage() {
                                         <input 
                                             type="date" 
                                             id="course-end" 
-                                            value={course.endDate}
-                                            onChange={(e) => setData({ ...data, name: e.target.value })} 
+                                            defaultValue={course.endDate}
+                                            onBlur={(e) => {
+                                                setData({
+                                                    ...data,
+                                                    training: data.training.map((course, i) =>
+                                                        i === index ? { ...course, endDate: e.target.value } : course
+                                                    )
+                                                });
+                                            }} 
                                             className={inputClasses} 
                                         />
                                     </div>
@@ -378,7 +458,20 @@ export default function EditDetailsPage() {
                                 </div>
 
                                 <label htmlFor="course-description" className="block text-gray-700 mt-6">Description:</label>
-                                <textarea id="course-description" defaultValue={course.description} className={inputClasses} rows="3"></textarea>
+                                <textarea 
+                                    id="course-description" 
+                                    defaultValue={course.description}
+                                    onBlur={(e) => {
+                                        setData({
+                                            ...data,
+                                            training: data.training.map((course, i) =>
+                                                i === index ? { ...course, description: e.target.value } : course
+                                            )
+                                        });
+                                    }} 
+                                    className={inputClasses} 
+                                    rows="3">
+                                </textarea>
 
                             </div>
                         ))
@@ -400,8 +493,15 @@ export default function EditDetailsPage() {
                                         <input 
                                             type="text" 
                                             id="job-title" 
-                                            value={job.title}
-                                            onChange={(e) => setData({ ...data, name: e.target.value })} 
+                                            defaultValue={job.title}
+                                            onBlur={(e) => {
+                                                setData({
+                                                    ...data,
+                                                    experience: data.experience.map((job, i) =>
+                                                        i === index ? { ...job, title: e.target.value } : job
+                                                    )
+                                                });
+                                            }}
                                             className={inputClasses} 
                                         />
                                     </div>
@@ -410,8 +510,15 @@ export default function EditDetailsPage() {
                                         <input 
                                             type="text" 
                                             id="company" 
-                                            value={job.company}
-                                            onChange={(e) => setData({ ...data, name: e.target.value })}
+                                            defaultValue={job.company}
+                                            onBlur={(e) => {
+                                                setData({
+                                                    ...data,
+                                                    experience: data.experience.map((job, i) =>
+                                                        i === index ? { ...job, company: e.target.value } : job
+                                                    )
+                                                });
+                                            }}
                                             className={inputClasses} 
                                         />
                                     </div>                                    
@@ -424,8 +531,15 @@ export default function EditDetailsPage() {
                                         <input 
                                             type="text" 
                                             id="job-location" 
-                                            value={job.location}
-                                            onChange={(e) => setData({ ...data, name: e.target.value })} 
+                                            defaultValue={job.location}
+                                            onBlur={(e) => {
+                                                setData({
+                                                    ...data,
+                                                    experience: data.experience.map((job, i) =>
+                                                        i === index ? { ...job, location: e.target.value } : job
+                                                    )
+                                                });
+                                            }} 
                                             className={inputClasses} 
                                         />
                                     </div>
@@ -434,8 +548,15 @@ export default function EditDetailsPage() {
                                         <input 
                                             type="date" 
                                             id="job-start" 
-                                            value={job.startDate}
-                                            onChange={(e) => setData({ ...data, name: e.target.value })} 
+                                            defaultValue={job.startDate}
+                                            onBlur={(e) => {
+                                                setData({
+                                                    ...data,
+                                                    experience: data.experience.map((job, i) =>
+                                                        i === index ? { ...job, startDate: e.target.value } : job
+                                                    )
+                                                });
+                                            }}
                                             className={inputClasses} 
                                         />
                                     </div>
@@ -444,8 +565,15 @@ export default function EditDetailsPage() {
                                         <input 
                                             type="date" 
                                             id="job-end" 
-                                            value={job.endDate}
-                                            onChange={(e) => setData({ ...data, name: e.target.value })} 
+                                            defaultValue={job.endDate}
+                                            onBlur={(e) => {
+                                                setData({
+                                                    ...data,
+                                                    experience: data.experience.map((job, i) =>
+                                                        i === index ? { ...job, endDate: e.target.value } : job
+                                                    )
+                                                });
+                                            }} 
                                             className={inputClasses} 
                                         />
                                     </div>
@@ -462,8 +590,15 @@ export default function EditDetailsPage() {
                                 <label htmlFor="course-description" className="block text-gray-700 mt-6">Description:</label>
                                 <textarea 
                                     id="course-description" 
-                                    value={job.description}
-                                    onChange={(e) => setData({ ...data, name: e.target.value })} 
+                                    defaultValue={job.description}
+                                    onBlur={(e) => {
+                                                setData({
+                                                    ...data,
+                                                    experience: data.experience.map((job, i) =>
+                                                        i === index ? { ...job, description: e.target.value } : job
+                                                    )
+                                                });
+                                            }}
                                     className={inputClasses} 
                                     rows="4"
                                 ></textarea>
@@ -488,8 +623,15 @@ export default function EditDetailsPage() {
                                         <input 
                                             type="text" 
                                             id="project-title" 
-                                            value={project.title} 
-                                            onChange={(e) => setData({ ...data, name: e.target.value })}
+                                            defaultValue={project.title} 
+                                            onBlur={(e) => {
+                                                setData({
+                                                    ...data,
+                                                    projects: data.projects.map((project, i) =>
+                                                        i === index ? { ...project, title: e.target.value } : project
+                                                    )
+                                                });
+                                            }}
                                             className={inputClasses} 
                                         />
                                     </div>
@@ -498,8 +640,15 @@ export default function EditDetailsPage() {
                                         <input 
                                             type="text" 
                                             id="project-url" 
-                                            value={project.url} 
-                                            onChange={(e) => setData({ ...data, name: e.target.value })}
+                                            defaultValue={project.url} 
+                                            onBlur={(e) => {
+                                                setData({
+                                                    ...data,
+                                                    projects: data.projects.map((project, i) =>
+                                                        i === index ? { ...project, url: e.target.value } : project
+                                                    )
+                                                });
+                                            }}
                                             className={inputClasses} 
                                         />
                                     </div> 
@@ -520,8 +669,15 @@ export default function EditDetailsPage() {
                                 <label htmlFor="project-description" className="block text-gray-700 mt-6">Description:</label>
                                 <textarea 
                                     id="project-description" 
-                                    value={project.description}
-                                    onChange={(e) => setData({ ...data, name: e.target.value })} 
+                                    default={project.description}
+                                    onBlur={(e) => {
+                                                setData({
+                                                    ...data,
+                                                    projects: data.projects.map((project, i) =>
+                                                        i === index ? { ...project, description: e.target.value } : project
+                                                    )
+                                                });
+                                            }}
                                     className={inputClasses} 
                                     rows="3"
                                 ></textarea>
@@ -537,7 +693,7 @@ export default function EditDetailsPage() {
                     <textarea 
                         id="summary" 
                         value={data.hobbies}
-                        onChange={(e) => setData({ ...data, name: e.target.value })} 
+                        onChange={(e) => setData({ ...data, hobbies: e.target.value })} 
                         className={inputClasses} 
                         rows="6"
                     ></textarea>

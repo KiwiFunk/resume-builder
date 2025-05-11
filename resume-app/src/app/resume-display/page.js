@@ -1,7 +1,7 @@
-"use client"; // Enables React hooks in Next.js 13+
+"use client"; // Set to client-side rendering to enable React hooks and local storage access
 
-import { useRouter } from "next/navigation";    // Import useRouter for navigation
-import DisplayResume from "./ResumeDisplay";    // Import the DisplayResume component from the same folder
+import { useRouter } from "next/navigation";        // Import useRouter for navigation
+import DisplayResume from "./ResumeDisplay";        // Import the DisplayResume component from the same folder
 import { useState, useEffect } from "react";
 import { getLocalData } from "@/utils/localData";   // Import the getLocalData function to fetch data from local storage
 
