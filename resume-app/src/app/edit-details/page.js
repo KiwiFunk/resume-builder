@@ -242,7 +242,18 @@ export default function EditDetailsPage() {
                                     </button>
                                 </div>
 
-                                <TaggingHandler tagCollection={group.items} />
+                                {/* Pass array containing tags, and callback function for updating state to TaggingHandler */}
+                                <TaggingHandler 
+                                    tags={group.items} 
+                                    onTagUpdate={(updatedTags) => {
+                                        setData({
+                                            ...data,
+                                            skills: data.skills.map((group, i) => 
+                                                i === index ? { ...group, items: updatedTags } : group
+                                            )
+                                        });
+                                    }}
+                                />
                                
                             </div>   
                         ))}
@@ -664,7 +675,17 @@ export default function EditDetailsPage() {
                                 </div>  
 
                                 <label htmlFor="project-skills" className="block text-gray-700">Technologies used:</label>
-                                <TaggingHandler tagCollection={project.skills} />
+                                <TaggingHandler 
+                                    tags={project.skills} 
+                                    onTagUpdate={(updatedTags) => {
+                                        setData({
+                                            ...data,
+                                            projects: data.projects.map((project, i) =>
+                                                i === index ? { ...project, skills: updatedTags } : project
+                                            )
+                                        });
+                                    }}
+                                />
                                 
                                 <label htmlFor="project-description" className="block text-gray-700 mt-6">Description:</label>
                                 <textarea 

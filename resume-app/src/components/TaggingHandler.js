@@ -3,10 +3,11 @@
 import React from "react";
 import { useState } from "react";
 
-export default function TaggingHandler({ tagCollection }) {
-
-    // State to manage the tag collection (React will not re-render if we directly modify the array as it was passed as a prop)
-    const [tags, setTags] = useState(tagCollection); // Initialize state with the passed tag collection
+/* 
+Using a callback function to update the main state whenever a tag is added, deleted or renamed
+This allows the parent component to manage the state of the tags 
+*/
+export default function TaggingHandler({ tags, onTagUpdate }) {
 
     // State to handle tag name input
     const [tagName, setTagName] = useState("");
@@ -30,7 +31,7 @@ export default function TaggingHandler({ tagCollection }) {
             //Clean up tag name
             updatedTags[editingIndex] = tagName.trim() === "" ? "Untitled" : tagName.trim();
 
-            setTags(updatedTags);            
+            onTagUpdate(updatedTags);       // Use callback to update the parent state     
         }
     };
 
@@ -54,14 +55,9 @@ export default function TaggingHandler({ tagCollection }) {
     
     const handleTagDelete = (index) => {
         const updatedTags = tags.filter((_, i) => i !== index); // Create new array excluding 'index'
-        setTags(updatedTags);                                   // Update the state with the new array
+        onTagUpdate(updatedTags);                               // Update the state with the new array by using the callback
         setEditingIndex(null);                                  // Exit editing mode if the deleted tag was being edited
     }
-
-    {/* Create function to update original array with the tag state when save is clicked */}
-    const updateTagCollection = () => {
-        tagCollection = tags; // Update the original array with the new state
-    };
 
     return (
         <div className="flex flex-wrap gap-2 mt-3">
