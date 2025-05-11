@@ -18,6 +18,10 @@ export default function ResumeDisplayPage() {
         return <div>Loading...</div>;               // Show loading state until data is fetched
     }
 
+    if (!data.name) {
+        return <div>No data found. Please fill out your details.</div>; // Show message if no data is found
+    }
+
     return (
         <main className="flex flex-col items-center justify-center min-h-screen p-6">
             {/* Page navigation and tools such as save to PDF */}
