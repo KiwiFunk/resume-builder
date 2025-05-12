@@ -17,7 +17,6 @@ export default function EditDetailsPage() {
 
     var useDebugData = false;                       // Set to true to load debug data
 
-
     const handleDeletion = (key, index) => {                // key (string) name of the array to delete from, index (number) of the item to delete
         setData({                                           // Call setData to update the state
             ...data,                                        // Spread the existing data
@@ -25,7 +24,6 @@ export default function EditDetailsPage() {
         });
     };
             
-
     useEffect(() => {
         // Fetch data from localStorage AFTER the component mounts.
         const storedData = getLocalData("userData", {
@@ -208,8 +206,9 @@ export default function EditDetailsPage() {
 
                                 {/* Delete Button */}
                                 <button 
+                                    type="button"
                                     className="p-3 border border-gray-300 rounded text-red-500 hover:text-red-600 cursor-pointer hover:animate-wiggle hover:scale-110 transition-transform duration-100 ease-in-out"
-                                    onClick={() => alert("Delete social functionality coming soon!")}
+                                    onClick={() => handleDeletion("socials", index)}
                                 >
                                     <i className="bi bi-trash"></i>
                                 </button>
@@ -379,8 +378,9 @@ export default function EditDetailsPage() {
 
                                     {/* Delete button */}
                                     <button 
+                                        type="button"
                                         className="h-full p-3 mt-6 border border-gray-300 rounded text-red-500 hover:text-red-600 cursor-pointer sm:hover:animate-wiggle sm:hover:scale-110 transition-transform duration-100 ease-in-out flex-0"
-                                        onClick={() => alert("Delete skill group functionality coming soon!")}
+                                        onClick={() => handleDeletion("education", index)}
                                     >
                                         <i className="bi bi-trash"></i>
                                     </button>
@@ -474,9 +474,10 @@ export default function EditDetailsPage() {
                                     </div>
 
                                     {/* Delete button */}
-                                    <button                                             
+                                    <button  
+                                        type="button"       // Set to button to prevent defult 'submit' action                                           
                                         className="h-full p-3 mt-6 border border-gray-300 rounded text-red-500 hover:text-red-600 cursor-pointer sm:hover:animate-wiggle sm:hover:scale-110 transition-transform duration-100 ease-in-out flex-0"
-                                        onClick={() => alert("Delete skill group functionality coming soon!")}
+                                        onClick={() => handleDeletion("training", index)}
                                     >
                                         <i className="bi bi-trash"></i>
                                     </button>
@@ -604,9 +605,10 @@ export default function EditDetailsPage() {
                                     </div>
 
                                     {/* Delete button */}
-                                    <button                                             
+                                    <button         
+                                        type="button"       // Set to button to prevent defult 'submit' action                                    
                                         className="h-full p-3 mt-6 border border-gray-300 rounded text-red-500 hover:text-red-600 cursor-pointer sm:hover:animate-wiggle sm:hover:scale-110 transition-transform duration-100 ease-in-out flex-0"
-                                        onClick={() => alert("Delete skill group functionality coming soon!")}
+                                        onClick={() => handleDeletion("experience", index)}
                                     >
                                         <i className="bi bi-trash"></i>
                                     </button>
@@ -678,9 +680,10 @@ export default function EditDetailsPage() {
                                     </div> 
 
                                     {/* Delete button */}
-                                    <button                                             
+                                    <button
+                                        type="button"       // Set to button to prevent defult 'submit' action                                            
                                         className="h-full p-3 mt-6 border border-gray-300 rounded text-red-500 hover:text-red-600 cursor-pointer sm:hover:animate-wiggle sm:hover:scale-110 transition-transform duration-100 ease-in-out flex-0"
-                                        onClick={() => alert("Delete skill group functionality coming soon!")}
+                                        onClick={() => handleDeletion("projects", index)}
                                     >
                                         <i className="bi bi-trash"></i>
                                     </button>
