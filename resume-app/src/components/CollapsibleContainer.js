@@ -40,7 +40,7 @@ export default function CollapsibleContainer({ title, children }) {
                     {/* Collapsable content */}
                     <div
                         className={`transition-all duration-100 ease-in-out 
-                        ${isOpen ? "max-h-screen opacity-100 mt-2.5" : "max-h-0 opacity-0 overflow-hidden"}`}
+                        ${isOpen ? "opacity-100 mt-2.5" : "max-h-0 opacity-0 overflow-hidden"}`}
                     >
                         {children}
                     </div>
