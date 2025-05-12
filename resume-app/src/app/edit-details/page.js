@@ -718,8 +718,7 @@ export default function EditDetailsPage() {
                         id="summary" 
                         value={data.hobbies}
                         onChange={(e) => setData({ ...data, hobbies: e.target.value })} 
-                        className={inputClasses} 
-                        rows="6"
+                        className={`${inputClasses} min-h-[26rem] sm:min-h-[14rem]`}
                     ></textarea>
                     <p className="text-gray-400 text-sm">Sentences will be automatically formatted as bullet points.</p>
                 </CollapsibleContainer>
