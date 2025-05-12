@@ -32,6 +32,26 @@ export default function EditDetailsPage() {
             [key]: [...data[key], object ]                  // Access the key variable as an array and add a new object to it
         });
     };
+
+    /**
+     * Handle nested state updates
+     * 
+     * @param {string} field - The main field in the state (e.g., "socials").
+     * @param {number} index - The index of the item in the array.
+     * @param {string} subfield - The property within the nested object (e.g., "url").
+     * @param {*} value - The new value to set for the subfield.
+     * 
+     * Example Usage:
+     * updateNestedState("socials", 2, "url", "https://newwebsite.com");
+     */
+    const updateNestedState = (field, index, subfield, value) => {
+        setData({
+            ...data,
+            [field]: data[field].map((item, i) => 
+                i === index ? { ...item, [subfield]: value } : item
+            )
+        });
+    };
             
     useEffect(() => {
         // Fetch data from localStorage AFTER the component mounts.
