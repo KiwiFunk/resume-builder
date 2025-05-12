@@ -8,12 +8,14 @@ import CollapsibleContainer from "@/components/CollapsibleContainer";
 import TaggingHandler from "@/components/TaggingHandler";
 
 import debugData from "@/UserData";         // Import placeholder data for debugging
+import { useDebounce } from "@/utils/hooks";
 
 const inputClasses = "w-full p-3 border border-gray-300 rounded text-gray-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500";
 
 export default function EditDetailsPage() {
     const router = useRouter();                     // Initialize the router
     const [data, setData] = useState(null);         // Init as null to avoid hydration issues
+    
 
     var useDebugData = false;                       // Set to true to load debug data
 
@@ -192,9 +194,9 @@ export default function EditDetailsPage() {
                                 {/* Using defaultValue and onBlur to avoid excessive re-renders. Only update state when focus is lost */}
                                 <input
                                     type="text"
-                                    defaultValue={social.url}
-                                    className={inputClasses}
-                                    onBlur={(e) => {
+                                    value={social.url}
+                                    className={inputClasses}                              
+                                    onChange={(e) => {
                                         setData({
                                             ...data, 
                                             socials: data.socials.map((social, i) => 
@@ -235,8 +237,7 @@ export default function EditDetailsPage() {
                                     <input
                                         type="text"
                                         value={group.groupName}
-                                        onChange
-                                        onBlur={(e) => {
+                                        onChange={(e) => {
                                             setData({
                                                 ...data,
                                                 // When updating states, React needs a new object, instead of mutating the existing one
@@ -296,8 +297,8 @@ export default function EditDetailsPage() {
                                         <input 
                                             type="text" 
                                             id="edutitle" 
-                                            defaultValue={edu.degree}
-                                            onBlur={(e) => {
+                                            value={edu.degree}
+                                            onChange={(e) => {
                                                 setData({
                                                     ...data,
                                                     education: data.education.map((edu, i) => 
@@ -313,8 +314,8 @@ export default function EditDetailsPage() {
                                         <input 
                                             type="text" 
                                             id="eduinstitute" 
-                                            defaultValue={edu.institution}
-                                            onBlur={(e) => {
+                                            value={edu.institution}
+                                            onChange={(e) => {
                                                 setData({
                                                     ...data,
                                                     education: data.education.map((edu, i) =>
@@ -332,8 +333,8 @@ export default function EditDetailsPage() {
                                         <input 
                                             type="text" 
                                             id="edulocation" 
-                                            defaultValue={edu.location} 
-                                            onBlur={(e) => {
+                                            value={edu.location} 
+                                            onChange={(e) => {
                                                 setData({
                                                     ...data,
                                                     education: data.education.map((edu, i) =>
@@ -349,8 +350,8 @@ export default function EditDetailsPage() {
                                         <input 
                                             type="date" 
                                             id="edustart" 
-                                            defaultValue={edu.startDate}
-                                            onBlur={(e) => {
+                                            value={edu.startDate}
+                                            onChange={(e) => {
                                                 setData({
                                                     ...data,
                                                     education: data.education.map((edu, i) =>
@@ -366,8 +367,8 @@ export default function EditDetailsPage() {
                                         <input 
                                             type="date" 
                                             id="eduend" 
-                                            defaultValue={edu.endDate} 
-                                            onBlur={(e) => {
+                                            value={edu.endDate} 
+                                            onChange={(e) => {
                                                 setData({
                                                     ...data,
                                                     education: data.education.map((edu, i) =>
@@ -408,8 +409,8 @@ export default function EditDetailsPage() {
                                         <input 
                                             type="text" 
                                             id="course-title" 
-                                            defaultValue={course.title} 
-                                            onBlur={(e) => {
+                                            value={course.title} 
+                                            onChange={(e) => {
                                                 setData({
                                                     ...data,
                                                     training: data.training.map((course, i) =>
@@ -425,8 +426,8 @@ export default function EditDetailsPage() {
                                         <input 
                                             type="text" 
                                             id="course-institute" 
-                                            defaultValue={course.institution} 
-                                            onBlur={(e) => {
+                                            value={course.institution} 
+                                            onChange={(e) => {
                                                 setData({
                                                     ...data,
                                                     training: data.training.map((course, i) =>
@@ -446,8 +447,8 @@ export default function EditDetailsPage() {
                                         <input 
                                             type="date" 
                                             id="course-start" 
-                                            defaultValue={course.startDate} 
-                                            onBlur={(e) => {
+                                            value={course.startDate} 
+                                            onChange={(e) => {
                                                 setData({
                                                     ...data,
                                                     training: data.training.map((course, i) =>
@@ -463,8 +464,8 @@ export default function EditDetailsPage() {
                                         <input 
                                             type="date" 
                                             id="course-end" 
-                                            defaultValue={course.endDate}
-                                            onBlur={(e) => {
+                                            value={course.endDate}
+                                            onChange={(e) => {
                                                 setData({
                                                     ...data,
                                                     training: data.training.map((course, i) =>
@@ -489,8 +490,8 @@ export default function EditDetailsPage() {
                                 <label htmlFor="course-description" className="block text-gray-700 mt-6">Description:</label>
                                 <textarea 
                                     id="course-description" 
-                                    defaultValue={course.description}
-                                    onBlur={(e) => {
+                                    value={course.description}
+                                    onChange={(e) => {
                                         setData({
                                             ...data,
                                             training: data.training.map((course, i) =>
@@ -522,8 +523,8 @@ export default function EditDetailsPage() {
                                         <input 
                                             type="text" 
                                             id="job-title" 
-                                            defaultValue={job.title}
-                                            onBlur={(e) => {
+                                            value={job.title}
+                                            onChange={(e) => {
                                                 setData({
                                                     ...data,
                                                     experience: data.experience.map((job, i) =>
@@ -539,8 +540,8 @@ export default function EditDetailsPage() {
                                         <input 
                                             type="text" 
                                             id="company" 
-                                            defaultValue={job.company}
-                                            onBlur={(e) => {
+                                            value={job.company}
+                                            onChange={(e) => {
                                                 setData({
                                                     ...data,
                                                     experience: data.experience.map((job, i) =>
@@ -560,8 +561,8 @@ export default function EditDetailsPage() {
                                         <input 
                                             type="text" 
                                             id="job-location" 
-                                            defaultValue={job.location}
-                                            onBlur={(e) => {
+                                            value={job.location}
+                                            onChange={(e) => {
                                                 setData({
                                                     ...data,
                                                     experience: data.experience.map((job, i) =>
@@ -577,8 +578,8 @@ export default function EditDetailsPage() {
                                         <input 
                                             type="date" 
                                             id="job-start" 
-                                            defaultValue={job.startDate}
-                                            onBlur={(e) => {
+                                            value={job.startDate}
+                                            onChange={(e) => {
                                                 setData({
                                                     ...data,
                                                     experience: data.experience.map((job, i) =>
@@ -594,8 +595,8 @@ export default function EditDetailsPage() {
                                         <input 
                                             type="date" 
                                             id="job-end" 
-                                            defaultValue={job.endDate}
-                                            onBlur={(e) => {
+                                            value={job.endDate}
+                                            onChange={(e) => {
                                                 setData({
                                                     ...data,
                                                     experience: data.experience.map((job, i) =>
@@ -620,8 +621,8 @@ export default function EditDetailsPage() {
                                 <label htmlFor="course-description" className="block text-gray-700 mt-6">Description:</label>
                                 <textarea 
                                     id="course-description" 
-                                    defaultValue={job.description}
-                                    onBlur={(e) => {
+                                    value={job.description}
+                                    onChange={(e) => {
                                                 setData({
                                                     ...data,
                                                     experience: data.experience.map((job, i) =>
@@ -652,8 +653,8 @@ export default function EditDetailsPage() {
                                         <input 
                                             type="text" 
                                             id="project-title" 
-                                            defaultValue={project.title} 
-                                            onBlur={(e) => {
+                                            value={project.title} 
+                                            onChange={(e) => {
                                                 setData({
                                                     ...data,
                                                     projects: data.projects.map((project, i) =>
@@ -669,8 +670,8 @@ export default function EditDetailsPage() {
                                         <input 
                                             type="text" 
                                             id="project-url" 
-                                            defaultValue={project.url} 
-                                            onBlur={(e) => {
+                                            value={project.url} 
+                                            onChange={(e) => {
                                                 setData({
                                                     ...data,
                                                     projects: data.projects.map((project, i) =>
@@ -709,8 +710,8 @@ export default function EditDetailsPage() {
                                 <label htmlFor="project-description" className="block text-gray-700 mt-6">Description:</label>
                                 <textarea 
                                     id="project-description" 
-                                    defaultValue={project.description}
-                                    onBlur={(e) => {
+                                    value={project.description}
+                                    onChange={(e) => {
                                                 setData({
                                                     ...data,
                                                     projects: data.projects.map((project, i) =>
