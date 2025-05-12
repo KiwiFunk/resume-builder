@@ -18,6 +18,7 @@ export default function ResumeDisplayPage() {
         return <div>Loading...</div>;               // Show loading state until data is fetched
     }
 
+    // Replace by hiding display resume button and loading different home page
     if (!data.name) {
         return <div>No data found. Please fill out your details.</div>; // Show message if no data is found
     }

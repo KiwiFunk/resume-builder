@@ -157,8 +157,7 @@ export default function EditDetailsPage() {
                             id="summary" 
                             value={data.summary} 
                             onChange={(e) => setData({ ...data, summary: e.target.value })}
-                            className={inputClasses} 
-                            rows="6"
+                            className={`${inputClasses} min-h-[18rem] sm:min-h-[12rem]`}
                         ></textarea>
                     </div>
                 </CollapsibleContainer>
@@ -172,8 +171,13 @@ export default function EditDetailsPage() {
                             <div key={index} className="flex items-center gap-2">
                                 {/* Social Media Icon */}
                                 <div
-                                    className="w-6 h-5 bg-(--accent)"
-                                    style={{ maskImage: `url('/icons/${social.platform.toLowerCase()}.svg')`, WebkitMaskImage: `url('/icons/${social.platform.toLowerCase()}.svg')` }}
+                                    className="w-7 h-7 bg-(--accent)"
+                                    style={{
+                                        maskImage: `url('/icons/${social.platform.toLowerCase()}.svg')`,
+                                        WebkitMaskImage: `url('/icons/${social.platform.toLowerCase()}.svg')`,
+                                        maskSize: 'contain',
+                                        maskRepeat: 'no-repeat'
+                                    }}
                                     aria-label={social.platform}
                                 ></div>
 
@@ -216,7 +220,7 @@ export default function EditDetailsPage() {
 
                         {/* Map through current skills data */}
                         {data.skills.map((group, index) => (
-                            <div id="skill-group" key={index} className="mb-4 w-full bg-white p-5 rounded-lg shadow-md border border-gray-300">
+                            <div id="skill-group" key={index} className="w-full bg-white p-5 rounded-lg shadow-md border border-gray-300">
                             
                                 <div className="flex items-center gap-2 mb-4">
                                     <input
@@ -275,7 +279,7 @@ export default function EditDetailsPage() {
                             <div id="education-entry" key={index} className="mb-4 w-full bg-white p-5 rounded-lg shadow-md border border-gray-300">
 
                                 <div className="grid grid-cols-1 sm:mb-0 sm:grid-cols-2 sm:gap-4">
-                                    <div>
+                                    <div className="mb-6">
                                         <label htmlFor="edutitle" className="block text-gray-700">Title:</label>
                                         <input 
                                             type="text" 
@@ -292,7 +296,7 @@ export default function EditDetailsPage() {
                                             className={inputClasses} 
                                         />
                                     </div>
-                                    <div>
+                                    <div className="mb-6">
                                         <label htmlFor="eduinstitute" className="block text-gray-700">Institution:</label>
                                         <input 
                                             type="text" 
@@ -310,7 +314,7 @@ export default function EditDetailsPage() {
                                     </div>
                                 </div>
 
-                                <div className="mt-6 sm:mt-0 flex flex-col sm:flex-row gap-6 sm:gap-4">
+                                <div className="flex flex-col sm:flex-row gap-6 sm:gap-4">
                                     <div className="flex-1">
                                         <label htmlFor="edulocation" className="block text-gray-700">Location:</label>
                                         <input 
@@ -386,7 +390,7 @@ export default function EditDetailsPage() {
                             <div id="training-entry" key={index} className="mb-4 w-full bg-white p-5 rounded-lg shadow-md border border-gray-300">
 
                                 <div className="grid grid-cols-1 sm:mb-0 sm:grid-cols-2 sm:gap-4">
-                                    <div>
+                                    <div className="mb-6">
                                         <label htmlFor="course-title" className="block text-gray-700">Title:</label>
                                         <input 
                                             type="text" 
@@ -403,7 +407,7 @@ export default function EditDetailsPage() {
                                             className={inputClasses} 
                                         />
                                     </div>
-                                    <div>
+                                    <div className="mb-6">
                                         <label htmlFor="course-institute" className="block text-gray-700">Institution:</label>
                                         <input 
                                             type="text" 
@@ -422,7 +426,7 @@ export default function EditDetailsPage() {
                                     </div>                                    
                                 </div>
 
-                                <div className="mt-6 sm:mt-0 flex flex-col sm:flex-row gap-6 sm:gap-4">
+                                <div className="flex flex-col sm:flex-row gap-6 sm:gap-4">
                                     
                                     <div className="flex-1">
                                         <label htmlFor="course-start" className="block text-gray-700">Start Date:</label>
@@ -499,7 +503,7 @@ export default function EditDetailsPage() {
                             <div id="job-entry" key={index} className="mb-4 w-full bg-white p-5 rounded-lg shadow-md border border-gray-300">
 
                                 <div className="grid grid-cols-1 sm:mb-0 sm:grid-cols-2 sm:gap-4">
-                                    <div>
+                                    <div className="mb-6">
                                         <label htmlFor="job-title" className="block text-gray-700">Title:</label>
                                         <input 
                                             type="text" 
@@ -516,7 +520,7 @@ export default function EditDetailsPage() {
                                             className={inputClasses} 
                                         />
                                     </div>
-                                    <div>
+                                    <div className="mb-6">
                                         <label htmlFor="company" className="block text-gray-700">Company:</label>
                                         <input 
                                             type="text" 
@@ -535,7 +539,7 @@ export default function EditDetailsPage() {
                                     </div>                                    
                                 </div>
 
-                                <div className="mt-6 sm:mt-0 flex flex-col sm:flex-row gap-6 sm:gap-4">
+                                <div className="flex flex-col sm:flex-row gap-6 sm:gap-4">
                                     
                                     <div className="flex-1">
                                         <label htmlFor="job-location" className="block text-gray-700">Location:</label>
@@ -628,7 +632,7 @@ export default function EditDetailsPage() {
                         .map((project, index) => (
                             <div id="project-entry" key={index} className="mb-4 w-full bg-white p-5 rounded-lg shadow-md border border-gray-300">
                                 
-                                <div className="mt-6 sm:mt-0 flex flex-col sm:flex-row gap-6 sm:gap-4">
+                                <div className="flex flex-col sm:flex-row gap-6 sm:gap-4">
                                     <div className="flex-1">
                                         <label htmlFor="project-title" className="block text-gray-700">Title:</label>
                                         <input 
@@ -674,7 +678,7 @@ export default function EditDetailsPage() {
 
                                 </div>  
 
-                                <label htmlFor="project-skills" className="block text-gray-700">Technologies used:</label>
+                                <label htmlFor="project-skills" className="block text-gray-700 mt-6">Technologies used:</label>
                                 <TaggingHandler 
                                     tags={project.skills} 
                                     onTagUpdate={(updatedTags) => {
