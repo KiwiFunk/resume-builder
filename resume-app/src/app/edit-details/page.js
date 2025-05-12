@@ -228,12 +228,14 @@ export default function EditDetailsPage() {
 
                         {/* Map through current skills data */}
                         {data.skills.map((group, index) => (
+                            
                             <div id="skill-group" key={index} className="w-full bg-white p-5 rounded-lg shadow-md border border-gray-300">
                             
                                 <div className="flex items-center gap-2 mb-4">
                                     <input
                                         type="text"
-                                        defaultValue={group.groupName}
+                                        value={group.groupName}
+                                        onChange
                                         onBlur={(e) => {
                                             setData({
                                                 ...data,
@@ -246,6 +248,7 @@ export default function EditDetailsPage() {
                                         }}
                                         className={inputClasses}
                                     />
+
                                     <button
                                         type="button"
                                         className="p-3 border border-gray-300 rounded text-red-500 hover:text-red-600 cursor-pointer hover:animate-wiggle hover:scale-110 transition-transform duration-100 ease-in-out"
