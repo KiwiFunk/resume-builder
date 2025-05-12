@@ -222,15 +222,8 @@ export default function EditDetailsPage() {
                                 <input
                                     type="text"
                                     value={social.url}
-                                    className={inputClasses}                              
-                                    onChange={(e) => {
-                                        setData({
-                                            ...data, 
-                                            socials: data.socials.map((social, i) => 
-                                                i === index ? { ...social, url: e.target.value } : social
-                                            )
-                                        });
-                                    }}
+                                    className={inputClasses}
+                                    onChange={(e) => updateNestedState("socials", index, "url", e.target.value)}                              
                                 />
 
                                 {/* Delete Button */}
@@ -271,16 +264,7 @@ export default function EditDetailsPage() {
                                     <input
                                         type="text"
                                         value={group.groupName}
-                                        onChange={(e) => {
-                                            setData({
-                                                ...data,
-                                                // When updating states, React needs a new object, instead of mutating the existing one
-                                                skills: data.skills.map((group, i) => 
-                                                    // If i == index, spread the group and update the groupName, else return the group unchanged
-                                                    i === index ? { ...group, groupName: e.target.value } : group
-                                                )
-                                            });
-                                        }}
+                                        onChange={(e) => updateNestedState("skills", index, "groupName", e.target.value)} 
                                         className={inputClasses}
                                     />
 
@@ -296,14 +280,7 @@ export default function EditDetailsPage() {
                                 {/* Pass array containing tags, and callback function for updating state to TaggingHandler */}
                                 <TaggingHandler 
                                     tags={group.items} 
-                                    onTagUpdate={(updatedTags) => {
-                                        setData({
-                                            ...data,
-                                            skills: data.skills.map((group, i) => 
-                                                i === index ? { ...group, items: updatedTags } : group
-                                            )
-                                        });
-                                    }}
+                                    onTagUpdate={(updatedTags) => updateNestedState("skills", index, "items", updatedTags)}
                                 />
                                
                             </div>   
@@ -338,14 +315,7 @@ export default function EditDetailsPage() {
                                             type="text" 
                                             id="edutitle" 
                                             value={edu.degree}
-                                            onChange={(e) => {
-                                                setData({
-                                                    ...data,
-                                                    education: data.education.map((edu, i) => 
-                                                        i === index ? { ...edu, degree: e.target.value } : edu
-                                                    )
-                                                });
-                                            }}
+                                            onChange={(e) => updateNestedState("education", index, "degree", e.target.value)}
                                             className={inputClasses} 
                                         />
                                     </div>
@@ -355,14 +325,7 @@ export default function EditDetailsPage() {
                                             type="text" 
                                             id="eduinstitute" 
                                             value={edu.institution}
-                                            onChange={(e) => {
-                                                setData({
-                                                    ...data,
-                                                    education: data.education.map((edu, i) =>
-                                                        i === index ? { ...edu, institution: e.target.value } : edu
-                                                    )
-                                                });
-                                            }}
+                                            onChange={(e) => updateNestedState("education", index, "institution", e.target.value)}
                                             className={inputClasses} />
                                     </div>
                                 </div>
@@ -374,14 +337,7 @@ export default function EditDetailsPage() {
                                             type="text" 
                                             id="edulocation" 
                                             value={edu.location} 
-                                            onChange={(e) => {
-                                                setData({
-                                                    ...data,
-                                                    education: data.education.map((edu, i) =>
-                                                        i === index ? { ...edu, location: e.target.value } : edu
-                                                    )
-                                                });
-                                            }}
+                                            onChange={(e) => updateNestedState("education", index, "location", e.target.value)}
                                             className={inputClasses} 
                                         />
                                     </div>
@@ -391,14 +347,7 @@ export default function EditDetailsPage() {
                                             type="date" 
                                             id="edustart" 
                                             value={edu.startDate}
-                                            onChange={(e) => {
-                                                setData({
-                                                    ...data,
-                                                    education: data.education.map((edu, i) =>
-                                                        i === index ? { ...edu, startDate: e.target.value } : edu
-                                                    )
-                                                });
-                                            }}
+                                            onChange={(e) => updateNestedState("education", index, "startDate", e.target.value)}
                                             className={inputClasses} 
                                         />
                                     </div>
@@ -408,14 +357,7 @@ export default function EditDetailsPage() {
                                             type="date" 
                                             id="eduend" 
                                             value={edu.endDate} 
-                                            onChange={(e) => {
-                                                setData({
-                                                    ...data,
-                                                    education: data.education.map((edu, i) =>
-                                                        i === index ? { ...edu, endDate: e.target.value } : edu
-                                                    )
-                                                });
-                                            }}
+                                            onChange={(e) => updateNestedState("education", index, "endDate", e.target.value)}
                                             className={inputClasses}
                                         />
                                     </div>
@@ -457,14 +399,7 @@ export default function EditDetailsPage() {
                                             type="text" 
                                             id="course-title" 
                                             value={course.title} 
-                                            onChange={(e) => {
-                                                setData({
-                                                    ...data,
-                                                    training: data.training.map((course, i) =>
-                                                        i === index ? { ...course, title: e.target.value } : course
-                                                    )
-                                                });
-                                            }}
+                                            onChange={(e) => updateNestedState("training", index, "title", e.target.value)}
                                             className={inputClasses} 
                                         />
                                     </div>
@@ -474,14 +409,7 @@ export default function EditDetailsPage() {
                                             type="text" 
                                             id="course-institute" 
                                             value={course.institution} 
-                                            onChange={(e) => {
-                                                setData({
-                                                    ...data,
-                                                    training: data.training.map((course, i) =>
-                                                        i === index ? { ...course, institution: e.target.value } : course
-                                                    )
-                                                });
-                                            }}
+                                            onChange={(e) => updateNestedState("training", index, "institution", e.target.value)}
                                             className={inputClasses} 
                                         />
                                     </div>                                    
@@ -495,14 +423,7 @@ export default function EditDetailsPage() {
                                             type="date" 
                                             id="course-start" 
                                             value={course.startDate} 
-                                            onChange={(e) => {
-                                                setData({
-                                                    ...data,
-                                                    training: data.training.map((course, i) =>
-                                                        i === index ? { ...course, startDate: e.target.value } : course
-                                                    )
-                                                });
-                                            }}
+                                            onChange={(e) => updateNestedState("training", index, "startDate", e.target.value)}
                                             className={inputClasses}
                                         />
                                     </div>
@@ -512,14 +433,7 @@ export default function EditDetailsPage() {
                                             type="date" 
                                             id="course-end" 
                                             value={course.endDate}
-                                            onChange={(e) => {
-                                                setData({
-                                                    ...data,
-                                                    training: data.training.map((course, i) =>
-                                                        i === index ? { ...course, endDate: e.target.value } : course
-                                                    )
-                                                });
-                                            }} 
+                                            onChange={(e) => updateNestedState("training", index, "endDate", e.target.value)}
                                             className={inputClasses} 
                                         />
                                     </div>
@@ -538,14 +452,7 @@ export default function EditDetailsPage() {
                                 <textarea 
                                     id="course-description" 
                                     value={course.description}
-                                    onChange={(e) => {
-                                        setData({
-                                            ...data,
-                                            training: data.training.map((course, i) =>
-                                                i === index ? { ...course, description: e.target.value } : course
-                                            )
-                                        });
-                                    }} 
+                                    onChange={(e) => updateNestedState("training", index, "description", e.target.value)}
                                     className={inputClasses} 
                                     rows="3">
                                 </textarea>
@@ -571,14 +478,7 @@ export default function EditDetailsPage() {
                                             type="text" 
                                             id="job-title" 
                                             value={job.title}
-                                            onChange={(e) => {
-                                                setData({
-                                                    ...data,
-                                                    experience: data.experience.map((job, i) =>
-                                                        i === index ? { ...job, title: e.target.value } : job
-                                                    )
-                                                });
-                                            }}
+                                            onChange={(e) => updateNestedState("experience", index, "title", e.target.value)}
                                             className={inputClasses} 
                                         />
                                     </div>
@@ -588,14 +488,7 @@ export default function EditDetailsPage() {
                                             type="text" 
                                             id="company" 
                                             value={job.company}
-                                            onChange={(e) => {
-                                                setData({
-                                                    ...data,
-                                                    experience: data.experience.map((job, i) =>
-                                                        i === index ? { ...job, company: e.target.value } : job
-                                                    )
-                                                });
-                                            }}
+                                            onChange={(e) => updateNestedState("experience", index, "company", e.target.value)}
                                             className={inputClasses} 
                                         />
                                     </div>                                    
@@ -609,14 +502,7 @@ export default function EditDetailsPage() {
                                             type="text" 
                                             id="job-location" 
                                             value={job.location}
-                                            onChange={(e) => {
-                                                setData({
-                                                    ...data,
-                                                    experience: data.experience.map((job, i) =>
-                                                        i === index ? { ...job, location: e.target.value } : job
-                                                    )
-                                                });
-                                            }} 
+                                            onChange={(e) => updateNestedState("experience", index, "location", e.target.value)}
                                             className={inputClasses} 
                                         />
                                     </div>
@@ -626,14 +512,7 @@ export default function EditDetailsPage() {
                                             type="date" 
                                             id="job-start" 
                                             value={job.startDate}
-                                            onChange={(e) => {
-                                                setData({
-                                                    ...data,
-                                                    experience: data.experience.map((job, i) =>
-                                                        i === index ? { ...job, startDate: e.target.value } : job
-                                                    )
-                                                });
-                                            }}
+                                            onChange={(e) => updateNestedState("experience", index, "startDate", e.target.value)}
                                             className={inputClasses} 
                                         />
                                     </div>
@@ -643,14 +522,7 @@ export default function EditDetailsPage() {
                                             type="date" 
                                             id="job-end" 
                                             value={job.endDate}
-                                            onChange={(e) => {
-                                                setData({
-                                                    ...data,
-                                                    experience: data.experience.map((job, i) =>
-                                                        i === index ? { ...job, endDate: e.target.value } : job
-                                                    )
-                                                });
-                                            }} 
+                                            onChange={(e) => updateNestedState("experience", index, "endDate", e.target.value)}
                                             className={inputClasses} 
                                         />
                                     </div>
@@ -669,14 +541,7 @@ export default function EditDetailsPage() {
                                 <textarea 
                                     id="course-description" 
                                     value={job.description}
-                                    onChange={(e) => {
-                                                setData({
-                                                    ...data,
-                                                    experience: data.experience.map((job, i) =>
-                                                        i === index ? { ...job, description: e.target.value } : job
-                                                    )
-                                                });
-                                            }}
+                                    onChange={(e) => updateNestedState("experience", index, "description", e.target.value)}
                                     className={`${inputClasses} min-h-[16rem] sm:min-h-[10rem]`}
                                 ></textarea>
                                 <p className="text-gray-400 text-sm">Sentences will be automatically formatted as bullet points.</p>
@@ -701,14 +566,7 @@ export default function EditDetailsPage() {
                                             type="text" 
                                             id="project-title" 
                                             value={project.title} 
-                                            onChange={(e) => {
-                                                setData({
-                                                    ...data,
-                                                    projects: data.projects.map((project, i) =>
-                                                        i === index ? { ...project, title: e.target.value } : project
-                                                    )
-                                                });
-                                            }}
+                                            onChange={(e) => updateNestedState("projects", index, "title", e.target.value)}
                                             className={inputClasses} 
                                         />
                                     </div>
@@ -718,14 +576,7 @@ export default function EditDetailsPage() {
                                             type="text" 
                                             id="project-url" 
                                             value={project.url} 
-                                            onChange={(e) => {
-                                                setData({
-                                                    ...data,
-                                                    projects: data.projects.map((project, i) =>
-                                                        i === index ? { ...project, url: e.target.value } : project
-                                                    )
-                                                });
-                                            }}
+                                            onChange={(e) => updateNestedState("projects", index, "url", e.target.value)}
                                             className={inputClasses} 
                                         />
                                     </div> 
@@ -744,28 +595,14 @@ export default function EditDetailsPage() {
                                 <label htmlFor="project-skills" className="block text-gray-700 mt-6">Technologies used:</label>
                                 <TaggingHandler 
                                     tags={project.skills} 
-                                    onTagUpdate={(updatedTags) => {
-                                        setData({
-                                            ...data,
-                                            projects: data.projects.map((project, i) =>
-                                                i === index ? { ...project, skills: updatedTags } : project
-                                            )
-                                        });
-                                    }}
+                                    onTagUpdate={(updatedTags) => updateNestedState("projects", index, "skills", updatedTags)}
                                 />
                                 
                                 <label htmlFor="project-description" className="block text-gray-700 mt-6">Description:</label>
                                 <textarea 
                                     id="project-description" 
                                     value={project.description}
-                                    onChange={(e) => {
-                                                setData({
-                                                    ...data,
-                                                    projects: data.projects.map((project, i) =>
-                                                        i === index ? { ...project, description: e.target.value } : project
-                                                    )
-                                                });
-                                            }}
+                                    onChange={(e) => updateNestedState("projects", index, "description", e.target.value)}
                                     className={inputClasses} 
                                     rows="3"
                                 ></textarea>
