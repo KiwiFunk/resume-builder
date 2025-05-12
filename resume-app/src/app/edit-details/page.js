@@ -25,6 +25,13 @@ export default function EditDetailsPage() {
             [key]: data[key].filter((_, i) => i !== index)  // Access the key variable as an array and filter out the supplied index
         });
     };
+
+    const handleAddition = (key, object) => {               // key (string) name of the array to add to
+        setData({                                           // Call setData to update the state
+            ...data,                                        // Spread the existing data
+            [key]: [...data[key], object ]                  // Access the key variable as an array and add a new object to it
+        });
+    };
             
     useEffect(() => {
         // Fetch data from localStorage AFTER the component mounts.
@@ -220,6 +227,13 @@ export default function EditDetailsPage() {
                          {/* Input field with social icon to the left, dynamically set by parsing the name from the url */}
 
                         {/* Create new social media button under the last social media link */}
+                        <button
+                            type="button"
+                            className="mt-4 px-3 py-2 rounded-lg bg-gray-300 text-gray-600 text-sm font-medium shadow-sm hover:bg-gray-400 hover:text-white transition duration-200 hover:cursor-pointer"
+                            onClick={() => handleAddition("socials", { platform: "website", url: "", inUse: true })}
+                        >
+                            <i className="bi bi-plus"></i> Add Social Media
+                        </button>
 
                     </div>
                 </CollapsibleContainer>
@@ -276,7 +290,13 @@ export default function EditDetailsPage() {
                         ))}
                                                         
                         {/* Create skill group button under the last skill group, MAKE RESPONSIVE 1/2 COLUMNS */}
-                            {/* Add new skill button in each group */}
+                        <button
+                            type="button"
+                            className="mt-4 px-3 py-2 rounded-lg bg-gray-300 text-gray-600 text-sm font-medium shadow-sm hover:bg-gray-400 hover:text-white transition duration-200 hover:cursor-pointer"
+                            onClick={() => handleAddition("skills", { groupName: "New Skill Group", items: [] })} // Add new skill group
+                        >
+                            <i className="bi bi-plus"></i> Add Skill Group
+                        </button>
                         
                         {/* Implement react-dnd to allow drag and drop of skills between groups */}
                         
@@ -394,6 +414,13 @@ export default function EditDetailsPage() {
                     }
 
                     {/* Add new education button under the last education entry */}
+                    <button
+                            type="button"
+                            className="mt-4 px-3 py-2 rounded-lg bg-gray-300 text-gray-600 text-sm font-medium shadow-sm hover:bg-gray-400 hover:text-white transition duration-200 hover:cursor-pointer"
+                            onClick={() => handleAddition("education", { degree: "", institution: "", location: "", startDate: "", endDate: "" })} // Add new education entry
+                        >
+                            <i className="bi bi-plus"></i> Add Education
+                        </button>
                 </CollapsibleContainer>
 
                 <CollapsibleContainer title="Your Courses & Training">
@@ -752,4 +779,4 @@ export default function EditDetailsPage() {
 
         </main>
     );
-    }
+}
