@@ -614,8 +614,7 @@ export default function EditDetailsPage() {
                                                     )
                                                 });
                                             }}
-                                    className={inputClasses} 
-                                    rows="4"
+                                    className={`${inputClasses} min-h-[16rem] sm:min-h-[10rem]`}
                                 ></textarea>
                                 <p className="text-gray-400 text-sm">Sentences will be automatically formatted as bullet points.</p>
 
