@@ -17,6 +17,15 @@ export default function EditDetailsPage() {
 
     var useDebugData = false;                       // Set to true to load debug data
 
+
+    const handleDeletion = (key, index) => {                // key (string) name of the array to delete from, index (number) of the item to delete
+        setData({                                           // Call setData to update the state
+            ...data,                                        // Spread the existing data
+            [key]: data[key].filter((_, i) => i !== index)  // Access the key variable as an array and filter out the supplied index
+        });
+    };
+            
+
     useEffect(() => {
         // Fetch data from localStorage AFTER the component mounts.
         const storedData = getLocalData("userData", {
@@ -238,9 +247,10 @@ export default function EditDetailsPage() {
                                         }}
                                         className={inputClasses}
                                     />
-                                    <button 
+                                    <button
+                                        type="button"
                                         className="p-3 border border-gray-300 rounded text-red-500 hover:text-red-600 cursor-pointer hover:animate-wiggle hover:scale-110 transition-transform duration-100 ease-in-out"
-                                        onClick={() => alert("Delete skill group functionality coming soon!")}
+                                        onClick={() => handleDeletion("skills", index)}
                                     >
                                         <i className="bi bi-trash"></i>
                                     </button>
@@ -718,7 +728,7 @@ export default function EditDetailsPage() {
                         id="summary" 
                         value={data.hobbies}
                         onChange={(e) => setData({ ...data, hobbies: e.target.value })} 
-                        className={`${inputClasses} min-h-[26rem] sm:min-h-[14rem]`}
+                        className={`${inputClasses} min-h-[26rem] sm:min-h-[16rem]`}
                     ></textarea>
                     <p className="text-gray-400 text-sm">Sentences will be automatically formatted as bullet points.</p>
                 </CollapsibleContainer>
