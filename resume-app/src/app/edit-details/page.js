@@ -6,6 +6,7 @@ import { getLocalData, setLocalData } from "@/utils/localData";
 
 import CollapsibleContainer from "@/components/CollapsibleContainer";
 import TaggingHandler from "@/components/TaggingHandler";
+import DeleteButton from "@/components/DeleteButton";
 
 import debugData from "@/UserData";         // Import placeholder data for debugging
 import { useDebounce } from "@/utils/hooks";
@@ -224,21 +225,12 @@ export default function EditDetailsPage() {
                                     value={social.url}
                                     className={inputClasses}
                                     onChange={(e) => updateNestedState("socials", index, "url", e.target.value)}                              
-                                />
+                                />  
 
-                                {/* Delete Button */}
-                                <button 
-                                    type="button"
-                                    className="p-3 border border-gray-300 rounded text-red-500 hover:text-red-600 cursor-pointer hover:animate-wiggle hover:scale-110 transition-transform duration-100 ease-in-out"
-                                    onClick={() => handleDeletion("socials", index)}
-                                >
-                                    <i className="bi bi-trash"></i>
-                                </button>
+                                <DeleteButton onDelete={() => handleDeletion("socials", index)} />
                             </div>
                         ))}
-
-                         {/* Input field with social icon to the left, dynamically set by parsing the name from the url */}
-
+                        {/* Input field with social icon to the left, dynamically set by parsing the name from the url */}
                     </div>
                 </CollapsibleContainer>
 
