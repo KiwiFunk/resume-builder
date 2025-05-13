@@ -1,63 +1,120 @@
-"use client"; // Set to client-side rendering to enable React hooks and local storage access
+"use client";
 
-import { useRouter } from "next/navigation";        // Import useRouter for navigation
-import DisplayResume from "./ResumeDisplay";        // Import the DisplayResume component from the same folder
+import { useRouter } from "next/navigation";
+import DisplayResume from "./ResumeDisplay";
 import { useState, useEffect } from "react";
-import { getLocalData } from "@/utils/localData";   // Import the getLocalData function to fetch data from local storage
+import { getLocalData } from "@/utils/localData";
 
 export default function ResumeDisplayPage() {
-    const router = useRouter();                     // Initialize the router
-    const [data, setData] = useState(null);         // Initialize state to hold user data
+  const router = useRouter();
+  const [data, setData] = useState(null);                               //State to hold user data 
+  const [isLoading, setIsLoading] = useState(true);                     //State to manage loading status
 
-    useEffect(() => {
-        const userData = getLocalData("userData");  // Fetch user data from local storage once component mounts
-        setData(userData);                          // Set the fetched data to state
-    }, []); 
 
-    if (!data) {
-        return <div>Loading...</div>;               // Show loading state until data is fetched
-    }
+  useEffect(() => {
+    // Load user data and preferred template if available
+    const userData = getLocalData("userData");
+    setData(userData);
+    setIsLoading(false);
+  }, []);                                                               // Only run once on component mount
 
-    // Replace by hiding display resume button and loading different home page
-    if (!data.name) {
-        return <div>No data found. Please fill out your details.</div>; // Show message if no data is found
-    }
-
+  // LOADING PAGE
+  if (isLoading) {
     return (
-        <main className="flex flex-col items-center justify-center min-h-screen p-6">
-            {/* Page navigation and tools such as save to PDF */}
-            <div className="w-full max-w-4xl flex justify-between items-center">
-                <button
-                    className="cursor-pointer hover:scale-110 transition-transform duration-200 ease-in-out"
-                    onClick={() => router.push("/")}
-                >
-                    <i className="bi bi-chevron-left text-xl"></i>
-                </button>
-
-                <div className="gap-4 flex flex-row items-center">
-
-                    {/* This feature will use scraping and simple JS to check for keyword matches against job listings, potentially expanded to AI suggestions */}
-                    <button
-                        className="cursor-pointer hover:scale-110 transition-transform duration-200 ease-in-out"
-                        onClick={() => alert("Check your resume for keyword matches against job listings, and ATS compatibility!")}
-                    >
-                        <i className="bi bi-check2-square text-xl"></i>
-                    </button>
-                    
-                    <button
-                        className="cursor-pointer hover:scale-110 transition-transform duration-200 ease-in-out"
-                        onClick={() => alert("PDF functionality coming soon!")}
-                    >
-                        <i className="bi bi-file-earmark-pdf-fill text-xl"></i>
-                    </button>
-                </div>
-                
-                </div>
-
-            {/* Eventually, add a widget to handle selecting a resume template before displaying */}
-
-            {/* Load in the resume display component */}
-            <DisplayResume data={data} />
-        </main>
+      <div className="min-h-screen flex items-center justify-center bg-gray-50">
+        <div className="text-center">
+          <div className="animate-spin rounded-full h-16 w-16 border-t-4 border-b-4 border-blue-600 mx-auto mb-4"></div>
+          <p className="text-gray-600">Loading your resume...</p>
+        </div>
+      </div>
     );
+  }
+
+  // NO DATA PAGE
+  if (!data || !data.name) {
+    return (
+      <div className="min-h-screen flex flex-col items-center justify-center bg-gradient-to-br from-gray-50 to-gray-100 px-4">
+        <div className="max-w-md w-full bg-white rounded-xl shadow-lg p-8 text-center">
+          <div className="inline-flex items-center justify-center w-16 h-16 mb-6 bg-blue-100 rounded-full">
+            <i className="bi bi-file-earmark-text text-2xl text-blue-600"></i>
+          </div>
+          <h2 className="text-2xl font-bold text-gray-900 mb-4">No Resume Found</h2>
+          <p className="text-gray-600 mb-6">Create your first resume by adding your details.</p>
+          <button
+            onClick={() => router.push("/edit-details")}
+            className="px-6 py-3 bg-blue-600 text-white rounded-lg shadow-md hover:bg-blue-700 transition-all duration-200 transform hover:-translate-y-0.5"
+          >
+            <span className="flex items-center justify-center gap-2">
+              <i className="bi bi-plus-circle"></i>
+              Create Resume Now
+            </span>
+          </button>
+        </div>
+      </div>
+    );
+  }
+
+  return (
+    <main className="min-h-screen bg-gradient-to-br from-gray-50 to-gray-100 py-8">
+      {/* Top toolbar */}
+      <div className="sticky top-0 z-10 bg-white shadow-md py-3 mb-8 backdrop-blur">
+        <div className="container mx-auto max-w-5xl px-4 flex justify-between items-center">
+          {/* Navigation */}
+          <div className="flex items-center space-x-4">
+            <button
+              className="p-2 rounded hover:bg-gray-100 transition-colors flex items-center gap-1 text-gray-700"
+              onClick={() => router.push("/")}
+            >
+              <i className="bi bi-chevron-left text-xl"></i>
+              <span className="hidden sm:inline">Home</span>
+            </button>
+
+            <h1 className="hidden sm:block text-xl font-medium text-gray-900">Resume Preview</h1>
+          </div>
+
+          {/* Actions */}
+          <div className="flex items-center space-x-2">
+            {/* Edit button */}
+            <button
+              className="px-3 py-2 rounded hover:bg-gray-100 transition-colors flex items-center gap-2 text-blue-600"
+              onClick={() => router.push("/edit-details")}
+            >
+              <i className="bi bi-pencil"></i>
+              <span className="hidden sm:inline">Edit</span>
+            </button>
+
+            {/* ATS checker */}
+            <button
+              className="px-3 py-2 rounded hover:bg-gray-100 transition-colors flex items-center gap-2 text-green-600"
+              onClick={() => alert("ATS compatibility check coming soon!")}
+            >
+              <i className="bi bi-check2-circle"></i>
+              <span className="hidden sm:inline">ATS Check</span>
+            </button>
+
+            {/* PDF download */}
+            <button
+              className="px-3 py-2 rounded bg-blue-600 hover:bg-blue-700 transition-colors flex items-center gap-2 text-white"
+              onClick={() => alert("PDF export coming soon!")}
+            >
+              <i className="bi bi-file-earmark-pdf"></i>
+              <span className="hidden sm:inline">Download PDF</span>
+            </button>
+          </div>
+        </div>
+      </div>
+
+      {/* Resume Container */}
+      <div className="container mx-auto max-w-5xl px-4">
+
+        {/* Resume display section */}
+        <div className="flex justify-center">
+          <div className="p-8">
+            <DisplayResume data={data} />
+          </div>
+        </div>
+
+      </div>
+    </main>
+  );
 }
