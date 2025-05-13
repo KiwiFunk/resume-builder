@@ -203,34 +203,12 @@ export default function EditDetailsPage() {
                     
                 {/* Social Media Links */}
                 <CollapsibleContainer title="Edit Socials" useAddBtn={true} callback={() => handleAdd("socials", { platform: "website", url: "", inUse: true })}>
-                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                        {/* Map through the current social media data */}
-                        {data.socials.map((social, index) => (
-                            <div key={index} className="flex items-center gap-2">
-                                {/* Social Media Icon */}
-                                <div
-                                    className="w-7 h-7 bg-(--accent)"
-                                    style={{
-                                        maskImage: `url('/icons/${social.platform.toLowerCase()}.svg')`,
-                                        WebkitMaskImage: `url('/icons/${social.platform.toLowerCase()}.svg')`,
-                                        maskSize: 'contain',
-                                        maskRepeat: 'no-repeat'
-                                    }}
-                                    aria-label={social.platform}
-                                ></div>
-
-                                {/* Social Media URL Input */}
-                                <input
-                                    type="text"
-                                    value={social.url}
-                                    className={inputClasses}
-                                    onChange={(e) => updateNestedState("socials", index, "url", e.target.value)}                              
-                                />  
-                                <DeleteButton onDelete={() => handleDeletion("socials", index)} />
-                            </div>
-                        ))}
-                        {/* Input field with social icon to the left, dynamically set by parsing the name from the url */}
-                    </div>
+                    <SocialMediaLinks
+                        data={data}
+                        inputClasses={inputClasses}
+                        updateNestedState={updateNestedState}
+                        handleDeletion={handleDeletion}
+                    />
                 </CollapsibleContainer>
 
                 {/* Skills Section */}

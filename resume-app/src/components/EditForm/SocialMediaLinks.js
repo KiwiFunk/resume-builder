@@ -1,7 +1,6 @@
-import CollapsibleContainer from "@/components/CollapsibleContainer";
 import DeleteButton from "@/components/DeleteButton";
 
-export default function SocialMediaLinks({ data, updateNestedState, handleDeletion }) {
+export default function SocialMediaLinks({ data, inputClasses, updateNestedState, handleDeletion }) {
 
     // Array to contain platforms we have icons for in the public/icons folder
     // Is there a way to dynamically get this list from the public/icons folder?
@@ -9,14 +8,14 @@ export default function SocialMediaLinks({ data, updateNestedState, handleDeleti
         "artstation", "linkedin", "github", "twitter", "stackoverflow",
     ];
 
-    const setPlatfrom = (url, index) => {
+    const setPlatfrom = (url, i) => {
         let hostname = new URL(url).hostname;                               // Extract the domain name from the URL (also known as the hostname)
         hostname = hostname.replace(/^www\.|\.com|\.net|\.org|\.io/g, "");  // Remove 'www.', '.com', '.net', '.org', and '.io' from the hostname
     
         hostname = supportedPlatforms.includes(hostname) ? hostname : "website";        
         
         // Update the platform name in the state
-        updateNestedState("socials", index, "platform", hostname);          // Update the platform name in the state
+        updateNestedState("socials", i, "platform", hostname);          // Update the platform name in the state
     }
 
     return (
@@ -43,7 +42,7 @@ export default function SocialMediaLinks({ data, updateNestedState, handleDeleti
                         className={inputClasses}
                         onChange={(e) => updateNestedState("socials", index, "url", e.target.value)}
                         /* Dynamically set social icon by parsing the name from the url */
-                        onBlur={() => setPlatfrom(social.url, i)}
+                        onBlur={() => setPlatfrom(social.url, index)}
                     />
                     <DeleteButton onDelete={() => handleDeletion("socials", index)} />
                 </div>
