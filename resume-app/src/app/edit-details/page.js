@@ -7,6 +7,7 @@ import { getLocalData, setLocalData } from "@/utils/localData";
 import CollapsibleContainer from "@/components/CollapsibleContainer";
 import TaggingHandler from "@/components/TaggingHandler";
 import DeleteButton from "@/components/DeleteButton";
+import SocialMediaLinks from "@/components/EditForm/SocialMediaLinks";
 
 import debugData from "@/UserData";         // Import placeholder data for debugging
 import { useDebounce } from "@/utils/hooks";
