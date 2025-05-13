@@ -8,6 +8,17 @@ export const styles = {
   summary: "mb-6 text-gray-700 leading-relaxed",
   
   // Component-specific styles
+
+  contactInformation: {
+    container: "font-sans",
+    name: "text-4xl font-bold text-gray-900 mb-1",
+    title: "text-lg text-blue-600 mb-3",
+    contactsContainer: "text-gray-700 space-y-1",
+    contactItem: "flex items-center gap-2",
+    icon: "text-blue-500",
+    showIcons: true
+  },
+  
   skills: {
     container: "grid grid-cols-2 sm:grid-cols-3 gap-4",
     skillGroup: "",

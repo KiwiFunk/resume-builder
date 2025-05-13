@@ -14,7 +14,11 @@ export default function Minimal({ data }) {
     <div className={styles.container}>
       {/* Clean, minimal header */}
       <header className={styles.header}>
-        <ContactInformation className={styles.contactContainer} data={data} />
+        <ContactInformation
+          className={styles.contactContainer}
+          data={data}
+          styles={styles.contactInformation}
+        />
         <Socials className={styles.socialsContainer} data={data} />
       </header>
       

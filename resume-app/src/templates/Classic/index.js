@@ -14,7 +14,11 @@ export default function Classic({ data }) {
     <div className={styles.container}>
       {/* Header with centered contact info */}
       <header className={styles.header}>
-        <ContactInformation className={styles.contactContainer} data={data} />
+        <ContactInformation
+          className={styles.contactContainer}
+          data={data}
+          styles={styles.contactInformation}
+        />
         <div className={styles.divider}></div>
       </header>
 

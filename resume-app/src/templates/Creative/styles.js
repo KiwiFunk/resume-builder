@@ -20,6 +20,16 @@ export const styles = {
   summary: "text-gray-700 leading-relaxed pl-9",
   
   // Component-specific styles for Creative template
+  contactInformation: {
+    container: "font-sans",
+    name: "text-4xl font-extrabold bg-clip-text text-transparent bg-gradient-to-r from-white to-blue-100 mb-1",
+    title: "text-lg text-white mb-3 font-medium",
+    contactsContainer: "text-white space-y-1",
+    contactItem: "flex items-center gap-2",
+    icon: "text-blue-200",
+    showIcons: true
+  },
+  
   skills: {
     container: "grid grid-cols-2 sm:grid-cols-3 gap-4",
     skillGroup: "bg-white p-4 rounded-lg shadow-sm",

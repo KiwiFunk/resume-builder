@@ -14,7 +14,11 @@ export default function Modern({ data }) {
     <div className={styles.container}>
       {/* Header with Contact Info and Socials */}
       <header className={styles.header}>
-        <ContactInformation className={styles.contactContainer} data={data} />
+        <ContactInformation
+          className={styles.contactContainer}
+          data={data}
+          styles={styles.contactInformation}
+        />
         <Socials className={styles.socialsContainer} data={data} />
       </header>
 

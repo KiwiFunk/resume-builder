@@ -15,6 +15,16 @@ export const styles = {
   section: "mb-8",
   
   // Component-specific styles for Classic 
+    contactInformation: {
+    container: "font-serif text-center",
+    name: "text-4xl font-bold text-gray-900 mb-2",
+    title: "text-xl text-gray-700 mb-4 font-medium",
+    contactsContainer: "text-gray-700 flex flex-wrap justify-center gap-4",
+    contactItem: "text-sm",
+    icon: "hidden",
+    showIcons: false // Classic style typically doesn't use icons
+  },
+
   skills: {
     
   },

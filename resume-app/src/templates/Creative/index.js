@@ -15,7 +15,11 @@ export default function Creative({ data }) {
       {/* Colorful header section */}
       <header className={styles.header}>
         <div className={styles.headerContent}>
-          <ContactInformation className={styles.contactContainer} data={data} />
+          <ContactInformation
+            className={styles.contactContainer}
+            data={data}
+            styles={styles.contactInformation}
+          />
           <div className={styles.socialWrapper}>
             <Socials className={styles.socialsContainer} data={data} />
           </div>

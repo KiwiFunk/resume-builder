@@ -11,6 +11,16 @@ export const styles = {
   summaryText: "text-gray-700 leading-relaxed",
   
   // Component-specific styles for Minimal template
+  contactInformation: {
+    container: "font-sans",
+    name: "text-3xl font-bold text-gray-900 mb-1 uppercase tracking-wide",
+    title: "text-lg text-gray-600 mb-4",
+    contactsContainer: "text-gray-700 flex flex-wrap gap-6 text-sm",
+    contactItem: "inline-block", 
+    icon: "hidden",
+    showIcons: false // Minimal design without icons
+  },
+  
   skills: {
     container: "space-y-4",
     skillGroup: "mb-6",
