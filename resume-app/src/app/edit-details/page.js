@@ -538,7 +538,8 @@ export default function EditDetailsPage() {
 
                 {/* Submit button */}
                 <button
-                    type="submit"
+                    type="button"
+                    onClick={handleSave}
                     className="mt-4 px-4 py-2 bg-blue-500 text-white rounded shadow hover:bg-blue-600 cursor-pointer"
                 >
                     Save Changes
