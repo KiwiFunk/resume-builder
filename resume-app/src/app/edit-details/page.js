@@ -250,14 +250,7 @@ export default function EditDetailsPage() {
                                         onChange={(e) => updateNestedState("skills", index, "groupName", e.target.value)} 
                                         className={inputClasses}
                                     />
-
-                                    <button
-                                        type="button"
-                                        className="p-3 border border-gray-300 rounded text-red-500 hover:text-red-600 cursor-pointer hover:animate-wiggle hover:scale-110 transition-transform duration-100 ease-in-out"
-                                        onClick={() => handleDeletion("skills", index)}
-                                    >
-                                        <i className="bi bi-trash"></i>
-                                    </button>
+                                    <DeleteButton onDelete={() => handleDeletion("skills", index)} />
                                 </div>
 
                                 {/* Pass array containing tags, and callback function for updating state to TaggingHandler */}
@@ -265,12 +258,9 @@ export default function EditDetailsPage() {
                                     tags={group.items} 
                                     onTagUpdate={(updatedTags) => updateNestedState("skills", index, "items", updatedTags)}
                                 />
-                               
                             </div>   
                         ))}
-                        
-                        {/* Implement react-dnd to allow drag and drop of skills between groups */}
-                        
+                        {/* Implement react-dnd to allow drag and drop of skills between groups */}        
                     </div>
                 </CollapsibleContainer>
 
@@ -334,20 +324,11 @@ export default function EditDetailsPage() {
                                             className={inputClasses}
                                         />
                                     </div>
-
-                                    {/* Delete button */}
-                                    <button 
-                                        type="button"
-                                        className="h-full p-3 mt-6 border border-gray-300 rounded text-red-500 hover:text-red-600 cursor-pointer sm:hover:animate-wiggle sm:hover:scale-110 transition-transform duration-100 ease-in-out flex-0"
-                                        onClick={() => handleDeletion("education", index)}
-                                    >
-                                        <i className="bi bi-trash"></i>
-                                    </button>
+                                    <DeleteButton onDelete={() => handleDeletion("education", index)} additionalClasses="h-full mt-6"/>
                                 </div>
                             </div>
                         ))
                     }
-
                     {/* Add new education button under the last education entry */}
                     <button
                             type="button"
@@ -410,15 +391,7 @@ export default function EditDetailsPage() {
                                             className={inputClasses} 
                                         />
                                     </div>
-
-                                    {/* Delete button */}
-                                    <button  
-                                        type="button"       // Set to button to prevent defult 'submit' action                                           
-                                        className="h-full p-3 mt-6 border border-gray-300 rounded text-red-500 hover:text-red-600 cursor-pointer sm:hover:animate-wiggle sm:hover:scale-110 transition-transform duration-100 ease-in-out flex-0"
-                                        onClick={() => handleDeletion("training", index)}
-                                    >
-                                        <i className="bi bi-trash"></i>
-                                    </button>
+                                    <DeleteButton onDelete={() => handleDeletion("training", index)} additionalClasses="h-full mt-6"/>
                                 </div>
 
                                 <label htmlFor="course-description" className="block text-gray-700 mt-6">Description:</label>
@@ -499,15 +472,7 @@ export default function EditDetailsPage() {
                                             className={inputClasses} 
                                         />
                                     </div>
-
-                                    {/* Delete button */}
-                                    <button         
-                                        type="button"       // Set to button to prevent defult 'submit' action                                    
-                                        className="h-full p-3 mt-6 border border-gray-300 rounded text-red-500 hover:text-red-600 cursor-pointer sm:hover:animate-wiggle sm:hover:scale-110 transition-transform duration-100 ease-in-out flex-0"
-                                        onClick={() => handleDeletion("experience", index)}
-                                    >
-                                        <i className="bi bi-trash"></i>
-                                    </button>
+                                    <DeleteButton onDelete={() => handleDeletion("experience", index)} additionalClasses="h-full mt-6" />
                                 </div>
 
                                 <label htmlFor="course-description" className="block text-gray-700 mt-6">Description:</label>
@@ -522,8 +487,6 @@ export default function EditDetailsPage() {
                             </div>
                         ))
                     }
-
-                        {/* Add new job button under the last job entry */}
                 </CollapsibleContainer>
 
                 <CollapsibleContainer title="Projects & Portfolio">
@@ -553,16 +516,7 @@ export default function EditDetailsPage() {
                                             className={inputClasses} 
                                         />
                                     </div> 
-
-                                    {/* Delete button */}
-                                    <button
-                                        type="button"       // Set to button to prevent defult 'submit' action                                            
-                                        className="h-full p-3 mt-6 border border-gray-300 rounded text-red-500 hover:text-red-600 cursor-pointer sm:hover:animate-wiggle sm:hover:scale-110 transition-transform duration-100 ease-in-out flex-0"
-                                        onClick={() => handleDeletion("projects", index)}
-                                    >
-                                        <i className="bi bi-trash"></i>
-                                    </button>
-
+                                    <DeleteButton onDelete={() => handleDeletion("projects", index)} additionalClasses="h-full mt-6"/>
                                 </div>  
 
                                 <label htmlFor="project-skills" className="block text-gray-700 mt-6">Technologies used:</label>
