@@ -9,7 +9,7 @@ export default function ResumeDisplayPage() {
   const router = useRouter();
   const [data, setData] = useState(null);                               //State to hold user data 
   const [isLoading, setIsLoading] = useState(true);                     //State to manage loading status
-
+  const [scale, setScale] = useState(100);                              //State to manage zoom level  
 
   useEffect(() => {
     // Load user data and preferred template if available
@@ -107,10 +107,43 @@ export default function ResumeDisplayPage() {
       {/* Resume Container */}
       <div className="container mx-auto max-w-5xl px-4">
 
+        {/* Zoom control */}
+        <div className="flex items-center gap-3">
+          <label htmlFor="scale" className="text-sm font-medium text-gray-700">Zoom:</label>
+          <div className="flex items-center">
+            <button
+              className="px-2 py-1 bg-gray-100 hover:bg-gray-200 rounded-l border border-gray-300"
+              onClick={() => setScale(Math.max(50, scale - 10))}
+            >
+              <i className="bi bi-dash"></i>
+            </button>
+            <span className="px-3 py-1 border-t border-b border-gray-300 bg-white text-sm">
+              {scale}%
+            </span>
+            <button
+              className="px-2 py-1 bg-gray-100 hover:bg-gray-200 rounded-r border border-gray-300"
+              onClick={() => setScale(Math.min(150, scale + 10))}
+            >
+              <i className="bi bi-plus"></i>
+            </button>
+          </div>
+
+
+        </div>
+
         {/* Resume display section */}
         <div className="flex justify-center">
-          <div className="p-8">
-            <DisplayResume data={data} />
+          <div
+            className="bg-white shadow-xl rounded-lg overflow-hidden mb-8 print:shadow-none origin-top transition-all duration-150"
+            style={{
+              maxWidth: '1000px',
+              transform: `scale(${scale / 100})`,
+              transformOrigin: 'top center'
+            }}
+          >
+            <div className="p-8 a4-page">
+              <DisplayResume data={data} />
+            </div>
           </div>
         </div>
 
