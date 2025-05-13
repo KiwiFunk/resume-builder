@@ -21,7 +21,7 @@ export default function Creative({ data }) {
             styles={styles.contactInformation}
           />
           <div className={styles.socialWrapper}>
-            <Socials className={styles.socialsContainer} data={data} />
+            <Socials className={styles.socialsContainer} data={data} styles={styles.socials}/>
           </div>
         </div>
       </header>

@@ -29,6 +29,15 @@ export const styles = {
     icon: "text-blue-200",
     showIcons: true
   },
+
+  socials: {
+  container: "flex flex-wrap gap-3 mt-2",
+  socialItem: "inline-block",
+  iconWrapper: "w-5 h-5 bg-white mr-2",
+  link: "flex items-center px-3 py-1 bg-white bg-opacity-20 hover:bg-opacity-30 rounded-full transition-all",
+  linkText: "text-white text-sm",
+  showIcons: true
+  },
   
   skills: {
     container: "grid grid-cols-2 sm:grid-cols-3 gap-4",

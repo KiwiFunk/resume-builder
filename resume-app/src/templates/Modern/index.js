@@ -19,7 +19,7 @@ export default function Modern({ data }) {
           data={data}
           styles={styles.contactInformation}
         />
-        <Socials className={styles.socialsContainer} data={data} />
+        <Socials className={styles.socialsContainer} data={data} styles={styles.socials}/>
       </header>
 
       {/* Summary */}

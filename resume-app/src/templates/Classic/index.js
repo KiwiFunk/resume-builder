@@ -30,7 +30,7 @@ export default function Classic({ data }) {
       )}
       
       {/* Socials */}
-      <Socials className={styles.socialsContainer} data={data} />
+      <Socials className={styles.socialsContainer} data={data} styles={styles.socials}/>
 
       {/* Two column layout */}
       <div className={styles.twoColumnLayout}>

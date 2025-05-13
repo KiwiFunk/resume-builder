@@ -18,6 +18,15 @@ export const styles = {
     icon: "text-blue-500",
     showIcons: true
   },
+
+  socials: {
+  container: "flex flex-col gap-2 mt-2",
+  socialItem: "flex items-center",
+  iconWrapper: "w-5 h-5 bg-blue-600",
+  link: "flex items-center gap-2 hover:text-blue-600 transition-colors",
+  linkText: "text-gray-700 text-sm",
+  showIcons: true
+  },
   
   skills: {
     container: "grid grid-cols-2 sm:grid-cols-3 gap-4",

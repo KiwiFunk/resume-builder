@@ -20,6 +20,15 @@ export const styles = {
     icon: "hidden",
     showIcons: false // Minimal design without icons
   },
+
+  socials: {
+  container: "flex flex-wrap gap-x-6 gap-y-2 mt-2",
+  socialItem: "inline-block",
+  iconWrapper: "hidden",
+  link: "text-sm uppercase tracking-wider text-gray-700 hover:text-gray-900",
+  linkText: "text-gray-700 text-sm",
+  showIcons: false // Minimal design without icons
+  },
   
   skills: {
     container: "space-y-4",
