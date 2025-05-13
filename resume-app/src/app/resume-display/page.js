@@ -164,7 +164,7 @@ export default function ResumeDisplayPage() {
               transformOrigin: 'top center'
             }}
           >
-            <div className="p-8">
+            <div className="p-8 a4-page">
               <DisplayResume data={data} template={template} />
             </div>
           </div>

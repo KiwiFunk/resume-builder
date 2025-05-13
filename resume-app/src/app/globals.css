@@ -6,6 +6,23 @@
   --accent: #0070f3;
 }
 
+.a4-page {
+  width: 210mm;
+  min-height: 297mm;
+  /* padding: 20mm; */
+  margin: 0 auto;
+  background-color: white;
+}
+
+@media print {
+  .a4-page {
+    width: 100%;
+    height: auto;
+    padding: 0;
+    margin: 0;
+  }
+}
+
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
