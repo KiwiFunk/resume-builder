@@ -61,7 +61,8 @@ export default function ResumeDisplayPage() {
   }
 
   return (
-    <main className="min-h-screen bg-gradient-to-br from-gray-50 to-gray-100 py-8">
+    <main className="min-h-screen bg-gradient-to-br from-gray-50 to-gray-100 pb-8">
+
       {/* Top toolbar */}
       <div className="sticky top-0 z-10 bg-white shadow-md py-3 mb-8 backdrop-blur">
         <div className="container mx-auto max-w-5xl px-4 flex justify-between items-center">
@@ -112,6 +113,7 @@ export default function ResumeDisplayPage() {
 
       {/* Resume Container */}
       <div className="container mx-auto max-w-5xl px-4">
+        
         {/* Template selector and controls */}
         <div className="bg-white rounded-lg shadow-md mb-4 p-4">
           <div className="flex flex-wrap items-center justify-between gap-4">
