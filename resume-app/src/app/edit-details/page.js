@@ -219,14 +219,12 @@ export default function EditDetailsPage() {
                                 ></div>
 
                                 {/* Social Media URL Input */}
-                                {/* Using defaultValue and onBlur to avoid excessive re-renders. Only update state when focus is lost */}
                                 <input
                                     type="text"
                                     value={social.url}
                                     className={inputClasses}
                                     onChange={(e) => updateNestedState("socials", index, "url", e.target.value)}                              
                                 />  
-
                                 <DeleteButton onDelete={() => handleDeletion("socials", index)} />
                             </div>
                         ))}
@@ -264,7 +262,7 @@ export default function EditDetailsPage() {
                     </div>
                 </CollapsibleContainer>
 
-                <CollapsibleContainer title="Your Education"> 
+                <CollapsibleContainer title="Your Education" useAddBtn={true} callback={() => handleAddition("education", { degree: "", institution: "", location: "", startDate: "", endDate: "" })}>
                     {/* Map through the current education data */}
                     {data.education
                         .sort((a, b) => new Date(b.startDate) - new Date(a.startDate)) // Sort by startDate (Descending)
@@ -329,17 +327,9 @@ export default function EditDetailsPage() {
                             </div>
                         ))
                     }
-                    {/* Add new education button under the last education entry */}
-                    <button
-                            type="button"
-                            className="mt-4 px-3 py-2 rounded-lg bg-gray-300 text-gray-600 text-sm font-medium shadow-sm hover:bg-gray-400 hover:text-white transition duration-200 hover:cursor-pointer"
-                            onClick={() => handleAddition("education", { degree: "", institution: "", location: "", startDate: "", endDate: "" })} // Add new education entry
-                        >
-                            <i className="bi bi-plus"></i> Add Education
-                        </button>
                 </CollapsibleContainer>
 
-                <CollapsibleContainer title="Your Courses & Training">
+                <CollapsibleContainer title="Your Courses & Training" useAddBtn={true} callback={() => handleAddition("training", { title: "", institution: "", startDate: "", endDate: "", description: "" })}>
                     {/* Map through current courses data */}
                     {data.training
                         .sort((a, b) => new Date(b.startDate) - new Date(a.startDate)) // Sort by startDate (Descending)
@@ -405,12 +395,10 @@ export default function EditDetailsPage() {
 
                             </div>
                         ))
-                    }
-                    {/* Add new course button under the last course entry */}
-                        
+                    }                     
                 </CollapsibleContainer>
 
-                <CollapsibleContainer title="Employment History">
+                <CollapsibleContainer title="Employment History" useAddBtn={true} callback={() => handleAddition("experience", { title: "", company: "", location: "", startDate: "", endDate: "", description: "" })}>
                     {/* Map through current employment data */}
                     {data.experience
                         .sort((a, b) => new Date(b.startDate) - new Date(a.startDate)) // Sort by startDate (Descending)
@@ -483,13 +471,12 @@ export default function EditDetailsPage() {
                                     className={`${inputClasses} min-h-[16rem] sm:min-h-[10rem]`}
                                 ></textarea>
                                 <p className="text-gray-400 text-sm">Sentences will be automatically formatted as bullet points.</p>
-
                             </div>
                         ))
                     }
                 </CollapsibleContainer>
 
-                <CollapsibleContainer title="Projects & Portfolio">
+                <CollapsibleContainer title="Projects & Portfolio" useAddBtn={true} callback={() => handleAddition("projects", { title: "", url: "", skills: [], description: "" })}>
                     {/* Map through current projects data */}
                     {data.projects
                         .map((project, index) => (
@@ -535,11 +522,9 @@ export default function EditDetailsPage() {
                                 ></textarea>
                         
                             </div>
-                    ))}
-
-                        {/* Add new project button under the last project entry */}
-                  
+                    ))}               
                 </CollapsibleContainer>
+
                 <CollapsibleContainer title="Hobbies & Interests">
                     <label htmlFor="summary" className="hidden text-gray-700">Summary:</label>
                     <textarea 
@@ -551,7 +536,6 @@ export default function EditDetailsPage() {
                     <p className="text-gray-400 text-sm">Sentences will be automatically formatted as bullet points.</p>
                 </CollapsibleContainer>
 
-
                 {/* Submit button */}
                 <button
                     type="submit"
@@ -560,7 +544,6 @@ export default function EditDetailsPage() {
                     Save Changes
                 </button>
             </form>
-
         </main>
     );
 }
