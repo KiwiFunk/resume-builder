@@ -121,7 +121,7 @@ export default function ResumeDisplayPage() {
                 id="template"
                 value={template}
                 onChange={handleTemplateChange}
-                className="bg-white border border-gray-300 rounded px-3 py-1.5 text-sm focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+                className="text-gray-600 bg-white border border-gray-300 rounded px-3 py-1.5 text-sm focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
               >
                 <option value="modern">Modern</option>
                 <option value="classic">Classic</option>
@@ -133,14 +133,14 @@ export default function ResumeDisplayPage() {
             {/* Zoom control */}
             <div className="flex items-center gap-3">
               <label htmlFor="scale" className="text-sm font-medium text-gray-700">Zoom:</label>
-              <div className="flex items-center">
+              <div className="flex items-center text-gray-600">
                 <button
                   className="px-2 py-1 bg-gray-100 hover:bg-gray-200 rounded-l border border-gray-300"
                   onClick={() => setScale(Math.max(50, scale - 10))}
                 >
                   <i className="bi bi-dash"></i>
                 </button>
-                <span className="px-3 py-1 border-t border-b border-gray-300 bg-white text-sm">
+                <span className="px-3 py-1 border-t border-b border-gray-300">
                   {scale}%
                 </span>
                 <button
@@ -151,6 +151,7 @@ export default function ResumeDisplayPage() {
                 </button>
               </div>
             </div>
+
           </div>
         </div>
 
