@@ -9,6 +9,7 @@ export default function ResumeDisplayPage() {
   const router = useRouter();
   const [data, setData] = useState(null);                               //State to hold user data 
   const [isLoading, setIsLoading] = useState(true);                     //State to manage loading status
+  const [template, setTemplate] = useState("modern");                   //State to hold current template
   const [scale, setScale] = useState(100);                              //State to manage zoom level  
 
   useEffect(() => {
@@ -17,6 +18,11 @@ export default function ResumeDisplayPage() {
     setData(userData);
     setIsLoading(false);
   }, []);                                                               // Only run once on component mount
+
+  const handleTemplateChange = (e) => {
+    const newTemplate = e.target.value;
+    setTemplate(newTemplate);
+  };
 
   // LOADING PAGE
   if (isLoading) {
@@ -106,29 +112,46 @@ export default function ResumeDisplayPage() {
 
       {/* Resume Container */}
       <div className="container mx-auto max-w-5xl px-4">
+        {/* Template selector and controls */}
+        <div className="bg-white rounded-lg shadow-md mb-4 p-4">
+          <div className="flex flex-wrap items-center justify-between gap-4">
+            <div className="flex items-center gap-3">
+              <label htmlFor="template" className="text-sm font-medium text-gray-700">Template:</label>
+              <select
+                id="template"
+                value={template}
+                onChange={handleTemplateChange}
+                className="bg-white border border-gray-300 rounded px-3 py-1.5 text-sm focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+              >
+                <option value="modern">Modern</option>
+                <option value="classic">Classic</option>
+                <option value="creative">Creative</option>
+                <option value="minimal">Minimal</option>
+              </select>
+            </div>
 
-        {/* Zoom control */}
-        <div className="flex items-center gap-3">
-          <label htmlFor="scale" className="text-sm font-medium text-gray-700">Zoom:</label>
-          <div className="flex items-center">
-            <button
-              className="px-2 py-1 bg-gray-100 hover:bg-gray-200 rounded-l border border-gray-300"
-              onClick={() => setScale(Math.max(50, scale - 10))}
-            >
-              <i className="bi bi-dash"></i>
-            </button>
-            <span className="px-3 py-1 border-t border-b border-gray-300 bg-white text-sm">
-              {scale}%
-            </span>
-            <button
-              className="px-2 py-1 bg-gray-100 hover:bg-gray-200 rounded-r border border-gray-300"
-              onClick={() => setScale(Math.min(150, scale + 10))}
-            >
-              <i className="bi bi-plus"></i>
-            </button>
+            {/* Zoom control */}
+            <div className="flex items-center gap-3">
+              <label htmlFor="scale" className="text-sm font-medium text-gray-700">Zoom:</label>
+              <div className="flex items-center">
+                <button
+                  className="px-2 py-1 bg-gray-100 hover:bg-gray-200 rounded-l border border-gray-300"
+                  onClick={() => setScale(Math.max(50, scale - 10))}
+                >
+                  <i className="bi bi-dash"></i>
+                </button>
+                <span className="px-3 py-1 border-t border-b border-gray-300 bg-white text-sm">
+                  {scale}%
+                </span>
+                <button
+                  className="px-2 py-1 bg-gray-100 hover:bg-gray-200 rounded-r border border-gray-300"
+                  onClick={() => setScale(Math.min(150, scale + 10))}
+                >
+                  <i className="bi bi-plus"></i>
+                </button>
+              </div>
+            </div>
           </div>
-
-
         </div>
 
         {/* Resume display section */}
@@ -141,8 +164,8 @@ export default function ResumeDisplayPage() {
               transformOrigin: 'top center'
             }}
           >
-            <div className="p-8 a4-page">
-              <DisplayResume data={data} />
+            <div className="p-8">
+              <DisplayResume data={data} template={template} />
             </div>
           </div>
         </div>
