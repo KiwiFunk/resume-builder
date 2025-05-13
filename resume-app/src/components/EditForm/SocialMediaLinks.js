@@ -8,14 +8,22 @@ export default function SocialMediaLinks({ data, inputClasses, updateNestedState
         "artstation", "linkedin", "github", "twitter", "stackoverflow",
     ];
 
-    const setPlatfrom = (url, i) => {
-        let hostname = new URL(url).hostname;                               // Extract the domain name from the URL (also known as the hostname)
+    const setPlatform = (url, i) => {
+        if (!url) return; // Handle empty input
+
+        // If protocol is missing, add 'https://' to the URL to ensure it is valid
+        let processedUrl = url;
+        if (!url.startsWith('http://') && !url.startsWith('https://')) {
+            processedUrl = 'https://' + url;
+        }
+
+        let hostname = new URL(processedUrl).hostname;                    // Extract the domain name from the URL (also known as the hostname)
         hostname = hostname.replace(/^www\.|\.com|\.net|\.org|\.io/g, "");  // Remove 'www.', '.com', '.net', '.org', and '.io' from the hostname
     
-        hostname = supportedPlatforms.includes(hostname) ? hostname : "website";        
+        const platform = supportedPlatforms.includes(hostname) ? hostname : "website";        
         
         // Update the platform name in the state
-        updateNestedState("socials", i, "platform", hostname);          // Update the platform name in the state
+        updateNestedState("socials", i, "platform", platform);          // Update the platform name in the state
     }
 
     return (
@@ -42,7 +50,7 @@ export default function SocialMediaLinks({ data, inputClasses, updateNestedState
                         className={inputClasses}
                         onChange={(e) => updateNestedState("socials", index, "url", e.target.value)}
                         /* Dynamically set social icon by parsing the name from the url */
-                        onBlur={() => setPlatfrom(social.url, index)}
+                        onBlur={() => setPlatform(social.url, index)}
                     />
                     <DeleteButton onDelete={() => handleDeletion("socials", index)} />
                 </div>
