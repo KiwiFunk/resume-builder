@@ -41,11 +41,11 @@ export default function CollapsibleContainer({ title, children, useAddButton = f
                         {/* Title */}
                         <h2 className="text-2xl font-bold text-gray-800">{title}</h2>
                         
-                        <div className="flex items-center gap-4">
+                        <div className="flex items-center gap-4 text-xl">
                             {/* Add button */}
                             {useAddButton && (
                                 <i 
-                                    className="bi bi-plus-circle-fill text-gray-300 hover:cursor-pointer hover:scale-105 hover:text-gray-600"
+                                    className="bi bi-plus-circle-fill text-gray-300 hover:cursor-pointer text-lg hover:scale-105 hover:text-gray-600"
                                     onClick={createItemCallback}  // Call the callback function when clicked
                                 ></i>
                             )}
