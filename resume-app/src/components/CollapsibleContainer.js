@@ -41,6 +41,7 @@ export default function CollapsibleContainer({ title, children, useAddButton = f
                         {/* Title */}
                         <h2 className="text-2xl font-bold text-gray-800">{title}</h2>
                         
+                        {/* Container controls */}
                         <div className="flex items-center gap-4 text-xl">
                             {/* Add button */}
                             {useAddButton && (
