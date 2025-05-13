@@ -1,7 +1,17 @@
 "use client"
 import React, { useState, useRef } from "react";
 
-export default function CollapsibleContainer({ title, children }) {
+/**
+ * Create a collapsible container component,
+ * 
+ * @param {string} title - The title to be displayed in the heading bar h2 element.
+ * @param {ReactNode} children - The content to be displayed inside the collapsible container.
+ * @param {boolean} useAddButton - Display an add button in the heading bar.
+ * @param {function} createItemCallback - Callback function to be called when the add button is clicked.
+ * @returns {JSX.Element} - A collapsible container component.
+ * 
+ */
+export default function CollapsibleContainer({ title, children, useAddButton = false, createItemCallback = null }) {
 
     // State to manage the visibility of the collapsible content
     const [isOpen, setIsOpen] = useState(false);
@@ -27,14 +37,25 @@ export default function CollapsibleContainer({ title, children }) {
 
                     {/* Heading Bar */}
                     <div className="flex justify-between items-center">
+
                         {/* Title */}
                         <h2 className="text-2xl font-bold text-gray-800">{title}</h2>
-                        {/* Arrow icon */}
-                        <i 
-                            className={`bi ${isOpen ? "bi-caret-down-fill" : "bi-caret-right-fill"}
-                            text-gray-300 hover:cursor-pointer hover:scale-105 hover:text-gray-600`}
-                            onClick={toggleCollapse}  // Toggle the collapsible content
-                        ></i>
+                        
+                        <div className="flex items-center gap-4">
+                            {/* Add button */}
+                            {useAddButton && (
+                                <i 
+                                    className="bi bi-plus-circle-fill text-gray-300 hover:cursor-pointer hover:scale-105 hover:text-gray-600"
+                                    onClick={createItemCallback}  // Call the callback function when clicked
+                                ></i>
+                            )}
+                            {/* Collapse/Expand icon */}
+                            <i 
+                                className={`bi ${isOpen ? "bi-caret-down-fill" : "bi-caret-right-fill"}
+                                text-gray-300 hover:cursor-pointer hover:scale-105 hover:text-gray-600`}
+                                onClick={toggleCollapse}  // Toggle the collapsible content
+                            ></i>
+                        </div>
                     </div>
 
                     {/* Collapsable content */}

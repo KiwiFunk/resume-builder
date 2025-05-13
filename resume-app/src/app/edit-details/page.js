@@ -200,7 +200,7 @@ export default function EditDetailsPage() {
                 
                     
                 {/* Social Media Links */}
-                <CollapsibleContainer title="Edit Socials">
+                <CollapsibleContainer title="Edit Socials" useAddButton={true} createItemCallback={() => handleAddition("socials", { platform: "website", url: "", inUse: true })}>
                     <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                         {/* Map through the current social media data */}
                         {data.socials.map((social, index) => (
@@ -239,20 +239,11 @@ export default function EditDetailsPage() {
 
                          {/* Input field with social icon to the left, dynamically set by parsing the name from the url */}
 
-                        {/* Create new social media button under the last social media link */}
-                        <button
-                            type="button"
-                            className="mt-4 px-3 py-2 rounded-lg bg-gray-300 text-gray-600 text-sm font-medium shadow-sm hover:bg-gray-400 hover:text-white transition duration-200 hover:cursor-pointer"
-                            onClick={() => handleAddition("socials", { platform: "website", url: "", inUse: true })}
-                        >
-                            <i className="bi bi-plus"></i> Add Social Media
-                        </button>
-
                     </div>
                 </CollapsibleContainer>
 
                 {/* Skills Section */}
-                <CollapsibleContainer title="Edit Skills">
+                <CollapsibleContainer title="Edit Skills" useAddButton={true} createItemCallback={() => handleAddition("skills", { groupName: "New Skill Group", items: [] })}>
                     <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
 
                         {/* Map through current skills data */}
@@ -285,20 +276,10 @@ export default function EditDetailsPage() {
                                
                             </div>   
                         ))}
-                                                        
-                        {/* Create skill group button under the last skill group, MAKE RESPONSIVE 1/2 COLUMNS */}
-                        <button
-                            type="button"
-                            className="mt-4 px-3 py-2 rounded-lg bg-gray-300 text-gray-600 text-sm font-medium shadow-sm hover:bg-gray-400 hover:text-white transition duration-200 hover:cursor-pointer"
-                            onClick={() => handleAddition("skills", { groupName: "New Skill Group", items: [] })} // Add new skill group
-                        >
-                            <i className="bi bi-plus"></i> Add Skill Group
-                        </button>
                         
                         {/* Implement react-dnd to allow drag and drop of skills between groups */}
                         
                     </div>
-
                 </CollapsibleContainer>
 
                 <CollapsibleContainer title="Your Education"> 
