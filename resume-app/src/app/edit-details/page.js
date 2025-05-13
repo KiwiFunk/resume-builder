@@ -201,7 +201,7 @@ export default function EditDetailsPage() {
                 
                     
                 {/* Social Media Links */}
-                <CollapsibleContainer title="Edit Socials" useAddButton={true} createItemCallback={() => handleAddition("socials", { platform: "website", url: "", inUse: true })}>
+                <CollapsibleContainer title="Edit Socials" useAddBtn={true} callback={() => handleAddition("socials", { platform: "website", url: "", inUse: true })}>
                     <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                         {/* Map through the current social media data */}
                         {data.socials.map((social, index) => (
@@ -235,7 +235,7 @@ export default function EditDetailsPage() {
                 </CollapsibleContainer>
 
                 {/* Skills Section */}
-                <CollapsibleContainer title="Edit Skills" useAddButton={true} createItemCallback={() => handleAddition("skills", { groupName: "New Skill Group", items: [] })}>
+                <CollapsibleContainer title="Edit Skills" useAddBtn={true} callback={() => handleAddition("skills", { groupName: "New Skill Group", items: [] })}>
                     <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
 
                         {/* Map through current skills data */}

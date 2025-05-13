@@ -11,7 +11,7 @@ import React, { useState, useRef } from "react";
  * @returns {JSX.Element} - A collapsible container component.
  * 
  */
-export default function CollapsibleContainer({ title, children, useAddButton = false, createItemCallback = null }) {
+export default function CollapsibleContainer({ title, children, useAddBtn = false, callback = null }) {
 
     // State to manage the visibility of the collapsible content
     const [isOpen, setIsOpen] = useState(false);
@@ -44,10 +44,10 @@ export default function CollapsibleContainer({ title, children, useAddButton = f
                         {/* Container controls */}
                         <div className="flex items-center gap-4 text-xl">
                             {/* Add button */}
-                            {useAddButton && (
+                            {useAddBtn && (
                                 <i 
                                     className="bi bi-plus-circle-fill text-gray-300 hover:cursor-pointer text-lg hover:scale-105 hover:text-gray-600"
-                                    onClick={createItemCallback}  // Call the callback function when clicked
+                                    onClick={callback}  // Call the callback function when clicked
                                 ></i>
                             )}
                             {/* Collapse/Expand icon */}
