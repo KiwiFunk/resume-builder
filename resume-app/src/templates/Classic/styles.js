@@ -35,12 +35,12 @@ export const styles = {
   },
 
   skills: {
-  container: "space-y-4",
-  skillGroup: "mb-6",
-  groupName: "font-bold text-gray-800 border-b border-gray-200 pb-1 mb-3",
-  skillsList: "grid grid-cols-2 gap-x-4 gap-y-2", // Changed to grid with 2 columns
-  skill: "text-gray-700 relative pl-3 before:content-['•'] before:absolute before:left-0 before:text-gray-500"
-},
+    container: "space-y-4",
+    skillGroup: "mb-6",
+    groupName: "font-bold text-gray-800 border-b border-gray-200 pb-1 mb-3",
+    skillsList: "grid grid-cols-2 gap-x-4 gap-y-2", // Changed to grid with 2 columns
+    skill: "text-gray-700 relative pl-3 before:content-['•'] before:absolute before:left-0 before:text-gray-500"
+  },
 
   experience: {
     container: "space-y-4",
@@ -64,6 +64,17 @@ export const styles = {
     dateLocation: "text-sm text-gray-600 font-medium",
     description: "mt-2 text-gray-700",
     dateRight: true // Traditional right-aligned dates
+  },
+
+  projects: {
+    container: "space-y-5",
+    project: "mb-4",
+    projectHeader: "flex flex-wrap justify-between items-start border-b border-gray-200 pb-1",
+    title: "font-bold text-gray-900",
+    skills: "flex flex-wrap gap-1 mt-2 mb-3",
+    skill: "text-xs text-gray-600 italic mr-2",
+    description: "mt-2 text-gray-700",
+    urlLink: "text-gray-600 italic text-sm hover:text-gray-900 border-b border-gray-300 hover:border-gray-900"
   },
 
   // Add other component styles
