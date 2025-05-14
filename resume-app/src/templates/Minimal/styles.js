@@ -46,7 +46,7 @@ export const styles = {
     jobEntry: "mb-6",
     jobHeader: "flex flex-col",
     jobTitle: "font-semibold text-gray-900 tracking-widest",
-    company: "text-gray-800",
+    company: "text-gray-800 tracking-wide",
     location: "text-gray-700 text-sm",
     dateLocation: "text-sm text-gray-500 mt-1",
     description: "mt-1 text-gray-700 text-sm font-light leading-relaxed",
@@ -56,10 +56,15 @@ export const styles = {
 
   education: {
     container: "space-y-6",
-    entry: "border-l-2 border-gray-200 pl-4 mb-6",
-    degree: "font-semibold text-gray-900",
-    institution: "text-gray-800",
+    entry: "mb-4 border-l-2 border-gray-200 pl-4",
+    entryHeader: "flex flex-col",
+    degree: "font-semibold text-gray-900 tracking-widest",
+    institution: "text-gray-800 tracking-wide",
+    location: "text-gray-700 text-sm",
     dateLocation: "text-sm text-gray-500 mt-1",
+    description: "mt-2 text-gray-700 text-sm font-light",
+    dateRight: false,
+    dateFormatting: { month: "long" }
   },
 
   projects: {

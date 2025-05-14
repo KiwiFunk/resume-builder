@@ -50,5 +50,17 @@ export const styles = {
     dateRight: true // Traditional right-aligned dates
   },
 
+  education: {
+    container: "space-y-5",
+    entry: "mb-4",
+    entryHeader: "flex flex-wrap justify-between items-start border-b border-gray-200 pb-1",
+    degree: "font-bold text-gray-900",
+    institution: "text-gray-800 italic",
+    location: "text-gray-700 text-sm",
+    dateLocation: "text-sm text-gray-600 font-medium",
+    description: "mt-2 text-gray-700",
+    dateRight: true // Traditional right-aligned dates
+  },
+
   // Add other component styles
 };

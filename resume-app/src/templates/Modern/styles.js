@@ -47,6 +47,18 @@ export const styles = {
     description: "mt-3 text-gray-700",
     dateRight: true // Keep dates on right
   },
+
+  education: {
+    container: "space-y-6",
+    entry: "mb-5",
+    entryHeader: "flex flex-wrap justify-between items-start",
+    degree: "font-semibold text-gray-900",
+    institution: "text-blue-600",
+    location: "text-gray-700 text-sm",
+    dateLocation: "text-sm text-gray-500",
+    description: "mt-2 text-gray-700",
+    dateRight: true // Keep dates on right
+  },
   
   // Add other styles later
 };

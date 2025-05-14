@@ -49,23 +49,27 @@ export const styles = {
   },
   
   experience: {
-  container: "",
-  jobEntry: "relative pl-6 pb-6 border-l-2 border-blue-200 before:content-[''] before:absolute before:w-4 before:h-4 before:bg-blue-500 before:rounded-full before:left-[-9px] last:border-l-0 last:ml-0.5",
-  jobHeader: "flex flex-col",
-  jobTitle: "text-lg font-bold text-gray-800",
-  company: "text-blue-600 font-medium",
-  location: "text-gray-600 text-sm",
-  dateLocation: "text-sm text-gray-600 mt-1",
-  description: "mt-3 text-gray-700",
-  dateRight: false // Put dates inline for timeline look
-},
+    container: "",
+    jobEntry: "relative pl-6 pb-6 border-l-2 border-blue-200 before:content-[''] before:absolute before:w-4 before:h-4 before:bg-blue-500 before:rounded-full before:left-[-9px] last:border-l-0 last:ml-0.5",
+    jobHeader: "flex flex-col",
+    jobTitle: "text-lg font-bold text-gray-800",
+    company: "text-blue-600 font-medium",
+    location: "text-gray-600 text-sm",
+    dateLocation: "text-sm text-gray-600 mt-1",
+    description: "mt-3 text-gray-700",
+    dateRight: false // Put dates inline for timeline look
+  },
   
   education: {
     container: "space-y-4",
-    entry: "bg-white rounded-lg p-4 shadow-sm",
+    entry: "bg-white rounded-lg p-4 shadow-sm border-l-4 border-blue-400",
+    entryHeader: "flex flex-col",
     degree: "font-bold text-gray-800",
     institution: "text-blue-600",
-    dateLocation: "text-sm text-gray-600 mt-1",
+    location: "text-gray-600 text-sm",
+    dateLocation: "text-sm text-gray-600 mt-1 italic",
+    description: "mt-2 text-gray-700 text-sm",
+    dateRight: false // Put dates inline for styled cards
   },
   
   projects: {

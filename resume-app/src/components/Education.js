@@ -8,16 +8,17 @@ const defaultStyles = {
   entryHeader: "flex flex-wrap justify-between items-start",
   degree: "font-bold text-gray-800",
   institution: "text-gray-700",
+  location: "text-gray-600 text-sm",
   dateLocation: "text-sm text-gray-600 mt-1",
   description: "mt-2 text-gray-700",
-  dateRight: true, 
+  dateRight: true,
   dateFormatting: {}
 };
 
 export default function Education({ data, styles = {} }) {
   // Merge provided styles with defaults
   const mergedStyles = { ...defaultStyles, ...styles };
-  
+
   // Determine whether to show dates on the right or inline
   const datesOnRight = styles.dateRight !== false;
 
