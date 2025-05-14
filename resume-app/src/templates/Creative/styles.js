@@ -84,10 +84,12 @@ export const styles = {
   training: {
     container: "space-y-4",
     entry: "bg-white rounded-lg p-4 shadow-sm",
+    entryHeader: "flex flex-col",
     course: "font-medium text-gray-800",
     institution: "text-blue-600 text-sm",
     date: "text-xs text-gray-500 mt-1",
     description: "text-gray-700 mt-2 text-sm",
+    dateRight: false // Inline dates for card-based design
   },
   
   hobbies: {
