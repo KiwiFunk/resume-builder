@@ -119,9 +119,11 @@ export default function ResumeDisplayPage() {
       {/* Resume Container */}
       <div className="container mx-auto max-w-5xl px-4">
         
-        {/* Template selector and controls */}
+        {/* Resume display controls */}
         <div className="bg-white rounded-lg shadow-md mb-4 p-4">
           <div className="flex flex-wrap items-center justify-between gap-4">
+
+            {/* Template selection */}
             <div className="flex items-center gap-3">
               <label htmlFor="template" className="text-sm font-medium text-gray-700">Template:</label>
               <select
@@ -136,6 +138,18 @@ export default function ResumeDisplayPage() {
                   </option>
                 ))}
               </select>
+            </div>
+
+            {/* Accent color selection */}
+            <div className="flex items-center gap-3">
+              <label htmlFor="accentColor" className="text-sm font-medium text-gray-700">Accent Color:</label>
+              <input
+                type="color"
+                id="accentColor"
+                value="#4F46E5" // Default color
+                onChange={(e) => console.log("Accent color changed to:", e.target.value)}
+                className="w-6 h-6 border border-gray-300 rounded-full cursor-pointer focus:outline-none focus:ring-2 focus:ring-blue-500"
+              />
             </div>
 
             {/* Zoom control */}
