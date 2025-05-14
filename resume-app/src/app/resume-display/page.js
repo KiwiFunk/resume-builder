@@ -4,6 +4,7 @@ import { useRouter } from "next/navigation";
 import DisplayResume from "./ResumeDisplay";
 import { useState, useEffect } from "react";
 import { getLocalData } from "@/utils/localData";
+import { getAllTemplates } from "@/templates";
 
 export default function ResumeDisplayPage() {
   const router = useRouter();
@@ -16,7 +17,10 @@ export default function ResumeDisplayPage() {
   useEffect(() => {
     // Load user data and preferred template if available
     const userData = getLocalData("userData");
+    const templates = getAllTemplates();
+
     setData(userData);
+    setAvailableTemplates(templates);
     setIsLoading(false);
   }, []);                                                               // Only run once on component mount
 
