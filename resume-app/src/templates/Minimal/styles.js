@@ -9,8 +9,8 @@ export const styles = {
   content: "space-y-8",
 
   section: "mb-10",
-  sectionTitle: "text-lg font-semibold uppercase tracking-widest mb-4 text-gray-700",
-  summaryText: "text-gray-700 leading-relaxed text-sm",
+  sectionTitle: "text-lg font-semibold uppercase tracking-widest mb-3.5 text-gray-700",
+  summaryText: "text-gray-700 leading-relaxed text-sm font-light",
   
 
   // Component-specific styles for Minimal template
@@ -36,7 +36,7 @@ export const styles = {
   skills: {
     container: "space-y-8",
     skillGroup: "mb-6",
-    groupName: "font-normal text-gray-500 mb-4 uppercase text-xs tracking-widest",
+    groupName: "font-normal text-gray-500 mb-4 uppercase text-xs tracking-wider",
     skillsList: "flex flex-wrap gap-x-6 gap-y-2",
     skill: "text-gray-700 text-sm mr-5 font-light relative pl-4 before:content-[''] before:absolute before:left-0 before:top-1/2 before:-translate-y-1/2 before:w-1 before:h-1 before:bg-gray-300 before:rounded-full"
   },
@@ -45,10 +45,12 @@ export const styles = {
     container: "space-y-8",
     jobEntry: "mb-6",
     jobHeader: "flex flex-col",
-    jobTitle: "font-semibold text-gray-900",
+    jobTitle: "font-semibold text-gray-900 tracking-widest",
     company: "text-gray-800",
+    location: "text-gray-700 text-sm",
     dateLocation: "text-sm text-gray-500 mt-1",
-    description: "mt-3 text-gray-700"
+    description: "mt-1 text-gray-700 text-sm font-light leading-relaxed",
+    dateRight: false // Put dates inline for minimal look
   },
 
   education: {

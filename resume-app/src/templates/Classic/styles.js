@@ -39,8 +39,16 @@ export const styles = {
   },
 
   experience: {
-
-  }
+    container: "space-y-4",
+    jobEntry: "mb-5",
+    jobHeader: "flex flex-wrap justify-between items-start border-b border-gray-200 pb-2",
+    jobTitle: "font-bold text-gray-900",
+    company: "text-gray-700 italic",
+    location: "text-gray-700 text-sm",
+    dateLocation: "text-sm text-gray-600",
+    description: "mt-3 text-gray-700",
+    dateRight: true // Traditional right-aligned dates
+  },
 
   // Add other component styles
 };

@@ -49,14 +49,16 @@ export const styles = {
   },
   
   experience: {
-    container: "space-y-6",
-    jobEntry: "relative pl-6 pb-6 border-l-2 border-blue-200 before:content-[''] before:absolute before:w-4 before:h-4 before:bg-blue-500 before:rounded-full before:left-[-9px] last:border-l-0",
-    jobHeader: "flex flex-col",
-    jobTitle: "text-lg font-bold text-gray-800",
-    company: "text-blue-600 font-medium",
-    dateLocation: "text-sm text-gray-600 mt-1",
-    description: "mt-3 text-gray-700"
-  },
+  container: "",
+  jobEntry: "relative pl-6 pb-6 border-l-2 border-blue-200 before:content-[''] before:absolute before:w-4 before:h-4 before:bg-blue-500 before:rounded-full before:left-[-9px] last:border-l-0 last:ml-0.5",
+  jobHeader: "flex flex-col",
+  jobTitle: "text-lg font-bold text-gray-800",
+  company: "text-blue-600 font-medium",
+  location: "text-gray-600 text-sm",
+  dateLocation: "text-sm text-gray-600 mt-1",
+  description: "mt-3 text-gray-700",
+  dateRight: false // Put dates inline for timeline look
+},
   
   education: {
     container: "space-y-4",

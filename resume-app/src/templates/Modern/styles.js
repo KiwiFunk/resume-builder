@@ -38,12 +38,14 @@ export const styles = {
   
   experience: {
     container: "space-y-6",
-    jobEntry: "mb-4",
+    jobEntry: "mb-6",
     jobHeader: "flex flex-wrap justify-between items-start",
     jobTitle: "text-lg font-semibold text-gray-800",
     company: "text-gray-700",
-    dateLocation: "text-sm text-gray-600 mt-1",
-    description: "mt-2 text-gray-700"
+    location: "text-gray-600 text-sm",
+    dateLocation: "text-sm text-gray-500 mt-1",
+    description: "mt-3 text-gray-700",
+    dateRight: true // Keep dates on right
   },
   
   // Add other styles later
