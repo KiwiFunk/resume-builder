@@ -140,18 +140,6 @@ export default function ResumeDisplayPage() {
               </select>
             </div>
 
-            {/* Accent color selection */}
-            <div className="flex items-center gap-3">
-              <label htmlFor="accentColor" className="text-sm font-medium text-gray-700">Accent Color:</label>
-              <input
-                type="color"
-                id="accentColor"
-                value="#4F46E5" // Default color
-                onChange={(e) => console.log("Accent color changed to:", e.target.value)}
-                className="w-6 h-6 border border-gray-300 rounded-full cursor-pointer focus:outline-none focus:ring-2 focus:ring-blue-500"
-              />
-            </div>
-
             {/* Zoom control */}
             <div className="flex items-center gap-3">
               <label htmlFor="scale" className="text-sm font-medium text-gray-700">Zoom:</label>

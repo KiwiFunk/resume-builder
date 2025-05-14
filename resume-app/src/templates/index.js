@@ -32,6 +32,12 @@ export const templateRegistry = {
     description: "Clean, minimal design inspired by Nordic aesthetics",
     thumbnail: "/thumbnails/nordic.png",
   },
+  meridian: {
+    name: "Meridian",
+    component: () => import('./Meridian').then(mod => mod.default),
+    description: "Modern design with a focus on clarity and readability",
+    thumbnail: "/thumbnails/meridian.png",
+  },
 
   // Add new templates to this registry
   
