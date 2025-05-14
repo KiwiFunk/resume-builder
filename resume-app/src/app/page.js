@@ -9,23 +9,21 @@ export default function Home() {
   const router = useRouter();
 
   return (
-    <main className="min-h-screen bg-gray-900">
+    <main className="min-h-screen bg-gradient-to-br from-gray-50 to-gray-100">
       
       {/* Hero Section */}
       <div className="container mx-auto max-w-6xl px-6 pt-20 pb-16">
         <div className="flex flex-col-reverse lg:flex-row items-center justify-between gap-12">
 
           {/* Text Content */}
-          <div className="w-full lg:w-1/2 space-y-6 text-center lg:text-left p-6">
-
-            <h1 className="text-5xl md:text-6xl font-extrabold text-white">
-              Resume <span className="text-blue-400">Builder</span>
+          <div className="w-full lg:w-1/2 space-y-6 text-center lg:text-left">
+            <h1 className="text-5xl md:text-6xl font-extrabold text-gray-900">
+              Resume <span className="text-blue-600">Builder</span>
             </h1>
             
-            <p className="text-xl text-gray-300 mx-auto max-w-xl text-center lg:text-left">
+            <p className="text-xl text-gray-600 max-w-xl mx-auto">
               Create your resume in minutes! Customize templates, check for best practices, tailor your details, and download as a PDF.
             </p>
-
 
             {/* User Buttons */}
             <div className="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start pt-4">
@@ -34,7 +32,6 @@ export default function Home() {
                 onClick={() => router.push("/edit-details")}
               >
                 <span className="flex items-center justify-center gap-2">
-                  {/* Conditionally render content depending on if data exists. Create Resume || Edit details */}
                   <i className="bi bi-pencil-fill"></i>
                   Create Resume
                 </span>
@@ -49,79 +46,81 @@ export default function Home() {
                   Preview Resume
                 </span>
               </button>
-
             </div>
           </div>
           
-          {/* Hero Image Container */}
+          {/* Hero Illustration */}
           <div className="w-full lg:w-1/2 flex justify-center">
             <div className="relative w-full max-w-md aspect-video">
-
-              {/* Replace with proper logo/image in the future */}
-              <div className="absolute inset-0 bg-blue-900 rounded-lg shadow-xl p-6 flex flex-col">
-                <div className="w-full h-4 bg-blue-800 rounded mb-4"></div>
-                <div className="grid grid-cols-4 gap-2 flex-grow">
-                  <div className="col-span-1 bg-gray-700 rounded"></div>
-                  <div className="col-span-3 bg-gray-800 rounded p-2">
-                    <div className="h-3 w-3/4 bg-blue-700 rounded mb-2"></div>
-                    <div className="h-3 w-full bg-gray-600 rounded mb-2"></div>
-                    <div className="h-3 w-5/6 bg-gray-600 rounded mb-2"></div>
+              {/* Modern UI element */}
+              <div className="absolute inset-0 bg-white rounded-xl shadow-xl p-6 flex flex-col transform rotate-2 hover:rotate-0 transition-all duration-500">
+                <div className="w-full h-4 bg-gray-100 rounded mb-4 flex items-center">
+                  <div className="flex gap-1 ml-2">
+                    <div className="w-2 h-2 rounded-full bg-red-400"></div>
+                    <div className="w-2 h-2 rounded-full bg-yellow-400"></div>
+                    <div className="w-2 h-2 rounded-full bg-green-400"></div>
+                  </div>
+                </div>
+                <div className="grid grid-cols-4 gap-3 flex-grow">
+                  <div className="col-span-1 bg-blue-50 rounded"></div>
+                  <div className="col-span-3 bg-gray-50 rounded p-3">
+                    <div className="h-3 w-3/4 bg-blue-100 rounded mb-2"></div>
+                    <div className="h-3 w-full bg-gray-200 rounded mb-2"></div>
+                    <div className="h-3 w-5/6 bg-gray-200 rounded mb-2"></div>
+                    <div className="h-3 w-full bg-gray-200 rounded mb-2"></div>
+                    <div className="h-3 w-2/3 bg-gray-200 rounded"></div>
                   </div>
                 </div>
               </div>
-
             </div>
           </div>
         </div>
       </div>
       
-
       {/* Features Section */}
-      <div className="bg-gray-800 py-16">
+      <div className="bg-white py-16">
         <div className="container mx-auto max-w-6xl px-6">
-          <h2 className="text-3xl font-bold text-center mb-12 text-white">Features</h2>
+          <h2 className="text-3xl font-bold text-center mb-12 text-gray-900">Features</h2>
           
-          {/* Feature Cards - Replace with scrolling carousel to hold additional features such as ATS check, keyword matching etc. */}
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
             {/* Feature 1 */}
-            <div className="bg-gray-700 p-6 rounded-lg shadow-md hover:shadow-lg transition-shadow">
-              <div className="w-12 h-12 bg-blue-900 rounded-full flex items-center justify-center mb-4">
-                <i className="bi bi-pencil text-blue-400 text-xl"></i>
+            <div className="bg-white p-6 rounded-lg shadow-md hover:shadow-lg transition-shadow border border-gray-100">
+              <div className="w-12 h-12 bg-blue-100 rounded-full flex items-center justify-center mb-4">
+                <i className="bi bi-pencil text-blue-600 text-xl"></i>
               </div>
-              <h3 className="text-xl font-semibold mb-2 text-white">Easy Editing</h3>
-              <p className="text-gray-300">Intuitive interface to add and edit your resume content with real-time preview.</p>
+              <h3 className="text-xl font-semibold mb-2 text-gray-800">Easy Editing</h3>
+              <p className="text-gray-600">Intuitive interface to add and edit your resume content with real-time preview.</p>
             </div>
             
             {/* Feature 2 */}
-            <div className="bg-gray-700 p-6 rounded-lg shadow-md hover:shadow-lg transition-shadow">
-              <div className="w-12 h-12 bg-blue-900 rounded-full flex items-center justify-center mb-4">
-                <i className="bi bi-layout-text-window-reverse text-blue-400 text-xl"></i>
+            <div className="bg-white p-6 rounded-lg shadow-md hover:shadow-lg transition-shadow border border-gray-100">
+              <div className="w-12 h-12 bg-blue-100 rounded-full flex items-center justify-center mb-4">
+                <i className="bi bi-layout-text-window-reverse text-blue-600 text-xl"></i>
               </div>
-              <h3 className="text-xl font-semibold mb-2 text-white">Professional Templates</h3>
-              <p className="text-gray-300">Choose from multiple professionally designed resume templates.</p>
+              <h3 className="text-xl font-semibold mb-2 text-gray-800">Professional Templates</h3>
+              <p className="text-gray-600">Choose from multiple professionally designed resume templates.</p>
             </div>
             
             {/* Feature 3 */}
-            <div className="bg-gray-700 p-6 rounded-lg shadow-md hover:shadow-lg transition-shadow">
-              <div className="w-12 h-12 bg-blue-900 rounded-full flex items-center justify-center mb-4">
-                <i className="bi bi-file-earmark-pdf text-blue-400 text-xl"></i>
+            <div className="bg-white p-6 rounded-lg shadow-md hover:shadow-lg transition-shadow border border-gray-100">
+              <div className="w-12 h-12 bg-blue-100 rounded-full flex items-center justify-center mb-4">
+                <i className="bi bi-file-earmark-pdf text-blue-600 text-xl"></i>
               </div>
-              <h3 className="text-xl font-semibold mb-2 text-white">Export as PDF</h3>
-              <p className="text-gray-300">Download your resume as a PDF document for easy submission to applications.</p>
+              <h3 className="text-xl font-semibold mb-2 text-gray-800">Export as PDF</h3>
+              <p className="text-gray-600">Download your resume as a PDF document for easy submission to applications.</p>
             </div>
           </div>
         </div>
       </div>
       
-
-      {/* Dev Tools (For testing only, remove on production) */}
-      <div className="bg-gray-900 py-12">
+      {/* Developer Tools Section - Kept but styled to match the design */}
+      <div className="bg-gray-50 py-12 border-t border-gray-200">
         <div className="container mx-auto max-w-6xl px-6">
-          <h2 className="text-2xl font-bold text-center mb-8 text-white">Developer Tools</h2>
+          <h2 className="text-2xl font-bold text-center mb-8 text-gray-700">Developer Tools</h2>
           
           <div className="flex flex-wrap justify-center gap-4">
             <button
-              className="px-5 py-2.5 bg-red-500 text-white rounded shadow hover:bg-red-600 transition-colors flex items-center gap-2"
+              className="px-5 py-2.5 bg-red-500 text-white rounded-lg shadow hover:bg-red-600 transition-colors flex items-center gap-2"
               onClick={() => {
                 removeLocalData("userData")
                 alert("User data deleted!");
@@ -132,7 +131,7 @@ export default function Home() {
             </button>
             
             <button
-              className="px-5 py-2.5 bg-green-500 text-white rounded shadow hover:bg-green-600 transition-colors flex items-center gap-2"
+              className="px-5 py-2.5 bg-green-500 text-white rounded-lg shadow hover:bg-green-600 transition-colors flex items-center gap-2"
               onClick={() => {
                 setLocalData("userData", data);
                 alert("Demo data loaded!");
@@ -144,12 +143,11 @@ export default function Home() {
           </div>
         </div>
       </div>
-      
 
       {/* Footer */}
-      <footer className="bg-gray-800 py-8 border-t border-gray-700">
+      <footer className="bg-white py-8 border-t border-gray-200">
         <div className="container mx-auto max-w-6xl px-6 text-center">
-          <p className="text-gray-400">Created by KiwiFunk!</p>
+          <p className="text-gray-500">© 2025 Resume Builder. Created by KiwiFunk!</p>
         </div>
       </footer>
     </main>
