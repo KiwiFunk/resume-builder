@@ -8,6 +8,7 @@ import CollapsibleContainer from "@/components/CollapsibleContainer";
 import TaggingHandler from "@/components/TaggingHandler";
 import DeleteButton from "@/components/DeleteButton";
 import SocialMediaLinks from "@/components/EditForm/SocialMediaLinks";
+import DatasetSelector from "@/components/EditForm/DatasetSelector";
 
 import debugData from "@/UserData";         // Import placeholder data for debugging
 import { useDebounce } from "@/utils/hooks";
@@ -195,29 +196,8 @@ export default function EditDetailsPage() {
                         </div>
                     </div>
 
-                    {/* Resume selector, with the option to create a new resume */}
-                    <div className="mt-4 p-6 bg-white rounded shadow-lg w-full max-w-4xl flex gap-4">
-                        <span
-                            className="px-3 py-2 rounded-full bg-(--accent) text-white text-sm font-semibold shadow-sm"
-                        >
-                        {data.title}
-                        </span>
-                        <span
-                            className="px-3 py-2 rounded-full bg-(--accent) text-white text-sm font-semibold shadow-sm"
-                        >
-                        Resume 2
-                        </span>
-                        <span
-                            className="px-3 py-2 rounded-full bg-(--accent) text-white text-sm font-semibold shadow-sm"
-                        >
-                        Resume 3
-                        </span>
-                        <span
-                            className="px-3 py-2 rounded-full bg-(--accent) text-white text-sm font-semibold shadow-sm"
-                        >
-                        <i className="bi bi-plus"></i>
-                        </span>
-                    </div>
+                    {/* Manage dataset */}
+                    <DatasetSelector />
 
                     {/* Job Title Card */}
                     <div className="bg-white rounded-lg shadow-md p-6">
