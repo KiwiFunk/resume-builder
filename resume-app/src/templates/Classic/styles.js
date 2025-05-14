@@ -88,5 +88,8 @@ export const styles = {
     dateRight: true 
   },
 
-  // Add other component styles
+  hobbies: {
+    container: "text-gray-700",
+    hobbyItem: "relative pl-3 mb-2 before:content-['•'] before:absolute before:left-0 before:text-gray-500"
+  },
 };

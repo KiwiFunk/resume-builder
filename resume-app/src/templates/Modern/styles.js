@@ -71,5 +71,8 @@ export const styles = {
     dateRight: true // Modern style with aligned dates
   },
     
-  // Add other styles later
+  hobbies: {
+    container: "flex flex-wrap gap-2",
+    hobbyItem: "bg-gray-100 text-gray-700 px-3 py-1 rounded-full text-sm"
+  },
 };

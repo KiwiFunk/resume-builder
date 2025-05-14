@@ -90,6 +90,7 @@ export const styles = {
   },
 
   hobbies: {
-    container: "text-gray-700",
-  }
+    container: "text-gray-700 font-light",
+    hobbyItem: "mb-2 text-sm relative pl-4 before:content-[''] before:absolute before:left-0 before:top-1/2 before:-translate-y-1/2 before:w-1 before:h-1 before:bg-gray-300 before:rounded-full",
+  },
 };

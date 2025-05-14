@@ -93,6 +93,7 @@ export const styles = {
   },
   
   hobbies: {
-    container: "text-gray-700 pl-9",
-  }
+  container: "flex flex-wrap gap-2",
+  hobbyItem: "text-gray-700 px-3 py-1 text-sm"
+},
 };
