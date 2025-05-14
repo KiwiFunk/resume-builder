@@ -33,7 +33,7 @@ export default function Home() {
               >
                 <span className="flex items-center justify-center gap-2">
                   <i className="bi bi-pencil-fill"></i>
-                  Create Resume
+                  {!data.name ? "Create Resume" : "Edit Resume"}
                 </span>
               </button>
               
