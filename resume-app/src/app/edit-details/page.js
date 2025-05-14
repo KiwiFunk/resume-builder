@@ -227,7 +227,7 @@ export default function EditDetailsPage() {
                         </h2>
                         
                         <div>
-                            <label htmlFor="summary" className="hidden block text-sm font-medium text-gray-700 mb-1">
+                            <label htmlFor="summary" className="hidden text-sm font-medium text-gray-700 mb-1">
                                 Job Title:
                             </label>
                             <input 
@@ -266,7 +266,7 @@ export default function EditDetailsPage() {
                     </div> 
                         
                     {/* Social Media Links */}
-                    <CollapsibleContainer title="Edit Socials" useAddBtn={true} callback={() => handleAdd("socials", { platform: "website", url: "", inUse: true })}>
+                    <CollapsibleContainer title="Edit Socials" icon="bi-share" useAddBtn={true} callback={() => handleAdd("socials", { platform: "website", url: "", inUse: true })}>
                         <SocialMediaLinks
                             data={data}
                             inputClasses={inputClasses}
@@ -276,7 +276,7 @@ export default function EditDetailsPage() {
                     </CollapsibleContainer>
 
                     {/* Skills Section */}
-                    <CollapsibleContainer title="Edit Skills" useAddBtn={true} callback={() => handleAdd("skills", { groupName: "New Skill Group", items: [] })}>
+                    <CollapsibleContainer title="Edit Skills" icon="bi-stars" useAddBtn={true} callback={() => handleAdd("skills", { groupName: "New Skill Group", items: [] })}>
                         <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
 
                             {/* Map through current skills data */}
@@ -305,7 +305,7 @@ export default function EditDetailsPage() {
                         </div>
                     </CollapsibleContainer>
 
-                    <CollapsibleContainer title="Your Education" useAddBtn={true} callback={() => handleAdd("education", { degree: "", institution: "", location: "", startDate: "", endDate: "" })}>
+                    <CollapsibleContainer title="Your Education" icon="bi-mortarboard-fill" useAddBtn={true} callback={() => handleAdd("education", { degree: "", institution: "", location: "", startDate: "", endDate: "" })}>
                         {/* Map through the current education data */}
                         {data.education
                             .sort((a, b) => new Date(b.startDate) - new Date(a.startDate)) // Sort by startDate (Descending)
@@ -372,7 +372,7 @@ export default function EditDetailsPage() {
                         }
                     </CollapsibleContainer>
 
-                    <CollapsibleContainer title="Your Courses & Training" useAddBtn={true} callback={() => handleAdd("training", { title: "", institution: "", startDate: "", endDate: "", description: "" })}>
+                    <CollapsibleContainer title="Your Courses & Training" icon="bi-journal-code" useAddBtn={true} callback={() => handleAdd("training", { title: "", institution: "", startDate: "", endDate: "", description: "" })}>
                         {/* Map through current courses data */}
                         {data.training
                             .sort((a, b) => new Date(b.startDate) - new Date(a.startDate)) // Sort by startDate (Descending)
@@ -441,7 +441,7 @@ export default function EditDetailsPage() {
                         }                     
                     </CollapsibleContainer>
 
-                    <CollapsibleContainer title="Employment History" useAddBtn={true} callback={() => handleAdd("experience", { title: "", company: "", location: "", startDate: "", endDate: "", description: "" })}>
+                    <CollapsibleContainer title="Employment History" icon="bi-briefcase-fill" useAddBtn={true} callback={() => handleAdd("experience", { title: "", company: "", location: "", startDate: "", endDate: "", description: "" })}>
                         {/* Map through current employment data */}
                         {data.experience
                             .sort((a, b) => new Date(b.startDate) - new Date(a.startDate)) // Sort by startDate (Descending)
@@ -519,7 +519,7 @@ export default function EditDetailsPage() {
                         }
                     </CollapsibleContainer>
 
-                    <CollapsibleContainer title="Projects & Portfolio" useAddBtn={true} callback={() => handleAdd("projects", { title: "", url: "", skills: [], description: "" })}>
+                    <CollapsibleContainer title="Projects & Portfolio" icon="bi-layers" useAddBtn={true} callback={() => handleAdd("projects", { title: "", url: "", skills: [], description: "" })}>
                         {/* Map through current projects data */}
                         {data.projects
                             .map((project, index) => (
@@ -568,7 +568,7 @@ export default function EditDetailsPage() {
                         ))}               
                     </CollapsibleContainer>
 
-                    <CollapsibleContainer title="Hobbies & Interests">
+                    <CollapsibleContainer title="Hobbies & Interests" icon="bi-heart-fill">
                         <label htmlFor="summary" className="hidden text-gray-700">Summary:</label>
                         <textarea 
                             id="summary" 
