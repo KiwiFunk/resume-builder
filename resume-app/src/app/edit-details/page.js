@@ -77,453 +77,487 @@ export default function EditDetailsPage() {
     }, []);                                         // Use empty dependency array to only run once.
 
     const handleSave = () => {
-        setLocalData("userData", data);             // Save the updated data to local storage
-        alert("Data saved successfully!");          // Alert the user
-    }
+        setLocalData("userData", data);
+        
+        // Show successful save animation
+        const saveBtn = document.getElementById("save-btn");
+        saveBtn.classList.add("animate-pulse");
+        setTimeout(() => saveBtn.classList.remove("animate-pulse"), 1000);
+        
+        // Show success message
+        const toast = document.createElement("div");
+        toast.className = "fixed bottom-4 right-4 bg-green-500 text-white px-4 py-2 rounded shadow-lg animate-fade-in-up";
+        toast.innerText = "Changes saved successfully!";
+        document.body.appendChild(toast);
+        setTimeout(() => document.body.removeChild(toast), 3000);
+    };
 
     if (!data) {
         return <div>Loading...</div>;               // Show loading state until data is fetched
     }
 
     return (
-        <main className="flex flex-col items-center justify-center min-h-screen p-6">
-            {/* Page navigation and function buttons */}
-            <div className="w-full max-w-4xl flex justify-between items-center">
-                <button
-                    className="cursor-pointer hover:scale-110 transition-transform duration-200 ease-in-out"
-                    onClick={() => router.push("/")}
-                >
-                    <i className="bi bi-chevron-left text-xl"></i>
-                </button>
+        <main className="min-h-screen bg-gradient-to-br from-gray-50 to-gray-100 pb-8">
+            {/* Top toolbar - matching resume-display style */}
+            <div className="sticky top-0 z-10 bg-white shadow-md py-3 mb-8 backdrop-blur">
+                <div className="container mx-auto max-w-5xl px-4 flex justify-between items-center">
+                    {/* Navigation */}
+                    <div className="flex items-center space-x-4">
+                        <button
+                            className="p-2 rounded hover:bg-gray-100 transition-colors flex items-center gap-1 text-gray-700"
+                            onClick={() => router.push("/")}
+                        >
+                            <i className="bi bi-chevron-left text-xl"></i>
+                            <span className="hidden sm:inline">Home</span>
+                        </button>
 
-                <button
-                    className="cursor-pointer hover:scale-110 transition-transform duration-200 ease-in-out"
-                    onClick={handleSave}
-                >
-                    <i className="bi bi-floppy-fill text-xl"></i>
-                </button>
+                        <h1 className="hidden sm:block text-xl font-medium text-gray-900">Edit Resume</h1>
+                    </div>
+
+                    {/* Actions */}
+                    <div className="flex items-center space-x-2">
+                        <button
+                            className="px-3 py-2 rounded hover:bg-gray-100 transition-colors flex items-center gap-2 text-blue-600"
+                            onClick={() => router.push("/resume-display")}
+                        >
+                            <i className="bi bi-eye"></i>
+                            <span className="hidden sm:inline">Preview</span>
+                        </button>
+
+                        <button
+                            id="save-btn"
+                            className="px-4 py-2 rounded bg-blue-600 hover:bg-blue-700 transition-colors flex items-center gap-2 text-white"
+                            onClick={handleSave}
+                        >
+                            <i className="bi bi-save"></i>
+                            <span className="hidden sm:inline">Save</span>
+                        </button>
+                    </div>
+                </div>
             </div>
 
             {/* Form populated with data from UserData.js */}
-            <form className="w-full max-w-4xl">
+            <div className="container mx-auto max-w-5xl px-4">
+                <form className="w-full max-w-4xl">
 
-                {/* Persistant user info */}
-                <div className="mt-4 p-6 bg-white rounded shadow-lg w-full max-w-4xl">
-                    <h2 className="text-2xl font-bold text-gray-800">Your Info</h2>
-                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                    {/* Persistant user info */}
+                    <div className="mt-4 p-6 bg-white rounded shadow-lg w-full max-w-4xl">
+                        <h2 className="text-2xl font-bold text-gray-800">Your Info</h2>
+                        <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                            <div className="mt-4">
+                                <label htmlFor="name" className="block text-gray-700">Name:</label>
+                                <input 
+                                    type="text" 
+                                    id="name" 
+                                    value={data.name} 
+                                    onChange={(e) => setData({ ...data, name: e.target.value })} // Update state on change
+                                    className={inputClasses} 
+                                />
+                            </div>
+                            <div className="sm:mt-4">
+                                <label htmlFor="email" className="block text-gray-700">Email:</label>
+                                <input 
+                                    type="email" 
+                                    id="email" 
+                                    value={data.email} 
+                                    onChange={(e) => setData({ ...data, email: e.target.value })}
+                                    className={inputClasses} />
+                            </div>
+                            <div>
+                                <label htmlFor="phone" className="block text-gray-700">Phone:</label>
+                                <input 
+                                    type="text" 
+                                    id="phone" 
+                                    value={data.phone} 
+                                    onChange={(e) => setData({ ...data, phone: e.target.value })}
+                                    className={inputClasses} />
+                            </div>
+                            <div>
+                                <label htmlFor="location" className="block text-gray-700">Location:</label>
+                                <input 
+                                    type="text" 
+                                    id="location" 
+                                    value={data.location}
+                                    onChange={(e) => setData({ ...data, location: e.target.value })} 
+                                    className={inputClasses} />
+                            </div>
+                        </div>
+                    </div>
+
+                    {/* Resume selector, with the option to create a new resume 
+                    <div className="mt-4 p-6 bg-white rounded shadow-lg w-full max-w-4xl flex gap-4">
+                        <span
+                            className="px-3 py-2 rounded-full bg-(--accent) text-white text-sm font-semibold shadow-sm"
+                        >
+                        Resume 1
+                        </span>
+                        <span
+                            className="px-3 py-2 rounded-full bg-(--accent) text-white text-sm font-semibold shadow-sm"
+                        >
+                        Resume 2
+                        </span>
+                        <span
+                            className="px-3 py-2 rounded-full bg-(--accent) text-white text-sm font-semibold shadow-sm"
+                        >
+                        Resume 3
+                        </span>
+                        <span
+                            className="px-3 py-2 rounded-full bg-(--accent) text-white text-sm font-semibold shadow-sm"
+                        >
+                        <i className="bi bi-plus"></i>
+                        </span>
+                    </div>
+                    */}
+
+                    {/* Resume Details */}
+        
+                    <CollapsibleContainer title="Edit Resume Details">
                         <div className="mt-4">
-                            <label htmlFor="name" className="block text-gray-700">Name:</label>
+                            <label htmlFor="title" className="block text-gray-700">Title:</label>
                             <input 
                                 type="text" 
-                                id="name" 
-                                value={data.name} 
-                                onChange={(e) => setData({ ...data, name: e.target.value })} // Update state on change
-                                className={inputClasses} 
-                            />
-                        </div>
-                        <div className="sm:mt-4">
-                            <label htmlFor="email" className="block text-gray-700">Email:</label>
-                            <input 
-                                type="email" 
-                                id="email" 
-                                value={data.email} 
-                                onChange={(e) => setData({ ...data, email: e.target.value })}
+                                id="title" 
+                                value={data.title}
+                                onChange={(e) => setData({ ...data, title: e.target.value })} 
                                 className={inputClasses} />
                         </div>
-                        <div>
-                            <label htmlFor="phone" className="block text-gray-700">Phone:</label>
-                            <input 
-                                type="text" 
-                                id="phone" 
-                                value={data.phone} 
-                                onChange={(e) => setData({ ...data, phone: e.target.value })}
-                                className={inputClasses} />
+                    
+                        <div className="mt-4">
+                            <label htmlFor="summary" className="block text-gray-700">Summary:</label>
+                            <textarea 
+                                id="summary" 
+                                value={data.summary} 
+                                onChange={(e) => setData({ ...data, summary: e.target.value })}
+                                className={`${inputClasses} min-h-[18rem] sm:min-h-[12rem]`}
+                            ></textarea>
                         </div>
-                        <div>
-                            <label htmlFor="location" className="block text-gray-700">Location:</label>
-                            <input 
-                                type="text" 
-                                id="location" 
-                                value={data.location}
-                                onChange={(e) => setData({ ...data, location: e.target.value })} 
-                                className={inputClasses} />
-                        </div>
-                    </div>
-                </div>
+                    </CollapsibleContainer>
+                    
+                        
+                    {/* Social Media Links */}
+                    <CollapsibleContainer title="Edit Socials" useAddBtn={true} callback={() => handleAdd("socials", { platform: "website", url: "", inUse: true })}>
+                        <SocialMediaLinks
+                            data={data}
+                            inputClasses={inputClasses}
+                            updateNestedState={updateNestedState}
+                            handleDeletion={handleDeletion}
+                        />
+                    </CollapsibleContainer>
 
-                {/* Resume selector, with the option to create a new resume 
-                <div className="mt-4 p-6 bg-white rounded shadow-lg w-full max-w-4xl flex gap-4">
-                    <span
-                        className="px-3 py-2 rounded-full bg-(--accent) text-white text-sm font-semibold shadow-sm"
-                    >
-                    Resume 1
-                    </span>
-                    <span
-                        className="px-3 py-2 rounded-full bg-(--accent) text-white text-sm font-semibold shadow-sm"
-                    >
-                    Resume 2
-                    </span>
-                    <span
-                        className="px-3 py-2 rounded-full bg-(--accent) text-white text-sm font-semibold shadow-sm"
-                    >
-                    Resume 3
-                    </span>
-                    <span
-                        className="px-3 py-2 rounded-full bg-(--accent) text-white text-sm font-semibold shadow-sm"
-                    >
-                    <i className="bi bi-plus"></i>
-                    </span>
-                </div>
-                */}
+                    {/* Skills Section */}
+                    <CollapsibleContainer title="Edit Skills" useAddBtn={true} callback={() => handleAdd("skills", { groupName: "New Skill Group", items: [] })}>
+                        <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
 
-                {/* Resume Details */}
-    
-                <CollapsibleContainer title="Edit Resume Details">
-                    <div className="mt-4">
-                        <label htmlFor="title" className="block text-gray-700">Title:</label>
-                        <input 
-                            type="text" 
-                            id="title" 
-                            value={data.title}
-                            onChange={(e) => setData({ ...data, title: e.target.value })} 
-                            className={inputClasses} />
-                    </div>
-                   
-                    <div className="mt-4">
-                        <label htmlFor="summary" className="block text-gray-700">Summary:</label>
+                            {/* Map through current skills data */}
+                            {data.skills.map((group, index) => (
+                                
+                                <div id="skill-group" key={index} className="w-full bg-white p-5 rounded-lg shadow-md border border-gray-300">
+                                
+                                    <div className="flex items-center gap-2 mb-4">
+                                        <input
+                                            type="text"
+                                            value={group.groupName}
+                                            onChange={(e) => updateNestedState("skills", index, "groupName", e.target.value)} 
+                                            className={inputClasses}
+                                        />
+                                        <DeleteButton onDelete={() => handleDeletion("skills", index)} />
+                                    </div>
+
+                                    {/* Pass array containing tags, and callback function for updating state to TaggingHandler */}
+                                    <TaggingHandler 
+                                        tags={group.items} 
+                                        onTagUpdate={(updatedTags) => updateNestedState("skills", index, "items", updatedTags)}
+                                    />
+                                </div>   
+                            ))}
+                            {/* Implement react-dnd to allow drag and drop of skills between groups */}        
+                        </div>
+                    </CollapsibleContainer>
+
+                    <CollapsibleContainer title="Your Education" useAddBtn={true} callback={() => handleAdd("education", { degree: "", institution: "", location: "", startDate: "", endDate: "" })}>
+                        {/* Map through the current education data */}
+                        {data.education
+                            .sort((a, b) => new Date(b.startDate) - new Date(a.startDate)) // Sort by startDate (Descending)
+                            .map((edu, index) => (
+                                <div id="education-entry" key={index} className="mb-4 w-full bg-white p-5 rounded-lg shadow-md border border-gray-300">
+
+                                    <div className="grid grid-cols-1 sm:mb-0 sm:grid-cols-2 sm:gap-4">
+                                        <div className="mb-6">
+                                            <label htmlFor="edutitle" className="block text-gray-700">Title:</label>
+                                            <input 
+                                                type="text" 
+                                                id="edutitle" 
+                                                value={edu.degree}
+                                                onChange={(e) => updateNestedState("education", index, "degree", e.target.value)}
+                                                className={inputClasses} 
+                                            />
+                                        </div>
+                                        <div className="mb-6">
+                                            <label htmlFor="eduinstitute" className="block text-gray-700">Institution:</label>
+                                            <input 
+                                                type="text" 
+                                                id="eduinstitute" 
+                                                value={edu.institution}
+                                                onChange={(e) => updateNestedState("education", index, "institution", e.target.value)}
+                                                className={inputClasses} />
+                                        </div>
+                                    </div>
+
+                                    <div className="flex flex-col sm:flex-row gap-6 sm:gap-4">
+                                        <div className="flex-1">
+                                            <label htmlFor="edulocation" className="block text-gray-700">Location:</label>
+                                            <input 
+                                                type="text" 
+                                                id="edulocation" 
+                                                value={edu.location} 
+                                                onChange={(e) => updateNestedState("education", index, "location", e.target.value)}
+                                                className={inputClasses} 
+                                            />
+                                        </div>
+                                        <div className="flex-1">
+                                            <label htmlFor="edustart" className="block text-gray-700">Start Date:</label>
+                                            <input 
+                                                type="date" 
+                                                id="edustart" 
+                                                value={edu.startDate}
+                                                onChange={(e) => updateNestedState("education", index, "startDate", e.target.value)}
+                                                className={inputClasses} 
+                                            />
+                                        </div>
+                                        <div className="flex-1">
+                                            <label htmlFor="eduend" className="block text-gray-700">End Date:</label>
+                                            <input 
+                                                type="date" 
+                                                id="eduend" 
+                                                value={edu.endDate} 
+                                                onChange={(e) => updateNestedState("education", index, "endDate", e.target.value)}
+                                                className={inputClasses}
+                                            />
+                                        </div>
+                                        <DeleteButton onDelete={() => handleDeletion("education", index)} additionalClasses="h-full mt-6"/>
+                                    </div>
+                                </div>
+                            ))
+                        }
+                    </CollapsibleContainer>
+
+                    <CollapsibleContainer title="Your Courses & Training" useAddBtn={true} callback={() => handleAdd("training", { title: "", institution: "", startDate: "", endDate: "", description: "" })}>
+                        {/* Map through current courses data */}
+                        {data.training
+                            .sort((a, b) => new Date(b.startDate) - new Date(a.startDate)) // Sort by startDate (Descending)
+                            .map((course, index) => (
+                                <div id="training-entry" key={index} className="mb-4 w-full bg-white p-5 rounded-lg shadow-md border border-gray-300">
+
+                                    <div className="grid grid-cols-1 sm:mb-0 sm:grid-cols-2 sm:gap-4">
+                                        <div className="mb-6">
+                                            <label htmlFor="course-title" className="block text-gray-700">Title:</label>
+                                            <input 
+                                                type="text" 
+                                                id="course-title" 
+                                                value={course.title} 
+                                                onChange={(e) => updateNestedState("training", index, "title", e.target.value)}
+                                                className={inputClasses} 
+                                            />
+                                        </div>
+                                        <div className="mb-6">
+                                            <label htmlFor="course-institute" className="block text-gray-700">Institution:</label>
+                                            <input 
+                                                type="text" 
+                                                id="course-institute" 
+                                                value={course.institution} 
+                                                onChange={(e) => updateNestedState("training", index, "institution", e.target.value)}
+                                                className={inputClasses} 
+                                            />
+                                        </div>                                    
+                                    </div>
+
+                                    <div className="flex flex-col sm:flex-row gap-6 sm:gap-4">
+                                        
+                                        <div className="flex-1">
+                                            <label htmlFor="course-start" className="block text-gray-700">Start Date:</label>
+                                            <input 
+                                                type="date" 
+                                                id="course-start" 
+                                                value={course.startDate} 
+                                                onChange={(e) => updateNestedState("training", index, "startDate", e.target.value)}
+                                                className={inputClasses}
+                                            />
+                                        </div>
+                                        <div className="flex-1">
+                                            <label htmlFor="course-end" className="block text-gray-700">End Date:</label>
+                                            <input 
+                                                type="date" 
+                                                id="course-end" 
+                                                value={course.endDate}
+                                                onChange={(e) => updateNestedState("training", index, "endDate", e.target.value)}
+                                                className={inputClasses} 
+                                            />
+                                        </div>
+                                        <DeleteButton onDelete={() => handleDeletion("training", index)} additionalClasses="h-full mt-6"/>
+                                    </div>
+
+                                    <label htmlFor="course-description" className="block text-gray-700 mt-6">Description:</label>
+                                    <textarea 
+                                        id="course-description" 
+                                        value={course.description}
+                                        onChange={(e) => updateNestedState("training", index, "description", e.target.value)}
+                                        className={inputClasses} 
+                                        rows="3">
+                                    </textarea>
+
+                                </div>
+                            ))
+                        }                     
+                    </CollapsibleContainer>
+
+                    <CollapsibleContainer title="Employment History" useAddBtn={true} callback={() => handleAdd("experience", { title: "", company: "", location: "", startDate: "", endDate: "", description: "" })}>
+                        {/* Map through current employment data */}
+                        {data.experience
+                            .sort((a, b) => new Date(b.startDate) - new Date(a.startDate)) // Sort by startDate (Descending)
+                            .map((job, index) => (
+                                <div id="job-entry" key={index} className="mb-4 w-full bg-white p-5 rounded-lg shadow-md border border-gray-300">
+
+                                    <div className="grid grid-cols-1 sm:mb-0 sm:grid-cols-2 sm:gap-4">
+                                        <div className="mb-6">
+                                            <label htmlFor="job-title" className="block text-gray-700">Title:</label>
+                                            <input 
+                                                type="text" 
+                                                id="job-title" 
+                                                value={job.title}
+                                                onChange={(e) => updateNestedState("experience", index, "title", e.target.value)}
+                                                className={inputClasses} 
+                                            />
+                                        </div>
+                                        <div className="mb-6">
+                                            <label htmlFor="company" className="block text-gray-700">Company:</label>
+                                            <input 
+                                                type="text" 
+                                                id="company" 
+                                                value={job.company}
+                                                onChange={(e) => updateNestedState("experience", index, "company", e.target.value)}
+                                                className={inputClasses} 
+                                            />
+                                        </div>                                    
+                                    </div>
+
+                                    <div className="flex flex-col sm:flex-row gap-6 sm:gap-4">
+                                        
+                                        <div className="flex-1">
+                                            <label htmlFor="job-location" className="block text-gray-700">Location:</label>
+                                            <input 
+                                                type="text" 
+                                                id="job-location" 
+                                                value={job.location}
+                                                onChange={(e) => updateNestedState("experience", index, "location", e.target.value)}
+                                                className={inputClasses} 
+                                            />
+                                        </div>
+                                        <div className="flex-1">
+                                            <label htmlFor="job-start" className="block text-gray-700">Start Date:</label>
+                                            <input 
+                                                type="date" 
+                                                id="job-start" 
+                                                value={job.startDate}
+                                                onChange={(e) => updateNestedState("experience", index, "startDate", e.target.value)}
+                                                className={inputClasses} 
+                                            />
+                                        </div>
+                                        <div className="flex-1">
+                                            <label htmlFor="job-end" className="block text-gray-700">End Date:</label>
+                                            <input 
+                                                type="date" 
+                                                id="job-end" 
+                                                value={job.endDate}
+                                                onChange={(e) => updateNestedState("experience", index, "endDate", e.target.value)}
+                                                className={inputClasses} 
+                                            />
+                                        </div>
+                                        <DeleteButton onDelete={() => handleDeletion("experience", index)} additionalClasses="h-full mt-6" />
+                                    </div>
+
+                                    <label htmlFor="course-description" className="block text-gray-700 mt-6">Description:</label>
+                                    <textarea 
+                                        id="course-description" 
+                                        value={job.description}
+                                        onChange={(e) => updateNestedState("experience", index, "description", e.target.value)}
+                                        className={`${inputClasses} min-h-[16rem] sm:min-h-[10rem]`}
+                                    ></textarea>
+                                    <p className="text-gray-400 text-sm">Sentences will be automatically formatted as bullet points.</p>
+                                </div>
+                            ))
+                        }
+                    </CollapsibleContainer>
+
+                    <CollapsibleContainer title="Projects & Portfolio" useAddBtn={true} callback={() => handleAdd("projects", { title: "", url: "", skills: [], description: "" })}>
+                        {/* Map through current projects data */}
+                        {data.projects
+                            .map((project, index) => (
+                                <div id="project-entry" key={index} className="mb-4 w-full bg-white p-5 rounded-lg shadow-md border border-gray-300">
+                                    
+                                    <div className="flex flex-col sm:flex-row gap-6 sm:gap-4">
+                                        <div className="flex-1">
+                                            <label htmlFor="project-title" className="block text-gray-700">Title:</label>
+                                            <input 
+                                                type="text" 
+                                                id="project-title" 
+                                                value={project.title} 
+                                                onChange={(e) => updateNestedState("projects", index, "title", e.target.value)}
+                                                className={inputClasses} 
+                                            />
+                                        </div>
+                                        <div className="flex-1">
+                                            <label htmlFor="project-url" className="block text-gray-700">URL:</label>
+                                            <input 
+                                                type="text" 
+                                                id="project-url" 
+                                                value={project.url} 
+                                                onChange={(e) => updateNestedState("projects", index, "url", e.target.value)}
+                                                className={inputClasses} 
+                                            />
+                                        </div> 
+                                        <DeleteButton onDelete={() => handleDeletion("projects", index)} additionalClasses="h-full mt-6"/>
+                                    </div>  
+
+                                    <label htmlFor="project-skills" className="block text-gray-700 mt-6">Technologies used:</label>
+                                    <TaggingHandler 
+                                        tags={project.skills} 
+                                        onTagUpdate={(updatedTags) => updateNestedState("projects", index, "skills", updatedTags)}
+                                    />
+                                    
+                                    <label htmlFor="project-description" className="block text-gray-700 mt-6">Description:</label>
+                                    <textarea 
+                                        id="project-description" 
+                                        value={project.description}
+                                        onChange={(e) => updateNestedState("projects", index, "description", e.target.value)}
+                                        className={inputClasses} 
+                                        rows="3"
+                                    ></textarea>
+                            
+                                </div>
+                        ))}               
+                    </CollapsibleContainer>
+
+                    <CollapsibleContainer title="Hobbies & Interests">
+                        <label htmlFor="summary" className="hidden text-gray-700">Summary:</label>
                         <textarea 
                             id="summary" 
-                            value={data.summary} 
-                            onChange={(e) => setData({ ...data, summary: e.target.value })}
-                            className={`${inputClasses} min-h-[18rem] sm:min-h-[12rem]`}
+                            value={data.hobbies}
+                            onChange={(e) => setData({ ...data, hobbies: e.target.value })} 
+                            className={`${inputClasses} min-h-[26rem] sm:min-h-[16rem]`}
                         ></textarea>
-                    </div>
-                </CollapsibleContainer>
-                
-                    
-                {/* Social Media Links */}
-                <CollapsibleContainer title="Edit Socials" useAddBtn={true} callback={() => handleAdd("socials", { platform: "website", url: "", inUse: true })}>
-                    <SocialMediaLinks
-                        data={data}
-                        inputClasses={inputClasses}
-                        updateNestedState={updateNestedState}
-                        handleDeletion={handleDeletion}
-                    />
-                </CollapsibleContainer>
+                        <p className="text-gray-400 text-sm">Sentences will be automatically formatted as bullet points.</p>
+                    </CollapsibleContainer>
 
-                {/* Skills Section */}
-                <CollapsibleContainer title="Edit Skills" useAddBtn={true} callback={() => handleAdd("skills", { groupName: "New Skill Group", items: [] })}>
-                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-
-                        {/* Map through current skills data */}
-                        {data.skills.map((group, index) => (
-                            
-                            <div id="skill-group" key={index} className="w-full bg-white p-5 rounded-lg shadow-md border border-gray-300">
-                            
-                                <div className="flex items-center gap-2 mb-4">
-                                    <input
-                                        type="text"
-                                        value={group.groupName}
-                                        onChange={(e) => updateNestedState("skills", index, "groupName", e.target.value)} 
-                                        className={inputClasses}
-                                    />
-                                    <DeleteButton onDelete={() => handleDeletion("skills", index)} />
-                                </div>
-
-                                {/* Pass array containing tags, and callback function for updating state to TaggingHandler */}
-                                <TaggingHandler 
-                                    tags={group.items} 
-                                    onTagUpdate={(updatedTags) => updateNestedState("skills", index, "items", updatedTags)}
-                                />
-                            </div>   
-                        ))}
-                        {/* Implement react-dnd to allow drag and drop of skills between groups */}        
-                    </div>
-                </CollapsibleContainer>
-
-                <CollapsibleContainer title="Your Education" useAddBtn={true} callback={() => handleAdd("education", { degree: "", institution: "", location: "", startDate: "", endDate: "" })}>
-                    {/* Map through the current education data */}
-                    {data.education
-                        .sort((a, b) => new Date(b.startDate) - new Date(a.startDate)) // Sort by startDate (Descending)
-                        .map((edu, index) => (
-                            <div id="education-entry" key={index} className="mb-4 w-full bg-white p-5 rounded-lg shadow-md border border-gray-300">
-
-                                <div className="grid grid-cols-1 sm:mb-0 sm:grid-cols-2 sm:gap-4">
-                                    <div className="mb-6">
-                                        <label htmlFor="edutitle" className="block text-gray-700">Title:</label>
-                                        <input 
-                                            type="text" 
-                                            id="edutitle" 
-                                            value={edu.degree}
-                                            onChange={(e) => updateNestedState("education", index, "degree", e.target.value)}
-                                            className={inputClasses} 
-                                        />
-                                    </div>
-                                    <div className="mb-6">
-                                        <label htmlFor="eduinstitute" className="block text-gray-700">Institution:</label>
-                                        <input 
-                                            type="text" 
-                                            id="eduinstitute" 
-                                            value={edu.institution}
-                                            onChange={(e) => updateNestedState("education", index, "institution", e.target.value)}
-                                            className={inputClasses} />
-                                    </div>
-                                </div>
-
-                                <div className="flex flex-col sm:flex-row gap-6 sm:gap-4">
-                                    <div className="flex-1">
-                                        <label htmlFor="edulocation" className="block text-gray-700">Location:</label>
-                                        <input 
-                                            type="text" 
-                                            id="edulocation" 
-                                            value={edu.location} 
-                                            onChange={(e) => updateNestedState("education", index, "location", e.target.value)}
-                                            className={inputClasses} 
-                                        />
-                                    </div>
-                                    <div className="flex-1">
-                                        <label htmlFor="edustart" className="block text-gray-700">Start Date:</label>
-                                        <input 
-                                            type="date" 
-                                            id="edustart" 
-                                            value={edu.startDate}
-                                            onChange={(e) => updateNestedState("education", index, "startDate", e.target.value)}
-                                            className={inputClasses} 
-                                        />
-                                    </div>
-                                    <div className="flex-1">
-                                        <label htmlFor="eduend" className="block text-gray-700">End Date:</label>
-                                        <input 
-                                            type="date" 
-                                            id="eduend" 
-                                            value={edu.endDate} 
-                                            onChange={(e) => updateNestedState("education", index, "endDate", e.target.value)}
-                                            className={inputClasses}
-                                        />
-                                    </div>
-                                    <DeleteButton onDelete={() => handleDeletion("education", index)} additionalClasses="h-full mt-6"/>
-                                </div>
-                            </div>
-                        ))
-                    }
-                </CollapsibleContainer>
-
-                <CollapsibleContainer title="Your Courses & Training" useAddBtn={true} callback={() => handleAdd("training", { title: "", institution: "", startDate: "", endDate: "", description: "" })}>
-                    {/* Map through current courses data */}
-                    {data.training
-                        .sort((a, b) => new Date(b.startDate) - new Date(a.startDate)) // Sort by startDate (Descending)
-                        .map((course, index) => (
-                            <div id="training-entry" key={index} className="mb-4 w-full bg-white p-5 rounded-lg shadow-md border border-gray-300">
-
-                                <div className="grid grid-cols-1 sm:mb-0 sm:grid-cols-2 sm:gap-4">
-                                    <div className="mb-6">
-                                        <label htmlFor="course-title" className="block text-gray-700">Title:</label>
-                                        <input 
-                                            type="text" 
-                                            id="course-title" 
-                                            value={course.title} 
-                                            onChange={(e) => updateNestedState("training", index, "title", e.target.value)}
-                                            className={inputClasses} 
-                                        />
-                                    </div>
-                                    <div className="mb-6">
-                                        <label htmlFor="course-institute" className="block text-gray-700">Institution:</label>
-                                        <input 
-                                            type="text" 
-                                            id="course-institute" 
-                                            value={course.institution} 
-                                            onChange={(e) => updateNestedState("training", index, "institution", e.target.value)}
-                                            className={inputClasses} 
-                                        />
-                                    </div>                                    
-                                </div>
-
-                                <div className="flex flex-col sm:flex-row gap-6 sm:gap-4">
-                                    
-                                    <div className="flex-1">
-                                        <label htmlFor="course-start" className="block text-gray-700">Start Date:</label>
-                                        <input 
-                                            type="date" 
-                                            id="course-start" 
-                                            value={course.startDate} 
-                                            onChange={(e) => updateNestedState("training", index, "startDate", e.target.value)}
-                                            className={inputClasses}
-                                        />
-                                    </div>
-                                    <div className="flex-1">
-                                        <label htmlFor="course-end" className="block text-gray-700">End Date:</label>
-                                        <input 
-                                            type="date" 
-                                            id="course-end" 
-                                            value={course.endDate}
-                                            onChange={(e) => updateNestedState("training", index, "endDate", e.target.value)}
-                                            className={inputClasses} 
-                                        />
-                                    </div>
-                                    <DeleteButton onDelete={() => handleDeletion("training", index)} additionalClasses="h-full mt-6"/>
-                                </div>
-
-                                <label htmlFor="course-description" className="block text-gray-700 mt-6">Description:</label>
-                                <textarea 
-                                    id="course-description" 
-                                    value={course.description}
-                                    onChange={(e) => updateNestedState("training", index, "description", e.target.value)}
-                                    className={inputClasses} 
-                                    rows="3">
-                                </textarea>
-
-                            </div>
-                        ))
-                    }                     
-                </CollapsibleContainer>
-
-                <CollapsibleContainer title="Employment History" useAddBtn={true} callback={() => handleAdd("experience", { title: "", company: "", location: "", startDate: "", endDate: "", description: "" })}>
-                    {/* Map through current employment data */}
-                    {data.experience
-                        .sort((a, b) => new Date(b.startDate) - new Date(a.startDate)) // Sort by startDate (Descending)
-                        .map((job, index) => (
-                            <div id="job-entry" key={index} className="mb-4 w-full bg-white p-5 rounded-lg shadow-md border border-gray-300">
-
-                                <div className="grid grid-cols-1 sm:mb-0 sm:grid-cols-2 sm:gap-4">
-                                    <div className="mb-6">
-                                        <label htmlFor="job-title" className="block text-gray-700">Title:</label>
-                                        <input 
-                                            type="text" 
-                                            id="job-title" 
-                                            value={job.title}
-                                            onChange={(e) => updateNestedState("experience", index, "title", e.target.value)}
-                                            className={inputClasses} 
-                                        />
-                                    </div>
-                                    <div className="mb-6">
-                                        <label htmlFor="company" className="block text-gray-700">Company:</label>
-                                        <input 
-                                            type="text" 
-                                            id="company" 
-                                            value={job.company}
-                                            onChange={(e) => updateNestedState("experience", index, "company", e.target.value)}
-                                            className={inputClasses} 
-                                        />
-                                    </div>                                    
-                                </div>
-
-                                <div className="flex flex-col sm:flex-row gap-6 sm:gap-4">
-                                    
-                                    <div className="flex-1">
-                                        <label htmlFor="job-location" className="block text-gray-700">Location:</label>
-                                        <input 
-                                            type="text" 
-                                            id="job-location" 
-                                            value={job.location}
-                                            onChange={(e) => updateNestedState("experience", index, "location", e.target.value)}
-                                            className={inputClasses} 
-                                        />
-                                    </div>
-                                    <div className="flex-1">
-                                        <label htmlFor="job-start" className="block text-gray-700">Start Date:</label>
-                                        <input 
-                                            type="date" 
-                                            id="job-start" 
-                                            value={job.startDate}
-                                            onChange={(e) => updateNestedState("experience", index, "startDate", e.target.value)}
-                                            className={inputClasses} 
-                                        />
-                                    </div>
-                                    <div className="flex-1">
-                                        <label htmlFor="job-end" className="block text-gray-700">End Date:</label>
-                                        <input 
-                                            type="date" 
-                                            id="job-end" 
-                                            value={job.endDate}
-                                            onChange={(e) => updateNestedState("experience", index, "endDate", e.target.value)}
-                                            className={inputClasses} 
-                                        />
-                                    </div>
-                                    <DeleteButton onDelete={() => handleDeletion("experience", index)} additionalClasses="h-full mt-6" />
-                                </div>
-
-                                <label htmlFor="course-description" className="block text-gray-700 mt-6">Description:</label>
-                                <textarea 
-                                    id="course-description" 
-                                    value={job.description}
-                                    onChange={(e) => updateNestedState("experience", index, "description", e.target.value)}
-                                    className={`${inputClasses} min-h-[16rem] sm:min-h-[10rem]`}
-                                ></textarea>
-                                <p className="text-gray-400 text-sm">Sentences will be automatically formatted as bullet points.</p>
-                            </div>
-                        ))
-                    }
-                </CollapsibleContainer>
-
-                <CollapsibleContainer title="Projects & Portfolio" useAddBtn={true} callback={() => handleAdd("projects", { title: "", url: "", skills: [], description: "" })}>
-                    {/* Map through current projects data */}
-                    {data.projects
-                        .map((project, index) => (
-                            <div id="project-entry" key={index} className="mb-4 w-full bg-white p-5 rounded-lg shadow-md border border-gray-300">
-                                
-                                <div className="flex flex-col sm:flex-row gap-6 sm:gap-4">
-                                    <div className="flex-1">
-                                        <label htmlFor="project-title" className="block text-gray-700">Title:</label>
-                                        <input 
-                                            type="text" 
-                                            id="project-title" 
-                                            value={project.title} 
-                                            onChange={(e) => updateNestedState("projects", index, "title", e.target.value)}
-                                            className={inputClasses} 
-                                        />
-                                    </div>
-                                    <div className="flex-1">
-                                        <label htmlFor="project-url" className="block text-gray-700">URL:</label>
-                                        <input 
-                                            type="text" 
-                                            id="project-url" 
-                                            value={project.url} 
-                                            onChange={(e) => updateNestedState("projects", index, "url", e.target.value)}
-                                            className={inputClasses} 
-                                        />
-                                    </div> 
-                                    <DeleteButton onDelete={() => handleDeletion("projects", index)} additionalClasses="h-full mt-6"/>
-                                </div>  
-
-                                <label htmlFor="project-skills" className="block text-gray-700 mt-6">Technologies used:</label>
-                                <TaggingHandler 
-                                    tags={project.skills} 
-                                    onTagUpdate={(updatedTags) => updateNestedState("projects", index, "skills", updatedTags)}
-                                />
-                                
-                                <label htmlFor="project-description" className="block text-gray-700 mt-6">Description:</label>
-                                <textarea 
-                                    id="project-description" 
-                                    value={project.description}
-                                    onChange={(e) => updateNestedState("projects", index, "description", e.target.value)}
-                                    className={inputClasses} 
-                                    rows="3"
-                                ></textarea>
-                        
-                            </div>
-                    ))}               
-                </CollapsibleContainer>
-
-                <CollapsibleContainer title="Hobbies & Interests">
-                    <label htmlFor="summary" className="hidden text-gray-700">Summary:</label>
-                    <textarea 
-                        id="summary" 
-                        value={data.hobbies}
-                        onChange={(e) => setData({ ...data, hobbies: e.target.value })} 
-                        className={`${inputClasses} min-h-[26rem] sm:min-h-[16rem]`}
-                    ></textarea>
-                    <p className="text-gray-400 text-sm">Sentences will be automatically formatted as bullet points.</p>
-                </CollapsibleContainer>
-
-                {/* Submit button */}
-                <button
-                    type="button"
-                    onClick={handleSave}
-                    className="mt-4 px-4 py-2 bg-blue-500 text-white rounded shadow hover:bg-blue-600 cursor-pointer"
-                >
-                    Save Changes
-                </button>
-            </form>
+                    {/* Submit button */}
+                    <button
+                        type="button"
+                        onClick={handleSave}
+                        className="mt-4 px-4 py-2 bg-blue-500 text-white rounded shadow hover:bg-blue-600 cursor-pointer"
+                    >
+                        Save Changes
+                    </button>
+                </form>
+            </div>
         </main>
     );
 }
