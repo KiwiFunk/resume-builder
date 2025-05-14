@@ -11,6 +11,7 @@ export default function ResumeDisplayPage() {
   const [isLoading, setIsLoading] = useState(true);                     //State to manage loading status
   const [template, setTemplate] = useState("modern");                   //State to hold current template
   const [scale, setScale] = useState(100);                              //State to manage zoom level  
+  const [availableTemplates, setAvailableTemplates] = useState([]);     //State to hold template options
 
   useEffect(() => {
     // Load user data and preferred template if available
