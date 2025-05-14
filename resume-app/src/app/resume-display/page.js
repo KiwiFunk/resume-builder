@@ -130,10 +130,11 @@ export default function ResumeDisplayPage() {
                 onChange={handleTemplateChange}
                 className="text-gray-600 bg-white border border-gray-300 rounded px-3 py-1.5 text-sm focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
               >
-                <option value="modern">Modern</option>
-                <option value="classic">Classic</option>
-                <option value="creative">Creative</option>
-                <option value="minimal">Minimal</option>
+                {availableTemplates.map(tmpl => (
+                  <option key={tmpl.id} value={tmpl.id}>
+                    {tmpl.name}
+                  </option>
+                ))}
               </select>
             </div>
 
