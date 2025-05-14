@@ -199,52 +199,41 @@ export default function EditDetailsPage() {
                     {/* Manage dataset */}
                     <DatasetSelector />
 
-                    {/* Job Title Card */}
-                    <div className="bg-white rounded-lg shadow-md p-6">
-                        <h2 className="text-xl font-medium text-gray-800 mb-4 border-b pb-2 flex items-center">
-                            <i className="bi bi-file-text mr-2 text-blue-500"></i>
-                            Job Title
-                        </h2>
-                        
+                    {/* Resume Specific Details */}                 
+                    <CollapsibleContainer title="Edit Resume Details" icon="bi-file-text" defaultOpen={true}>
                         <div>
-                            <label htmlFor="summary" className="hidden text-sm font-medium text-gray-700 mb-1">
-                                Job Title:
-                            </label>
-                            <input 
-                                type="text" 
-                                id="title" 
-                                value={data.title}
-                                placeholder="Job title you're applying for"
-                                onChange={(e) => setData({ ...data, title: e.target.value })} 
-                                className={inputClasses} 
-                            />
-                        </div>
-                    </div>
+                            <div className="mb-6">
+                                <label htmlFor="summary" className="text-sm font-medium text-gray-700 mb-1">
+                                    Job Title:
+                                </label>
+                                <input 
+                                    type="text" 
+                                    id="title" 
+                                    value={data.title}
+                                    placeholder="Job title you're applying for"
+                                    onChange={(e) => setData({ ...data, title: e.target.value })} 
+                                    className={inputClasses} 
+                                />
+                            </div>
 
-                    {/* Professional Summary Card */}
-                    <div className="bg-white rounded-lg shadow-md p-6">
-                        <h2 className="text-xl font-medium text-gray-800 mb-4 border-b pb-2 flex items-center">
-                            <i className="bi bi-file-text mr-2 text-blue-500"></i>
-                            Professional Summary
-                        </h2>
-                        
-                        <div>
-                            <label htmlFor="summary" className="block text-sm font-medium text-gray-700 mb-1">
-                                Write a short professional summary highlighting your experience and skills:
-                            </label>
-                            <textarea 
-                                id="summary" 
-                                value={data.summary} 
-                                onChange={(e) => setData({ ...data, summary: e.target.value })}
-                                className={`${inputClasses} min-h-[12rem]`}
-                                placeholder="Experienced software engineer with 5+ years specializing in front-end development..."
-                            ></textarea>
-                            <p className="text-sm text-gray-500 mt-1">
-                                This will appear at the top of your resume and should be 2-4 sentences.
-                            </p>
+                            <div>
+                                <label htmlFor="summary" className="block text-sm font-medium text-gray-700 mb-1">
+                                    Write a short professional summary highlighting your experience and skills:
+                                </label>
+                                <textarea 
+                                    id="summary" 
+                                    value={data.summary} 
+                                    onChange={(e) => setData({ ...data, summary: e.target.value })}
+                                    className={`${inputClasses} min-h-[12rem]`}
+                                    placeholder="Experienced software engineer with 5+ years specializing in front-end development..."
+                                ></textarea>
+                                <p className="text-sm text-gray-500 mt-1">
+                                    This will appear at the top of your resume and should be 2-4 sentences.
+                                </p>
+                            </div>
                         </div>
-                    </div> 
-                        
+                    </CollapsibleContainer>
+
                     {/* Social Media Links */}
                     <CollapsibleContainer title="Edit Socials" icon="bi-share" useAddBtn={true} callback={() => handleAdd("socials", { platform: "website", url: "", inUse: true })}>
                         <SocialMediaLinks

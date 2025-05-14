@@ -31,7 +31,7 @@ export default function DatasetSelector() {
           className="px-4 py-2 rounded-lg bg-blue-50 hover:bg-blue-100 text-blue-600 border border-blue-200 font-medium text-sm transition-all flex items-center gap-2"
           onClick={() => {alert("This button will allow you to add a new dataset!")}}
         >
-          <i className="bi bi-plus"></i>
+          <i className="bi bi-plus-square"></i>
           <span>New Resume</span>
         </button>
       </div>
