@@ -1,46 +1,75 @@
+import React from 'react';
 import { formatTextToPoints } from "../utils/formatText";
 
-export default function WorkExperience({ data }) {
+// Default styles used as fallback
+const defaultStyles = {
+  container: "space-y-6",
+  jobEntry: "mb-4",
+  jobHeader: "flex flex-wrap justify-between items-start",
+  jobTitle: "text-lg font-bold text-gray-800",
+  company: "text-gray-700",
+  location: "text-gray-700 text-sm",
+  dateLocation: "text-sm text-gray-600 mt-1",
+  description: "mt-3 text-gray-700",
+  dateRight: true // By default, show dates on the right
+};
 
-    return (
-        <div className="mt-4 p-6 bg-white rounded shadow-lg w-full max-w-4xl">
-            <h2 className="text-2xl font-bold text-gray-800">Experience</h2>
-            {data.experience
-                .sort((a, b) => new Date(b.startDate) - new Date(a.startDate)) // Sort by startDate (Descending)
-                .map((job, index) => (
-                    <div key={index} className="mt-4 flex flex-row">
+export default function WorkExperience({ data, styles = {} }) {
+  // Merge provided styles with defaults
+  const mergedStyles = { ...defaultStyles, ...styles };
+  
+  // Determine whether to show dates on the right or inline
+  const datesOnRight = styles.dateRight !== false;
 
-                        <div className="flex-grow">
-                            <h3 className="text-gray-700 text-lg font-bold">{job.title}</h3>
-                            <p className="text-gray-700">{job.company}</p>
-                            <p className="text-gray-700 text-sm">{job.location}</p>
+  if (!data.experience || data.experience.length === 0) {
+    return null;
+  }
 
-                            {formatTextToPoints(job.description).map((point, index) => (
-                                <p key={index} className="text-gray-700 text-sm">{point}</p>
-                            ))}
-                        </div>
+  // Format a date using a consistent format
+  const formatDate = (dateString) => {
+    return new Date(dateString).toLocaleDateString("en-US", {
+      year: "numeric",
+      month: "short"
+    });
+  };
 
-                        <div className="flex-shrink">
-                            {/* Format the start and end dates using toLocaleDateString */}
-                            <p className="text-gray-700 text-sm">
-                                {new Date(job.startDate).toLocaleDateString("en-US", {
-                                year: "numeric",
-                                month: "short",
-                                })}
-                                {" "}
-                                -
-                                {" "}
-                                {new Date(job.endDate).toLocaleDateString("en-US", {
-                                year: "numeric",
-                                month: "short",
-                                })}
-                            </p>
-                        </div>
+  return (
+    <div className={mergedStyles.container}>
+      {data.experience
+        .sort((a, b) => new Date(b.startDate) - new Date(a.startDate))
+        .map((job, index) => (
+          <div key={index} className={mergedStyles.jobEntry}>
+            {datesOnRight ? (
+              // Layout with dates on the right
+              <div className={mergedStyles.jobHeader}>
+                <div>
+                  <h3 className={mergedStyles.jobTitle}>{job.title}</h3>
+                  <p className={mergedStyles.company}>{job.company}</p>
+                  <p className={mergedStyles.location}>{job.location}</p>
+                </div>
+                <div className={mergedStyles.dateLocation}>
+                  {formatDate(job.startDate)} - {formatDate(job.endDate)}
+                </div>
+              </div>
+            ) : (
+              // Layout with dates inline
+              <div>
+                <h3 className={mergedStyles.jobTitle}>{job.title}</h3>
+                <p className={mergedStyles.company}>{job.company}</p>
+                <p className={mergedStyles.location}>{job.location}</p>
+                <p className={mergedStyles.dateLocation}>
+                  {formatDate(job.startDate)} - {formatDate(job.endDate)}
+                </p>
+              </div>
+            )}
 
-                    </div>
-                ))
-            }
-        </div>
-    );
+            <div className={mergedStyles.description}>
+              {formatTextToPoints(job.description).map((point, pointIndex) => (
+                <p key={pointIndex} className="mb-1">{point}</p>
+              ))}
+            </div>
+          </div>
+        ))}
+    </div>
+  );
 }
-
