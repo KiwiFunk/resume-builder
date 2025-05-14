@@ -2,12 +2,14 @@ export const styles = {
   container: "font-sans bg-white",
   
   // Header with gradient background
-  header: "bg-gradient-to-r from-blue-500 to-purple-600 p-6 rounded-xl mb-8 shadow-lg text-white",
-  headerContent: "flex flex-col md:flex-row gap-6 items-start",
-  contactContainer: "flex-grow",
-  socialWrapper: "md:self-end mt-2", 
-  socialsContainer: "flex gap-4",
-  
+  header: "bg-gradient-to-r from-blue-600 to-purple-600 p-6 rounded-xl mb-8 shadow-lg text-white relative overflow-hidden",
+  headerContent: "flex flex-col md:flex-row gap-6 items-start relative z-10",
+  headerMain: "flex-grow",
+  headerSide: "md:max-w-[240px] w-full",
+  socialsWrapper: "p-4 bg-white/10 backdrop-blur-sm rounded-lg border border-white/20 border-opacity-20",
+  socialsHeading: "text-white text-sm font-medium uppercase tracking-wider mb-3 opacity-90",
+  contactContainer: "mb-2",
+
   mainContent: "space-y-8",
   
   // Section styling with icons
@@ -22,21 +24,20 @@ export const styles = {
   // Component-specific styles for Creative template
   contactInformation: {
     container: "font-sans",
-    name: "text-4xl font-extrabold bg-clip-text text-transparent bg-gradient-to-r from-white to-blue-100 mb-1",
-    title: "text-lg text-white mb-3 font-medium",
-    contactsContainer: "text-white space-y-1",
+    name: "text-4xl font-bold text-white mb-1",
+    title: "text-lg text-blue-100 mb-4 font-medium",
+    contactsContainer: "text-white space-y-2",
     contactItem: "flex items-center gap-2",
     icon: "text-blue-200",
     showIcons: true
   },
 
   socials: {
-  container: "flex flex-wrap gap-3 mt-3",
-  socialItem: "inline-block mb-2",
-  iconWrapper: "w-5 h-5 bg-white inline-block align-middle mr-2",
-  link: "flex items-center px-3 py-1.5 bg-white bg-opacity-25 hover:bg-opacity-35 backdrop-blur-sm rounded-full transition-all border border-white border-opacity-30",
-  linkText: "text-white text-sm font-medium",
-  showIcons: true
+    container: "flex flex-wrap gap-2",
+    socialItem: "mb-2 w-full",
+    iconWrapper: "w-4 h-4 inline-block mr-2 bg-[#e0e7ff]", 
+    link: "flex items-center w-full p-2 rounded-md bg-white/10 border border-white/20 transition-colors",
+    linkText: "text-white text-sm"
   },
   
   skills: {

@@ -1,7 +1,7 @@
 export default function Socials({ data, className = "", styles = {} }) {
   // Default styles if none provided
   const defaultStyles = {
-    container: "mt-4 p-6 bg-white rounded shadow-lg",
+    container: "font-sans",
     socialItem: "flex items-center mt-4",
     iconWrapper: "w-6 h-6 bg-blue-500",
     link: "flex items-center gap-2",

@@ -15,13 +15,27 @@ export default function Creative({ data }) {
       {/* Colorful header section */}
       <header className={styles.header}>
         <div className={styles.headerContent}>
-          <ContactInformation
-            className={styles.contactContainer}
-            data={data}
-            styles={styles.contactInformation}
-          />
-          <div className={styles.socialWrapper}>
-            <Socials className={styles.socialsContainer} data={data} styles={styles.socials}/>
+          {/* Contact information with name, title, etc. */}
+          <div className={styles.headerMain}>
+            <ContactInformation
+              className={styles.contactContainer}
+              data={data}
+              styles={styles.contactInformation}
+            />
+          </div>
+
+          {/* Right side with improved social links */}
+          <div className={styles.headerSide}>
+            {data.socials && data.socials.some(s => s.inUse) && (
+              <div className={styles.socialsWrapper}>
+                <h3 className={styles.socialsHeading}>Connect</h3>
+                <Socials 
+                  className={styles.socialsContainer} 
+                  data={data} 
+                  styles={styles.socials}
+                />
+              </div>
+            )}
           </div>
         </div>
       </header>
