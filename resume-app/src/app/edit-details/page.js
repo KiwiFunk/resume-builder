@@ -548,14 +548,6 @@ export default function EditDetailsPage() {
                         <p className="text-gray-400 text-sm">Sentences will be automatically formatted as bullet points.</p>
                     </CollapsibleContainer>
 
-                    {/* Submit button */}
-                    <button
-                        type="button"
-                        onClick={handleSave}
-                        className="mt-4 px-4 py-2 bg-blue-500 text-white rounded shadow hover:bg-blue-600 cursor-pointer"
-                    >
-                        Save Changes
-                    </button>
                 </form>
             </div>
         </main>
