@@ -1,38 +1,67 @@
-export default function Education({ data }) {
-    return (
-        <div className="mt-4 p-6 bg-white rounded shadow-lg w-full max-w-4xl">
-            <h2 className="text-2xl font-bold text-gray-800">Education</h2>
-            {data.education
-                .sort((a, b) => new Date(b.startDate) - new Date(a.startDate)) // Sort by startDate (Descending)
-                .map((edu, index) => (
-                    <div key={index} className="mt-4 flex flex-row">
+import React from 'react';
+import { formatDate } from '../utils/formatDate';
 
-                        <div className="flex-grow">
-                            <p className="text-gray-700 text-lg font-bold">{edu.degree}</p>
-                            <p className="text-gray-700">{edu.institution}</p>
-                            <p className="text-gray-700 text-sm">{edu.location}</p>
-                        </div>
+// Default styles used as fallback
+const defaultStyles = {
+  container: "space-y-6",
+  entry: "mb-4",
+  entryHeader: "flex flex-wrap justify-between items-start",
+  degree: "font-bold text-gray-800",
+  institution: "text-gray-700",
+  dateLocation: "text-sm text-gray-600 mt-1",
+  description: "mt-2 text-gray-700",
+  dateRight: true, 
+  dateFormatting: {}
+};
 
-                        {/* Format the start and end dates using toLocaleDateString */}
-                        <div className="flex-shrink">
-                            <p className="text-gray-700 text-sm">
-                                {new Date(edu.startDate).toLocaleDateString("en-US", {
-                                year: "numeric",
-                                month: "short",
-                                })}
-                                {" "}
-                                -
-                                {" "}
-                                {new Date(edu.endDate).toLocaleDateString("en-US", {
-                                year: "numeric",
-                                month: "short",
-                                })}
-                            </p>
-                        </div>  
+export default function Education({ data, styles = {} }) {
+  // Merge provided styles with defaults
+  const mergedStyles = { ...defaultStyles, ...styles };
+  
+  // Determine whether to show dates on the right or inline
+  const datesOnRight = styles.dateRight !== false;
 
-                    </div>
-                ))
-            }
-        </div>
-    );
+  if (!data.education || data.education.length === 0) {
+    return null;
+  }
+
+  return (
+    <div className={mergedStyles.container}>
+      {data.education
+        .sort((a, b) => new Date(b.startDate) - new Date(a.startDate))
+        .map((edu, index) => (
+          <div key={index} className={mergedStyles.entry}>
+            {datesOnRight ? (
+              // Layout with dates on the right
+              <div className={mergedStyles.entryHeader}>
+                <div>
+                  <h3 className={mergedStyles.degree}>{edu.degree}</h3>
+                  <p className={mergedStyles.institution}>{edu.institution}</p>
+                  {edu.location && <p className={mergedStyles.location}>{edu.location}</p>}
+                </div>
+                <div className={mergedStyles.dateLocation}>
+                  {formatDate(edu.startDate, mergedStyles.dateFormatting)} - {formatDate(edu.endDate, mergedStyles.dateFormatting)}
+                </div>
+              </div>
+            ) : (
+              // Layout with dates inline
+              <div>
+                <h3 className={mergedStyles.degree}>{edu.degree}</h3>
+                <p className={mergedStyles.institution}>{edu.institution}</p>
+                {edu.location && <p className={mergedStyles.location}>{edu.location}</p>}
+                <p className={mergedStyles.dateLocation}>
+                  {formatDate(edu.startDate, mergedStyles.dateFormatting)} - {formatDate(edu.endDate, mergedStyles.dateFormatting)}
+                </p>
+              </div>
+            )}
+
+            {edu.description && (
+              <div className={mergedStyles.description}>
+                <p>{edu.description}</p>
+              </div>
+            )}
+          </div>
+        ))}
+    </div>
+  );
 }
