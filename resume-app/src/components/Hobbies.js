@@ -1,12 +1,30 @@
+import React from 'react';
 import { formatTextToPoints } from "../utils/formatText";
 
-export default function Hobbies({ data }) {
-    return (
-        <div className="mt-4 p-6 bg-white rounded shadow-lg w-full max-w-4xl">
-            <h2 className="mb-4 text-2xl font-bold text-gray-800">Hobbies</h2>
-            {formatTextToPoints(data.hobbies).map((point, index) => (
-                <p key={index} className="text-gray-700">{point}</p>
-            ))}
-        </div>
-    );
+// Default styles used as fallback
+const defaultStyles = {
+  container: "text-gray-700",
+  hobbyItem: "mb-1"
+};
+
+export default function Hobbies({ data, className = "", styles = {} }) {
+  // Merge provided styles with defaults
+  const mergedStyles = { ...defaultStyles, ...styles };
+  
+  if (!data.hobbies || data.hobbies.trim() === "") {
+    return null;
+  }
+
+  // Format hobbies text into bullet points if needed
+  const formattedHobbies = formatTextToPoints(data.hobbies);
+  
+  return (
+    <div className={`${mergedStyles.container} ${className}`}>
+      {formattedHobbies.map((hobby, index) => (
+        <p key={index} className={mergedStyles.hobbyItem}>
+          {hobby}
+        </p>
+      ))}
+    </div>
+  );
 }
