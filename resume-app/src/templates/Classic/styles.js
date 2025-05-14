@@ -77,5 +77,16 @@ export const styles = {
     urlLink: "text-gray-600 italic text-sm hover:text-gray-900 border-b border-gray-300 hover:border-gray-900"
   },
 
+  training: {
+    container: "space-y-4",
+    entry: "mb-4",
+    entryHeader: "flex flex-wrap justify-between items-start border-b border-gray-200 pb-1",
+    course: "font-bold text-gray-900",
+    institution: "text-gray-700 italic text-sm",
+    date: "text-sm text-gray-600 font-medium",
+    description: "mt-2 text-gray-700 text-sm",
+    dateRight: true 
+  },
+
   // Add other component styles
 };
