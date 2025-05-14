@@ -27,6 +27,7 @@ export default function Skills({ data, styles = {} }) {
           <div className={mergedStyles.skillsList}>
             {group.items.map((skill, i) => (
               <span key={i} className={mergedStyles.skill}>{skill}</span>
+              
             ))}
           </div>
         </div>

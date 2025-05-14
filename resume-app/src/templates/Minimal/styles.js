@@ -1,43 +1,46 @@
 export const styles = {
   container: "font-sans text-gray-800 max-w-4xl mx-auto bg-white",
   header: "flex flex-col md:flex-row justify-between items-start mb-10 pt-6",
-  contactContainer: "mb-4 md:mb-0",
-  socialsContainer: "flex gap-4",
-  
+  headerSide: "flex-1 flex flex-col gap-5",
+  headerDivider: "h-px bg-gray-200 w-full mt-2",
+  contactContainer: "mb-2 md:mb-0",
+  socialsContainer: "flex",
+
   content: "space-y-8",
-  
+
   section: "mb-10",
-  sectionTitle: "text-lg font-semibold uppercase tracking-wider mb-5 text-gray-900",
-  summaryText: "text-gray-700 leading-relaxed",
+  sectionTitle: "text-lg font-semibold uppercase tracking-widest mb-4 text-gray-700",
+  summaryText: "text-gray-700 leading-relaxed text-sm",
   
+
   // Component-specific styles for Minimal template
   contactInformation: {
     container: "font-sans",
     name: "text-3xl font-bold text-gray-900 mb-1 uppercase tracking-wide",
     title: "text-lg text-gray-600 mb-4",
     contactsContainer: "text-gray-700 flex flex-wrap gap-6 text-sm",
-    contactItem: "inline-block", 
-    icon: "hidden",
-    showIcons: false // Minimal design without icons
+    contactItem: "inline-block",
+    icon: "text-gray-400 text-xs mr-1",
+    showIcons: true // Let's use tiny, subtle icons
   },
 
   socials: {
-  container: "flex flex-wrap gap-x-6 gap-y-2 mt-2",
-  socialItem: "inline-block",
-  iconWrapper: "hidden",
-  link: "text-sm uppercase tracking-wider text-gray-700 hover:text-gray-900",
-  linkText: "text-gray-700 text-sm",
-  showIcons: false // Minimal design without icons
+    container: "flex flex-wrap gap-x-6 gap-y-2 mt-2",
+    socialItem: "inline-block",
+    iconWrapper: "hidden",
+    link: "text-sm uppercase tracking-wider text-gray-700 hover:text-gray-900",
+    linkText: "text-gray-700 text-sm",
+    showIcons: false // Minimal design without icons
   },
-  
+
   skills: {
-    container: "space-y-4",
+    container: "space-y-8",
     skillGroup: "mb-6",
-    groupName: "font-medium text-gray-900 mb-2 uppercase text-sm tracking-wider",
+    groupName: "font-normal text-gray-500 mb-4 uppercase text-xs tracking-widest",
     skillsList: "flex flex-wrap gap-x-6 gap-y-2",
-    skill: "text-gray-700 relative pl-5 before:content-[''] before:absolute before:left-0 before:top-1/2 before:-translate-y-1/2 before:w-2 before:h-2 before:bg-gray-300 before:rounded-full"
+    skill: "text-gray-700 text-sm mr-5 font-light relative pl-4 before:content-[''] before:absolute before:left-0 before:top-1/2 before:-translate-y-1/2 before:w-1 before:h-1 before:bg-gray-300 before:rounded-full"
   },
-  
+
   experience: {
     container: "space-y-8",
     jobEntry: "mb-6",
@@ -47,7 +50,7 @@ export const styles = {
     dateLocation: "text-sm text-gray-500 mt-1",
     description: "mt-3 text-gray-700"
   },
-  
+
   education: {
     container: "space-y-6",
     entry: "border-l-2 border-gray-200 pl-4 mb-6",
@@ -55,16 +58,17 @@ export const styles = {
     institution: "text-gray-800",
     dateLocation: "text-sm text-gray-500 mt-1",
   },
-  
+
   projects: {
-    container: "space-y-6",
-    project: "mb-6",
-    title: "font-semibold text-gray-900",
-    skills: "flex flex-wrap gap-x-3 gap-y-1 mt-2 mb-2",
-    skill: "text-xs text-gray-600",
-    description: "text-gray-700 mt-2",
+    container: "space-y-8",
+    project: "mb-8 relative pl-0",
+    title: "font-normal text-gray-800 tracking-wide",
+    skills: "flex flex-wrap gap-x-5 gap-y-1 mt-3 mb-3 text-gray-500",
+    skill: "text-xs text-gray-500 inline-flex items-center",
+    description: "text-gray-600 mt-3 font-light leading-relaxed text-sm",
+    urlLink: "text-gray-400 hover:text-gray-600 ml-2 text-xs tracking-wide transition-colors"
   },
-  
+
   training: {
     container: "space-y-4",
     entry: "mb-4",
@@ -73,7 +77,7 @@ export const styles = {
     date: "text-sm text-gray-500 mt-1",
     description: "text-gray-700 mt-2",
   },
-  
+
   hobbies: {
     container: "text-gray-700",
   }

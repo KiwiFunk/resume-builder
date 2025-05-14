@@ -5,7 +5,7 @@ export const styles = {
   header: "bg-gradient-to-r from-blue-500 to-purple-600 p-6 rounded-xl mb-8 shadow-lg text-white",
   headerContent: "flex flex-col md:flex-row gap-6 items-start",
   contactContainer: "flex-grow",
-  socialWrapper: "mt-4 md:mt-0", 
+  socialWrapper: "md:self-end mt-2", 
   socialsContainer: "flex gap-4",
   
   mainContent: "space-y-8",
@@ -31,11 +31,11 @@ export const styles = {
   },
 
   socials: {
-  container: "flex flex-wrap gap-3 mt-2",
-  socialItem: "inline-block",
-  iconWrapper: "w-5 h-5 bg-white mr-2",
-  link: "flex items-center px-3 py-1 bg-white bg-opacity-20 hover:bg-opacity-30 rounded-full transition-all",
-  linkText: "text-white text-sm",
+  container: "flex flex-wrap gap-3 mt-3",
+  socialItem: "inline-block mb-2",
+  iconWrapper: "w-5 h-5 bg-white inline-block align-middle mr-2",
+  link: "flex items-center px-3 py-1.5 bg-white bg-opacity-25 hover:bg-opacity-35 backdrop-blur-sm rounded-full transition-all border border-white border-opacity-30",
+  linkText: "text-white text-sm font-medium",
   showIcons: true
   },
   

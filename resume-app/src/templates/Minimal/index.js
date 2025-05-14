@@ -14,12 +14,22 @@ export default function Minimal({ data }) {
     <div className={styles.container}>
       {/* Clean, minimal header */}
       <header className={styles.header}>
-        <ContactInformation
-          className={styles.contactContainer}
-          data={data}
-          styles={styles.contactInformation}
-        />
-        <Socials className={styles.socialsContainer} data={data} styles={styles.socials}/>
+        {/* Contact info and socials in side column */}
+        <div className={styles.headerSide}>
+          <ContactInformation
+            className={styles.contactContainer}
+            data={data}
+            styles={styles.contactInformation}
+          />
+          {data.socials && data.socials.some(s => s.inUse) && (
+            <Socials 
+              className={styles.socialsContainer} 
+              data={data} 
+              styles={styles.socials}
+            />
+          )}
+          <div className={styles.headerDivider}></div>
+        </div>
       </header>
       
       {/* Main content with ample whitespace */}
