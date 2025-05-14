@@ -12,7 +12,7 @@ import SocialMediaLinks from "@/components/EditForm/SocialMediaLinks";
 import debugData from "@/UserData";         // Import placeholder data for debugging
 import { useDebounce } from "@/utils/hooks";
 
-const inputClasses = "w-full p-3 border border-gray-300 rounded text-gray-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500";
+const inputClasses = "w-full p-3 border border-gray-300 rounded-md text-gray-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all duration-200";
 
 export default function EditDetailsPage() {
     const router = useRouter();                     // Initialize the router
