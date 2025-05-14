@@ -137,54 +137,65 @@ export default function EditDetailsPage() {
             </div>
 
             {/* Form populated with data from UserData.js */}
-            <div className="container mx-auto max-w-5xl px-4">
-                <form className="w-full max-w-4xl">
+            <div className="container mx-auto max-w-5xl px-6">
+                <form className="w-full space-y-6">
 
-                    {/* Persistant user info */}
-                    <div className="mt-4 p-6 bg-white rounded shadow-lg w-full max-w-4xl">
-                        <h2 className="text-2xl font-bold text-gray-800">Your Info</h2>
-                        <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                            <div className="mt-4">
-                                <label htmlFor="name" className="block text-gray-700">Name:</label>
+                    {/* Personal Information Card. These fields persist between resumes */}
+                    <div className="bg-white rounded-lg shadow-md p-6">
+                        <h2 className="text-xl font-medium text-gray-800 mb-4 border-b pb-2 flex items-center">
+                            <i className="bi bi-person mr-2 text-blue-500"></i>
+                            Personal Information
+                        </h2>
+                        
+                        <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
+                            <div>
+                                <label htmlFor="name" className="block text-sm font-medium text-gray-700 mb-1">Name:</label>
                                 <input 
                                     type="text" 
                                     id="name" 
                                     value={data.name} 
-                                    onChange={(e) => setData({ ...data, name: e.target.value })} // Update state on change
+                                    onChange={(e) => setData({ ...data, name: e.target.value })}
                                     className={inputClasses} 
+                                    placeholder="Your full name"
                                 />
                             </div>
-                            <div className="sm:mt-4">
-                                <label htmlFor="email" className="block text-gray-700">Email:</label>
+                            <div>
+                                <label htmlFor="email" className="block text-sm font-medium text-gray-700 mb-1">Email Address:</label>
                                 <input 
                                     type="email" 
                                     id="email" 
                                     value={data.email} 
                                     onChange={(e) => setData({ ...data, email: e.target.value })}
-                                    className={inputClasses} />
+                                    placeholder="your.email@example.com"
+                                    className={inputClasses} 
+                                />
                             </div>
                             <div>
-                                <label htmlFor="phone" className="block text-gray-700">Phone:</label>
+                                <label htmlFor="phone" className="block text-sm font-medium text-gray-700 mb-1">Phone Number:</label>
                                 <input 
                                     type="text" 
                                     id="phone" 
                                     value={data.phone} 
                                     onChange={(e) => setData({ ...data, phone: e.target.value })}
-                                    className={inputClasses} />
+                                    placeholder="+1 (123) 456-7890"
+                                    className={inputClasses} 
+                                />
                             </div>
                             <div>
-                                <label htmlFor="location" className="block text-gray-700">Location:</label>
+                                <label htmlFor="location" className="block text-sm font-medium text-gray-700 mb-1">Location:</label>
                                 <input 
                                     type="text" 
                                     id="location" 
                                     value={data.location}
-                                    onChange={(e) => setData({ ...data, location: e.target.value })} 
-                                    className={inputClasses} />
+                                    onChange={(e) => setData({ ...data, location: e.target.value })}
+                                    placeholder="City, State, Country" 
+                                    className={inputClasses} 
+                                />
                             </div>
                         </div>
                     </div>
 
-                    {/* Resume selector, with the option to create a new resume 
+                    {/* Resume selector, with the option to create a new resume */}
                     <div className="mt-4 p-6 bg-white rounded shadow-lg w-full max-w-4xl flex gap-4">
                         <span
                             className="px-3 py-2 rounded-full bg-(--accent) text-white text-sm font-semibold shadow-sm"
@@ -207,7 +218,7 @@ export default function EditDetailsPage() {
                         <i className="bi bi-plus"></i>
                         </span>
                     </div>
-                    */}
+                    
 
                     {/* Resume Details */}
         
