@@ -35,8 +35,12 @@ export const styles = {
   },
 
   skills: {
-
-  },
+  container: "space-y-4",
+  skillGroup: "mb-6",
+  groupName: "font-bold text-gray-800 border-b border-gray-200 pb-1 mb-3",
+  skillsList: "grid grid-cols-2 gap-x-4 gap-y-2", // Changed to grid with 2 columns
+  skill: "text-gray-700 relative pl-3 before:content-['•'] before:absolute before:left-0 before:text-gray-500"
+},
 
   experience: {
     container: "space-y-4",
