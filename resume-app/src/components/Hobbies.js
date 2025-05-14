@@ -4,7 +4,8 @@ import { formatTextToPoints } from "../utils/formatText";
 // Default styles used as fallback
 const defaultStyles = {
   container: "text-gray-700",
-  hobbyItem: "mb-1"
+  hobbyItem: "mb-1",
+  prefixItems: true
 };
 
 export default function Hobbies({ data, className = "", styles = {} }) {
@@ -16,7 +17,7 @@ export default function Hobbies({ data, className = "", styles = {} }) {
   }
 
   // Format hobbies text into bullet points if needed
-  const formattedHobbies = formatTextToPoints(data.hobbies);
+  const formattedHobbies = formatTextToPoints(data.hobbies, mergedStyles.prefixItems);
   
   return (
     <div className={`${mergedStyles.container} ${className}`}>
