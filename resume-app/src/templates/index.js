@@ -25,8 +25,16 @@ export const templateRegistry = {
     component: () => import('./Minimal').then(mod => mod.default),
     description: "Clean, minimalist design with ample white space",
     thumbnail: "/thumbnails/minimal.png",
-  }
+  },
+  nordic: {
+    name: "Nordic",
+    component: () => import('./Nordic').then(mod => mod.default),
+    description: "Clean, minimal design inspired by Nordic aesthetics",
+    thumbnail: "/thumbnails/nordic.png",
+  },
+
   // Add new templates to this registry
+  
 };
 
 // Return a list of all available templates with their metadata
