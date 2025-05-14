@@ -218,32 +218,52 @@ export default function EditDetailsPage() {
                         <i className="bi bi-plus"></i>
                         </span>
                     </div>
-                    
 
-                    {/* Resume Details */}
-        
-                    <CollapsibleContainer title="Edit Resume Details">
-                        <div className="mt-4">
-                            <label htmlFor="title" className="block text-gray-700">Title:</label>
+                    {/* Job Title Card */}
+                    <div className="bg-white rounded-lg shadow-md p-6">
+                        <h2 className="text-xl font-medium text-gray-800 mb-4 border-b pb-2 flex items-center">
+                            <i className="bi bi-file-text mr-2 text-blue-500"></i>
+                            Job Title
+                        </h2>
+                        
+                        <div>
+                            <label htmlFor="summary" className="hidden block text-sm font-medium text-gray-700 mb-1">
+                                Job Title:
+                            </label>
                             <input 
                                 type="text" 
                                 id="title" 
                                 value={data.title}
+                                placeholder="Job title you're applying for"
                                 onChange={(e) => setData({ ...data, title: e.target.value })} 
-                                className={inputClasses} />
+                                className={inputClasses} 
+                            />
                         </div>
-                    
-                        <div className="mt-4">
-                            <label htmlFor="summary" className="block text-gray-700">Summary:</label>
+                    </div>
+
+                    {/* Professional Summary Card */}
+                    <div className="bg-white rounded-lg shadow-md p-6">
+                        <h2 className="text-xl font-medium text-gray-800 mb-4 border-b pb-2 flex items-center">
+                            <i className="bi bi-file-text mr-2 text-blue-500"></i>
+                            Professional Summary
+                        </h2>
+                        
+                        <div>
+                            <label htmlFor="summary" className="block text-sm font-medium text-gray-700 mb-1">
+                                Write a short professional summary highlighting your experience and skills:
+                            </label>
                             <textarea 
                                 id="summary" 
                                 value={data.summary} 
                                 onChange={(e) => setData({ ...data, summary: e.target.value })}
-                                className={`${inputClasses} min-h-[18rem] sm:min-h-[12rem]`}
+                                className={`${inputClasses} min-h-[12rem]`}
+                                placeholder="Experienced software engineer with 5+ years specializing in front-end development..."
                             ></textarea>
+                            <p className="text-sm text-gray-500 mt-1">
+                                This will appear at the top of your resume and should be 2-4 sentences.
+                            </p>
                         </div>
-                    </CollapsibleContainer>
-                    
+                    </div> 
                         
                     {/* Social Media Links */}
                     <CollapsibleContainer title="Edit Socials" useAddBtn={true} callback={() => handleAdd("socials", { platform: "website", url: "", inUse: true })}>
