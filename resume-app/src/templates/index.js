@@ -2,7 +2,7 @@
 
 // Template registry with metadata
 export const templateRegistry = {
-  modern: {
+  modern: {                                                                 // Template ID
     name: "Modern",                                                         // Template name string
     component: () => import('./Modern').then(mod => mod.default),           // Lazy load the component only when it is called. Create promise with import(), then resolve with .then. Extract default export once loaded.
     description: "Clean and professional design with modern styling",       // Description string for the template
