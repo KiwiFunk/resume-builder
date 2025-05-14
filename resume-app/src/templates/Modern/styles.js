@@ -50,15 +50,26 @@ export const styles = {
 
   education: {
     container: "space-y-6",
-    entry: "mb-5",
+    entry: "mb-4 p-4 rounded-lg bg-gray-50 hover:bg-gray-100 transition-colors",
     entryHeader: "flex flex-wrap justify-between items-start",
     degree: "font-semibold text-gray-900",
     institution: "text-blue-600",
     location: "text-gray-700 text-sm",
-    dateLocation: "text-sm text-gray-500",
+    dateLocation: "text-xs text-gray-500 bg-gray-200/70 px-2 py-1 rounded-full",
     description: "mt-2 text-gray-700",
     dateRight: true // Keep dates on right
   },
-  
+
+  training: {
+    container: "space-y-6",
+    entry: "mb-4 p-4 rounded-lg bg-gray-50 hover:bg-gray-100 transition-colors",
+    entryHeader: "flex flex-wrap justify-between items-start",
+    course: "font-semibold text-gray-900",
+    institution: "text-blue-600 text-sm",
+    date: "text-xs text-gray-500 bg-gray-200/70 px-2 py-1 rounded-full",
+    description: "mt-2 text-gray-700 text-sm",
+    dateRight: true // Modern style with aligned dates
+  },
+    
   // Add other styles later
 };
