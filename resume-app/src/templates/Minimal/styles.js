@@ -1,97 +1,95 @@
 export const styles = {
-  container: "font-sans text-gray-800 max-w-4xl mx-auto bg-white",
-  header: "flex flex-col md:flex-row justify-between items-start mb-10 pt-6",
-  headerSide: "flex-1 flex flex-col gap-5",
-  headerDivider: "h-px bg-gray-200 w-full mt-2",
+  // Minimal, Muji inspired aesthetics
+  container: "font-sans text-gray-700 max-w-4xl mx-auto bg-white tracking-wide",
+  header: "flex flex-col md:flex-row justify-between items-start mb-10 pt-8",
+  headerSide: "flex-1 flex flex-col gap-6",
+  headerDivider: "h-px bg-gray-100 w-full mt-2",
   contactContainer: "mb-2 md:mb-0",
   socialsContainer: "flex",
-
-  content: "space-y-8",
-
-  section: "mb-10",
-  sectionTitle: "text-lg font-semibold uppercase tracking-widest mb-3.5 text-gray-700",
-  summaryText: "text-gray-700 leading-relaxed text-sm font-light",
+  content: "space-y-10",
   
+  section: "mb-10",
+  sectionTitle: "text-base font-normal uppercase tracking-widest mb-5 text-gray-500",
+  summaryText: "text-gray-600 leading-relaxed text-sm font-light max-w-2xl",
 
-  // Component-specific styles for Minimal template
   contactInformation: {
     container: "font-sans",
-    name: "text-3xl font-bold text-gray-900 mb-1 uppercase tracking-wide",
-    title: "text-lg text-gray-600 mb-4",
-    contactsContainer: "text-gray-700 flex flex-wrap gap-6 text-sm",
+    name: "text-2xl font-normal text-gray-900 mb-1 uppercase tracking-widest",
+    title: "text-base text-gray-500 mb-4 font-light",
+    contactsContainer: "text-gray-600 flex flex-wrap gap-8 text-sm font-light",
     contactItem: "inline-block",
-    icon: "text-gray-400 text-xs mr-1",
-    showIcons: true // Let's use tiny, subtle icons
+    icon: "text-gray-400 text-xs mr-1.5",
+    showIcons: true
   },
 
   socials: {
-    container: "flex flex-wrap gap-x-6 gap-y-2 mt-2",
+    container: "flex flex-wrap gap-x-8 gap-y-2 mt-2",
     socialItem: "inline-block",
     iconWrapper: "hidden",
-    link: "text-sm uppercase tracking-wider text-gray-700 hover:text-gray-900",
-    linkText: "text-gray-700 text-sm",
-    showIcons: false // Minimal design without icons
+    link: "text-sm text-gray-500 hover:text-gray-700 transition-colors duration-200",
+    linkText: "text-gray-500 text-sm",
+    showIcons: false
   },
 
   skills: {
     container: "space-y-8",
-    skillGroup: "mb-6",
-    groupName: "font-normal text-gray-500 mb-4 uppercase text-xs tracking-wider",
-    skillsList: "flex flex-wrap gap-x-6 gap-y-2",
-    skill: "text-gray-700 text-sm mr-5 font-light relative pl-4 before:content-[''] before:absolute before:left-0 before:top-1/2 before:-translate-y-1/2 before:w-1 before:h-1 before:bg-gray-300 before:rounded-full"
+    skillGroup: "mb-8",
+    groupName: "font-normal text-gray-500 mb-4 uppercase text-xs tracking-widest",
+    skillsList: "flex flex-wrap gap-y-2",
+    skill: "text-gray-600 text-sm mr-6 font-light relative after:content-['·'] after:mx-3 after:text-gray-300 last:after:content-none last:mr-0"
   },
 
   experience: {
     container: "space-y-8",
-    jobEntry: "mb-6",
+    jobEntry: "mb-8",
     jobHeader: "flex flex-col",
-    jobTitle: "font-semibold text-gray-800 tracking-widest",
-    company: "text-gray-800 tracking-wide",
-    location: "text-gray-700 text-sm",
-    dateLocation: "text-sm text-gray-500 mt-1",
-    description: "mt-1 text-gray-700 text-sm font-light leading-relaxed",
-    dateRight: false,             // Put dates inline for minimal look
+    jobTitle: "font-normal text-gray-800 tracking-wide",
+    company: "text-gray-700 font-light",
+    location: "text-gray-500 text-sm font-light",
+    dateLocation: "text-sm text-gray-500 mt-1 font-light",
+    description: "mt-3 text-gray-600 text-sm font-light leading-relaxed",
+    dateRight: false,
     dateFormatting: { month: "long" }
   },
 
   education: {
-    container: "space-y-6",
-    entry: "mb-4 border-l-2 border-gray-200 pl-4",
+    container: "space-y-8",
+    entry: "mb-6 border-l border-gray-100 pl-4",
     entryHeader: "flex flex-col",
-    degree: "font-semibold text-gray-800 tracking-widest",
-    institution: "text-gray-800 tracking-wide",
-    location: "text-gray-700 text-sm",
-    dateLocation: "text-sm text-gray-500 mt-1",
-    description: "mt-2 text-gray-700 text-sm font-light",
+    degree: "font-normal text-gray-800 tracking-wide",
+    institution: "text-gray-700 font-light",
+    location: "text-gray-500 text-sm font-light",
+    dateLocation: "text-sm text-gray-500 mt-1 font-light",
+    description: "mt-2 text-gray-600 text-sm font-light",
     dateRight: false,
     dateFormatting: { month: "long" }
   },
 
   projects: {
-    container: "space-y-8",
-    project: "mb-8 relative pl-0",
-    title: "font-semibold text-gray-800 tracking-widest",
-    skills: "flex flex-wrap gap-x-5 gap-y-1 mt-3 mb-3 text-gray-500",
-    skill: "text-xs text-gray-500 inline-flex items-center",
+    container: "space-y-10",
+    project: "mb-8",
+    title: "font-normal text-gray-800 tracking-wide",
+    skills: "flex flex-wrap gap-x-2 gap-y-1 mt-2 mb-2 text-gray-500",
+    skill: "text-xs text-gray-500 inline-flex items-center after:content-['·'] after:ml-2 after:mr-2 after:text-gray-300 last:after:content-none",
     description: "text-gray-600 mt-3 font-light leading-relaxed text-sm",
-    urlLink: "text-gray-400 hover:text-gray-600 ml-2 text-xs tracking-wide transition-colors"
+    urlLink: "text-gray-400 hover:text-gray-600 ml-2 text-xs transition-colors"
   },
 
   training: {
-    container: "space-y-4",
+    container: "space-y-6",
     entry: "mb-4",
     entryHeader: "flex flex-col",
-    course: "font-semibold text-gray-800 tracking-widest",
-    institution: "text-gray-800 text-sm",
-    date: "text-sm text-gray-500 mt-1",
+    course: "font-normal text-gray-800 tracking-wide",
+    institution: "text-gray-700 text-sm font-light",
+    date: "text-sm text-gray-500 mt-1 font-light",
     description: "text-gray-600 mt-3 font-light leading-relaxed text-sm",
-    dateRight: false, // Inline dates for minimal look
-    dateFormatting: { month: "long" } // Full month name for minimal elegance
+    dateRight: false,
+    dateFormatting: { month: "long" }
   },
 
   hobbies: {
-    container: "text-gray-700 font-light",
-    hobbyItem: "mb-2 text-sm relative pl-4 before:content-[''] before:absolute before:left-0 before:top-1/2 before:-translate-y-1/2 before:w-1 before:h-1 before:bg-gray-300 before:rounded-full",
-    prefixItems: false // We dont want hyphens as we are creating dots in the above line
+    container: "text-gray-600 font-light",
+    hobbyItem: "mb-3 text-sm relative pl-4 before:content-[''] before:absolute before:left-0 before:top-1/2 before:-translate-y-1/2 before:w-1 before:h-1 before:bg-gray-200 before:rounded-full",
+    prefixItems: false
   },
 };
