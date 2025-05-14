@@ -50,7 +50,8 @@ export const styles = {
     location: "text-gray-700 text-sm",
     dateLocation: "text-sm text-gray-500 mt-1",
     description: "mt-1 text-gray-700 text-sm font-light leading-relaxed",
-    dateRight: false // Put dates inline for minimal look
+    dateRight: false,             // Put dates inline for minimal look
+    dateFormatting: { month: "long" }
   },
 
   education: {

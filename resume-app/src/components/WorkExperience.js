@@ -1,5 +1,6 @@
 import React from 'react';
 import { formatTextToPoints } from "../utils/formatText";
+import { formatDate } from '../utils/formatDate';
 
 // Default styles used as fallback
 const defaultStyles = {
@@ -11,7 +12,8 @@ const defaultStyles = {
   location: "text-gray-700 text-sm",
   dateLocation: "text-sm text-gray-600 mt-1",
   description: "mt-3 text-gray-700",
-  dateRight: true // By default, show dates on the right
+  dateRight: true, 
+  dateFormatting: {}
 };
 
 export default function WorkExperience({ data, styles = {} }) {
@@ -24,14 +26,6 @@ export default function WorkExperience({ data, styles = {} }) {
   if (!data.experience || data.experience.length === 0) {
     return null;
   }
-
-  // Format a date using a consistent format
-  const formatDate = (dateString) => {
-    return new Date(dateString).toLocaleDateString("en-US", {
-      year: "numeric",
-      month: "short"
-    });
-  };
 
   return (
     <div className={mergedStyles.container}>
@@ -48,7 +42,7 @@ export default function WorkExperience({ data, styles = {} }) {
                   <p className={mergedStyles.location}>{job.location}</p>
                 </div>
                 <div className={mergedStyles.dateLocation}>
-                  {formatDate(job.startDate)} - {formatDate(job.endDate)}
+                  {formatDate(job.startDate, mergedStyles.dateFormatting)} - {formatDate(job.endDate, mergedStyles.dateFormatting)}
                 </div>
               </div>
             ) : (
@@ -58,7 +52,7 @@ export default function WorkExperience({ data, styles = {} }) {
                 <p className={mergedStyles.company}>{job.company}</p>
                 <p className={mergedStyles.location}>{job.location}</p>
                 <p className={mergedStyles.dateLocation}>
-                  {formatDate(job.startDate)} - {formatDate(job.endDate)}
+                  {formatDate(job.startDate, mergedStyles.dateFormatting)} - {formatDate(job.endDate, mergedStyles.dateFormatting)}
                 </p>
               </div>
             )}
