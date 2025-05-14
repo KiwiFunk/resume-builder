@@ -45,7 +45,7 @@ export const styles = {
     container: "space-y-8",
     jobEntry: "mb-6",
     jobHeader: "flex flex-col",
-    jobTitle: "font-semibold text-gray-900 tracking-widest",
+    jobTitle: "font-semibold text-gray-800 tracking-widest",
     company: "text-gray-800 tracking-wide",
     location: "text-gray-700 text-sm",
     dateLocation: "text-sm text-gray-500 mt-1",
@@ -58,7 +58,7 @@ export const styles = {
     container: "space-y-6",
     entry: "mb-4 border-l-2 border-gray-200 pl-4",
     entryHeader: "flex flex-col",
-    degree: "font-semibold text-gray-900 tracking-widest",
+    degree: "font-semibold text-gray-800 tracking-widest",
     institution: "text-gray-800 tracking-wide",
     location: "text-gray-700 text-sm",
     dateLocation: "text-sm text-gray-500 mt-1",
@@ -70,7 +70,7 @@ export const styles = {
   projects: {
     container: "space-y-8",
     project: "mb-8 relative pl-0",
-    title: "font-normal text-gray-800 tracking-wide",
+    title: "font-semibold text-gray-800 tracking-widest",
     skills: "flex flex-wrap gap-x-5 gap-y-1 mt-3 mb-3 text-gray-500",
     skill: "text-xs text-gray-500 inline-flex items-center",
     description: "text-gray-600 mt-3 font-light leading-relaxed text-sm",
@@ -80,10 +80,13 @@ export const styles = {
   training: {
     container: "space-y-4",
     entry: "mb-4",
-    course: "font-semibold text-gray-900",
+    entryHeader: "flex flex-col",
+    course: "font-semibold text-gray-800 tracking-widest",
     institution: "text-gray-800 text-sm",
     date: "text-sm text-gray-500 mt-1",
-    description: "text-gray-700 mt-2",
+    description: "text-gray-600 mt-3 font-light leading-relaxed text-sm",
+    dateRight: false, // Inline dates for minimal look
+    dateFormatting: { month: "long" } // Full month name for minimal elegance
   },
 
   hobbies: {
