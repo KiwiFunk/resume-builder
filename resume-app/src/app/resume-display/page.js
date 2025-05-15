@@ -5,6 +5,7 @@ import DisplayResume from "./ResumeDisplay";
 import { useState, useEffect } from "react";
 import { getLocalData } from "@/utils/localData";
 import { getAllTemplates } from "@/templates";
+import FixedDisplay from "./FixedDisplay";
 
 export default function ResumeDisplayPage() {
   const router = useRouter();
@@ -175,9 +176,9 @@ export default function ResumeDisplayPage() {
               transformOrigin: 'top center'
             }}
           >
-            <div className="p-8 a4-page">
+            <FixedDisplay>
               <DisplayResume data={data} template={template} />
-            </div>
+            </FixedDisplay>
           </div>
         </div>
 
