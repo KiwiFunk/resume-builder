@@ -65,7 +65,7 @@ export default function DocumentViewer({ children, scale }) {
         }
         
         #portal-root {
-          padding: 32px;
+          padding: 42px;
           box-sizing: border-box;
         }
         
@@ -73,7 +73,7 @@ export default function DocumentViewer({ children, scale }) {
         @media print {
           body {
             width: 210mm;
-            height: 297mm;
+            /* height: 297mm; */
             padding: 0;
             margin: 0;
           }
