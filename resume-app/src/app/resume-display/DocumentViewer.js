@@ -114,16 +114,50 @@ export default function DocumentViewer({ children, scale, onAutoScale }) {
                     min-height: auto !important; /* Prevent infinite growth */
                     max-height: 3000px; /* Set a reasonable max height to prevent infinite scrolling */
                 }
-                
-                /* Critical fix for iOS Safari */
+
+                /* Mobile specific formatting fixes */
                 @supports (-webkit-overflow-scrolling: touch) {
-                    .grid-cols-\\[280px_1fr\\] {
-                    height: auto !important;
-                    min-height: 0 !important;
+                    /* Fix common flex layout issues on mobile */
+                    .flex {
+                        flex-shrink: 0 !important;
+                    }
+                    
+                    .flex-col {
+                        min-height: 0 !important;
+                        height: auto !important;
+                    }
+                    
+                    /* Fix for grid layouts (like Meridian) */
+                    .grid {
+                        min-height: 0 !important;
+                        height: auto !important;
+                    }
+                    
+                    /* Fix bottom spacing issues */
+                    #portal-root > *:last-child {
+                        margin-bottom: 0 !important;
+                        padding-bottom: 0 !important;
+                    }
+                    
+                    /* Fix for elements that might grow indefinitely */
+                    .flex-grow {
+                        flex-grow: 0 !important;
+                    }
+                    
+                    /* Ensure all sections have controlled heights */
+                    section, div, header, footer {
+                        height: auto !important;
+                        max-height: none !important; 
                     }
                     
                     #portal-root {
-                    max-height: 2500px !important;
+                        max-height: 2500px !important;
+                        padding-bottom: 0 !important;
+                    }
+
+                    .grid-cols-\\[280px_1fr\\] {
+                        height: auto !important;
+                        min-height: 0 !important;
                     }
                 }
                 
