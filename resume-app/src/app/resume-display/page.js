@@ -5,7 +5,7 @@ import DisplayResume from "./ResumeDisplay";
 import { useState, useEffect } from "react";
 import { getLocalData } from "@/utils/localData";
 import { getAllTemplates } from "@/templates";
-import FixedDisplay from "./FixedDisplay";
+import DocumentViewer from "./DocumentViewer";
 
 export default function ResumeDisplayPage() {
   const router = useRouter();
@@ -168,20 +168,10 @@ export default function ResumeDisplayPage() {
 
         {/* Resume display section */}
         <div className="flex justify-center">
-          <div
-            className="bg-white shadow-xl rounded-lg overflow-hidden mb-8 print:shadow-none origin-top transition-all duration-150"
-            style={{
-              maxWidth: '1000px',
-              transform: `scale(${scale / 100})`,
-              transformOrigin: 'top center'
-            }}
-          >
-            <FixedDisplay>
-              <DisplayResume data={data} template={template} />
-            </FixedDisplay>
-          </div>
+          <DocumentViewer scale={scale}>
+            <DisplayResume data={data} template={template} />
+          </DocumentViewer>
         </div>
-
       </div>
     </main>
   );

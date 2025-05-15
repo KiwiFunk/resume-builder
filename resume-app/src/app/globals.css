@@ -6,19 +6,39 @@
   --accent: #0070f3;
 }
 
-.scale-container {
-  transform-origin: top left;
+/* Document viewer styles */
+.doc-viewer-wrapper {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  overflow-x: hidden;
+  padding: 1rem 0;
 }
 
-@media (max-width: 1200px) {
-  .scale-content {
-    transform: scale(0.8);
+.doc-viewer-scaler {
+  transition: transform 0.2s ease;
+}
+
+/* Print styles */
+@media print {
+  .doc-viewer-wrapper {
+    padding: 0;
   }
-}
-
-@media (max-width: 900px) {
-  .scale-content {
-    transform: scale(0.6);
+  
+  .doc-viewer-scaler {
+    transform: none !important;
+    margin: 0 !important;
+  }
+  
+  iframe {
+    height: auto !important;
+    box-shadow: none !important;
+    border-radius: 0 !important;
+  }
+  
+  @page {
+    size: A4;
+    margin: 0;
   }
 }
 
