@@ -50,7 +50,7 @@ export default function DocumentViewer({ children, scale, onAutoScale }) {
             window.removeEventListener('resize', handleResize);
         };
     }, [onAutoScale]);
-    
+
     // Set up iframe when it loads
     useEffect(() => {
         if (!iframeRef.current) return;
@@ -98,34 +98,48 @@ export default function DocumentViewer({ children, scale, onAutoScale }) {
             // Add basic A4 styling - with explicit scroll prevention
             const style = iframeDoc.createElement('style');
             style.textContent = `
-        html, body {
-          margin: 0;
-          padding: 0;
-          width: 794px; /* A4 width */
-          background-color: white;
-          min-height: 1123px; /* A4 minimum height */
-          overflow: hidden !important; /* Force prevent scrolling */
-        }
-        
-        #portal-root {
-          padding: 42px;
-          box-sizing: border-box;
-          overflow: visible !important; /* Allow content to overflow without scrolling */
-        }
-        
-        /* Ensure print styling works correctly */
-        @media print {
-          body {
-            width: 210mm;
-            padding: 0;
-            margin: 0;
-          }
-          
-          #portal-root {
-            padding: 15mm;
-          }
-        }
-      `;
+                html, body {
+                    margin: 0;
+                    padding: 0;
+                    width: 794px; /* A4 width */
+                    background-color: white;
+                    min-height: 1123px; /* A4 minimum height */
+                    overflow: hidden !important; /* Force prevent scrolling */
+                }
+                
+                #portal-root {
+                    padding: 42px;
+                    box-sizing: border-box;
+                    overflow: visible !important; /* Allow content to overflow without scrolling */
+                    min-height: auto !important; /* Prevent infinite growth */
+                    max-height: 3000px; /* Set a reasonable max height to prevent infinite scrolling */
+                }
+                
+                /* Critical fix for iOS Safari */
+                @supports (-webkit-overflow-scrolling: touch) {
+                    .grid-cols-\\[280px_1fr\\] {
+                    height: auto !important;
+                    min-height: 0 !important;
+                    }
+                    
+                    #portal-root {
+                    max-height: 2500px !important;
+                    }
+                }
+                
+                /* Ensure print styling works correctly */
+                @media print {
+                    body {
+                    width: 210mm;
+                    padding: 0;
+                    margin: 0;
+                    }
+                    
+                    #portal-root {
+                    padding: 15mm;
+                    }
+                }
+                `;
             head.appendChild(style);
 
             // Create portal target
