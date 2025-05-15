@@ -15,38 +15,44 @@ export default function DocumentViewer({ children, scale }) {
       const iframe = iframeRef.current;
       const iframeDoc = iframe.contentDocument || iframe.contentWindow.document;
       
-      // Create a head element with necessary styles
+      // Set up the head with necessary styles
       const head = iframeDoc.head;
       
-      // Set viewport meta to force desktop width
+      // CRITICAL: Force desktop viewport - this prevents responsive breakpoints from triggering
       const meta = iframeDoc.createElement('meta');
       meta.setAttribute('name', 'viewport');
-      meta.setAttribute('content', 'width=device-width, initial-scale=1.0');
+      meta.setAttribute('content', 'width=1200');
       head.appendChild(meta);
       
-      // Add Tailwind CSS
+      // Add core Tailwind CSS - match your app's version
       const tailwindLink = iframeDoc.createElement('link');
       tailwindLink.rel = 'stylesheet';
-      tailwindLink.href = 'https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css';
+      // Use the same version your app uses - this is important!
+      tailwindLink.href = 'https://cdn.jsdelivr.net/npm/tailwindcss@3.3.3/dist/tailwind.min.css';
       head.appendChild(tailwindLink);
       
-      // Add Bootstrap Icons if needed
+      // Add Bootstrap Icons
       const iconsLink = iframeDoc.createElement('link');
       iconsLink.rel = 'stylesheet';
-      iconsLink.href = 'https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.3/font/bootstrap-icons.css';
+      iconsLink.href = 'https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css';
       head.appendChild(iconsLink);
       
-      // Add your global styles if needed
+      // Try to get Next.js generated CSS from the main document
       try {
-        const globalStyles = iframeDoc.createElement('link');
-        globalStyles.rel = 'stylesheet';
-        globalStyles.href = `${window.location.origin}/globals.css`;
-        head.appendChild(globalStyles);
+        const stylesheets = document.querySelectorAll('link[rel="stylesheet"]');
+        stylesheets.forEach(sheet => {
+          if (sheet.href && sheet.href.includes('_next')) {
+            const styleLink = iframeDoc.createElement('link');
+            styleLink.rel = 'stylesheet';
+            styleLink.href = sheet.href;
+            head.appendChild(styleLink);
+          }
+        });
       } catch (e) {
-        console.log('Could not load global styles:', e);
+        console.log('Could not load Next.js styles:', e);
       }
       
-      // Add internal styles for A4 paper
+      // Add basic A4 styling
       const style = iframeDoc.createElement('style');
       style.textContent = `
         body {
@@ -56,12 +62,25 @@ export default function DocumentViewer({ children, scale }) {
           background-color: white;
           min-height: 1123px; /* A4 height */
           overflow-x: hidden;
-          font-family: Arial, sans-serif;
         }
         
         #portal-root {
           padding: 32px;
           box-sizing: border-box;
+        }
+        
+        /* Ensure print styling works correctly */
+        @media print {
+          body {
+            width: 210mm;
+            height: 297mm;
+            padding: 0;
+            margin: 0;
+          }
+          
+          #portal-root {
+            padding: 0;
+          }
         }
       `;
       head.appendChild(style);
