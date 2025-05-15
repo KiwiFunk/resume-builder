@@ -53,22 +53,22 @@ export default function DocumentViewer({ children, scale }) {
         console.log('Could not load Next.js styles:', e);
       }
       
-      // Add basic A4 styling - crucial CSS changes for scroll handling
+      // Add basic A4 styling - with explicit scroll prevention
       const style = iframeDoc.createElement('style');
       style.textContent = `
-        body {
+        html, body {
           margin: 0;
           padding: 0;
           width: 794px; /* A4 width */
           background-color: white;
           min-height: 1123px; /* A4 minimum height */
-          overflow-x: hidden;
-          overflow-y: visible; /* Allow content to determine height */
+          overflow: hidden !important; /* Force prevent scrolling */
         }
         
         #portal-root {
           padding: 42px;
           box-sizing: border-box;
+          overflow: visible !important; /* Allow content to overflow without scrolling */
         }
         
         /* Ensure print styling works correctly */
@@ -134,17 +134,49 @@ export default function DocumentViewer({ children, scale }) {
     };
   }, []);
   
+  // Effect to update height calculation when scale changes
+  useEffect(() => {
+    if (!iframeRef.current || !iframeDocument) return;
+    
+    // Ensure scrolling is disabled when scale changes
+    iframeRef.current.setAttribute('scrolling', 'no');
+    
+    // Force scrolling to be disabled on the iframe document
+    if (iframeDocument.body) {
+      iframeDocument.body.style.overflow = 'hidden';
+      iframeDocument.documentElement.style.overflow = 'hidden';
+    }
+    
+    // Recalculate height after scale changes
+    const newHeight = Math.max(
+      iframeDocument.body.scrollHeight,
+      iframeDocument.documentElement.scrollHeight,
+      iframeDocument.body.offsetHeight,
+      iframeDocument.documentElement.offsetHeight,
+      1123 // Minimum A4 height
+    );
+    
+    setContentHeight(newHeight);
+  }, [scale, iframeDocument]);
+  
   // Calculate scale
   const scaleFactor = scale / 100;
   
   return (
-    <div className="doc-viewer-wrapper" ref={wrapperRef}>
+    <div 
+      className="doc-viewer-wrapper" 
+      ref={wrapperRef}
+      style={{
+        overflow: 'visible', // Allow content to be visible beyond container
+      }}
+    >
       <div 
         className="doc-viewer-scaler"
         style={{
           transform: `scale(${scaleFactor})`,
           transformOrigin: 'top center',
-          marginBottom: scaleFactor < 1 ? `${(1 - scaleFactor) * contentHeight * 0.5}px` : 0
+          marginBottom: scaleFactor < 1 ? `${(1 - scaleFactor) * contentHeight * 0.5}px` : 0,
+          pointerEvents: 'none', // Prevent iframe from capturing pointer events
         }}
       >
         <iframe
@@ -157,7 +189,8 @@ export default function DocumentViewer({ children, scale }) {
             background: 'white',
             boxShadow: '0 4px 20px rgba(0, 0, 0, 0.15)',
             borderRadius: '8px',
-            display: 'block'
+            display: 'block',
+            pointerEvents: 'auto', // Re-enable pointer events for iframe content
           }}
           scrolling="no" // Disable iframe scrolling
           src="about:blank"
