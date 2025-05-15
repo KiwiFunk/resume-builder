@@ -4,8 +4,10 @@ import { createPortal } from 'react-dom';
 
 export default function DocumentViewer({ children, scale }) {
   const iframeRef = useRef(null);
+  const wrapperRef = useRef(null);
   const [iframeLoaded, setIframeLoaded] = useState(false);
   const [iframeDocument, setIframeDocument] = useState(null);
+  const [contentHeight, setContentHeight] = useState(1123); // Default A4 height
   
   // Set up iframe when it loads
   useEffect(() => {
@@ -27,7 +29,6 @@ export default function DocumentViewer({ children, scale }) {
       // Add core Tailwind CSS - match your app's version
       const tailwindLink = iframeDoc.createElement('link');
       tailwindLink.rel = 'stylesheet';
-      // Use the same version your app uses - this is important!
       tailwindLink.href = 'https://cdn.jsdelivr.net/npm/tailwindcss@3.3.3/dist/tailwind.min.css';
       head.appendChild(tailwindLink);
       
@@ -52,7 +53,7 @@ export default function DocumentViewer({ children, scale }) {
         console.log('Could not load Next.js styles:', e);
       }
       
-      // Add basic A4 styling
+      // Add basic A4 styling - crucial CSS changes for scroll handling
       const style = iframeDoc.createElement('style');
       style.textContent = `
         body {
@@ -60,8 +61,9 @@ export default function DocumentViewer({ children, scale }) {
           padding: 0;
           width: 794px; /* A4 width */
           background-color: white;
-          min-height: 1123px; /* A4 height */
+          min-height: 1123px; /* A4 minimum height */
           overflow-x: hidden;
+          overflow-y: visible; /* Allow content to determine height */
         }
         
         #portal-root {
@@ -73,13 +75,12 @@ export default function DocumentViewer({ children, scale }) {
         @media print {
           body {
             width: 210mm;
-            /* height: 297mm; */
             padding: 0;
             margin: 0;
           }
           
           #portal-root {
-            padding: 0;
+            padding: 15mm;
           }
         }
       `;
@@ -95,6 +96,29 @@ export default function DocumentViewer({ children, scale }) {
       
       setIframeDocument(iframeDoc);
       setIframeLoaded(true);
+      
+      // Set up a mutation observer to watch for content height changes
+      const resizeObserver = new ResizeObserver(() => {
+        // Get the actual content height
+        const newHeight = Math.max(
+          iframeDoc.body.scrollHeight,
+          iframeDoc.documentElement.scrollHeight,
+          iframeDoc.body.offsetHeight,
+          iframeDoc.documentElement.offsetHeight,
+          1123 // Minimum A4 height
+        );
+        
+        // Update iframe height
+        setContentHeight(newHeight);
+      });
+      
+      // Observe the body for size changes
+      resizeObserver.observe(iframeDoc.body);
+      
+      // Clean up observer when component unmounts
+      return () => {
+        resizeObserver.disconnect();
+      };
     };
     
     if (iframeRef.current.contentDocument?.readyState === 'complete') {
@@ -114,13 +138,13 @@ export default function DocumentViewer({ children, scale }) {
   const scaleFactor = scale / 100;
   
   return (
-    <div className="doc-viewer-wrapper">
+    <div className="doc-viewer-wrapper" ref={wrapperRef}>
       <div 
         className="doc-viewer-scaler"
         style={{
           transform: `scale(${scaleFactor})`,
           transformOrigin: 'top center',
-          marginBottom: scaleFactor < 1 ? `${(1 - scaleFactor) * 1123 * 0.5}px` : 0
+          marginBottom: scaleFactor < 1 ? `${(1 - scaleFactor) * contentHeight * 0.5}px` : 0
         }}
       >
         <iframe
@@ -128,13 +152,14 @@ export default function DocumentViewer({ children, scale }) {
           title="Resume Document"
           style={{
             width: '794px', // A4 width in pixels
-            height: '1123px', // A4 height in pixels
+            height: `${contentHeight}px`, // Dynamic height based on content
             border: 'none',
             background: 'white',
             boxShadow: '0 4px 20px rgba(0, 0, 0, 0.15)',
             borderRadius: '8px',
             display: 'block'
           }}
+          scrolling="no" // Disable iframe scrolling
           src="about:blank"
         />
         
