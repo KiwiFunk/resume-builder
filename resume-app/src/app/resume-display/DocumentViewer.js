@@ -186,7 +186,8 @@ export default function DocumentViewer({ children, scale }) {
                 justifyContent: 'center',
                 width: '100%',
                 backgroundColor: 'transparent', // Ensure this matches parent background
-                marginBottom: scaleFactor < 1 ? '2rem' : '0' // Add some bottom margin when scaled down
+                marginBottom: scaleFactor < 1 ? '2rem' : '0', // Add some bottom margin when scaled down
+                zIndex: 5
             }}
         >
             <div
