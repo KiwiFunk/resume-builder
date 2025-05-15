@@ -2,13 +2,55 @@
 import { useRef, useState, useEffect } from 'react';
 import { createPortal } from 'react-dom';
 
-export default function DocumentViewer({ children, scale }) {
+export default function DocumentViewer({ children, scale, onAutoScale }) {
     const iframeRef = useRef(null);
     const wrapperRef = useRef(null);
     const [iframeLoaded, setIframeLoaded] = useState(false);
     const [iframeDocument, setIframeDocument] = useState(null);
     const [contentHeight, setContentHeight] = useState(1123); // Default A4 height
 
+    // Auto scaling calculation on mount and window resize
+    useEffect(() => {
+        // Calculate optimal scale based on viewport width
+        const calculateOptimalScale = () => {
+            // Get viewport width with some margin
+            const viewportWidth = window.innerWidth - 48; // 24px margin on each side
+            
+            // A4 width is 794px
+            const a4Width = 794;
+            
+            // Calculate ideal scale (with max and min constraints)
+            let idealScale = Math.floor((viewportWidth / a4Width) * 100);
+            
+            // Constrain scale between 30% and 100%
+            idealScale = Math.max(30, Math.min(100, idealScale));
+            
+            return idealScale;
+        };
+        
+        // Set optimal scale on first load
+        if (onAutoScale && wrapperRef.current) {
+            const optimalScale = calculateOptimalScale();
+            onAutoScale(optimalScale);
+        }
+        
+        // Update scale on window resize
+        const handleResize = () => {
+            if (onAutoScale) {
+                const optimalScale = calculateOptimalScale();
+                onAutoScale(optimalScale);
+            }
+        };
+        
+        // Add resize listener
+        window.addEventListener('resize', handleResize);
+        
+        // Cleanup
+        return () => {
+            window.removeEventListener('resize', handleResize);
+        };
+    }, [onAutoScale]);
+    
     // Set up iframe when it loads
     useEffect(() => {
         if (!iframeRef.current) return;

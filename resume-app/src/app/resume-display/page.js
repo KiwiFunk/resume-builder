@@ -7,6 +7,7 @@ import { getLocalData } from "@/utils/localData";
 import { getAllTemplates } from "@/templates";
 import DocumentViewer from "./DocumentViewer";
 
+
 export default function ResumeDisplayPage() {
   const router = useRouter();
   const [data, setData] = useState(null);                               //State to hold user data 
@@ -14,6 +15,8 @@ export default function ResumeDisplayPage() {
   const [template, setTemplate] = useState("modern");                   //State to hold current template
   const [scale, setScale] = useState(100);                              //State to manage zoom level  
   const [availableTemplates, setAvailableTemplates] = useState([]);     //State to hold template options
+  const [autoScaleEnabled, setAutoScaleEnabled] = useState(true);
+
 
   useEffect(() => {
     // Load user data and preferred template if available
@@ -28,6 +31,16 @@ export default function ResumeDisplayPage() {
   const handleTemplateChange = (e) => {
     const newTemplate = e.target.value;
     setTemplate(newTemplate);
+  };
+
+  const handleAutoScale = (newScale) => {
+    if (autoScaleEnabled) {
+      setScale(newScale);
+    }
+  };
+
+  const toggleAutoScale = () => {
+    setAutoScaleEnabled(prev => !prev);
   };
 
   // LOADING PAGE
@@ -141,6 +154,21 @@ export default function ResumeDisplayPage() {
               </select>
             </div>
 
+            <div className="flex items-center gap-2">
+              <span className="text-sm font-medium text-gray-700">Auto-fit:</span>
+              <button
+                onClick={toggleAutoScale}
+                className={`px-2 py-1 text-xs rounded-md ${
+                  autoScaleEnabled 
+                    ? 'bg-blue-600 text-white' 
+                    : 'bg-gray-200 text-gray-700'
+                }`}
+                title={autoScaleEnabled ? "Disable auto-fit" : "Enable auto-fit"}
+              >
+                <i className={`bi ${autoScaleEnabled ? 'bi-check-lg' : 'bi-x-lg'}`}></i>
+              </button>
+            </div>
+
             {/* Zoom control */}
             <div className="flex items-center gap-3">
               <label htmlFor="scale" className="text-sm font-medium text-gray-700">Zoom:</label>
@@ -168,7 +196,10 @@ export default function ResumeDisplayPage() {
 
         {/* Resume display section */}
         <div className="flex justify-center">
-          <DocumentViewer scale={scale}>
+          <DocumentViewer 
+            scale={scale} 
+            onAutoScale={handleAutoScale}
+          >
             <DisplayResume data={data} template={template} />
           </DocumentViewer>
         </div>
