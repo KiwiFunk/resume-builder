@@ -33,8 +33,14 @@ export default function DocumentViewer({ children }) {
     }, []);
 
     return (
-        <iframe ref={iframeRef} title="Resume Document" style={{ width: '794px', height: '1123px', border: 'none' }}>
-            {portalTarget && createPortal(children, portalTarget)}
+        <iframe ref={iframeRef} title="Resume Document" style={{ width: '100%', height: '100%', border: 'none' }}>
+            {/* Wrap our content in a div that emulates the A4 page */}
+                {portalTarget && createPortal(
+                    <div className="a4-page">
+                        {children}
+                    </div>,
+                    portalTarget
+                )}
         </iframe>
     );
 }
