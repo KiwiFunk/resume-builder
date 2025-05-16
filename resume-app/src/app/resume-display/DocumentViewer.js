@@ -1,29 +1,40 @@
 "use client";
-import { useEffect, useState } from "react";
-import { createPortal } from "react-dom";
+import { useRef, useState, useEffect } from 'react';
+import { createPortal } from 'react-dom';
 
 export default function DocumentViewer({ children }) {
-    const [ref, setRef] = useState(null);                   // State to hold iframe reference
-    const container = ref?.contentWindow?.document?.body;   // Get iframe body
+    const iframeRef = useRef(null);
+    const [portalTarget, setPortalTarget] = useState(null);
 
+    // Set up iframe on component mount
     useEffect(() => {
-        if (!ref?.contentWindow?.document) return;
+        if (!iframeRef.current) return;
         
-        const iframeDoc = ref.contentWindow.document;
-        const head = iframeDoc.head;
+        const iframe = iframeRef.current;
+        const iframeDoc = iframe.contentDocument || iframe.contentWindow?.document;
 
-        // Inject Tailwind CSS into the iframe
-        const tailwindLink = iframeDoc.createElement('link');
-        tailwindLink.rel = 'stylesheet';
-        tailwindLink.href = "https://cdn.tailwindcss.com";
+        // Create target div for React portal
+        const root = iframeDoc.createElement('div');
+        root.id = 'portal-root';
+        iframeDoc.body.appendChild(root);
+        setPortalTarget(root);
 
-        head.appendChild(tailwindLink);
-        
-    }, [ref]);
+        // iframe head ref for injecting styles
+        const head = iframeDoc.head
+
+        // Inject CSS into the iframe
+        // Next.js bundles all CSS dependencies into its own stylesheets, we only need to copy those.
+        document.querySelectorAll('link[rel="stylesheet"]').forEach(sheet => {
+            if (!sheet.href?.includes('_next')) return;     // Skip non-Next.js styles
+            const link = sheet.cloneNode(true);             // Clone the stylesheet node
+            iframeDoc.head.appendChild(link);               // Append cloned link to iframe
+        });
+
+    }, []);
 
     return (
-        <iframe ref={setRef} style={{ width: "100%", height: "600px", border: "none" }}>
-            {container && createPortal(children, container)}
+        <iframe ref={iframeRef} title="Resume Document" style={{ width: '794px', height: '1123px', border: 'none' }}>
+            {portalTarget && createPortal(children, portalTarget)}
         </iframe>
     );
 }
