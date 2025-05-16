@@ -15,7 +15,8 @@ export default function DocumentViewer({ children }) {
         // Inject Tailwind CSS into the iframe
         const tailwindLink = iframeDoc.createElement('link');
         tailwindLink.rel = 'stylesheet';
-        tailwindLink.href = 'https://cdn.jsdelivr.net/npm/tailwindcss@3.3.3/dist/tailwind.min.css';
+        tailwindLink.href = "https://cdn.tailwindcss.com";
+
         head.appendChild(tailwindLink);
         
     }, [ref]);
