@@ -3,29 +3,26 @@ import { useEffect, useState } from "react";
 import { createPortal } from "react-dom";
 
 export default function DocumentViewer({ children }) {
-    
-    const [ref, setRef] = useState(null);                   // State to hold the iframe reference
-    const container = ref?.contentWindow?.document?.body    // Get the body of the iframe document
+    const [ref, setRef] = useState(null);                   // State to hold iframe reference
+    const container = ref?.contentWindow?.document?.body;   // Get iframe body
 
     useEffect(() => {
-        if (!iframeDocument) return;
+        if (!ref?.contentWindow?.document) return;
+        
+        const iframeDoc = ref.contentWindow.document;
+        const head = iframeDoc.head;
 
-        const head = iframeDocument.head;
+        // Inject Tailwind CSS into the iframe
+        const tailwindLink = iframeDoc.createElement('link');
+        tailwindLink.rel = 'stylesheet';
+        tailwindLink.href = 'https://cdn.jsdelivr.net/npm/tailwindcss@3.3.3/dist/tailwind.min.css';
+        head.appendChild(tailwindLink);
+        
+    }, [ref]);
 
-        // Copy all stylesheets from the main document
-        document.querySelectorAll('link[rel="stylesheet"]').forEach(sheet => {
-            const clonedSheet = iframeDocument.createElement('link');
-            clonedSheet.rel = sheet.rel;
-            clonedSheet.href = sheet.href;
-            head.appendChild(clonedSheet);
-        });
-
-    }, [iframeDocument]);
-    
     return (
-        <iframe ref={setRef}>
-            {/* Use a portal to render the children inside the iframe */}
-            { container && createPortal(children, container) }
+        <iframe ref={setRef} style={{ width: "100%", height: "600px", border: "none" }}>
+            {container && createPortal(children, container)}
         </iframe>
     );
 }
