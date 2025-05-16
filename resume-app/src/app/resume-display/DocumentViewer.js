@@ -1,6 +1,7 @@
 "use client";
 import { useRef, useState, useEffect } from 'react';
 import { createPortal } from 'react-dom';
+import { useContentHeight } from '@/hooks/useContentHeight';
 
 export default function DocumentViewer({ children }) {
     const iframeRef = useRef(null);
@@ -32,15 +33,20 @@ export default function DocumentViewer({ children }) {
 
     }, []);
 
+    // Dynamically calculate container height using useContentHeight hook
+    let contentHeight = useContentHeight(iframeRef, 1123); // Min A4 height
+
     return (
-        <iframe ref={iframeRef} title="Resume Document" style={{ width: '100%', height: '100%', border: 'none' }}>
-            {/* Wrap our content in a div that emulates the A4 page */}
-                {portalTarget && createPortal(
-                    <div className="a4-page">
-                        {children}
-                    </div>,
-                    portalTarget
-                )}
+        <iframe 
+            ref={iframeRef} 
+            title="Resume Document" 
+            style={{ 
+                width: '794px', 
+                height: `${contentHeight}px`, 
+                border: 'none' 
+            }}
+        >
+            {portalTarget && createPortal(children,portalTarget)}
         </iframe>
     );
 }
