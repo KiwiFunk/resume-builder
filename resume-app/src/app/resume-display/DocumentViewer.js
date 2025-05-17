@@ -55,34 +55,43 @@ export default function DocumentViewer({ children, scale = 100 }) {
     // Calculate scaling
     const scaleFactor = scale / 100;
     const containerHeight = contentHeight * scaleFactor;
+    const containerWidth = 794 * scaleFactor; // A4 width in px
 
     return (
-        /* Outer wrapper handles container size when scaled. Transfom affects visual size, not actual container dimensions */
-        <div style={{ height: `${containerHeight}px`, overflow: scaleFactor < 1 ? 'hidden' : 'visible' }}>
-
-            {/* Inner wrapper handles document styling and display */}
-            <div
-                style ={{
-                    boxShadow: '0 4px 20px rgba(0, 0, 0, 0.15)',
-                    borderRadius: '8px',
-                    backgroundColor: `${pageColor}`,
-                    transform: `scale(${scaleFactor})`,
-                    transformOrigin: 'top center',
-                }}
-            >
+    <div className="flex justify-center">
+        {/* Fixed-width container sized exactly to match the scaled document */}
+        <div style={{ 
+            width: `${794 * scaleFactor}px`, 
+            height: `${contentHeight * scaleFactor}px`,
+            position: 'relative', // For absolute positioning
+            overflow: 'hidden'
+        }}>
+            {/* Absolutely positioned iframe with transform */}
+            <div style={{
+                position: 'absolute',
+                top: 0,
+                left: 0, 
+                width: '794px',
+                height: `${contentHeight}px`,
+                transform: `scale(${scaleFactor})`,
+                transformOrigin: 'top left', // Key change: transform from top-left
+                boxShadow: '0 4px 20px rgba(0, 0, 0, 0.15)',
+                borderRadius: '8px',
+                backgroundColor: pageColor,
+            }}>
                 <iframe 
                     ref={iframeRef} 
                     title="Resume Document" 
                     style={{ 
-                        width: '794px', 
-                        height: `${contentHeight}px`, 
+                        width: '100%',
+                        height: '100%',
                         border: 'none', 
                     }}
                 >
-                    {portalTarget && createPortal(children,portalTarget)}
+                    {portalTarget && createPortal(children, portalTarget)}
                 </iframe>
             </div>
-
         </div>
-    );
+    </div>
+);
 }

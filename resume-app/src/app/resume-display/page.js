@@ -6,17 +6,24 @@ import { useState, useEffect } from "react";
 import { getLocalData } from "@/utils/localData";
 import { getAllTemplates } from "@/templates";
 import DocumentViewer from "./DocumentViewer";
-
+import { useAutoScale } from "@/hooks/useAutoScale";
 
 export default function ResumeDisplayPage() {
   const router = useRouter();
-  const [data, setData] = useState(null);                               //State to hold user data 
-  const [isLoading, setIsLoading] = useState(true);                     //State to manage loading status
-  const [template, setTemplate] = useState("modern");                   //State to hold current template
-  const [scale, setScale] = useState(100);                              //State to manage zoom level  
-  const [availableTemplates, setAvailableTemplates] = useState([]);     //State to hold template options
+  const [data, setData] = useState(null);
+  const [isLoading, setIsLoading] = useState(true);
+  const [template, setTemplate] = useState("modern");
+  const [availableTemplates, setAvailableTemplates] = useState([]);
+  
+  // Auto-scale state
   const [autoScaleEnabled, setAutoScaleEnabled] = useState(true);
-
+  const [manualScale, setManualScale] = useState(100);
+  
+  // Get auto-calculated scale from hook when enabled
+  const autoScale = useAutoScale(autoScaleEnabled);
+  
+  // Use auto scale or manual scale based on the toggle
+  const scale = autoScaleEnabled ? autoScale : manualScale;
 
   useEffect(() => {
     // Load user data and preferred template if available
@@ -26,21 +33,25 @@ export default function ResumeDisplayPage() {
     setData(userData);
     setAvailableTemplates(templates);
     setIsLoading(false);
-  }, []);                                                               // Only run once on component mount
+  }, []);
 
   const handleTemplateChange = (e) => {
-    const newTemplate = e.target.value;
-    setTemplate(newTemplate);
-  };
-
-  const handleAutoScale = (newScale) => {
-    if (autoScaleEnabled) {
-      setScale(newScale);
-    }
+    setTemplate(e.target.value);
   };
 
   const toggleAutoScale = () => {
     setAutoScaleEnabled(prev => !prev);
+  };
+
+  const adjustManualScale = (delta) => {
+    if (autoScaleEnabled) {
+      // If auto-scale is enabled, first disable it and set manual scale to current auto scale
+      setAutoScaleEnabled(false);
+      setManualScale(prev => Math.max(30, Math.min(150, autoScale + delta)));
+    } else {
+      // If already in manual mode, just adjust the scale
+      setManualScale(prev => Math.max(30, Math.min(150, prev + delta)));
+    }
   };
 
   // LOADING PAGE
@@ -83,7 +94,7 @@ export default function ResumeDisplayPage() {
     <main className="min-h-screen bg-gradient-to-br from-gray-50 to-gray-100 pb-8">
 
       {/* Top toolbar */}
-      <div className="sticky top-0 z-50 bg-white shadow-md py-3 mb-8 backdrop-blur">
+      <div className="sticky top-0 z-10 bg-white shadow-md py-3 mb-8 backdrop-blur">
         <div className="container mx-auto max-w-5xl px-4 flex justify-between items-center">
           {/* Navigation */}
           <div className="flex items-center space-x-4">
@@ -175,7 +186,7 @@ export default function ResumeDisplayPage() {
               <div className="flex items-center text-gray-600">
                 <button
                   className="px-2 py-1 bg-gray-100 hover:bg-gray-200 rounded-l border border-gray-300"
-                  onClick={() => setScale(Math.max(50, scale - 10))}
+                  onClick={() => adjustManualScale(-10)}
                 >
                   <i className="bi bi-dash"></i>
                 </button>
@@ -184,22 +195,18 @@ export default function ResumeDisplayPage() {
                 </span>
                 <button
                   className="px-2 py-1 bg-gray-100 hover:bg-gray-200 rounded-r border border-gray-300"
-                  onClick={() => setScale(Math.min(150, scale + 10))}
+                  onClick={() => adjustManualScale(10)}
                 >
                   <i className="bi bi-plus"></i>
                 </button>
               </div>
             </div>
-
           </div>
         </div>
 
         {/* Resume display section */}
-        <div className="flex justify-center">
-          <DocumentViewer 
-            scale={scale} 
-            onAutoScale={handleAutoScale}
-          >
+        <div className="flex justify-center mb-2 margin-auto">
+          <DocumentViewer scale={scale}>
             <DisplayResume data={data} template={template} />
           </DocumentViewer>
         </div>
