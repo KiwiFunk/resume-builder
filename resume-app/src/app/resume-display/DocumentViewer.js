@@ -31,6 +31,7 @@ export default function DocumentViewer({ children, scale = 100 }) {
         styleTag.textContent = `
             body {
                 background-color: transparent !important;
+                overflow: hidden !important;
             }
             #portal-root {
             /* I have no idea why the bottom margin is also applying to the top - portal related issue? */
@@ -66,16 +67,16 @@ export default function DocumentViewer({ children, scale = 100 }) {
             position: 'relative', // For absolute positioning
             overflow: 'hidden'
         }}>
-            {/* Absolutely positioned iframe with transform */}
+            {/* Inner wrapper acts as document page styling */}
             <div style={{
                 position: 'absolute',
                 top: 0,
                 left: 0, 
-                width: '794px',
+                width: '794px',                 // A4 width in px
                 height: `${contentHeight}px`,
                 transform: `scale(${scaleFactor})`,
-                transformOrigin: 'top left', // Key change: transform from top-left
-                boxShadow: '0 4px 20px rgba(0, 0, 0, 0.15)',
+                transformOrigin: 'top left', 
+                boxShadow: '0 4px 20px rgba(0, 0, 0, 0.18)',
                 borderRadius: '8px',
                 backgroundColor: pageColor,
             }}>
