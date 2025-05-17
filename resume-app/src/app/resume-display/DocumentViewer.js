@@ -3,7 +3,7 @@ import { useRef, useState, useEffect } from 'react';
 import { createPortal } from 'react-dom';
 import { useContentHeight } from '@/hooks/useContentHeight';
 
-export default function DocumentViewer({ children }) {
+export default function DocumentViewer({ children, scale }) {
     const iframeRef = useRef(null);
     const [portalTarget, setPortalTarget] = useState(null);
 
@@ -52,13 +52,18 @@ export default function DocumentViewer({ children }) {
     // Dynamically calculate container height using useContentHeight hook
     let contentHeight = useContentHeight(iframeRef, 1123); // Min A4 height
 
+    // Calculate scale
+    const scaleFactor = scale / 100;
+
     return (
-        /* The outer div acts like a document page */
+        /* The outer div acts like a document page and handles transform */
         <div
             style ={{
                 boxShadow: '0 4px 20px rgba(0, 0, 0, 0.15)',
                 borderRadius: '8px',
                 backgroundColor: `${pageColor}`,
+                transform: `scale(${scaleFactor})`,
+                transformOrigin: 'top center',
             }}
         >
             <iframe 
