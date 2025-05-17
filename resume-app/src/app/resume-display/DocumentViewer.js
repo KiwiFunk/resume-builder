@@ -3,7 +3,7 @@ import { useRef, useState, useEffect } from 'react';
 import { createPortal } from 'react-dom';
 import { useContentHeight } from '@/hooks/useContentHeight';
 
-export default function DocumentViewer({ children, scale }) {
+export default function DocumentViewer({ children, scale = 100 }) {
     const iframeRef = useRef(null);
     const [portalTarget, setPortalTarget] = useState(null);
 
