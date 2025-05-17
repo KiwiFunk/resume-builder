@@ -25,15 +25,6 @@ export default function DocumentViewer({ children }) {
         // iframe head ref for injecting styles
         const head = iframeDoc.head
 
-        // Apply Styling to the portal-root
-        const style = iframeDoc.createElement('style');
-        style.textContent = `
-            #portal-root {
-                background-color: ${pageColor};
-            }
-        `;
-        iframeDoc.head.appendChild(style);
-
         // Inject CSS into the iframe
         // Next.js bundles all CSS dependencies into its own stylesheets, we only need to copy those.
         document.querySelectorAll('link[rel="stylesheet"]').forEach(sheet => {
@@ -58,10 +49,6 @@ export default function DocumentViewer({ children }) {
                 width: '794px', 
                 height: `${contentHeight}px`, 
                 border: 'none', 
-                padding: `${margins}px`,
-                backgroundColor: pageColor,
-                boxShadow: '0 6px 20px rgba(0, 0, 0, 0.18)',
-                borderRadius: '8px',
             }}
         >
             {portalTarget && createPortal(children,portalTarget)}

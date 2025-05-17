@@ -5,7 +5,7 @@ import { useState, useEffect } from "react";
  * of the bottom-most element inside #portal-root.
  * 
  * - Uses MutationObserver to track DOM changes.
- * - Add Padding to prevent clipping
+ * - Add Padding to bottom to prevent scrollbars.
  * - Ensures updates only happen when necessary (prevents excessive re-renders).
  * 
  * @param {object} iframeRef - Ref to the iframe element.
@@ -15,7 +15,7 @@ import { useState, useEffect } from "react";
 export function useContentHeight(iframeRef, minHeight = 1123) {
     const [contentHeight, setContentHeight] = useState(minHeight);
 
-    const paddingBottom = 120;
+    const paddingBottom = 40;
 
     useEffect(() => {
         if (!iframeRef.current) return;
