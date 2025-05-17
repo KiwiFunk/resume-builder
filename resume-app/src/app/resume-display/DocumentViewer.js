@@ -7,7 +7,7 @@ export default function DocumentViewer({ children }) {
     const iframeRef = useRef(null);
     const [portalTarget, setPortalTarget] = useState(null);
 
-    const pageColor = '#F8F9FB'; // Default page color
+    const pageColor = '#fff'; // Default page color
 
     // Set up iframe on component mount
     useEffect(() => {
@@ -24,6 +24,23 @@ export default function DocumentViewer({ children }) {
 
         // iframe head ref for injecting styles
         const head = iframeDoc.head
+
+        // Inject a style tag to enforce background color
+        const styleTag = iframeDoc.createElement("style");
+        styleTag.textContent = `
+            body {
+                background-color: transparent !important;
+            }
+
+            #portal-root {
+            /* I have no idea why the bottom margin is also applying to the top - portal related issue? */
+                padding: ${margins/2}px ${margins}px 0px ${margins}px;
+            }
+
+
+        `;
+        iframeDoc.head.appendChild(styleTag);
+
 
         // Inject CSS into the iframe
         // Next.js bundles all CSS dependencies into its own stylesheets, we only need to copy those.
@@ -42,16 +59,25 @@ export default function DocumentViewer({ children }) {
     const margins = 42;
 
     return (
-        <iframe 
-            ref={iframeRef} 
-            title="Resume Document" 
-            style={{ 
-                width: '794px', 
-                height: `${contentHeight}px`, 
-                border: 'none', 
+        /* The outer div acts like a document page */
+        <div
+            style ={{
+                boxShadow: '0 4px 20px rgba(0, 0, 0, 0.15)',
+                borderRadius: '8px',
+                backgroundColor: `${pageColor}`,
             }}
         >
-            {portalTarget && createPortal(children,portalTarget)}
-        </iframe>
+            <iframe 
+                ref={iframeRef} 
+                title="Resume Document" 
+                style={{ 
+                    width: '794px', 
+                    height: `${contentHeight}px`, 
+                    border: 'none', 
+                }}
+            >
+                {portalTarget && createPortal(children,portalTarget)}
+            </iframe>
+        </div>
     );
 }
