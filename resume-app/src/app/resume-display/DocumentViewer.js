@@ -12,49 +12,48 @@ export default function DocumentViewer({ children, scale = 100 }) {
 
     // Set up iframe on component mount
     useEffect(() => {
-        if (!iframeRef.current) return;
-        
-        const iframe = iframeRef.current;
-        const iframeDoc = iframe.contentDocument || iframe.contentWindow?.document;
+        if (!iframeRef.current) return;             // Check if iframeRef is available
+        const iframe = iframeRef.current;           // Get iframe reference
 
-        // Create target div for React portal
-        const root = iframeDoc.createElement('div');
-        root.id = 'portal-root';
-        iframeDoc.body.appendChild(root);
-        setPortalTarget(root);
+        const handleLoad = () => {
+            const iframeDoc = iframe.contentDocument || iframe.contentWindow?.document;
 
-        // iframe head ref for injecting styles
-        const head = iframeDoc.head
+            // Create target div for React portal
+            const root = iframeDoc.createElement('div');
+            root.id = 'portal-root';
+            iframeDoc.body.appendChild(root);
+            setPortalTarget(root);
 
-        // Inject CSS styling for portal-root
-        const styleTag = iframeDoc.createElement("style");
-        styleTag.textContent = `
-            body {
-                background-color: transparent !important;
-                overflow: hidden !important;
-            }
-            #portal-root {
-            /* I have no idea why the bottom margin is also applying to the top - portal related issue? */
-                padding: ${margins/2}px ${margins}px 0px ${margins}px;
-            }
-        `;
-        iframeDoc.head.appendChild(styleTag);
+            // iframe head ref for injecting styles
+            const head = iframeDoc.head
 
-        // Inject CSS into the iframe
-        // Next.js bundles all CSS dependencies into its own stylesheets, we only need to copy those.
-        document.querySelectorAll('link[rel="stylesheet"]').forEach(sheet => {
-            if (!sheet.href?.includes('_next')) return;     // Skip non-Next.js styles
-            const link = sheet.cloneNode(true);             // Clone the stylesheet node
-            iframeDoc.head.appendChild(link);               // Append cloned link to iframe
-        });
+            // Inject CSS styling for portal-root
+            const styleTag = iframeDoc.createElement("style");
+            styleTag.textContent = `
+                body {
+                    background-color: transparent !important;
+                    overflow: hidden !important;
+                }
+                #portal-root {
+                /* I have no idea why the bottom margin is also applying to the top - portal related issue? */
+                    padding: ${margins/2}px ${margins}px 0px ${margins}px;
+                }
+            `;
+            iframeDoc.head.appendChild(styleTag);
 
-        // Cleanup function to remove portal target when component unmounts
-        return () => {
-            if (iframeDoc.body.contains(root)) {
-                iframeDoc.body.removeChild(root);
-            }
+            // Inject CSS into the iframe
+            // Next.js bundles all CSS dependencies into its own stylesheets, we only need to copy those.
+            document.querySelectorAll('link[rel="stylesheet"]').forEach(sheet => {
+                if (!sheet.href?.includes('_next')) return;     // Skip non-Next.js styles
+                const link = sheet.cloneNode(true);             // Clone the stylesheet node
+                iframeDoc.head.appendChild(link);               // Append cloned link to iframe
+            });
         };
 
+        // Add event listener
+        iframe.addEventListener("load", handleLoad);                    // Listen for iframe load, then run handleLoad
+        return () => iframe.removeEventListener("load", handleLoad);    // Cleanup event listener on unmount
+        
     }, []);
 
     // Dynamically calculate container height using useContentHeight hook
@@ -62,8 +61,6 @@ export default function DocumentViewer({ children, scale = 100 }) {
 
     // Calculate scaling
     const scaleFactor = scale / 100;
-    const containerHeight = contentHeight * scaleFactor;
-    const containerWidth = 794 * scaleFactor; // A4 width in px
 
     return (
     <div className="flex justify-center">
