@@ -36,6 +36,9 @@ export default function DocumentViewer({ children }) {
     // Dynamically calculate container height using useContentHeight hook
     let contentHeight = useContentHeight(iframeRef, 1123); // Min A4 height
 
+    // Margin size variable (We may allow for presets in future versions e.g Standard, Compact, etc.)
+    const margins = 42;
+
     return (
         <iframe 
             ref={iframeRef} 
@@ -43,8 +46,10 @@ export default function DocumentViewer({ children }) {
             style={{ 
                 width: '794px', 
                 height: `${contentHeight}px`, 
-                border: 'none',
-                overflow: 'hidden'
+                border: 'none', 
+                padding: `${margins}px`,
+                boxShadow: '0 6px 20px rgba(0, 0, 0, 0.18)',
+                borderRadius: '8px',
             }}
         >
             {portalTarget && createPortal(children,portalTarget)}
