@@ -52,31 +52,37 @@ export default function DocumentViewer({ children, scale }) {
     // Dynamically calculate container height using useContentHeight hook
     let contentHeight = useContentHeight(iframeRef, 1123); // Min A4 height
 
-    // Calculate scale
+    // Calculate scaling
     const scaleFactor = scale / 100;
+    const containerHeight = contentHeight * scaleFactor;
 
     return (
-        /* The outer div acts like a document page and handles transform */
-        <div
-            style ={{
-                boxShadow: '0 4px 20px rgba(0, 0, 0, 0.15)',
-                borderRadius: '8px',
-                backgroundColor: `${pageColor}`,
-                transform: `scale(${scaleFactor})`,
-                transformOrigin: 'top center',
-            }}
-        >
-            <iframe 
-                ref={iframeRef} 
-                title="Resume Document" 
-                style={{ 
-                    width: '794px', 
-                    height: `${contentHeight}px`, 
-                    border: 'none', 
+        /* Outer wrapper handles container size when scaled. Transfom affects visual size, not actual container dimensions */
+        <div style={{ height: `${containerHeight}px`, overflow: scaleFactor < 1 ? 'hidden' : 'visible' }}>
+
+            {/* Inner wrapper handles document styling and display */}
+            <div
+                style ={{
+                    boxShadow: '0 4px 20px rgba(0, 0, 0, 0.15)',
+                    borderRadius: '8px',
+                    backgroundColor: `${pageColor}`,
+                    transform: `scale(${scaleFactor})`,
+                    transformOrigin: 'top center',
                 }}
             >
-                {portalTarget && createPortal(children,portalTarget)}
-            </iframe>
+                <iframe 
+                    ref={iframeRef} 
+                    title="Resume Document" 
+                    style={{ 
+                        width: '794px', 
+                        height: `${contentHeight}px`, 
+                        border: 'none', 
+                    }}
+                >
+                    {portalTarget && createPortal(children,portalTarget)}
+                </iframe>
+            </div>
+
         </div>
     );
 }
