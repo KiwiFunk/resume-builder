@@ -43,7 +43,8 @@ export default function DocumentViewer({ children }) {
             style={{ 
                 width: '794px', 
                 height: `${contentHeight}px`, 
-                border: 'none' 
+                border: 'none',
+                overflow: 'hidden'
             }}
         >
             {portalTarget && createPortal(children,portalTarget)}

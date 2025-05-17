@@ -1,41 +1,47 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect } from "react";
 
-/* 
-This hook is used to calculate the content height of an iframe. 
-It uses the ResizeObserver API to observe changes in the iframe's content and updates the height accordingly. 
-The minimum height is set to 1123 pixels, which is the height of an A4 page. 
-*/
+/**
+ * Dynamically calculates the content height of an iframe based on the position
+ * of the bottom-most element inside #portal-root.
+ * 
+ * - Uses MutationObserver to track DOM changes.
+ * - Ensures updates only happen when necessary (prevents excessive re-renders).
+ * 
+ * @param {object} iframeRef - Ref to the iframe element.
+ * @param {number} minHeight - Minimum height for the iframe (default: A4 page height in px).
+ * @returns {number} Calculated iframe content height.
+ */
 export function useContentHeight(iframeRef, minHeight = 1123) {
-    const [contentHeight, setContentHeight] = useState(minHeight); // Min A4 height
+    const [contentHeight, setContentHeight] = useState(minHeight);
 
     useEffect(() => {
         if (!iframeRef.current) return;
+        const doc = iframeRef.current.contentDocument;
+        if (!doc) return;
 
-        const iframeDoc = iframeRef.current.contentDocument;
-        if (!iframeDoc) return;
+        const calculateHeight = () => {
+            try {
+                const elements = [...doc.querySelectorAll("#portal-root *")];
+                const maxBottom = elements.reduce(
+                    (height, el) => Math.max(height, el.getBoundingClientRect().bottom),
+                    minHeight
+                );
 
-        const updateHeight = () => {
-            const newHeight = Math.min(
-                Math.max(iframeDoc.documentElement.scrollHeight, minHeight),
-                iframeDoc.documentElement.clientHeight + 50 // Adds a small buffer instead of excessive space
-            );
-
-            setContentHeight(newHeight);
+                setContentHeight(prev => (Math.abs(maxBottom - prev) > 10 ? maxBottom : prev));
+            } catch (e) {
+                console.error("Error measuring elements:", e);
+            }
         };
 
-        // ResizeObserver for visual changes
-        const resizeObserver = new ResizeObserver(updateHeight);
-        resizeObserver.observe(iframeDoc.documentElement);
+        // Initial height calculation after a slight delay to ensure rendering is complete
+        setTimeout(calculateHeight, 100);
 
-        // MutationObserver for content changes
-        const mutationObserver = new MutationObserver(updateHeight);
-        mutationObserver.observe(iframeDoc.body, { childList: true, subtree: true });
-
-        return () => {
-            resizeObserver.disconnect();
-            mutationObserver.disconnect();
-        };
-    }, [iframeRef]);
+        // Observe mutations and debounce height updates
+        const observer = new MutationObserver(() => setTimeout(calculateHeight, 100));
+        observer.observe(doc.body, { childList: true, subtree: true });
+        // Clean up observer on unmount
+        return () => observer.disconnect();
+    }, [iframeRef, minHeight]);
 
     return contentHeight;
 }
