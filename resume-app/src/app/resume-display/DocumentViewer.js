@@ -7,7 +7,8 @@ export default function DocumentViewer({ children }) {
     const iframeRef = useRef(null);
     const [portalTarget, setPortalTarget] = useState(null);
 
-    const pageColor = '#fff'; // Default page color
+    const pageColor = '#fff';   // Page color
+    const margins = 42;         // Variable to set page margins (Control with prop. Compact, wide, etc.)
 
     // Set up iframe on component mount
     useEffect(() => {
@@ -25,22 +26,18 @@ export default function DocumentViewer({ children }) {
         // iframe head ref for injecting styles
         const head = iframeDoc.head
 
-        // Inject a style tag to enforce background color
+        // Inject CSS styling for portal-root
         const styleTag = iframeDoc.createElement("style");
         styleTag.textContent = `
             body {
                 background-color: transparent !important;
             }
-
             #portal-root {
             /* I have no idea why the bottom margin is also applying to the top - portal related issue? */
                 padding: ${margins/2}px ${margins}px 0px ${margins}px;
             }
-
-
         `;
         iframeDoc.head.appendChild(styleTag);
-
 
         // Inject CSS into the iframe
         // Next.js bundles all CSS dependencies into its own stylesheets, we only need to copy those.
@@ -54,9 +51,6 @@ export default function DocumentViewer({ children }) {
 
     // Dynamically calculate container height using useContentHeight hook
     let contentHeight = useContentHeight(iframeRef, 1123); // Min A4 height
-
-    // Margin size variable (We may allow for presets in future versions e.g Standard, Compact, etc.)
-    const margins = 42;
 
     return (
         /* The outer div acts like a document page */
