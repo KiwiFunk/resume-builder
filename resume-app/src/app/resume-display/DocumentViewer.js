@@ -48,6 +48,13 @@ export default function DocumentViewer({ children, scale = 100 }) {
             iframeDoc.head.appendChild(link);               // Append cloned link to iframe
         });
 
+        // Cleanup function to remove portal target when component unmounts
+        return () => {
+            if (iframeDoc.body.contains(root)) {
+                iframeDoc.body.removeChild(root);
+            }
+        };
+
     }, []);
 
     // Dynamically calculate container height using useContentHeight hook
