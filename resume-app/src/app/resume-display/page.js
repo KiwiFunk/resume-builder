@@ -17,7 +17,7 @@ export default function ResumeDisplayPage() {
   const [isLoading, setIsLoading] = useState(true);
   const [template, setTemplate] = useState("modern");
   const [availableTemplates, setAvailableTemplates] = useState([]);
-  const [margins, setMargins] = useState("70"); 
+  const [margins, setMargins] = useState(70); 
 
   // Auto-scale state
   const [autoScaleEnabled, setAutoScaleEnabled] = useState(true);
