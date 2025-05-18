@@ -34,7 +34,7 @@ export default function DocumentViewer({ children, scale = 100, margins }) {
                     overflow: hidden !important;
                 }
                 #portal-root {
-                    padding: ${margins}px ${margins}px ${margins/2}px ${margins}px;
+                    padding: ${margins}px ${margins}px 0px ${margins}px;
                 }
             `;
             iframeDoc.head.appendChild(styleTag);
@@ -55,7 +55,7 @@ export default function DocumentViewer({ children, scale = 100, margins }) {
     }, [margins]); // Re-run effect if margins change
 
     // Dynamically calculate container height using useContentHeight hook
-    let contentHeight = useContentHeight(iframeRef, 1123); // Min A4 height
+    let contentHeight = useContentHeight(iframeRef, 1123, margins); // Min A4 height
 
     // Calculate scaling
     const scaleFactor = scale / 100;

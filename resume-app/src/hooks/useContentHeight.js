@@ -3,7 +3,7 @@ import { useState, useEffect } from "react";
 /**
  * Dynamically calculates the content height of an iframe.
  */
-export function useContentHeight(iframeRef, minHeight = 1123) {
+export function useContentHeight(iframeRef, minHeight = 1123, margins) {
     const [contentHeight, setContentHeight] = useState(minHeight);
     const paddingBottom = 40;
 
@@ -64,7 +64,7 @@ export function useContentHeight(iframeRef, minHeight = 1123) {
         // Clean up interval on component unmount/change
         return () => clearInterval(intervalId);
         
-    }, [iframeRef, minHeight]);
+    }, [iframeRef, minHeight, margins]);
 
     return contentHeight;
 }
