@@ -51,7 +51,8 @@ export default function DocumentViewer({ children, scale = 100 }) {
         };
 
         // Add event listener
-        iframe.addEventListener("load", handleLoad);                    // Listen for iframe load, then run handleLoad
+        iframe.addEventListener("load", handleLoad);                    // Listen for iframe load, then run handleLoad 
+        iframe.src = 'about:blank';                                     // Set src attribute to trigger load event in Chrome/Blink
         return () => iframe.removeEventListener("load", handleLoad);    // Cleanup event listener on unmount
 
     }, []);
