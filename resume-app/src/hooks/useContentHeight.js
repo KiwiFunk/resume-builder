@@ -1,49 +1,69 @@
 import { useState, useEffect } from "react";
 
 /**
- * Dynamically calculates the content height of an iframe based on the position
- * of the bottom-most element inside #portal-root.
- * 
- * - Uses MutationObserver to track DOM changes.
- * - Add Padding to bottom to prevent scrollbars.
- * - Ensures updates only happen when necessary (prevents excessive re-renders).
- * 
- * @param {object} iframeRef - Ref to the iframe element.
- * @param {number} minHeight - Minimum height for the iframe (default: A4 page height in px).
- * @returns {number} Calculated iframe content height.
+ * Dynamically calculates the content height of an iframe.
  */
 export function useContentHeight(iframeRef, minHeight = 1123) {
     const [contentHeight, setContentHeight] = useState(minHeight);
-
     const paddingBottom = 40;
 
     useEffect(() => {
         if (!iframeRef.current) return;
-        const doc = iframeRef.current.contentDocument;
-        if (!doc) return;
-
-        const calculateHeight = () => {
+        
+        // Wait for document to be available and portal root to exist
+        const checkDocumentReady = () => {
             try {
-                const elements = [...doc.querySelectorAll("#portal-root *")];
-                const maxBottom = elements.reduce(
-                    (height, el) => Math.max(height, el.getBoundingClientRect().bottom),
-                    minHeight
-                );
-
-                setContentHeight(prev => (Math.abs(maxBottom - prev) > 10 ? maxBottom + paddingBottom : prev));
+                const doc = iframeRef.current.contentDocument || iframeRef.current.contentWindow?.document;
+                if (!doc || !doc.querySelector('#portal-root')) return false;
+                return doc;
             } catch (e) {
-                console.error("Error measuring elements:", e);
+                return false;
             }
         };
+        
+        // Calculate height function
+        const calculateHeight = () => {
+            const doc = checkDocumentReady();
+            if (!doc) return false;
+            
+            try {
+                const elements = [...doc.querySelectorAll("#portal-root *")];
+                if (elements.length === 0) return false;
+                
+                const maxBottom = elements.reduce(
+                    (height, el) => Math.max(height, el.getBoundingClientRect().bottom),
+                    0
+                );
 
-        // Initial height calculation after a slight delay to ensure rendering is complete
-        setTimeout(calculateHeight, 100);
-
-        // Observe mutations and debounce height updates
-        const observer = new MutationObserver(() => setTimeout(calculateHeight, 100));
-        observer.observe(doc.body, { childList: true, subtree: true });
-        // Clean up observer on unmount
-        return () => observer.disconnect();
+                setContentHeight(Math.max(maxBottom + paddingBottom, minHeight));
+                return true;
+            } catch (e) {
+                console.error("Error measuring elements:", e);
+                return false;
+            }
+        };
+        
+        // Try every 50ms until successful or timeout (20 attempts = 2 seconds)
+        let attempts = 0;
+        const intervalId = setInterval(() => {
+            if (calculateHeight() || attempts++ > 20) {
+                clearInterval(intervalId);
+                
+                // Once successful, set up MutationObserver for future changes
+                const doc = checkDocumentReady();
+                if (doc) {
+                    const observer = new MutationObserver(() => setTimeout(calculateHeight, 50));
+                    observer.observe(doc.body, { childList: true, subtree: true });
+                    
+                    // Clean up observer on component unmount/change
+                    return () => observer.disconnect();
+                }
+            }
+        }, 50);
+        
+        // Clean up interval on component unmount/change
+        return () => clearInterval(intervalId);
+        
     }, [iframeRef, minHeight]);
 
     return contentHeight;

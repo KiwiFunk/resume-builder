@@ -36,7 +36,7 @@ export default function DocumentViewer({ children, scale = 100 }) {
                 }
                 #portal-root {
                 /* I have no idea why the bottom margin is also applying to the top - portal related issue? */
-                    padding: ${margins/2}px ${margins}px 0px ${margins}px;
+                    padding: ${margins / 2}px ${margins}px 0px ${margins}px;
                 }
             `;
             iframeDoc.head.appendChild(styleTag);
@@ -53,7 +53,7 @@ export default function DocumentViewer({ children, scale = 100 }) {
         // Add event listener
         iframe.addEventListener("load", handleLoad);                    // Listen for iframe load, then run handleLoad
         return () => iframe.removeEventListener("load", handleLoad);    // Cleanup event listener on unmount
-        
+
     }, []);
 
     // Dynamically calculate container height using useContentHeight hook
@@ -63,40 +63,40 @@ export default function DocumentViewer({ children, scale = 100 }) {
     const scaleFactor = scale / 100;
 
     return (
-    <div className="flex justify-center">
-        {/* Fixed-width container sized exactly to match the scaled document */}
-        <div style={{ 
-            width: `${794 * scaleFactor}px`, 
-            height: `${contentHeight * scaleFactor}px`,
-            position: 'relative', // For absolute positioning
-            overflow: 'hidden',
-            boxShadow: '0 4px 20px rgba(0, 0, 0, 0.18)',
-            borderRadius: '8px',
-        }}>
-            {/* Inner wrapper acts as document page styling */}
+        <div className="flex justify-center">
+            {/* Fixed-width container sized exactly to match the scaled document */}
             <div style={{
-                position: 'absolute',
-                top: 0,
-                left: 0, 
-                width: '794px',                 // A4 width in px
-                height: `${contentHeight}px`,
-                transform: `scale(${scaleFactor})`,
-                transformOrigin: 'top left', 
-                backgroundColor: pageColor,
+                width: `${794 * scaleFactor}px`,
+                height: `${contentHeight * scaleFactor}px`,
+                position: 'relative', // For absolute positioning
+                overflow: 'hidden',
+                boxShadow: '0 4px 20px rgba(0, 0, 0, 0.18)',
+                borderRadius: '8px',
             }}>
-                <iframe 
-                    ref={iframeRef} 
-                    title="Resume Document" 
-                    style={{ 
-                        width: '100%',
-                        height: '100%',
-                        border: 'none', 
-                    }}
-                >
-                    {portalTarget && createPortal(children, portalTarget)}
-                </iframe>
+                {/* Inner wrapper acts as document page styling */}
+                <div style={{
+                    position: 'absolute',
+                    top: 0,
+                    left: 0,
+                    width: '794px',                 // A4 width in px
+                    height: `${contentHeight}px`,
+                    transform: `scale(${scaleFactor})`,
+                    transformOrigin: 'top left',
+                    backgroundColor: pageColor,
+                }}>
+                    <iframe
+                        ref={iframeRef}
+                        title="Resume Document"
+                        style={{
+                            width: '100%',
+                            height: '100%',
+                            border: 'none',
+                        }}
+                    >
+                        {portalTarget && createPortal(children, portalTarget)}
+                    </iframe>
+                </div>
             </div>
         </div>
-    </div>
-);
+    );
 }
