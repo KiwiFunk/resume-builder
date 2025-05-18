@@ -9,6 +9,7 @@ import DocumentViewer from "./DocumentViewer";
 import { useAutoScale } from "@/hooks/useAutoScale";
 import LoadingPage from "./LoadingPage";
 import NoDataPage from "./NoDataPage";
+import ResumeToolbar from "./EditingToolbar";
 
 export default function ResumeDisplayPage() {
   const router = useRouter();
@@ -131,77 +132,18 @@ export default function ResumeDisplayPage() {
       <div className="container mx-auto max-w-5xl px-4">
 
         {/* Resume display controls */}
-        <div className="bg-white rounded-lg shadow-md mb-4 p-4">
-          <div className="flex flex-wrap items-center justify-between gap-4">
-
-            {/* Template selection */}
-            <div className="flex items-center gap-3">
-              <label htmlFor="template" className="hidden sm:block text-sm font-medium text-gray-700">Template:</label>
-              <select
-                id="template"
-                value={template}
-                onChange={handleTemplateChange}
-                className="text-gray-600 bg-white border border-gray-300 rounded px-3 py-1.5 text-sm focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
-              >
-                {availableTemplates.map(tmpl => (
-                  <option key={tmpl.id} value={tmpl.id}>
-                    {tmpl.name}
-                  </option>
-                ))}
-              </select>
-            </div>
-            {/* Margin control */}
-            <div className="flex items-center gap-3">
-              <label htmlFor="margins" className="hidden sm:block text-sm font-medium text-gray-700">Margins:</label>
-              <select
-                id="margins"
-                className="text-gray-600 bg-white border border-gray-300 rounded px-3 py-1.5 text-sm focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
-                onChange={(e) => setMargins(parseInt(e.target.value))}
-              >
-                <option value="70">Normal</option>
-                <option value="40">Narrow</option>
-                <option value="100">Wide</option>
-              </select>
-            </div>
-
-            {/* Auto-fit toggle */}
-            <div className="flex items-center gap-2">
-              <span className="text-sm font-medium text-gray-700">Auto-fit:</span>
-              <button
-                onClick={toggleAutoScale}
-                className={`px-2 py-1 text-xs rounded-md ${autoScaleEnabled
-                    ? 'bg-blue-600 text-white'
-                    : 'bg-gray-200 text-gray-700'
-                  }`}
-                title={autoScaleEnabled ? "Disable auto-fit" : "Enable auto-fit"}
-              >
-                <i className={`bi ${autoScaleEnabled ? 'bi-check-lg' : 'bi-x-lg'}`}></i>
-              </button>
-            </div>
-
-            {/* Zoom control */}
-            <div className="flex items-center gap-3">
-              <label htmlFor="scale" className="hidden sm:block text-sm font-medium text-gray-700">Zoom:</label>
-              <div className="flex items-center text-gray-600">
-                <button
-                  className="px-2 py-1 bg-gray-100 hover:bg-gray-200 rounded-l border border-gray-300"
-                  onClick={() => adjustManualScale(-10)}
-                >
-                  <i className="bi bi-dash"></i>
-                </button>
-                <span className="px-3 py-1 border-t border-b border-gray-300">
-                  {scale}%
-                </span>
-                <button
-                  className="px-2 py-1 bg-gray-100 hover:bg-gray-200 rounded-r border border-gray-300"
-                  onClick={() => adjustManualScale(10)}
-                >
-                  <i className="bi bi-plus"></i>
-                </button>
-              </div>
-            </div>
-          </div>
-        </div>
+        <ResumeToolbar
+          template={template}
+          setTemplate={setTemplate}
+          availableTemplates={availableTemplates}
+          margins={margins}
+          setMargins={setMargins}
+          autoScaleEnabled={autoScaleEnabled}
+          toggleAutoScale={toggleAutoScale}
+          scale={scale}
+          adjustManualScale={adjustManualScale}
+          handleTemplateChange={handleTemplateChange}
+        />
 
         {/* Resume display section */}
         <div className="flex justify-center mb-2 margin-auto">
