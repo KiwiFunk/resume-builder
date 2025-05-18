@@ -14,14 +14,14 @@ export default function ResumeDisplayPage() {
   const [isLoading, setIsLoading] = useState(true);
   const [template, setTemplate] = useState("modern");
   const [availableTemplates, setAvailableTemplates] = useState([]);
-  
+
   // Auto-scale state
   const [autoScaleEnabled, setAutoScaleEnabled] = useState(true);
   const [manualScale, setManualScale] = useState(100);
-  
+
   // Get auto-calculated scale from hook when enabled
   const autoScale = useAutoScale(autoScaleEnabled);
-  
+
   // Use auto scale or manual scale based on the toggle
   const scale = autoScaleEnabled ? autoScale : manualScale;
 
@@ -44,14 +44,19 @@ export default function ResumeDisplayPage() {
   };
 
   const adjustManualScale = (delta) => {
-    if (autoScaleEnabled) {
-      // If auto-scale is enabled, first disable it and set manual scale to current auto scale
-      setAutoScaleEnabled(false);
-      setManualScale(prev => Math.max(30, Math.min(150, autoScale + delta)));
-    } else {
-      // If already in manual mode, just adjust the scale
-      setManualScale(prev => Math.max(30, Math.min(150, prev + delta)));
-    }
+    setAutoScaleEnabled(false); // Disable auto-scale when adjusting manually
+
+    setManualScale(prev => {
+      let newScale = autoScaleEnabled ? autoScale : prev + delta;
+
+      // Ensure correct rounding behavior based on delta direction
+      newScale = delta > 0
+        ? Math.ceil(newScale / 10) * 10  // Round UP when increasing scale
+        : Math.floor(newScale / 10) * 10; // Round DOWN when decreasing scale
+
+      // Keep within allowed range
+      return Math.max(30, Math.min(150, newScale));
+    });
   };
 
   // LOADING PAGE
@@ -143,7 +148,7 @@ export default function ResumeDisplayPage() {
 
       {/* Resume Container */}
       <div className="container mx-auto max-w-5xl px-4">
-        
+
         {/* Resume display controls */}
         <div className="bg-white rounded-lg shadow-md mb-4 p-4">
           <div className="flex flex-wrap items-center justify-between gap-4">
@@ -169,11 +174,10 @@ export default function ResumeDisplayPage() {
               <span className="text-sm font-medium text-gray-700">Auto-fit:</span>
               <button
                 onClick={toggleAutoScale}
-                className={`px-2 py-1 text-xs rounded-md ${
-                  autoScaleEnabled 
-                    ? 'bg-blue-600 text-white' 
+                className={`px-2 py-1 text-xs rounded-md ${autoScaleEnabled
+                    ? 'bg-blue-600 text-white'
                     : 'bg-gray-200 text-gray-700'
-                }`}
+                  }`}
                 title={autoScaleEnabled ? "Disable auto-fit" : "Enable auto-fit"}
               >
                 <i className={`bi ${autoScaleEnabled ? 'bi-check-lg' : 'bi-x-lg'}`}></i>
