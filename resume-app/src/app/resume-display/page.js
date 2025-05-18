@@ -155,7 +155,7 @@ export default function ResumeDisplayPage() {
 
             {/* Template selection */}
             <div className="flex items-center gap-3">
-              <label htmlFor="template" className="text-sm font-medium text-gray-700">Template:</label>
+              <label htmlFor="template" className="hidden sm:block text-sm font-medium text-gray-700">Template:</label>
               <select
                 id="template"
                 value={template}
@@ -186,7 +186,7 @@ export default function ResumeDisplayPage() {
 
             {/* Zoom control */}
             <div className="flex items-center gap-3">
-              <label htmlFor="scale" className="text-sm font-medium text-gray-700">Zoom:</label>
+              <label htmlFor="scale" className="hidden sm:block text-sm font-medium text-gray-700">Zoom:</label>
               <div className="flex items-center text-gray-600">
                 <button
                   className="px-2 py-1 bg-gray-100 hover:bg-gray-200 rounded-l border border-gray-300"
