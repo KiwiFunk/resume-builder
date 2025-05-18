@@ -3,12 +3,11 @@ import { useRef, useState, useEffect } from 'react';
 import { createPortal } from 'react-dom';
 import { useContentHeight } from '@/hooks/useContentHeight';
 
-export default function DocumentViewer({ children, scale = 100 }) {
+export default function DocumentViewer({ children, scale = 100, margins }) {
     const iframeRef = useRef(null);
     const [portalTarget, setPortalTarget] = useState(null);
 
     const pageColor = '#fff';   // Page color
-    const margins = 42;         // Variable to set page margins (Control with prop. Compact, wide, etc.)
 
     // Set up iframe on component mount
     useEffect(() => {
@@ -35,7 +34,7 @@ export default function DocumentViewer({ children, scale = 100 }) {
                     overflow: hidden !important;
                 }
                 #portal-root {
-                    padding: ${margins}px ${margins}px 0px ${margins}px;
+                    padding: ${margins}px ${margins}px ${margins/2}px ${margins}px;
                 }
             `;
             iframeDoc.head.appendChild(styleTag);
@@ -53,7 +52,7 @@ export default function DocumentViewer({ children, scale = 100 }) {
         iframe.addEventListener("load", handleLoad);                    // Listen for iframe load, then run handleLoad 
         iframe.src = 'about:blank';                                     // Set src attribute to trigger load event in Chrome/Blink
         return () => iframe.removeEventListener("load", handleLoad);    // Cleanup event listener on unmount
-    }, []);
+    }, [margins]); // Re-run effect if margins change
 
     // Dynamically calculate container height using useContentHeight hook
     let contentHeight = useContentHeight(iframeRef, 1123); // Min A4 height

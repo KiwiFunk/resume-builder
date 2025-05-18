@@ -16,6 +16,7 @@ export default function ResumeDisplayPage() {
   const [isLoading, setIsLoading] = useState(true);
   const [template, setTemplate] = useState("modern");
   const [availableTemplates, setAvailableTemplates] = useState([]);
+  const [margins, setMargins] = useState("70"); 
 
   // Auto-scale state
   const [autoScaleEnabled, setAutoScaleEnabled] = useState(true);
@@ -149,7 +150,21 @@ export default function ResumeDisplayPage() {
                 ))}
               </select>
             </div>
+            {/* Margin control */}
+            <div className="flex items-center gap-3">
+              <label htmlFor="margins" className="hidden sm:block text-sm font-medium text-gray-700">Margins:</label>
+              <select
+                id="margins"
+                className="text-gray-600 bg-white border border-gray-300 rounded px-3 py-1.5 text-sm focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+                onChange={(e) => setMargins(parseInt(e.target.value))}
+              >
+                <option value="70">Normal</option>
+                <option value="40">Narrow</option>
+                <option value="100">Wide</option>
+              </select>
+            </div>
 
+            {/* Auto-fit toggle */}
             <div className="flex items-center gap-2">
               <span className="text-sm font-medium text-gray-700">Auto-fit:</span>
               <button
@@ -190,7 +205,7 @@ export default function ResumeDisplayPage() {
 
         {/* Resume display section */}
         <div className="flex justify-center mb-2 margin-auto">
-          <DocumentViewer scale={scale}>
+          <DocumentViewer scale={scale} margins={margins}>
             <DisplayResume data={data} template={template} />
           </DocumentViewer>
         </div>
