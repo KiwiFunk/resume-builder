@@ -35,8 +35,7 @@ export default function DocumentViewer({ children, scale = 100 }) {
                     overflow: hidden !important;
                 }
                 #portal-root {
-                /* I have no idea why the bottom margin is also applying to the top - portal related issue? */
-                    padding: ${margins / 2}px ${margins}px 0px ${margins}px;
+                    padding: ${margins}px ${margins}px 0px ${margins}px;
                 }
             `;
             iframeDoc.head.appendChild(styleTag);
@@ -49,12 +48,11 @@ export default function DocumentViewer({ children, scale = 100 }) {
                 iframeDoc.head.appendChild(link);               // Append cloned link to iframe
             });
         };
-
+        
         // Add event listener
         iframe.addEventListener("load", handleLoad);                    // Listen for iframe load, then run handleLoad 
         iframe.src = 'about:blank';                                     // Set src attribute to trigger load event in Chrome/Blink
         return () => iframe.removeEventListener("load", handleLoad);    // Cleanup event listener on unmount
-
     }, []);
 
     // Dynamically calculate container height using useContentHeight hook
