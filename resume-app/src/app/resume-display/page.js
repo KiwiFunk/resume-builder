@@ -39,28 +39,30 @@ export default function ResumeDisplayPage() {
     setIsLoading(false);
   }, []);
 
-  const handleTemplateChange = (e) => {
-    setTemplate(e.target.value);
-  };
-
   const toggleAutoScale = () => {
     setAutoScaleEnabled(prev => !prev);
   };
 
   const adjustManualScale = (delta) => {
-    setAutoScaleEnabled(false); // Disable auto-scale when adjusting manually
-
-    setManualScale(prev => {
-      let newScale = autoScaleEnabled ? autoScale : prev + delta;
-
-      // Ensure correct rounding behavior based on delta direction
-      newScale = delta > 0
-        ? Math.ceil(newScale / 10) * 10  // Round UP when increasing scale
-        : Math.floor(newScale / 10) * 10; // Round DOWN when decreasing scale
-
-      // Keep within allowed range
-      return Math.max(30, Math.min(150, newScale));
-    });
+    // First capture the current scale value (whether auto or manual)
+    const currentScale = autoScaleEnabled ? autoScale : manualScale;
+    
+    // Disable auto-scale when adjusting manually
+    setAutoScaleEnabled(false);
+    
+    // Calculate new scale based on current visible scale + delta
+    const newScaleRaw = currentScale + delta;
+    
+    // Round the new scale to the nearest 10
+    const newScaleRounded = delta > 0
+      ? Math.floor(newScaleRaw / 10) * 10   
+      : Math.ceil(newScaleRaw / 10) * 10;  
+    
+    // Apply minimum 30% and maximum 150% constraints
+    const finalScale = Math.max(30, Math.min(150, newScaleRounded));
+    
+    // Set the new manual scale
+    setManualScale(finalScale);
   };
 
   // LOADING PAGE
@@ -142,7 +144,6 @@ export default function ResumeDisplayPage() {
           toggleAutoScale={toggleAutoScale}
           scale={scale}
           adjustManualScale={adjustManualScale}
-          handleTemplateChange={handleTemplateChange}
         />
 
         {/* Resume display section */}
