@@ -34,13 +34,36 @@ export default function EditingToolbar({
                     </select>
                 </div>
                 {/* Accent color selector */}
+                {/* Do not conditionally render */}
                 <div className="flex items-center px-3 h-full border-r border-gray-200">
-                    <label htmlFor="accentColor" className="text-xs font-medium text-gray-700 mr-2">Accent</label>
-                    <div 
-                        className={`w-6 h-6 rounded-full bg-gray-100 border-2 ${accentMenuOpen ? 'border-blue-500' : 'border-gray-200'}`}
+                    <label htmlFor="accentColor" className="text-xs font-medium text-gray-700 mr-2">
+                        Accent
+                    </label>
+
+                    {/* Toggle Button */}
+                    <div
+                        className={`w-6 h-6 rounded-full bg-gray-100 border-2 cursor-pointer ${accentMenuOpen ? "border-blue-500" : "border-gray-200"
+                            }`}
                         onClick={() => setAccentMenuOpen(!accentMenuOpen)}
                     ></div>
+
+                    {/* Animated Panel */}
+                    <div
+                        className={`
+                        ml-2 h-8 flex items-center overflow-hidden transition-all duration-300 ease-in-out
+                        ${accentMenuOpen ? "w-[96px] opacity-100" : "w-0 opacity-0"}
+                        `}
+                    >
+                        {["red", "green", "blue"].map((color) => (
+                            <div
+                                key={color}
+                                className={`w-6 h-6 rounded-full bg-${color}-500 cursor-pointer mr-2 last:mr-0`}
+                                onClick={() => setAccentMenuOpen(false)}
+                            ></div>
+                        ))}
+                    </div>
                 </div>
+
                 {/* Margin buttons with visual icons */}
                 <div className="flex items-center h-full px-3 border-r border-gray-200">
                     <span className="text-xs font-medium text-gray-700 mr-2">Margins</span>
