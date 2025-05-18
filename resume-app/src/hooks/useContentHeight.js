@@ -5,7 +5,7 @@ import { useState, useEffect } from "react";
  */
 export function useContentHeight(iframeRef, minHeight = 1123, margins) {
     const [contentHeight, setContentHeight] = useState(minHeight);
-    const paddingBottom = 40;
+    const paddingBottom = 60;
 
     useEffect(() => {
         if (!iframeRef.current) return;
@@ -43,7 +43,7 @@ export function useContentHeight(iframeRef, minHeight = 1123, margins) {
             }
         };
         
-        // Try every 50ms until successful or timeout (20 attempts = 2 seconds)
+        // Try every 60ms until successful or timeout (20 attempts = 2 seconds)
         let attempts = 0;
         const intervalId = setInterval(() => {
             if (calculateHeight() || attempts++ > 20) {
@@ -59,7 +59,7 @@ export function useContentHeight(iframeRef, minHeight = 1123, margins) {
                     return () => observer.disconnect();
                 }
             }
-        }, 50);
+        }, 60);
         
         // Clean up interval on component unmount/change
         return () => clearInterval(intervalId);
