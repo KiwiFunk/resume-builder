@@ -13,13 +13,14 @@ export default function EditingToolbar({
     adjustManualScale,
 }) {
     const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+    const [accentMenuOpen, setAccentMenuOpen] = useState(false);
 
     return (
         <div className="bg-white rounded-lg border border-gray-200 shadow-sm mb-4 overflow-hidden">
             {/* Toolbar for desktop and tablet - always visible */}
             <div className="hidden sm:flex items-center justify-center h-12 px-2 border-b border-gray-200 overflow-x-autoo">
                 {/* Template dropdown with compact styling */}
-                <div className="flex items-center px-1 h-full border-r border-gray-200">
+                <div className="flex items-center px-2 h-full border-r border-gray-200">
                     <label htmlFor="template" className="text-xs font-medium text-gray-700 mr-2">Template</label>
                     <select
                         id="template"
@@ -32,7 +33,14 @@ export default function EditingToolbar({
                         ))}
                     </select>
                 </div>
-
+                {/* Accent color selector */}
+                <div className="flex items-center px-3 h-full border-r border-gray-200">
+                    <label htmlFor="accentColor" className="text-xs font-medium text-gray-700 mr-2">Accent</label>
+                    <div 
+                        className={`w-6 h-6 rounded-full bg-gray-100 border-2 ${accentMenuOpen ? 'border-blue-500' : 'border-gray-200'}`}
+                        onClick={() => setAccentMenuOpen(!accentMenuOpen)}
+                    ></div>
+                </div>
                 {/* Margin buttons with visual icons */}
                 <div className="flex items-center h-full px-3 border-r border-gray-200">
                     <span className="text-xs font-medium text-gray-700 mr-2">Margins</span>
