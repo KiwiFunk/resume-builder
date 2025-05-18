@@ -69,7 +69,9 @@ export default function DocumentViewer({ children, scale = 100 }) {
             width: `${794 * scaleFactor}px`, 
             height: `${contentHeight * scaleFactor}px`,
             position: 'relative', // For absolute positioning
-            overflow: 'hidden'
+            overflow: 'hidden',
+            boxShadow: '0 4px 20px rgba(0, 0, 0, 0.18)',
+            borderRadius: '8px',
         }}>
             {/* Inner wrapper acts as document page styling */}
             <div style={{
@@ -80,8 +82,6 @@ export default function DocumentViewer({ children, scale = 100 }) {
                 height: `${contentHeight}px`,
                 transform: `scale(${scaleFactor})`,
                 transformOrigin: 'top left', 
-                boxShadow: '0 4px 20px rgba(0, 0, 0, 0.18)',
-                borderRadius: '8px',
                 backgroundColor: pageColor,
             }}>
                 <iframe 
