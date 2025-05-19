@@ -20,14 +20,14 @@ export default function EditingToolbar({
     const colorDotSize = 6; // Width of the color dot
     const colorDotMargin = 2; // Margin between dots
     const accentColors = [
-        { name: "Blue", hex: "#3b82f6" },
-        { name: "Red", hex: "#ef4444" },
-        { name: "Green", hex: "#22c55e" },
-        { name: "Yellow", hex: "#eab308" },
-        { name: "Purple", hex: "#a855f7" },
-        { name: "Pink",  hex: "#ec4899" },
-        { name: "Indigo", hex: "#6366f1" },
-        { name: "Teal", hex: "#14b8a6" }
+        { name: "Blue", hex: "#2563eb" },
+        { name: "Teal", hex: "#0d9488" },
+        { name: "Purple", hex: "#7c3aed" },
+        { name: "Green", hex: "#16a34a" },  
+        { name: "Red", hex: "#dc2626" },
+        { name: "Orange", hex: "#ea580c" },
+        { name: "Pink", hex: "#db2777" },    
+        { name: "Slate", hex: "#475569" }
     ];
 
     return (
