@@ -15,9 +15,20 @@ export default function EditingToolbar({
     const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
     const [accentMenuOpen, setAccentMenuOpen] = useState(false);
 
-    let colorDotSize = 6; // Width of the color dot
-    let colorDotMargin = 2; // Margin between dots
-    let numberOfColors = 3; // Number of colors in the accent menu
+    
+
+    const colorDotSize = 6; // Width of the color dot
+    const colorDotMargin = 2; // Margin between dots
+    const accentColors = [
+        { name: "Blue", value: "blue-500", hex: "#3b82f6" },
+        { name: "Red", value: "red-500", hex: "#ef4444" },
+        { name: "Green", value: "green-500", hex: "#22c55e" },
+        { name: "Yellow", value: "yellow-500", hex: "#eab308" },
+        { name: "Purple", value: "purple-500", hex: "#a855f7" },
+        { name: "Pink", value: "pink-500", hex: "#ec4899" },
+        { name: "Indigo", value: "indigo-500", hex: "#6366f1" },
+        { name: "Teal", value: "teal-500", hex: "#14b8a6" }
+    ];
 
     return (
         <div className="bg-white rounded-lg border border-gray-200 shadow-sm mb-4 overflow-hidden">
@@ -55,21 +66,23 @@ export default function EditingToolbar({
                     <div
                         className={`
                         ml-${colorDotMargin} h-8 flex items-center gap-2 overflow-hidden transition-all duration-300 ease-in-out            
-                        ${accentMenuOpen ? `w-${(colorDotSize + colorDotMargin) * numberOfColors} opacity-100` : "w-0 opacity-0"}
+                        ${accentMenuOpen ? `w-${(colorDotSize + colorDotMargin) * accentColors.length} opacity-100` : "w-0 opacity-0"}
                         `}
                     >
-                        {["red", "green", "blue"].map((color, index) => (
+                        {accentColors.map((color, index) => (
                             <div
-                                key={color}
+                                key={index}
                                 className={`
-                                w-${colorDotSize} h-${colorDotSize} rounded-full bg-${color}-500 cursor-pointer flex-shrink-0
+                                w-${colorDotSize} h-${colorDotSize} rounded-full cursor-pointer flex-shrink-0
                                 transition-all duration-300 ease-out
                                 `}
                                 style={{
+                                    backgroundColor: color.hex,
                                     transform: accentMenuOpen ? 'scale(1)' : 'scale(0.5)',
                                     opacity: accentMenuOpen ? 1 : 0,
-                                    transitionDelay: accentMenuOpen ? `${index * 100}ms` : '0ms'
+                                    transitionDelay: accentMenuOpen ? `${index * 45}ms` : '0ms'
                                 }}
+                                aria-label={color.name}
                                 onClick={() => setAccentMenuOpen(false)}
                             ></div>
                         ))}
