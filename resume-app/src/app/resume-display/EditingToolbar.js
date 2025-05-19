@@ -15,6 +15,10 @@ export default function EditingToolbar({
     const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
     const [accentMenuOpen, setAccentMenuOpen] = useState(false);
 
+    let colorDotSize = 6; // Width of the color dot
+    let colorDotMargin = 2; // Margin between dots
+    let numberOfColors = 3; // Number of colors in the accent menu
+
     return (
         <div className="bg-white rounded-lg border border-gray-200 shadow-sm mb-4 overflow-hidden">
             {/* Toolbar for desktop and tablet - always visible */}
@@ -46,18 +50,26 @@ export default function EditingToolbar({
                             }`}
                         onClick={() => setAccentMenuOpen(!accentMenuOpen)}
                     ></div>
-
-                    {/* Animated Panel */}
+                    
+                    {/* Width is multiples of 8. Dot is 6px, margin left is 2px */}
                     <div
                         className={`
-                        ml-2 h-8 flex items-center overflow-hidden transition-all duration-300 ease-in-out
-                        ${accentMenuOpen ? "w-[96px] opacity-100" : "w-0 opacity-0"}
+                        ml-${colorDotMargin} h-8 flex items-center gap-2 overflow-hidden transition-all duration-300 ease-in-out            
+                        ${accentMenuOpen ? `w-${(colorDotSize + colorDotMargin) * numberOfColors} opacity-100` : "w-0 opacity-0"}
                         `}
                     >
-                        {["red", "green", "blue"].map((color) => (
+                        {["red", "green", "blue"].map((color, index) => (
                             <div
                                 key={color}
-                                className={`w-6 h-6 rounded-full bg-${color}-500 cursor-pointer mr-2 last:mr-0`}
+                                className={`
+                                w-${colorDotSize} h-${colorDotSize} rounded-full bg-${color}-500 cursor-pointer flex-shrink-0
+                                transition-all duration-300 ease-out
+                                `}
+                                style={{
+                                    transform: accentMenuOpen ? 'scale(1)' : 'scale(0.5)',
+                                    opacity: accentMenuOpen ? 1 : 0,
+                                    transitionDelay: accentMenuOpen ? `${index * 100}ms` : '0ms'
+                                }}
                                 onClick={() => setAccentMenuOpen(false)}
                             ></div>
                         ))}
