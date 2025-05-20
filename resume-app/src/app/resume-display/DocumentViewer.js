@@ -58,7 +58,22 @@ export default function DocumentViewer({ children, scale = 100, margins }) {
         iframe.addEventListener("load", handleLoad);                    // Listen for iframe load, then run handleLoad 
         iframe.src = 'about:blank';                                     // Set src attribute to trigger load event in Chrome/Blink
         return () => iframe.removeEventListener("load", handleLoad);    // Cleanup event listener on unmount
-    }, [margins]); // Re-run effect if margins change
+    }, []); // Re-run effect if margins change
+
+    // Update margin styling when prop changes
+    useEffect(() => {
+        if (!portalTarget) return; // Ensure portalTarget exists
+
+        const iframeDoc = iframeRef.current?.contentDocument;
+        if (!iframeDoc) return;
+
+        // Select the portal-root element
+        const portalRoot = iframeDoc.getElementById('portal-root');
+        if (portalRoot) {
+            // Update with the new margins
+            portalRoot.style.padding = `${margins}px ${margins}px 0px ${margins}px`;
+        }
+    }, [margins, portalTarget]);
 
     // Dynamically calculate container height using useContentHeight hook
     let contentHeight = useContentHeight(iframeRef, 1123, margins); // Min A4 height
