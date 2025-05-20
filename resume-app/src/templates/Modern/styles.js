@@ -3,7 +3,7 @@ export const styles = {
   header: "flex flex-col md:flex-row gap-6 mb-8",
   contactContainer: "flex-grow",
   socialsContainer: "flex-shrink-0 min-w-[140px]",
-  sectionTitle: "text-lg font-bold text-blue-600 border-b border-blue-200 pb-2 mb-4",
+  sectionTitle: "text-lg font-bold text-[color:var(--accent)] border-b border-blue-200 pb-2 mb-4",
   section: "mb-6",
   summary: "mb-6 text-gray-700 leading-relaxed",
   
@@ -15,7 +15,7 @@ export const styles = {
     title: "text-lg text-[color:var(--accent)] mb-3",
     contactsContainer: "text-gray-700 space-y-1",
     contactItem: "flex items-center gap-2",
-    icon: "text-blue-500",
+    icon: "text-[color:var(--accent)]",
     showIcons: true
   },
 
