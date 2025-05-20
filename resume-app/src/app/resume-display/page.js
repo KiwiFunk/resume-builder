@@ -15,7 +15,7 @@ export default function ResumeDisplayPage() {
   const router = useRouter();
   const [data, setData] = useState(null);
   const [isLoading, setIsLoading] = useState(true);
-  const [template, setTemplate] = useState(null);
+  const [template, setTemplate] = useState({});
   const [availableTemplates, setAvailableTemplates] = useState([]);
   const [margins, setMargins] = useState(70); 
 

@@ -57,7 +57,8 @@ export const getAllTemplates = () => {
     id,
     name: template.name,
     description: template.description,
-    thumbnail: template.thumbnail
+    thumbnail: template.thumbnail,
+    useAccent: template.useAccent,
   }));
 };
 
