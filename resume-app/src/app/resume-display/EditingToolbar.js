@@ -81,9 +81,14 @@ export default function EditingToolbar({
                     {/* Toggle Button - shows the selected color */}
                     <button
                         data-color-toggle
-                        className={`w-6 h-6 rounded-full border-2 cursor-pointer ${accentMenuOpen ? "border-blue-500" : "border-gray-200"
-                            }`}
-                        style={{ backgroundColor: selectedColor.hex }}
+                        className={`w-6 h-6 rounded-full border-2 ${accentMenuOpen ? "border-blue-500" : "border-gray-200"}
+                            ${template?.useAccent === false ? "opacity-50" : "cursor-pointer"} 
+                            `}
+                        style={{
+                            backgroundColor: template?.useAccent === false 
+                                ? "#CBCBCB"
+                                : selectedColor.hex
+                        }}
                         onClick={() => setAccentMenuOpen(!accentMenuOpen)}
                         disabled={template.useAccent === false}
                         aria-expanded={accentMenuOpen}
