@@ -39,6 +39,12 @@ export default function DocumentViewer({ children, scale = 100, margins }) {
             `;
             iframeDoc.head.appendChild(styleTag);
 
+            // Inject Bootstrap Icons CDN
+            const bootstrapIconsStyle = iframeDoc.createElement('link');
+            bootstrapIconsStyle.rel = 'stylesheet';
+            bootstrapIconsStyle.href = 'https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css';
+            iframeDoc.head.appendChild(bootstrapIconsStyle);
+
             // Inject CSS into the iframe
             // Next.js bundles all CSS dependencies into its own stylesheets, we only need to copy those.
             document.querySelectorAll('link[rel="stylesheet"]').forEach(sheet => {
