@@ -62,8 +62,8 @@ export default function EditingToolbar({
                     <label htmlFor="template" className="text-xs font-medium text-gray-700 mr-2">Template</label>
                     <select
                         id="template"
-                        value={template}
-                        onChange={(e) => setTemplate(e.target.value)}
+                        value={template.id}
+                        onChange={(e) => setTemplate(availableTemplates.find(t => t.id === e.target.value))}
                         className="h-8 text-sm text-gray-700 bg-white border border-gray-200 rounded px-2 py-0 focus:outline-none focus:ring-1 focus:ring-blue-500"
                     >
                         {availableTemplates.map(tmpl => (
@@ -166,8 +166,8 @@ export default function EditingToolbar({
                     {/* Template selector (always visible on mobile) */}
                     <div className="flex items-center">
                         <select
-                            value={template}
-                            onChange={(e) => setTemplate(e.target.value)}
+                            value={template.id}
+                            onChange={(e) => setTemplate(availableTemplates.find(t => t.id === e.target.value))}
                             className="text-sm text-gray-700 border border-gray-200 rounded px-2 py-1"
                         >
                             {availableTemplates.map(tmpl => (

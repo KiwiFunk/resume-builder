@@ -3,7 +3,7 @@
 import { useState, useEffect, Suspense } from 'react';
 import { getTemplate } from "@/templates";
 
-export default function DisplayResume({ data, template = "modern" }) {
+export default function DisplayResume({ data, template }) {
   const [TemplateComponent, setTemplateComponent] = useState(null);
   const [loading, setLoading] = useState(true);
 
@@ -11,7 +11,7 @@ export default function DisplayResume({ data, template = "modern" }) {
     //Use async function to wait for the template to load before setting
     async function loadTemplate() {
       setLoading(true);
-      const Template = await getTemplate(template);
+      const Template = await getTemplate(template.id);
       setTemplateComponent(() => Template);
       setLoading(false);
     }
