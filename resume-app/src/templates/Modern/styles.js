@@ -3,7 +3,7 @@ export const styles = {
   header: "flex flex-col md:flex-row gap-6 mb-8",
   contactContainer: "flex-grow",
   socialsContainer: "flex-shrink-0 min-w-[140px]",
-  sectionTitle: "text-lg font-bold text-[color:var(--accent)] border-b border-blue-200 pb-2 mb-4",
+  sectionTitle: "text-lg font-bold text-[color:var(--accent)] border-b border-[color:var(--accent-light)] pb-2 mb-4",
   section: "mb-6",
   summary: "mb-6 text-gray-700 leading-relaxed",
   
@@ -20,12 +20,12 @@ export const styles = {
   },
 
   socials: {
-  container: "flex flex-col gap-2 mt-2",
-  socialItem: "flex items-center",
-  iconWrapper: "w-5 h-5 bg-[color:var(--accent)]",
-  link: "flex items-center gap-2 hover:text-blue-600 transition-colors",
-  linkText: "text-gray-700 text-sm",
-  showIcons: true
+    container: "flex flex-col gap-2 mt-2",
+    socialItem: "flex items-center",
+    iconWrapper: "w-5 h-5 bg-[color:var(--accent)]",
+    link: "flex items-center gap-2 hover:text-blue-600 transition-colors",
+    linkText: "text-gray-700 text-sm",
+    showIcons: true
   },
   
   skills: {
@@ -33,7 +33,7 @@ export const styles = {
     skillGroup: "",
     groupName: "font-semibold text-gray-800 mb-2",
     skillsList: "flex flex-wrap gap-2",
-    skill: "px-2 py-1 bg-blue-100 text-blue-800 text-sm rounded"
+    skill: "px-2 py-1 bg-[color:var(--accent-light)] text-[color:var(--accent)] text-sm rounded"
   },
   
   experience: {
@@ -48,12 +48,21 @@ export const styles = {
     dateRight: true // Keep dates on right
   },
 
+  projects: {
+      container: "space-y-6",
+      project: "mb-6",
+      title: "text-lg font-semibold text-gray-800",
+      skill: "bg-[color:var(--accent-light)] text-[color:var(--accent)] text-sm rounded px-2 py-0.5 mr-1",
+      description: "mt-2 text-gray-700 text-md",
+      urlLink: "text-[color:var(--accent)] ml-2 text-xs transition-colors"
+    },
+
   education: {
     container: "space-y-6",
     entry: "mb-4 p-4 rounded-lg bg-gray-50 hover:bg-gray-100 transition-colors",
     entryHeader: "flex flex-wrap justify-between items-start",
     degree: "font-semibold text-gray-900",
-    institution: "text-blue-600",
+    institution: "text-[color:var(--accent)]",
     location: "text-gray-700 text-sm",
     dateLocation: "text-xs text-gray-500 bg-gray-200/70 px-2 py-1 rounded-full",
     description: "mt-2 text-gray-700",
@@ -65,7 +74,7 @@ export const styles = {
     entry: "mb-4 p-4 rounded-lg bg-gray-50 hover:bg-gray-100 transition-colors",
     entryHeader: "flex flex-wrap justify-between items-start",
     course: "font-semibold text-gray-900",
-    institution: "text-blue-600 text-sm",
+    institution: "text-[color:var(--accent)] text-sm",
     date: "text-xs text-gray-500 bg-gray-200/70 px-2 py-1 rounded-full",
     description: "mt-2 text-gray-700 text-sm",
     dateRight: true // Modern style with aligned dates
