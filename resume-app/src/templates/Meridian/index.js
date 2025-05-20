@@ -11,15 +11,9 @@ import { styles } from './styles';
 
 export default function Creative({ data, accentColor }) {
   if (!data) return null;
-  
-  // Dynamic accent color support
-  const dynamicStyles = accentColor ? {
-    "--accent-color": accentColor,
-    "--accent-color-light": `${accentColor}1a`, // 10% opacity version
-  } : {};
 
   return (
-    <div className={styles.container} style={dynamicStyles}>
+    <div className={styles.container}>
       {/* Left sidebar */}
       <div className={styles.sidebar}>
         {/* Profile photo area (placeholder for future feature) */}
@@ -98,7 +92,7 @@ export default function Creative({ data, accentColor }) {
         {data.summary && (
           <div className={styles.summaryBanner}>
             <div className={styles.summarySectionTitle}>
-              <i className="bi bi-person-vcard"></i>
+              <i className={`bi bi-person-vcard ${styles.icon}`}></i>
               <h2>Profile</h2>
             </div>
             <p className={styles.summaryText}>{data.summary}</p>
@@ -109,7 +103,7 @@ export default function Creative({ data, accentColor }) {
         {data.experience && data.experience.length > 0 && (
           <div className={styles.contentSection}>
             <div className={styles.sectionTitleWrapper}>
-              <i className="bi bi-briefcase"></i>
+              <i className={`bi bi-briefcase ${styles.icon}`}></i>
               <h2 className={styles.sectionTitle}>Experience</h2>
             </div>
             <WorkExperience data={data} styles={styles.experience} />
@@ -120,7 +114,7 @@ export default function Creative({ data, accentColor }) {
         {data.projects && data.projects.length > 0 && (
           <div className={styles.contentSection}>
             <div className={styles.sectionTitleWrapper}>
-              <i className="bi bi-layers"></i>
+              <i className={`bi bi-layers ${styles.icon}`}></i>
               <h2 className={styles.sectionTitle}>Projects</h2>
             </div>
             <Projects data={data} styles={styles.projects} />
@@ -131,7 +125,7 @@ export default function Creative({ data, accentColor }) {
         {data.training && data.training.length > 0 && (
           <div className={styles.contentSection}>
             <div className={styles.sectionTitleWrapper}>
-              <i className="bi bi-journal-code"></i>
+              <i className={`bi bi-journal-code ${styles.icon}`}></i>
               <h2 className={styles.sectionTitle}>Professional Development</h2>
             </div>
             <CoursesAndTraining data={data} styles={styles.training} />
