@@ -221,43 +221,64 @@ export default function EditingToolbar({
 
                 {/* Expandable controls section */}
                 {mobileMenuOpen && (
-                    <div className="border-t border-gray-200 px-3 py-2 bg-gray-50 grid grid-cols-2 gap-2">
-                        {/* Margins */}
-                        <div className="flex flex-col">
-                            <span className="text-xs font-medium text-gray-700 mb-1">Margins</span>
-                            <div className="flex border border-gray-200 rounded overflow-hidden bg-white">
+                    <div className="border-t border-gray-200 px-3 py-2 bg-gray-50 space-y-3">
+                        {/* Top row with Margins and Auto-fit */}
+                        <div className="grid grid-cols-2 gap-2">
+                            {/* Margins */}
+                            <div className="flex flex-col">
+                                <span className="text-xs font-medium text-gray-700 mb-1">Margins</span>
+                                <div className="flex border border-gray-200 rounded overflow-hidden bg-white">
+                                    <button
+                                        onClick={() => setMargins(40)}
+                                        className={`flex-1 py-1 ${margins === 40 ? 'bg-gray-100 text-gray-800' : 'text-gray-600'}`}
+                                    >
+                                        <i className="bi bi-arrows-angle-contract"></i>
+                                    </button>
+                                    <button
+                                        onClick={() => setMargins(70)}
+                                        className={`flex-1 py-1 border-l border-r border-gray-200 ${margins === 70 ? 'bg-gray-100 text-gray-800' : 'text-gray-600'}`}
+                                    >
+                                        <i className="bi bi-dash-lg"></i>
+                                    </button>
+                                    <button
+                                        onClick={() => setMargins(100)}
+                                        className={`flex-1 py-1 ${margins === 100 ? 'bg-gray-100 text-gray-800' : 'text-gray-600'}`}
+                                    >
+                                        <i className="bi bi-arrows-angle-expand"></i>
+                                    </button>
+                                </div>
+                            </div>
+
+                            {/* Auto-fit toggle */}
+                            <div className="flex flex-col">
+                                <span className="text-xs font-medium text-gray-700 mb-1">Auto-fit</span>
                                 <button
-                                    onClick={() => setMargins(40)}
-                                    className={`flex-1 py-1 ${margins === 40 ? 'bg-gray-100 text-gray-800' : 'text-gray-600'}`}
+                                    onClick={toggleAutoScale}
+                                    className={`py-1 rounded ${autoScaleEnabled ? 'bg-blue-500 text-white' : 'bg-white text-gray-700 border border-gray-200'}`}
                                 >
-                                    <i className="bi bi-arrows-angle-contract"></i>
-                                </button>
-                                <button
-                                    onClick={() => setMargins(70)}
-                                    className={`flex-1 py-1 border-l border-r border-gray-200 ${margins === 70 ? 'bg-gray-100 text-gray-800' : 'text-gray-600'}`}
-                                >
-                                    <i className="bi bi-dash-lg"></i>
-                                </button>
-                                <button
-                                    onClick={() => setMargins(100)}
-                                    className={`flex-1 py-1 ${margins === 100 ? 'bg-gray-100 text-gray-800' : 'text-gray-600'}`}
-                                >
-                                    <i className="bi bi-arrows-angle-expand"></i>
+                                    {autoScaleEnabled ? 'Enabled' : 'Disabled'}
                                 </button>
                             </div>
                         </div>
-
-                        {/* Auto-fit toggle */}
-                        <div className="flex flex-col">
-                            <span className="text-xs font-medium text-gray-700 mb-1">Auto-fit</span>
-                            <button
-                                onClick={toggleAutoScale}
-                                className={`py-1 rounded ${autoScaleEnabled ? 'bg-blue-500 text-white' : 'bg-white text-gray-700 border border-gray-200'
-                                    }`}
-                            >
-                                {autoScaleEnabled ? 'Enabled' : 'Disabled'}
-                            </button>
-                        </div>
+                        
+                        {/* Color selector row */}
+                        { template.useAccent && 
+                            <div className="flex flex-col">
+                                <span className="text-xs font-medium text-gray-700 mb-1">Accent Color</span>
+                                <div className="flex flex-wrap gap-2">
+                                    {accentColors.map((color, index) => (
+                                        <button
+                                            key={index}
+                                            className={`w-7 h-7 rounded-full ${selectedColor.hex === color.hex ? 'ring-2 ring-offset-2 ring-blue-500' : ''}`}
+                                            style={{ backgroundColor: color.hex }}
+                                            onClick={() => handleColorSelect(color)}
+                                            title={color.name}
+                                            aria-label={`Select ${color.name} accent color`}
+                                        ></button>
+                                    ))}
+                                </div>
+                            </div>
+                        }
                     </div>
                 )}
             </div>
