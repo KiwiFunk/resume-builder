@@ -40,6 +40,7 @@ To add a new template to the system:
         component: () => import('./YourTemplateFolder').then(mod => mod.default),
         description: "A brief description of your template",
         thumbnail: "/thumbnails/yourtemplate.png", // Add a thumbnail image
+        useAccent: true
     }
     ```
 6. Create a thumbnail preview image (400x600px recommended) and add it to public/thumbnails/
