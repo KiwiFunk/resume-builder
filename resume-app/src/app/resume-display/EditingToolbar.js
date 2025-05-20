@@ -80,7 +80,7 @@ export default function EditingToolbar({
                                     backgroundColor: color.hex,
                                     transform: accentMenuOpen ? 'scale(1)' : 'scale(0.5)',
                                     opacity: accentMenuOpen ? 1 : 0,
-                                    transitionDelay: accentMenuOpen ? `${index * 45}ms` : '0ms'
+                                    transitionDelay: accentMenuOpen ? `${index * 20}ms` : '0ms'
                                 }}
                                 aria-label={color.name}
                                 onClick={() => setAccentMenuOpen(false)}
