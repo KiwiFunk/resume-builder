@@ -11,6 +11,7 @@ export default function EditingToolbar({
     toggleAutoScale,
     scale,
     adjustManualScale,
+    setAccentColor
 }) {
     const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
     const [accentMenuOpen, setAccentMenuOpen] = useState(false);
@@ -48,8 +49,7 @@ export default function EditingToolbar({
     // Handle color selection
     const handleColorSelect = (color) => {
         setSelectedColor(color);
-        // Here you would update your theme/accent color
-        // e.g., updateAccentColor(color.hex);
+        setAccentColor(selectedColor.hex);
         setAccentMenuOpen(false);
     };
 
