@@ -85,6 +85,7 @@ export default function EditingToolbar({
                             }`}
                         style={{ backgroundColor: selectedColor.hex }}
                         onClick={() => setAccentMenuOpen(!accentMenuOpen)}
+                        disabled={template.useAccent === false}
                         aria-expanded={accentMenuOpen}
                         title={`Current color: ${selectedColor.name}`}
                     ></button>

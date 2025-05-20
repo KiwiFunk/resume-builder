@@ -15,7 +15,7 @@ export default function ResumeDisplayPage() {
   const router = useRouter();
   const [data, setData] = useState(null);
   const [isLoading, setIsLoading] = useState(true);
-  const [template, setTemplate] = useState("modern");
+  const [template, setTemplate] = useState(null);
   const [availableTemplates, setAvailableTemplates] = useState([]);
   const [margins, setMargins] = useState(70); 
 
@@ -34,6 +34,7 @@ export default function ResumeDisplayPage() {
     const userData = getLocalData("userData");
     const templates = getAllTemplates();
 
+    setTemplate(templates[0]);
     setData(userData);
     setAvailableTemplates(templates);
     setIsLoading(false);
