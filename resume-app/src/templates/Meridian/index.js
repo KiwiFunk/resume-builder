@@ -9,9 +9,7 @@ import Projects from "@/components/Projects";
 import Hobbies from "@/components/Hobbies";
 import { styles } from './styles';
 
-export default function Creative({ data, accentColor }) {
-  if (!data) return null;
-
+export default function Meridian({ data }) {
   return (
     <div className={styles.container}>
       {/* Left sidebar */}
