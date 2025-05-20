@@ -18,8 +18,6 @@ export default function ResumeDisplayPage() {
   const [template, setTemplate] = useState({});
   const [availableTemplates, setAvailableTemplates] = useState([]);
   const [margins, setMargins] = useState(70); 
-  const [accentColor, setAccentColor] = useState(null);
-
   // Auto-scale state
   const [autoScaleEnabled, setAutoScaleEnabled] = useState(true);
   const [manualScale, setManualScale] = useState(100);
@@ -146,13 +144,12 @@ export default function ResumeDisplayPage() {
           toggleAutoScale={toggleAutoScale}
           scale={scale}
           adjustManualScale={adjustManualScale}
-          setAccentColor={setAccentColor}
         />
 
         {/* Resume display section */}
         <div className="flex justify-center mb-2 margin-auto">
           <DocumentViewer scale={scale} margins={margins}>
-            <DisplayResume data={data} template={template} accentColor={accentColor} />
+            <DisplayResume data={data} template={template} />
           </DocumentViewer>
         </div>
       </div>

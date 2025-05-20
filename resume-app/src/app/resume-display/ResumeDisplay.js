@@ -3,7 +3,7 @@
 import { useState, useEffect, Suspense } from 'react';
 import { getTemplate } from "@/templates";
 
-export default function DisplayResume({ data, template, accentColor }) {
+export default function DisplayResume({ data, template }) {
   const [TemplateComponent, setTemplateComponent] = useState(null);
   const [loading, setLoading] = useState(true);
 
@@ -19,12 +19,6 @@ export default function DisplayResume({ data, template, accentColor }) {
     loadTemplate();
   }, [template]); // Execute when template changes
 
-  // Spread data and inject accent color into the data object
-  const dataComplete = {
-    ...data,
-    accentColor: accentColor,
-  };
-
   // Loading state
   if (loading || !TemplateComponent) {
     return (
@@ -35,5 +29,5 @@ export default function DisplayResume({ data, template, accentColor }) {
   }
 
   // Render the loaded template component with the provided data
-  return <TemplateComponent data={dataComplete} />;
+  return <TemplateComponent data={data} />;
 }
