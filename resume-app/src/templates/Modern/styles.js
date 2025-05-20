@@ -22,7 +22,7 @@ export const styles = {
   socials: {
   container: "flex flex-col gap-2 mt-2",
   socialItem: "flex items-center",
-  iconWrapper: "w-5 h-5 bg-blue-600",
+  iconWrapper: "w-5 h-5 bg-[color:var(--accent)]",
   link: "flex items-center gap-2 hover:text-blue-600 transition-colors",
   linkText: "text-gray-700 text-sm",
   showIcons: true

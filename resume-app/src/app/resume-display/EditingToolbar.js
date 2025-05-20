@@ -1,6 +1,6 @@
 "use client";
 import { useState, useEffect, useRef } from 'react';
-import { setAccentColor } from "@/utils/localData"; // Import the function to set accent color
+import { setAccentColor } from "@/utils/setAccentColor"; // Import the function to set accent color
 
 export default function EditingToolbar({
     template,
@@ -49,7 +49,7 @@ export default function EditingToolbar({
     // Handle color selection
     const handleColorSelect = (color) => {
         setSelectedColor(color);
-        setAccentColor(selectedColor.hex);
+        setAccentColor(color.hex);
         setAccentMenuOpen(false);
     };
 
