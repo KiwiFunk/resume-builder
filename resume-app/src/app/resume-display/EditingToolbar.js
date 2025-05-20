@@ -1,5 +1,5 @@
 "use client";
-import { useState } from 'react';
+import { useState, useEffect, useRef } from 'react';
 
 export default function EditingToolbar({
     template,
@@ -14,26 +14,49 @@ export default function EditingToolbar({
 }) {
     const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
     const [accentMenuOpen, setAccentMenuOpen] = useState(false);
+    const [selectedColor, setSelectedColor] = useState({ name: "Blue", hex: "#2563eb" });
+    const drawerRef = useRef(null);
 
-    
-
-    const colorDotSize = 6; // Width of the color dot
-    const colorDotMargin = 2; // Margin between dots
     const accentColors = [
         { name: "Blue", hex: "#2563eb" },
         { name: "Teal", hex: "#0d9488" },
         { name: "Purple", hex: "#7c3aed" },
-        { name: "Green", hex: "#16a34a" },  
+        { name: "Green", hex: "#16a34a" },
         { name: "Red", hex: "#dc2626" },
         { name: "Orange", hex: "#ea580c" },
-        { name: "Pink", hex: "#db2777" },    
+        { name: "Pink", hex: "#db2777" },
         { name: "Slate", hex: "#475569" }
     ];
+
+    // Close drawer when clicking outside
+    useEffect(() => {
+        function handleClickOutside(event) {
+            if (
+                accentMenuOpen &&
+                drawerRef.current &&
+                !drawerRef.current.contains(event.target) &&
+                !event.target.closest('[data-color-toggle]')
+            ) {
+                setAccentMenuOpen(false);
+            }
+        }
+
+        document.addEventListener("mousedown", handleClickOutside);
+        return () => document.removeEventListener("mousedown", handleClickOutside);
+    }, [accentMenuOpen]);
+
+    // Handle color selection
+    const handleColorSelect = (color) => {
+        setSelectedColor(color);
+        // Here you would update your theme/accent color
+        // e.g., updateAccentColor(color.hex);
+        setAccentMenuOpen(false);
+    };
 
     return (
         <div className="bg-white rounded-lg border border-gray-200 shadow-sm mb-4 overflow-hidden">
             {/* Toolbar for desktop and tablet - always visible */}
-            <div className="hidden sm:flex items-center justify-center h-12 px-2 border-b border-gray-200 overflow-x-autoo">
+            <div className="hidden sm:flex items-center justify-center h-12 px-2 border-b border-gray-200 overflow-x-auto relative">
                 {/* Template dropdown with compact styling */}
                 <div className="flex items-center px-2 h-full border-r border-gray-200">
                     <label htmlFor="template" className="text-xs font-medium text-gray-700 mr-2">Template</label>
@@ -48,45 +71,23 @@ export default function EditingToolbar({
                         ))}
                     </select>
                 </div>
-                {/* Accent color selector */}
-                {/* Do not conditionally render */}
+
+                {/* Accent color selector - just the button */}
                 <div className="flex items-center px-3 h-full border-r border-gray-200">
                     <label htmlFor="accentColor" className="text-xs font-medium text-gray-700 mr-2">
                         Accent
                     </label>
 
-                    {/* Toggle Button */}
-                    <div
-                        className={`w-6 h-6 rounded-full bg-gray-100 border-2 cursor-pointer ${accentMenuOpen ? "border-blue-500" : "border-gray-200"
+                    {/* Toggle Button - shows the selected color */}
+                    <button
+                        data-color-toggle
+                        className={`w-6 h-6 rounded-full border-2 cursor-pointer ${accentMenuOpen ? "border-blue-500" : "border-gray-200"
                             }`}
+                        style={{ backgroundColor: selectedColor.hex }}
                         onClick={() => setAccentMenuOpen(!accentMenuOpen)}
-                    ></div>
-                    
-                    {/* Width is multiples of 8. Dot is 6px, margin left is 2px */}
-                    <div
-                        className={`
-                        ml-${colorDotMargin} h-8 flex items-center gap-2 overflow-hidden transition-all duration-300 ease-in-out            
-                        ${accentMenuOpen ? `w-${(colorDotSize + colorDotMargin) * accentColors.length} opacity-100` : "w-0 opacity-0"}
-                        `}
-                    >
-                        {accentColors.map((color, index) => (
-                            <div
-                                key={index}
-                                className={`
-                                w-${colorDotSize} h-${colorDotSize} rounded-full cursor-pointer flex-shrink-0
-                                transition-all duration-300 ease-out
-                                `}
-                                style={{
-                                    backgroundColor: color.hex,
-                                    transform: accentMenuOpen ? 'scale(1)' : 'scale(0.5)',
-                                    opacity: accentMenuOpen ? 1 : 0,
-                                    transitionDelay: accentMenuOpen ? `${index * 20}ms` : '0ms'
-                                }}
-                                aria-label={color.name}
-                                onClick={() => setAccentMenuOpen(false)}
-                            ></div>
-                        ))}
-                    </div>
+                        aria-expanded={accentMenuOpen}
+                        title={`Current color: ${selectedColor.name}`}
+                    ></button>
                 </div>
 
                 {/* Margin buttons with visual icons */}
@@ -123,8 +124,8 @@ export default function EditingToolbar({
                     <button
                         onClick={toggleAutoScale}
                         className={`h-8 px-3 rounded text-sm flex items-center gap-1 ${autoScaleEnabled
-                                ? 'bg-blue-500 text-white hover:bg-blue-600'
-                                : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
+                            ? 'bg-blue-500 text-white hover:bg-blue-600'
+                            : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
                             } transition-colors`}
                         title={autoScaleEnabled ? "Disable auto-fit" : "Enable auto-fit"}
                     >
@@ -175,6 +176,7 @@ export default function EditingToolbar({
                     </div>
 
                     <div className="flex items-center space-x-2">
+
                         {/* Zoom controls for Mobile */}
                         <div className="flex items-center h-full pl-3">
                             <div className="flex items-center h-8 border border-gray-200 rounded overflow-hidden bg-white">
@@ -200,13 +202,15 @@ export default function EditingToolbar({
 
                         {/* Toggle for additional controls */}
                         <button
-                            onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+                            onClick={() => {
+                                setMobileMenuOpen(!mobileMenuOpen);
+                            }}
                             className="p-1 rounded text-gray-500 hover:bg-gray-100"
                         >
                             <i className={`bi ${mobileMenuOpen ? 'bi-x' : 'bi-sliders'}`}></i>
                         </button>
                     </div>
-                    
+
                 </div>
 
                 {/* Expandable controls section */}
@@ -251,6 +255,43 @@ export default function EditingToolbar({
                     </div>
                 )}
             </div>
+
+            {/* Color drawer - appears below the active toolbar */}
+            <div
+                ref={drawerRef}
+                className={`
+                    border-b border-gray-200 bg-gray-50 overflow-hidden transition-all duration-300 ease-in-out
+                    ${accentMenuOpen ? "max-h-24 opacity-100" : "max-h-0 opacity-0"}
+                `}
+                aria-hidden={!accentMenuOpen}
+            >
+                <div className="px-4 py-2.5">
+                    <div className="flex flex-col">
+                        <div className="flex items-center gap-3 flex-wrap">
+                            {accentColors.map((color, index) => (
+                                <button
+                                    key={index}
+                                    className={`
+                                        w-7 h-7 rounded-full cursor-pointer
+                                        transition-all duration-300 ease-out
+                                        ${selectedColor.hex === color.hex ? 'ring-2 ring-offset-2 ring-blue-500' : ''}
+                                    `}
+                                    style={{
+                                        backgroundColor: color.hex,
+                                        transform: `scale(${accentMenuOpen ? 1 : 0.5})`,
+                                        opacity: accentMenuOpen ? 1 : 0,
+                                        transitionDelay: accentMenuOpen ? `${index * 50}ms` : '0ms'
+                                    }}
+                                    onClick={() => handleColorSelect(color)}
+                                    title={color.name}
+                                    aria-label={`Select ${color.name} accent color`}
+                                ></button>
+                            ))}
+                        </div>
+                    </div>
+                </div>
+            </div>
+
         </div>
     );
 }
