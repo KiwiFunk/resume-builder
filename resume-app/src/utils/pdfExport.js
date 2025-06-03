@@ -74,6 +74,41 @@ export async function exportResumeToPDF(iframeElement, userData) {
 
 // Handle multi-page content
 async function handlePageBreaks(pdf, canvas, imgWidth, margin, pageHeight) {
+    const totalPages = Math.ceil((canvas.height * imgWidth / canvas.width) / pageHeight);
+
+    for (let page = 0; page < totalPages; page++) {
+        if (page > 0) pdf.addPage();
+
+        const sourceY = page * (pageHeight * canvas.width / imgWidth);
+        const sourceHeight = Math.min(
+            pageHeight * canvas.width / imgWidth,
+            canvas.height - sourceY
+        );
+
+        // Create a temporary canvas for this page
+        const pageCanvas = document.createElement('canvas');
+        const pageCtx = pageCanvas.getContext('2d');
+
+        pageCanvas.width = canvas.width;
+        pageCanvas.height = sourceHeight;
+
+        // Draw the section of the original canvas
+        pageCtx.drawImage(
+            canvas,
+            0, sourceY, canvas.width, sourceHeight,
+            0, 0, canvas.width, sourceHeight
+        );
+
+        const actualHeight = (sourceHeight * imgWidth) / canvas.width;
+        pdf.addImage(
+            pageCanvas.toDataURL('image/png'),
+            'PNG',
+            margin,
+            margin,
+            imgWidth,
+            actualHeight
+        );
+    }
 }
 
 // Generate the filename for the PDF
@@ -83,6 +118,6 @@ function generateFileName(userData) {
     }
 
     const name = userData.name;
-    const jobTitle = userData.title || 'resume';
+    const jobTitle = userData.title;
     return `${name.replace(/\s+/g, '_')}_${jobTitle.replace(/\s+/g, '_')}.pdf`;
 }
