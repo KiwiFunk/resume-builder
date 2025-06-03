@@ -77,3 +77,12 @@ async function handlePageBreaks(pdf, canvas, imgWidth, margin, pageHeight) {
 }
 
 // Generate the filename for the PDF
+function generateFileName(userData) {
+    if (!userData) {
+        return 'resume.pdf';
+    }
+
+    const name = userData.name;
+    const jobTitle = userData.title || 'resume';
+    return `${name.replace(/\s+/g, '_')}_${jobTitle.replace(/\s+/g, '_')}.pdf`;
+}
