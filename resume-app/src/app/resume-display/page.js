@@ -80,7 +80,7 @@ export default function ResumeDisplayPage() {
       setExportProgress(0);
 
       // Find the iframe
-      const iframe = document.querySelectorAll('iframe');
+      const iframe = document.getElementById('ResumeDocument');
       if (!iframe) {
         throw new Error('Resume preview not found');
       }

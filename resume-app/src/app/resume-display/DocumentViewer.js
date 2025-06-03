@@ -106,6 +106,7 @@ export default function DocumentViewer({ children, scale = 100, margins }) {
                     <iframe
                         ref={iframeRef}
                         title="Resume Document"
+                        id="ResumeDocument"
                         style={{
                             width: '100%',
                             height: '100%',

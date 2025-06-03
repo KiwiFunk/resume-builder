@@ -4,13 +4,13 @@
 import html2canvas from 'html2canvas';
 import { jsPDF } from 'jspdf';
 
-export async function exportResumeToPDF(iframeElement, userData) {
+export async function exportResumeToPDF(iframe, userData) {
   try {
-    // Get iframe document
-    const iframeDoc = iframeElement.contentDocument || iframeElement.contentWindow.document;
-    const content = iframeDoc.getElementById('portal-root');
+
+    // Get iframe content
+    const content = iframe.contentDocument.getElementById('portal-root');
     
-    if (!portalRoot) {
+    if (!content) {
       throw new Error('Resume content not found');
     }
 
@@ -78,7 +78,7 @@ async function handlePageBreaks(pdf, canvas, imgWidth, margin, pageHeight) {
 
     // Loop through each page and add it to the PDF
     for (let page = 0; page < totalPages; page++) {
-      
+
         // If not the first page, add a new page
         if (page > 0) pdf.addPage();
 
