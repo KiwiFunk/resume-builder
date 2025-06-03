@@ -11,7 +11,6 @@ import LoadingPage from "./LoadingPage";
 import NoDataPage from "./NoDataPage";
 import ResumeToolbar from "./EditingToolbar";
 import { exportResumeToPDF } from "@/utils/pdfExport";
-import { PDFExportToast } from '@/components/PDFExportToast';
 
 export default function ResumeDisplayPage() {
   const router = useRouter();
@@ -23,11 +22,6 @@ export default function ResumeDisplayPage() {
   // Auto-scale state
   const [autoScaleEnabled, setAutoScaleEnabled] = useState(true);
   const [manualScale, setManualScale] = useState(100);
-
-  //PDF Export states
-  const [isExporting, setIsExporting] = useState(false);
-  const [exportProgress, setExportProgress] = useState(0);
-  const [showToast, setShowToast] = useState(false);
 
   // Get auto-calculated scale from hook when enabled
   const autoScale = useAutoScale(autoScaleEnabled);
@@ -75,39 +69,18 @@ export default function ResumeDisplayPage() {
   // PDF EXPORT FUNCTION
   const handlePDFExport = async () => {
     try {
-      setIsExporting(true);
-      setShowToast(true);
-      setExportProgress(0);
-
       // Find the iframe
       const iframe = document.getElementById('ResumeDocument');
       if (!iframe) {
         throw new Error('Resume preview not found');
       }
 
-      // Simulate progress (since html2canvas doesn't provide real progress)
-      const progressInterval = setInterval(() => {
-        setExportProgress(prev => {
-          if (prev >= 90) {
-            clearInterval(progressInterval);
-            return 90; // Stop at 90%, complete when PDF is actually done
-          }
-          return prev + 10;
-        });
-      }, 200);
-
-      // Export to PDF
+      // Export to PDF (opens print dialog)
       await exportResumeToPDF(iframe, data);
-      
-      clearInterval(progressInterval);
-      setExportProgress(100);
       
     } catch (error) {
       console.error('PDF export failed:', error);
-      alert('Failed to generate PDF. Please try again.');
-      setShowToast(false);
-    } finally {
-      setIsExporting(false);
+      alert('Failed to open print dialog. Please try again.');
     }
   };
 
@@ -166,26 +139,12 @@ export default function ResumeDisplayPage() {
 
             {/* PDF download */}
             <button
-              className={`px-3 py-2 rounded transition-colors flex items-center gap-2 text-white ${
-                isExporting 
-                  ? 'bg-gray-400 cursor-not-allowed' 
-                  : 'bg-blue-600 hover:bg-blue-700'
-              }`}
+              className="px-3 py-2 rounded transition-colors flex items-center gap-2 text-white bg-blue-600 hover:bg-blue-700"
               onClick={handlePDFExport}
-              disabled={isExporting}
             >
-              <i className={`bi ${isExporting ? 'bi-hourglass-split' : 'bi-file-earmark-pdf'}`}></i>
-              <span className="hidden sm:inline">
-                {isExporting ? 'Generating...' : 'Download PDF'}
-              </span>
+              <i className="bi bi-file-earmark-pdf"></i>
+              <span className="hidden sm:inline">Export PDF</span>
             </button>
-
-            {/* PDF Export Toast */}
-            <PDFExportToast 
-              isVisible={showToast}
-              progress={exportProgress}
-              onClose={() => setShowToast(false)}
-            />
           </div>
         </div>
       </div>
