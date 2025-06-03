@@ -76,7 +76,10 @@ export async function exportResumeToPDF(iframeElement, userData) {
 async function handlePageBreaks(pdf, canvas, imgWidth, margin, pageHeight) {
     const totalPages = Math.ceil((canvas.height * imgWidth / canvas.width) / pageHeight);
 
+    // Loop through each page and add it to the PDF
     for (let page = 0; page < totalPages; page++) {
+      
+        // If not the first page, add a new page
         if (page > 0) pdf.addPage();
 
         const sourceY = page * (pageHeight * canvas.width / imgWidth);

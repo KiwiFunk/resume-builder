@@ -10,6 +10,8 @@ import { useAutoScale } from "@/hooks/useAutoScale";
 import LoadingPage from "./LoadingPage";
 import NoDataPage from "./NoDataPage";
 import ResumeToolbar from "./EditingToolbar";
+import { exportResumeToPDF } from "@/utils/pdfExport";
+import { PDFExportToast } from '@/components/PDFExportToast';
 
 export default function ResumeDisplayPage() {
   const router = useRouter();
@@ -21,6 +23,11 @@ export default function ResumeDisplayPage() {
   // Auto-scale state
   const [autoScaleEnabled, setAutoScaleEnabled] = useState(true);
   const [manualScale, setManualScale] = useState(100);
+
+  //PDF Export states
+  const [isExporting, setIsExporting] = useState(false);
+  const [exportProgress, setExportProgress] = useState(0);
+  const [showToast, setShowToast] = useState(false);
 
   // Get auto-calculated scale from hook when enabled
   const autoScale = useAutoScale(autoScaleEnabled);
