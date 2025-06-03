@@ -72,6 +72,45 @@ export default function ResumeDisplayPage() {
     setManualScale(finalScale);
   };
 
+  // PDF EXPORT FUNCTION
+  const handlePDFExport = async () => {
+    try {
+      setIsExporting(true);
+      setShowToast(true);
+      setExportProgress(0);
+
+      // Find the iframe
+      const iframe = document.querySelectorAll('iframe');
+      if (!iframe) {
+        throw new Error('Resume preview not found');
+      }
+
+      // Simulate progress (since html2canvas doesn't provide real progress)
+      const progressInterval = setInterval(() => {
+        setExportProgress(prev => {
+          if (prev >= 90) {
+            clearInterval(progressInterval);
+            return 90; // Stop at 90%, complete when PDF is actually done
+          }
+          return prev + 10;
+        });
+      }, 200);
+
+      // Export to PDF
+      await exportResumeToPDF(iframe, data);
+      
+      clearInterval(progressInterval);
+      setExportProgress(100);
+      
+    } catch (error) {
+      console.error('PDF export failed:', error);
+      alert('Failed to generate PDF. Please try again.');
+      setShowToast(false);
+    } finally {
+      setIsExporting(false);
+    }
+  };
+
   // LOADING PAGE
   if (isLoading) {
     return (
@@ -127,12 +166,26 @@ export default function ResumeDisplayPage() {
 
             {/* PDF download */}
             <button
-              className="px-3 py-2 rounded bg-blue-600 hover:bg-blue-700 transition-colors flex items-center gap-2 text-white"
-              onClick={() => alert("PDF export coming soon!")}
+              className={`px-3 py-2 rounded transition-colors flex items-center gap-2 text-white ${
+                isExporting 
+                  ? 'bg-gray-400 cursor-not-allowed' 
+                  : 'bg-blue-600 hover:bg-blue-700'
+              }`}
+              onClick={handlePDFExport}
+              disabled={isExporting}
             >
-              <i className="bi bi-file-earmark-pdf"></i>
-              <span className="hidden sm:inline">Download PDF</span>
+              <i className={`bi ${isExporting ? 'bi-hourglass-split' : 'bi-file-earmark-pdf'}`}></i>
+              <span className="hidden sm:inline">
+                {isExporting ? 'Generating...' : 'Download PDF'}
+              </span>
             </button>
+
+            {/* PDF Export Toast */}
+            <PDFExportToast 
+              isVisible={showToast}
+              progress={exportProgress}
+              onClose={() => setShowToast(false)}
+            />
           </div>
         </div>
       </div>
