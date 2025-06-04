@@ -20,7 +20,7 @@ I've tried to think of features that might be useful when creating a resume for 
 - **Auto-fitting Magic**: The preview automatically scales to fit your screen, so you can always see your entire resume
 - **Easy Data Entry**: Simple forms guide you through adding all your important information and keeps it centralized in one place.
 - **Never Lose Your Work**: Everything saves automatically as you type. (Or at least it will when i implement this, but hey, it has a cool toast right now!)
-- **Print-Ready Results**: Generate professional PDFs that are ready to submit to employers (This will be implemented using something like React-PDF)
+- **Print-Ready Results**: Generate professional PDFs that are ready to submit to employers
 
 ## 🎨 Template Gallery
 
@@ -62,6 +62,7 @@ These are the main pieces that make everything work:
 - **EditingToolbar**: The control center where you can customize how your resume looks
 - **Resume Display**: The components that render each section of your resume
 - **Template System**: A modular system making it effortless to add new templates and register them without messing with core code
+- **PDF Export**: Using Puppeteer we seamlessly handle the creation of a PDF file to download, avoiding any rasterization and keeping the text content interactive.
 
 ## 👩‍💻 Want to Contribute?
 
@@ -79,7 +80,7 @@ I've designed the system to be modular, so you can focus on the design without w
 
 I have big plans for future enhancements:
 
-- One-click PDF export functionality
+- Smart breaks in the PDF to prevent content being cut off in undesirable areas.
 - ATS (Applicant Tracking System) compatibility checker
 - Support for multiple languages
 - Cloud storage so you can access your resume from anywhere
