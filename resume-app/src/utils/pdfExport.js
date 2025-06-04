@@ -37,7 +37,6 @@ export async function exportResumeToPDF(iframe, userData) {
               margin: 0; 
               padding: 0;
               background: white; 
-              font-family: system-ui, -apple-system, sans-serif;
             }
             * {
               -webkit-print-color-adjust: exact;
