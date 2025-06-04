@@ -86,7 +86,7 @@ export async function exportResumeToPDF(iframe, userData) {
     const url = URL.createObjectURL(blob);
     const a = document.createElement('a');
     a.href = url;
-    a.download = `${userData?.name?.replace(/\s+/g, '_') || 'resume'}.pdf`;
+    a.download = generateFileName(userData);
     document.body.appendChild(a);
     a.click();
     document.body.removeChild(a);
@@ -100,4 +100,16 @@ export async function exportResumeToPDF(iframe, userData) {
     alert(`PDF export failed: ${error.message}`);
     throw error;
   }
+}
+
+// Generate the filename for the PDF
+function generateFileName(userData) {
+    if (!userData) {
+        return 'resume.pdf';
+    }
+
+    const name = userData.name;
+    const jobTitle = userData.title;
+
+    return `${name.replace(/\s+/g, '_')}_${jobTitle.replace(/\s+/g, '_')}.pdf`;
 }
