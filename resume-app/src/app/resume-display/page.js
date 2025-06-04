@@ -11,6 +11,7 @@ import LoadingPage from "./LoadingPage";
 import NoDataPage from "./NoDataPage";
 import ResumeToolbar from "./EditingToolbar";
 import { exportResumeToPDF } from "@/utils/pdfExport";
+import PDFExportProgress from '@/components/PDFExportProgress';
 
 export default function ResumeDisplayPage() {
   const router = useRouter();
@@ -26,6 +27,8 @@ export default function ResumeDisplayPage() {
 
   //Export Progress
   const [exportProgress, setExportProgress] = useState(0);
+  const [isExporting, setIsExporting] = useState(false);
+  const [exportMessage, setExportMessage] = useState('');
 
   // Get auto-calculated scale from hook when enabled
   const autoScale = useAutoScale(autoScaleEnabled);
@@ -73,18 +76,33 @@ export default function ResumeDisplayPage() {
   // PDF EXPORT FUNCTION
   const handlePDFExport = async () => {
     try {
+      setIsExporting(true);
+      setExportProgress(0);
+      setExportMessage('Initializing...');
+
       // Find the iframe
       const iframe = document.getElementById('ResumeDocument');
       if (!iframe) {
         throw new Error('Resume preview not found');
       }
 
-      // Export to PDF
-      exportResumeToPDF(iframe, data, setExportProgress);
+      // Export to PDF with progress callback
+      await exportResumeToPDF(iframe, data, (progress, message) => {
+        setExportProgress(progress);
+        setExportMessage(message);
+      });
       
     } catch (error) {
       console.error('PDF export failed:', error);
-      alert('Failed to execute. Please try again.');
+      setExportProgress(-1); // Error state
+      setExportMessage('Export failed');
+    } finally {
+      // Keep modal open to show completion
+      setTimeout(() => {
+        setIsExporting(false);
+        setExportProgress(0);
+        setExportMessage('');
+      }, 4000);
     }
   };
 
@@ -143,11 +161,18 @@ export default function ResumeDisplayPage() {
 
             {/* PDF download */}
             <button
-              className="px-3 py-2 rounded transition-colors flex items-center gap-2 text-white bg-blue-600 hover:bg-blue-700"
+              className={`px-3 py-2 rounded transition-colors flex items-center gap-2 text-white ${
+                isExporting 
+                  ? 'bg-gray-400 cursor-not-allowed' 
+                  : 'bg-blue-600 hover:bg-blue-700'
+              }`}
               onClick={handlePDFExport}
+              disabled={isExporting}
             >
-              <i className="bi bi-file-earmark-pdf"></i>
-              <span className="hidden sm:inline">Export PDF</span>
+              <i className={`bi ${isExporting ? 'bi-hourglass-split' : 'bi-file-earmark-pdf'}`}></i>
+              <span className="hidden sm:inline">
+                {isExporting ? 'Generating...' : 'Export PDF'}
+              </span>
             </button>
           </div>
         </div>
@@ -176,6 +201,17 @@ export default function ResumeDisplayPage() {
           </DocumentViewer>
         </div>
       </div>
+
+      <PDFExportProgress 
+        isVisible={isExporting}
+        progress={exportProgress}
+        message={exportMessage}
+        onCancel={() => {
+          setIsExporting(false);
+          setExportProgress(0);
+          setExportMessage('');
+        }}
+      />
     </main>
   );
 }

@@ -1,7 +1,7 @@
 export async function exportResumeToPDF(iframe, userData, onProgress) {
   try {
     console.log('Starting PDF export...');
-    onProgress(10);
+    onProgress(10, 'Preparing content...');
     
     const iframeDoc = iframe.contentDocument;
     const content = iframeDoc.getElementById('portal-root');
@@ -21,7 +21,7 @@ export async function exportResumeToPDF(iframe, userData, onProgress) {
       })
       .join('\n');
 
-    onProgress(30);
+    onProgress(30, 'Processing styles...');
 
     // Get CSS custom properties
     const cssVariables = extractCSSVariables(iframeDoc.documentElement);
@@ -56,7 +56,7 @@ export async function exportResumeToPDF(iframe, userData, onProgress) {
     console.log('HTML content length:', htmlContent.length);
 
     console.log('Sending content to API...');
-    onProgress(50);
+    onProgress(50, 'Generating PDF...');
 
     // Send to API for PDF generation
     const response = await fetch('/api/generate-pdf', {
@@ -73,7 +73,7 @@ export async function exportResumeToPDF(iframe, userData, onProgress) {
     }
 
     console.log('PDF generated, downloading...');
-    onProgress(80);
+    onProgress(80, 'Downloading...');
 
     // Download the PDF
     const blob = await response.blob();
@@ -87,7 +87,7 @@ export async function exportResumeToPDF(iframe, userData, onProgress) {
     URL.revokeObjectURL(url);
 
     console.log('PDF download complete!');
-    onProgress(100);
+    onProgress(100, 'Complete!');
     return true;
     
   } catch (error) {
