@@ -3,7 +3,7 @@ import { useRef, useState, useEffect } from 'react';
 import { createPortal } from 'react-dom';
 import { useContentHeight } from '@/hooks/useContentHeight';
 
-export default function DocumentViewer({ children, scale = 100, margins }) {
+export default function DocumentViewer({ children, scale = 100, margins, fontSize = 14 }) {
     const iframeRef = useRef(null);
     const [portalTarget, setPortalTarget] = useState(null);
 
@@ -26,17 +26,10 @@ export default function DocumentViewer({ children, scale = 100, margins }) {
             // iframe head ref for injecting styles
             const head = iframeDoc.head
 
-            // Inject CSS styling for portal-root
+            // Inject CSS styling for portal-root with font size control
             const styleTag = iframeDoc.createElement("style");
-            styleTag.textContent = `
-                body {
-                    background-color: transparent !important;
-                    overflow: hidden !important;
-                }
-                #portal-root {
-                    padding: ${margins}px ${margins}px 0px ${margins}px;
-                }
-            `;
+            styleTag.id = "document-styles";
+            styleTag.textContent = generateCSS(margins, fontSize);
             iframeDoc.head.appendChild(styleTag);
 
             // Inject Bootstrap Icons CDN
@@ -119,4 +112,66 @@ export default function DocumentViewer({ children, scale = 100, margins }) {
             </div>
         </div>
     );
+}
+
+// Helper function to generate CSS with font size overrides
+function generateCSS(margins, fontSize) {
+    return `
+        body {
+            background-color: transparent !important;
+            overflow: hidden !important;
+        }
+        
+        #portal-root {
+            padding: ${margins}px ${margins}px 0px ${margins}px;
+            font-size: ${fontSize}px !important;
+            line-height: 1.4;
+        }
+        
+        /* Global font size overrides - these will override template styles */
+        #portal-root * {
+            font-size: inherit !important;
+        }
+        
+        /* Maintain relative sizing for specific elements */
+        #portal-root .text-xs,
+        #portal-root [class*="text-xs"] {
+            font-size: ${fontSize * 0.75}px !important;
+        }
+        
+        #portal-root .text-sm,
+        #portal-root [class*="text-sm"] {
+            font-size: ${fontSize * 0.875}px !important;
+        }
+        
+        #portal-root .text-base,
+        #portal-root [class*="text-base"] {
+            font-size: ${fontSize}px !important;
+        }
+        
+        #portal-root .text-lg,
+        #portal-root [class*="text-lg"] {
+            font-size: ${fontSize * 1.125}px !important;
+        }
+        
+        #portal-root .text-xl,
+        #portal-root [class*="text-xl"] {
+            font-size: ${fontSize * 1.25}px !important;
+        }
+        
+        #portal-root .text-2xl,
+        #portal-root [class*="text-2xl"] {
+            font-size: ${fontSize * 1.5}px !important;
+        }
+        
+        #portal-root .text-3xl,
+        #portal-root [class*="text-3xl"] {
+            font-size: ${fontSize * 1.875}px !important;
+        }
+        
+        #portal-root .text-4xl,
+        #portal-root [class*="text-4xl"] {
+            font-size: ${fontSize * 2.25}px !important;
+        }
+    `;
 }
