@@ -1,11 +1,9 @@
-import puppeteer from 'puppeteer-core';
-import chromium from '@sparticuz/chromium';
-
 export async function POST(request) {
   let browser = null;
   
   try {
     console.log('Starting PDF generation...');
+    console.log('Environment:', process.env.NODE_ENV);
     
     const { html } = await request.json();
     
@@ -13,26 +11,40 @@ export async function POST(request) {
       return Response.json({ error: 'No HTML content provided' }, { status: 400 });
     }
 
-    // Launch browser (optimized for Vercel)
-    browser = await puppeteer.launch({
-      args: chromium.args,
-      defaultViewport: chromium.defaultViewport,
-      executablePath: await chromium.executablePath(),
-      headless: chromium.headless,
-    });
+    // Check if we're in local development
+    const isLocal = !process.env.VERCEL && process.env.NODE_ENV === 'development';
+    
+    if (isLocal) {
+      // For local development, use regular puppeteer
+      const puppeteer = await import('puppeteer');
+      browser = await puppeteer.default.launch({
+        headless: 'new',
+        args: ['--no-sandbox', '--disable-setuid-sandbox']
+      });
+    } else {
+      // Production: Use puppeteer-core with chromium
+      const puppeteer = await import('puppeteer-core');
+      const chromium = await import('@sparticuz/chromium');
+      
+      browser = await puppeteer.default.launch({
+        args: chromium.default.args,
+        defaultViewport: chromium.default.defaultViewport,
+        executablePath: await chromium.default.executablePath(),
+        headless: chromium.default.headless,
+      });
+    }
     
     console.log('Browser launched successfully');
     
     const page = await browser.newPage();
+    await page.setViewport({ width: 794, height: 1123 });
     
-    // Set content and wait for it to load
     await page.setContent(html, { 
       waitUntil: ['networkidle0', 'domcontentloaded'] 
     });
     
     console.log('Content loaded, generating PDF...');
     
-    // Generate PDF
     const pdf = await page.pdf({
       format: 'A4',
       printBackground: true,
@@ -66,10 +78,11 @@ export async function POST(request) {
   }
 }
 
-// GET route for health check
+// GET route to check API status
 export async function GET() {
   return Response.json({ 
     message: 'PDF generation API is running',
+    environment: process.env.NODE_ENV,
     timestamp: new Date().toISOString()
   });
 }
