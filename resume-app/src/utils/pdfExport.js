@@ -5,34 +5,25 @@ export async function exportResumeToPDF(iframe, userData) {
     const iframeDoc = iframe.contentDocument;
     const content = iframeDoc.getElementById('portal-root');
     
-    if (!content) {
-      throw new Error('Resume content not found');
+    if (!iframeDoc) {
+      throw new Error('Cannot access iframe content');
     }
 
-    // Get all styles from iframe
+    // Collect ALL styles from the iframe
     const allStyles = Array.from(iframeDoc.querySelectorAll('style, link[rel="stylesheet"]'))
       .map(el => {
         if (el.tagName === 'LINK') {
+          // For external stylesheets, we need the actual CSS content
           return `<link rel="stylesheet" href="${el.href}">`;
         }
         return el.outerHTML;
       })
       .join('\n');
 
-    // Get CSS variables (your custom colors)
-    const rootElement = iframeDoc.documentElement;
-    const computedStyle = getComputedStyle(rootElement);
-    let cssVariables = '';
-    
-    for (let i = 0; i < computedStyle.length; i++) {
-      const prop = computedStyle[i];
-      if (prop.startsWith('--')) {
-        const value = computedStyle.getPropertyValue(prop);
-        cssVariables += `${prop}: ${value}; `;
-      }
-    }
+    // Get CSS custom properties
+    const cssVariables = extractCSSVariables(iframeDoc.documentElement);
 
-    // Create complete HTML package
+    // Create complete HTML with all styles
     const htmlContent = `
       <!DOCTYPE html>
       <html>
@@ -44,12 +35,9 @@ export async function exportResumeToPDF(iframe, userData) {
             :root { ${cssVariables} }
             body { 
               margin: 0; 
+              padding: 0;
               background: white; 
               font-family: system-ui, -apple-system, sans-serif;
-            }
-            @page { 
-              size: A4; 
-              margin: 0.5in; 
             }
             * {
               -webkit-print-color-adjust: exact;
@@ -63,9 +51,11 @@ export async function exportResumeToPDF(iframe, userData) {
       </html>
     `;
 
-    console.log('Sending request to API...');
+    console.log('HTML content length:', htmlContent.length);
 
-    // Call API endpoint
+    console.log('Sending content to API...');
+
+    // Send to API for PDF generation
     const response = await fetch('/api/generate-pdf', {
       method: 'POST',
       headers: {
@@ -112,4 +102,13 @@ function generateFileName(userData) {
     const jobTitle = userData.title;
 
     return `${name.replace(/\s+/g, '_')}_${jobTitle.replace(/\s+/g, '_')}.pdf`;
+}
+
+// Extract CSS variables from the document
+function extractCSSVariables(rootElement) {
+  const computedStyle = getComputedStyle(rootElement);
+  return Array.from(computedStyle)
+    .filter(prop => prop.startsWith('--'))
+    .map(prop => `${prop}: ${computedStyle.getPropertyValue(prop)};`)
+    .join(' ');
 }

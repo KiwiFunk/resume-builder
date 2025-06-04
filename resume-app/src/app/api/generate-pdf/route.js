@@ -3,7 +3,6 @@ export async function POST(request) {
   
   try {
     console.log('Starting PDF generation...');
-    console.log('Environment:', process.env.NODE_ENV);
     
     const { html } = await request.json();
     
@@ -11,18 +10,18 @@ export async function POST(request) {
       return Response.json({ error: 'No HTML content provided' }, { status: 400 });
     }
 
-    // Check if we're in local development
+    // Environment detection
     const isLocal = !process.env.VERCEL && process.env.NODE_ENV === 'development';
     
     if (isLocal) {
-      // For local development, use regular puppeteer
+      // Local development with regular puppeteer
       const puppeteer = await import('puppeteer');
       browser = await puppeteer.default.launch({
         headless: 'new',
         args: ['--no-sandbox', '--disable-setuid-sandbox']
       });
     } else {
-      // Production: Use puppeteer-core with chromium
+      // Production with optimized chromium
       const puppeteer = await import('puppeteer-core');
       const chromium = await import('@sparticuz/chromium');
       
@@ -34,26 +33,32 @@ export async function POST(request) {
       });
     }
     
-    console.log('Browser launched successfully');
+    console.log('Browser launched');
     
     const page = await browser.newPage();
+    
+    // Set viewport to match iframe dimensions
     await page.setViewport({ width: 794, height: 1123 });
     
+    // Load HTML as it appears in iframe
     await page.setContent(html, { 
       waitUntil: ['networkidle0', 'domcontentloaded'] 
     });
     
-    console.log('Content loaded, generating PDF...');
+    console.log('Generating PDF...');
     
+    // Generate PDF with minimal margins (WYSIWYG)
     const pdf = await page.pdf({
-      format: 'A4',
+      width: '794px',
+      height: '1123px',
       printBackground: true,
       margin: {
-        top: '0',
-        right: '0',
-        bottom: '0',
-        left: '0'
-      }
+        top: '0px',
+        right: '0px', 
+        bottom: '0px',
+        left: '0px'
+      },
+      preferCSSPageSize: true
     });
     
     console.log('PDF generated successfully');
@@ -78,11 +83,11 @@ export async function POST(request) {
   }
 }
 
-// GET route to check API status
+// GET endpoint to check API status
 export async function GET() {
   return Response.json({ 
     message: 'PDF generation API is running',
-    environment: process.env.NODE_ENV,
+    environment: process.env.NODE_ENV || 'unknown',
     timestamp: new Date().toISOString()
   });
 }
