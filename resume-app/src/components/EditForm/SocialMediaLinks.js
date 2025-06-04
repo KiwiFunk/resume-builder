@@ -23,8 +23,10 @@ export default function SocialMediaLinks({ data, inputClasses, updateNestedState
     
         const platform = supportedPlatforms.includes(hostname) ? hostname : "website";        
         
-        // Update the platform name in the state
-        updateNestedState("socials", i, "platform", platform);              // Update the platform name in the state
+        updateNestedState("socials", i, {
+            platform: platform,
+            url: processedUrl
+        });
     }
 
     return (

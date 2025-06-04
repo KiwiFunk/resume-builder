@@ -35,22 +35,36 @@ export default function EditDetailsPage() {
     };
 
     /**
-     * Handle nested state updates
+     * Handle nested state updates - now supports multiple field updates
      * 
      * @param {string} field - The main field in the state (e.g., "socials").
      * @param {number} index - The index of the item in the array.
-     * @param {string} subfield - The property within the nested object (e.g., "url").
-     * @param {*} value - The new value to set for the subfield.
+     * @param {string|object} subfieldOrUpdates - Either a single subfield name OR an object of updates.
+     * @param {*} value - The new value (only used if subfieldOrUpdates is a string).
      * 
      * Example Usage:
+     * // Single update (backward compatible)
      * updateNestedState("socials", 2, "url", "https://newwebsite.com");
+     * 
+     * // Multiple updates (new functionality)
+     * updateNestedState("socials", 2, { platform: "github", url: "https://github.com/user" });
      */
-    const updateNestedState = (field, index, subfield, value) => {
-        setData({
-            ...data,
-            [field]: data[field].map((item, i) => 
-                i === index ? { ...item, [subfield]: value } : item
-            )
+    const updateNestedState = (field, index, subfieldOrUpdates, value) => {
+        setData(prevData => {
+            const newArray = [...prevData[field]];
+            
+            if (typeof subfieldOrUpdates === 'string') {
+                // Single field update (backward compatible)
+                newArray[index] = { ...newArray[index], [subfieldOrUpdates]: value };
+            } else {
+                // Multiple field updates
+                newArray[index] = { ...newArray[index], ...subfieldOrUpdates };
+            }
+            
+            return {
+                ...prevData,
+                [field]: newArray
+            };
         });
     };
             
