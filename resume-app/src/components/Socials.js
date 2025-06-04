@@ -1,9 +1,11 @@
+import SOCIAL_MEDIA_ICONS from "../SocialsIconDB";
+
 export default function Socials({ data, className = "", styles = {} }) {
   // Default styles if none provided
   const defaultStyles = {
     container: "font-sans",
     socialItem: "flex items-center mt-4",
-    iconWrapper: "w-6 h-6 bg-blue-500",
+    iconWrapper: "w-6 h-6 text-blue-500",
     link: "flex items-center gap-2",
     linkText: "text-gray-700 text-sm",
     showIcons: true // By default, show icons
@@ -30,17 +32,14 @@ export default function Socials({ data, className = "", styles = {} }) {
               rel="noopener noreferrer"
               className={mergedStyles.link}
             >
-
               {/* Tailwind Mask */}
               {mergedStyles.showIcons && (
                 <div
                   className={mergedStyles.iconWrapper}
-                  style={{
-                    maskImage: `url('/icons/${social.platform.toLowerCase()}.svg')`,
-                    WebkitMaskImage: `url('/icons/${social.platform.toLowerCase()}.svg')`
-                  }}
                   aria-label={social.platform}
-                ></div>
+                >
+                  {SOCIAL_MEDIA_ICONS[social.platform.toLowerCase()]}
+                </div>
               )}
               {/* Display the social media platform name */}
 

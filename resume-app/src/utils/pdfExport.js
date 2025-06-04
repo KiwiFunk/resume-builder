@@ -29,7 +29,7 @@ export async function exportResumeToPDF(iframe, userData) {
       <html>
         <head>
           <meta charset="utf-8">
-          <title>${userData?.name || 'Resume'}</title>
+          <title>Export</title>
           ${allStyles}
           <style>
             :root { ${cssVariables} }

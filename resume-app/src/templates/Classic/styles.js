@@ -28,7 +28,7 @@ export const styles = {
   socials: {
     container: "flex justify-center gap-4 mt-2",
     socialItem: "inline-block px-2",
-    iconWrapper: "w-4 h-4 bg-gray-700 mr-1 inline-block",
+    iconWrapper: "w-4 h-4 text-gray-700 mr-1 inline-block",
     link: "flex items-center text-gray-700 hover:text-gray-900",
     linkText: "text-gray-700 text-sm border-b border-gray-300 hover:border-gray-900",
     showIcons: true // Classic style typically shows icons

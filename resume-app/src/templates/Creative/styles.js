@@ -35,7 +35,7 @@ export const styles = {
   socials: {
     container: "flex flex-wrap gap-2",
     socialItem: "mb-2 w-full",
-    iconWrapper: "w-4 h-4 inline-block mr-2 bg-white/20", 
+    iconWrapper: "w-4 h-4 inline-block mr-2 text-white/20", 
     link: "flex items-center w-full p-2 rounded-md bg-white/10 border border-white/20 transition-colors",
     linkText: "text-white text-sm"
   },

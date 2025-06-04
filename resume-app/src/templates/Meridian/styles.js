@@ -43,7 +43,7 @@ export const styles = {
   socials: {
     container: "flex flex-col gap-2",
     socialItem: "w-full",
-    iconWrapper: "bg-[var(--accent)] w-4 h-4 mr-2", 
+    iconWrapper: "text-[var(--accent)] w-4 h-4 mr-2", 
     link: "flex items-center text-sm text-gray-700 hover:text-[var(--accent)] transition-colors",
     linkText: "truncate",
     showIcons: true
