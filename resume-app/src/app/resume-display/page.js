@@ -19,9 +19,13 @@ export default function ResumeDisplayPage() {
   const [template, setTemplate] = useState({});
   const [availableTemplates, setAvailableTemplates] = useState([]);
   const [margins, setMargins] = useState(70); 
+
   // Auto-scale state
   const [autoScaleEnabled, setAutoScaleEnabled] = useState(true);
   const [manualScale, setManualScale] = useState(100);
+
+  //Export Progress
+  const [exportProgress, setExportProgress] = useState(0);
 
   // Get auto-calculated scale from hook when enabled
   const autoScale = useAutoScale(autoScaleEnabled);
@@ -75,12 +79,12 @@ export default function ResumeDisplayPage() {
         throw new Error('Resume preview not found');
       }
 
-      // Export to PDF (opens print dialog)
-      await exportResumeToPDF(iframe, data);
+      // Export to PDF
+      exportResumeToPDF(iframe, data, setExportProgress);
       
     } catch (error) {
       console.error('PDF export failed:', error);
-      alert('Failed to open print dialog. Please try again.');
+      alert('Failed to execute. Please try again.');
     }
   };
 

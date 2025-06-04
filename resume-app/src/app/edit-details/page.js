@@ -51,7 +51,7 @@ export default function EditDetailsPage() {
      */
     const updateNestedState = (field, index, subfieldOrUpdates, value) => {
         setData(prevData => {
-            const newArray = [...prevData[field]];
+            const newArray = [...prevData[field]];  // Create a shallow copy of the array at 'field'
             
             if (typeof subfieldOrUpdates === 'string') {
                 // Single field update (backward compatible)
