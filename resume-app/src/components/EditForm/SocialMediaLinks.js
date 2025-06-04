@@ -1,4 +1,5 @@
 import DeleteButton from "@/components/DeleteButton";
+import SOCIAL_MEDIA_ICONS from "@/SocialsIconDB";
 
 export default function SocialMediaLinks({ data, inputClasses, updateNestedState, handleDeletion }) {
 
@@ -17,13 +18,13 @@ export default function SocialMediaLinks({ data, inputClasses, updateNestedState
             processedUrl = 'https://' + url;
         }
 
-        let hostname = new URL(processedUrl).hostname;                    // Extract the domain name from the URL (also known as the hostname)
+        let hostname = new URL(processedUrl).hostname;                      // Extract the domain name from the URL (also known as the hostname)
         hostname = hostname.replace(/^www\.|\.com|\.net|\.org|\.io/g, "");  // Remove 'www.', '.com', '.net', '.org', and '.io' from the hostname
     
         const platform = supportedPlatforms.includes(hostname) ? hostname : "website";        
         
         // Update the platform name in the state
-        updateNestedState("socials", i, "platform", platform);          // Update the platform name in the state
+        updateNestedState("socials", i, "platform", platform);              // Update the platform name in the state
     }
 
     return (
@@ -33,15 +34,11 @@ export default function SocialMediaLinks({ data, inputClasses, updateNestedState
                 <div key={index} className="flex items-center gap-2">
                     {/* Social Media Icon */}
                     <div
-                        className="w-7 h-7 bg-(--accent)"
-                        style={{
-                            maskImage: `url('/icons/${social.platform.toLowerCase()}.svg')`,
-                            WebkitMaskImage: `url('/icons/${social.platform.toLowerCase()}.svg')`,
-                            maskSize: 'contain',
-                            maskRepeat: 'no-repeat'
-                        }}
+                        className="w-7 h-7 text-(--accent)"
                         aria-label={social.platform}
-                    ></div>
+                    >
+                        {SOCIAL_MEDIA_ICONS[social.platform.toLowerCase()]} 
+                    </div>
 
                     {/* Social Media URL Input */}
                     <input

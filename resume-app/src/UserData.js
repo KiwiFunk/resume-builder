@@ -32,7 +32,7 @@ let data = {
         {
             platform: "Twitter",
             url: "https://www.twitter.com/",
-            inUse: false,
+            inUse: true,
         },
         {
             platform: "StackOverflow",
